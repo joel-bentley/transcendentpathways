@@ -130,7 +130,8 @@ exports.register = function (server, options, next) {
         config: {
             validate: {
                 payload: {
-                    performerName: Joi.string().required()
+                    performerName: Joi.string().required(),
+                    timeCreated: Joi.date()
                 }
             }
         },
@@ -194,18 +195,14 @@ exports.register = function (server, options, next) {
         handler: function (request, reply) {
 
             var Musician = request.server.plugins['hapi-mongo-models'].Musicians;
-            var performerName = request.payload.performerName;
-            var timeCreated = request.payload.timeCreated || +Date.now();
-            //var email = request.payload.email;
-            //var password = request.payload.password;
-
-            Musician.create(performerName, timeCreated, function (err, Musician) {
+            request.payload.timeCreated = Date.now();
+            Musician.create(request.payload, function (err, musician) {
 
                 if (err) {
                     return reply(err);
                 }
 
-                reply(Musician);
+                reply(musician);
             });
         }
     });

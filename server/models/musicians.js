@@ -17,21 +17,22 @@ Musicians.schema = Joi.object().keys({
     timeCreated: Joi.date()
 });
 
-Musicians.create = function (name, timeCreated, callback) {
+Musicians.create = function (document, callback) {
 
-    var musician = name.trim();
+    //var musician = name.performerName;
+
     var document = {
-        performerName: musician,
-        timeCreated: timeCreated
+        performerName: document.performerName,
+        timeCreated: new Date()
     };
 
-    this.insert(document, function (err, Musicians) {
+    this.insert(document, function (err, musicians) {
 
         if (err) {
             return callback(err);
         }
 
-        callback(null, Musicians);
+        callback(null, musicians[0]);
     });
 };
 
