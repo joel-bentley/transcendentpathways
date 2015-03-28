@@ -62,6 +62,28 @@ var Component = React.createClass({
                     help={this.state.help.performerName}
                     disabled={this.state.loading}
                 />
+                <TextControl
+                    name="contactFirstName"
+                    label="Contact First Name"
+                    ref="contactFirstName"
+                    width="15"
+                    hasError={this.state.hasError.name}
+                    valueLink={this.linkState('contactFirstName')}
+                    help={this.state.help.contactFirstName}
+                    disabled={this.state.loading}
+                    class="col-md-3"
+                />
+                <TextControl
+                    name="contactLastName"
+                    label="Contact Last Name"
+                    ref="contactLastName"
+                    size="15"
+                    hasError={this.state.hasError.name}
+                    valueLink={this.linkState('contactLastName')}
+                    help={this.state.help.contactLastName}
+                    disabled={this.state.loading}
+                />
+
                 <ControlGroup hideLabel={true} hideHelp={true}>
                     <Button
                         type="submit"
@@ -72,13 +94,13 @@ var Component = React.createClass({
                         <Spinner space="left" show={this.state.loading} />
                     </Button>
                 </ControlGroup>
-            </fieldset>;
+                </fieldset>;
         }
 
         return (
             <section>
                 <h1 className="page-header">Create Musician</h1>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} >
                     {alerts}
                     {formElements}
                 </form>
