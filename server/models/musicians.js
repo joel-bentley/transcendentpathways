@@ -36,5 +36,4 @@ Musicians.create = function (document, callback) {
     });
 };
 
-
 module.exports = Musicians;
