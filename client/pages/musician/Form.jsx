@@ -172,7 +172,7 @@ var Component = React.createClass({
                         <TextControl
                             placeholder="phone number"
                             name="phone"
-                            label="Contact Phone Number"
+                            label="Phone Number"
                             ref="phone"
                             hasError={this.state.hasError.phone}
                             valueLink={this.linkState('phone')}

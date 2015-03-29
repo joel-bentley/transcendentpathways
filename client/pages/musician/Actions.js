@@ -16,14 +16,14 @@ var Actions = {
 
         var request = {
             method: 'POST',
-            url: '/api/musicians',
+            url: '/api/musician',
             data: data
         };
 
         Fetch(request, function (err, response) {
 
             if (!err) {
-                window.location.href = '/musicians';
+                window.location.href = '/musician';
                 response.success = true;
             }
 

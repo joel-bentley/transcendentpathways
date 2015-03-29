@@ -126,7 +126,7 @@ exports.register = function (server, options, next) {
 
     server.route({
         method: 'POST',
-        path: options.basePath + '/musicians',
+        path: options.basePath + '/musician',
         config: {
             validate: {
                 payload: {
