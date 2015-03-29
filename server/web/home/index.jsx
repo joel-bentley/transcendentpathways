@@ -42,7 +42,7 @@ var Component = React.createClass({
                                     who need it.
 
                                 </p>
-                                <a href="/musicians" className="btn btn-default btn-block">
+                                <a href="/musician" className="btn btn-default btn-block">
                                     Musician Info
                                 </a>
                             </div>

@@ -5,13 +5,13 @@ var Layout = require('../layouts/Default.jsx');
 var Component = React.createClass({
     render: function () {
 
-        var feet = <script src="/public/pages/musicians.min.js"></script>;
+        var feet = <script src="/public/pages/musician.min.js"></script>;
 
         return (
             <Layout
-                title="Musicians"
+                title="Musician"
                 feet={feet}
-                activeTab="musicians">
+                activeTab="musician">
 
                 <div className="col-sm-9" id="app-mount"></div>
                 <div className="col-sm-3 text-center"> </div>

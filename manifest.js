@@ -48,7 +48,7 @@ var manifest = {
                 Session: './server/models/session',
                 Status: './server/models/status',
                 User: './server/models/user',
-                Musicians: './server/models/musicians'
+                Musician: './server/models/musician'
             },
             autoIndex: Config.get('/hapiMongoModels/autoIndex')
         },
@@ -66,12 +66,12 @@ var manifest = {
         './server/api/signup': { basePath: '/api' },
         './server/api/statuses': { basePath: '/api' },
         './server/api/users': { basePath: '/api' },
-        './server/api/musicians': {basePath: '/api'},
+        './server/api/musician': {basePath: '/api'},
         './server/web/about': {},
         './server/web/account': {},
         './server/web/admin': {},
         './server/web/contact': {},
-        './server/web/musicians': {},
+        './server/web/musician': {},
         './server/web/home': {},
         './server/web/login': {},
         './server/web/public': {},
