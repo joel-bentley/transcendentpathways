@@ -13,13 +13,8 @@ var Component = React.createClass({
                 feet={feet}
                 activeTab="musicians">
 
-                <div className="row">
-                        <div className="col-sm-6" id="app-mount"></div>
-                        <div className="col-sm-6 text-center"></div>
-
-
-
-                </div>
+                <div className="col-sm-9" id="app-mount"></div>
+                <div className="col-sm-3 text-center"> </div>
             </Layout>
         );
     }
