@@ -57,7 +57,7 @@ var Component = React.createClass({
                     name="performerName"
                     label="Performer Name"
                     ref="performerName"
-                    hasError={this.state.hasError.name}
+                    hasError={this.state.hasError.performerName}
                     valueLink={this.linkState('performerName')}
                     help={this.state.help.performerName}
                     disabled={this.state.loading}
@@ -67,7 +67,7 @@ var Component = React.createClass({
                     label="Contact First Name"
                     ref="contactFirstName"
                     width="15"
-                    hasError={this.state.hasError.name}
+                    hasError={this.state.hasError.contactFirstName}
                     valueLink={this.linkState('contactFirstName')}
                     help={this.state.help.contactFirstName}
                     disabled={this.state.loading}
@@ -78,11 +78,87 @@ var Component = React.createClass({
                     label="Contact Last Name"
                     ref="contactLastName"
                     size="15"
-                    hasError={this.state.hasError.name}
+                    hasError={this.state.hasError.contactLastName}
                     valueLink={this.linkState('contactLastName')}
                     help={this.state.help.contactLastName}
                     disabled={this.state.loading}
                 />
+                <TextControl
+                    name="address1"
+                    label="Address 1"
+                    ref="address1"
+                    size="15"
+                    hasError={this.state.hasError.address1}
+                    valueLink={this.linkState('address1')}
+                    help={this.state.help.address1}
+                    disabled={this.state.loading}
+                />
+                <TextControl
+                    name="address2"
+                    label="Address 2"
+                    ref="address2"
+                    size="15"
+                    hasError={this.state.hasError.address2}
+                    valueLink={this.linkState('address2')}
+                    help={this.state.help.address2}
+                    disabled={this.state.loading}
+                />
+                <TextControl
+                    name="city"
+                    label="City"
+                    ref="city"
+                    size="15"
+                    hasError={this.state.hasError.city}
+                    valueLink={this.linkState('city')}
+                    help={this.state.help.city}
+                    disabled={this.state.loading}
+                />
+                <TextControl
+                    name="state"
+                    label="State"
+                    ref="state"
+                    size="15"
+                    hasError={this.state.hasError.state}
+                    valueLink={this.linkState('state')}
+                    help={this.state.help.state}
+                    disabled={this.state.loading}
+                />
+                <TextControl
+                    name="zipcode"
+                    label="Zip Code"
+                    ref="zipcode"
+                    size="15"
+                    hasError={this.state.hasError.zipcode}
+                    valueLink={this.linkState('zipcode')}
+                    help={this.state.help.zipcode}
+                    disabled={this.state.loading}
+                />
+                <TextControl
+                    name="phone"
+                    label="Contact Phone"
+                    ref="phone"
+                    size="15"
+                    hasError={this.state.hasError.phone}
+                    valueLink={this.linkState('phone')}
+                    help={this.state.help.phone}
+                    disabled={this.state.loading}
+                />
+                <TextControl
+                    name="website"
+                    label="Website URL"
+                    ref="website"
+                    size="15"
+                    hasError={this.state.hasError.website}
+                    valueLink={this.linkState('website')}
+                    help={this.state.help.website}
+                    disabled={this.state.website}
+                />
+
+
+
+
+
+
 
                 <ControlGroup hideLabel={true} hideHelp={true}>
                     <Button

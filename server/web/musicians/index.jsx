@@ -14,8 +14,8 @@ var Component = React.createClass({
                 activeTab="musicians">
 
                 <div className="row">
-                        <div className="col-sm-4" id="app-mount"></div>
-                        <div className="col-sm-4 text-center"></div>
+                        <div className="col-sm-6" id="app-mount"></div>
+                        <div className="col-sm-6 text-center"></div>
 
 
 
