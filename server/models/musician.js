@@ -1,29 +1,50 @@
 var Joi = require('joi');
 var ObjectAssign = require('object-assign');
 var BaseModel = require('hapi-mongo-models').BaseModel;
+var Slug = require('slug');
 
 
-var Musicians = BaseModel.extend({
+var Musician = BaseModel.extend({
     constructor: function (attrs) {
 
         ObjectAssign(this, attrs);
     }
 });
 
-Musicians._collection = 'musicians';
 
-Musicians.schema = Joi.object().keys({
+Musician._collection = 'musician';
+
+
+Musician._idClass = String;
+
+
+Musician.schema = Joi.object().keys({
     performerName: Joi.string().required(),
-    timeCreated: Joi.date()
+    contactFirstName: Joi.string().required(),
+    contactLastName: Joi.string().required(),
+    address1: Joi.string().required(),
+    address2: Joi.string(),
+    city: Joi.string().required(),
+    state: Joi.string().required(),
+    zipcode: Joi.string().required(),
+    phone: Joi.string().required(),
+    website: Joi.string()
 });
 
-Musicians.create = function (document, callback) {
 
-    //var musician = name.performerName;
+Musician.indexes = [
+    [{ id: 1 }],
+    [{ contactLastName: 1 }]
+];
+
+
+Musician.create = function (performerName, contactLastName, callback) {
 
     var document = {
-        performerName: document.performerName,
-        timeCreated: new Date()
+        _id: Slug(performerName + ' ' + contactLastName).toLowerCase(),
+        performerName: performerName,
+        contactLastName: contactLastName
+
     };
 
     this.insert(document, function (err, musicians) {
@@ -36,4 +57,5 @@ Musicians.create = function (document, callback) {
     });
 };
 
-module.exports = Musicians;
+
+module.exports = Musician;

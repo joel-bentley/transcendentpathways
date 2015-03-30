@@ -18,7 +18,6 @@ Gulp.task('webpack', function (callback) {
             contact: './client/pages/contact/index',
             login: './client/pages/login/index',
             signup: './client/pages/signup/index',
-            musician: './client/pages/musician/index'
         },
         output: {
             path: './public/pages',

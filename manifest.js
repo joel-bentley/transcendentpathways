@@ -71,7 +71,6 @@ var manifest = {
         './server/web/account': {},
         './server/web/admin': {},
         './server/web/contact': {},
-        './server/web/musician': {},
         './server/web/home': {},
         './server/web/login': {},
         './server/web/public': {},
