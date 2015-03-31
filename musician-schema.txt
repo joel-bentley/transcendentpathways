@@ -1,0 +1,29 @@
+
+var musicianSchema = new mongoose.Schema({
+    "performerName": String,
+    "soloPerformer": Boolean,
+    "contactName": {
+        "last": String,
+        "first": String
+    },
+    "address": {
+        "addressLine1": String,
+        "city": String,
+        "state": String,
+        "zipcode": String
+    },
+    "phone": String,
+    "website": String,
+    "references": Array,
+    "instruments": Array,
+    "approvedToPerform": Boolean,
+    "approvedBy": {
+        "last": String,
+        "first": String
+    },
+    "approvedDate": Date,
+    "performancesCompleted": Number,
+    "activePerformer": Boolean
+});
+
+module.exports = mongoose.model('Musician', musicianSchema);
