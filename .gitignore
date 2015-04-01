@@ -2,6 +2,7 @@ node_modules/*
 public/*
 test/artifacts/*
 /config.js
+.idea
 
 npm-debug.log
 .idea
