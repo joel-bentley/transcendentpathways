@@ -118,10 +118,11 @@ exports.register = function (server, options, next) {
         handler: function (request, reply) {
 
             var Musician = request.server.plugins['hapi-mongo-models'].Musician;
-            var performerName = request.payload.performerName;
-            var contactLastName = request.payload.contactLastName;
+            //var performerName = request.payload.performerName;
+            //var contactFirstName = request.payload.contactFirstName;
+            //var contactLastName = request.payload.contactLastName;
 
-            Musician.create(performerName, contactLastName, function (err, status) {
+            Musician.create(request.payload, function (err, status) {
 
                 if (err) {
                     return reply(err);

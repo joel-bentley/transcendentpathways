@@ -38,12 +38,14 @@ Musician.indexes = [
 ];
 
 
-Musician.create = function (performerName, contactLastName, callback) {
+//Musician.create = function (performerName, contactLastName, callback) {
+Musician.create = function (payload, callback) {
 
     var document = {
-        _id: Slug(performerName + ' ' + contactLastName).toLowerCase(),
-        performerName: performerName,
-        contactLastName: contactLastName
+        _id: Slug(payload.performerName + ' ' + payload.contactLastName).toLowerCase(),
+        performerName: payload.performerName,
+        contactFirstName: payload.contactFirstName,
+        contactLastName: payload.contactLastName
 
     };
 
