@@ -184,7 +184,14 @@ var Store = FluxStore.extend({
             this.state.details.zipcode = action.data.zipcode;
             this.state.details.phone = action.data.phone;
             this.state.details.website = action.data.website;
-
+            this.state.details.contactEmail = action.data.contactEmail;
+            this.state.details.references = action.data.references;
+            this.state.details.instruments = action.data.instruments;
+            this.state.details.approvedToPerform = action.data.approvedToPerform;
+            this.state.details.approvedBy = action.data.approvedBy;
+            this.state.details.approvedDate = action.data.approvedDate;
+            this.state.details.performancesCompleted = action.data.performancesCompleted;
+            this.state.details.activePerformer = action.data.activePerformer;
             this.emitChange();
         }
 
@@ -216,6 +223,14 @@ var Store = FluxStore.extend({
                 this.state.details.zipcode = action.data.zipcode;
                 this.state.details.phone = action.data.phone;
                 this.state.details.website = action.data.website;
+                this.state.details.contactEmail = action.data.contactEmail;
+                this.state.details.references = action.data.references;
+                this.state.details.instruments = action.data.instruments;
+                this.state.details.approvedToPerform = action.data.approvedToPerform;
+                this.state.details.approvedBy = action.data.approvedBy;
+                this.state.details.approvedDate = action.data.approvedDate;
+                this.state.details.performancesCompleted = action.data.performancesCompleted;
+                this.state.details.activePerformer = action.data.activePerformer;
             }
 
             this.emitChange();

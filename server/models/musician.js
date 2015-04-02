@@ -28,12 +28,22 @@ Musician.schema = Joi.object().keys({
     state: Joi.string().required(),
     zipcode: Joi.string().required(),
     phone: Joi.string().required(),
-    website: Joi.string()
+    website: Joi.string(),
+    contactEmail: Joi.string(),
+    references: Joi.string(),
+    instruments: Joi.string(),
+    approvedToPerform: Joi.boolean(),
+    approvedBy: Joi.string(),
+    approvedDate: Joi.date(),
+    performancesCompleted: Joi.number(),
+    activePerformer: Joi.boolean()
+
 });
 
 
 Musician.indexes = [
     [{ id: 1 }],
+    [{ performerName: 1 }],
     [{ contactLastName: 1 }]
 ];
 
@@ -53,6 +63,7 @@ Musician.create = function (payload, callback) {
         zipcode: payload.zipcode,
         phone: payload.phone,
         website: payload.website
+    
     };
 
     this.insert(document, function (err, musicians) {
