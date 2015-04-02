@@ -35,7 +35,7 @@ exports.register = function (server, options, next) {
             var Musician = request.server.plugins['hapi-mongo-models'].Musician;
             var query = {};
             if (request.query.performerName) {
-                query.performerLastName = new RegExp('^.*?' + request.query.performerLastName + '.*$', 'i');
+                query.performerName = new RegExp('^.*?' + request.query.performerName + '.*$', 'i');
             }
             if (request.query.contactLastName) {
                 query.contactLastName = new RegExp('^.*?' + request.query.contactLastName + '.*$', 'i');
