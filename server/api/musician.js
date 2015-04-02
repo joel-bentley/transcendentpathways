@@ -151,8 +151,15 @@ exports.register = function (server, options, next) {
                     state: Joi.string(),
                     zipcode: Joi.string(),
                     phone: Joi.string(),
-                    website: Joi.string()
-
+                    website: Joi.string(),
+                    contactEmail: Joi.string(),
+                    references: Joi.string(),
+                    instruments: Joi.string(),
+                    approvedToPerform: Joi.boolean(),
+                    approvedBy: Joi.string(),
+                    approvedDate: Joi.date(),
+                    performancesCompleted: Joi.number(),
+                    activePerformer: Joi.boolean()
                 }
             },
             pre: [
@@ -174,7 +181,15 @@ exports.register = function (server, options, next) {
                     state: request.payload.state,
                     zipcode: request.payload.zipcode,
                     phone: request.payload.phone,
-                    website: request.payload.website
+                    website: request.payload.website,
+                    contactEmail: request.payload.contactEmail,
+                    references: request.payload.references,
+                    instruments: request.payload.instruments,
+                    approvedToPerform: request.payload.approvedToPerform,
+                    approvedBy: request.payload.approvedBy,
+                    approvedDate: request.payload.approvedDate,
+                    performancesCompleted: request.payload.performancesCompleted,
+                    activePerformer: request.payload.activePerformer
               }
             };
 

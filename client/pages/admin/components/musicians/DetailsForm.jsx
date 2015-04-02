@@ -1,6 +1,7 @@
 var React = require('react/addons');
 var ControlGroup = require('../../../../components/form/ControlGroup');
 var TextControl = require('../../../../components/form/TextControl');
+var TextAreaControl = require('../../../../components/form/TextareaControl');
 var Button = require('../../../../components/form/Button');
 var Spinner = require('../../../../components/form/Spinner');
 var Actions = require('../../actions/Musician');
@@ -26,7 +27,15 @@ var Component = React.createClass({
                 state: nextProps.data.state,
                 zipcode: nextProps.data.zipcode,
                 phone: nextProps.data.phone,
-                website: nextProps.data.website
+                website: nextProps.data.website,
+                contactEmail: nextProps.data.contactEmail,
+                references: nextProps.data.references,
+                instruments: nextProps.data.instruments,
+                approvedToPerform: nextProps.data.approvedToPerform,
+                approvedBy: nextProps.data.approvedBy,
+                approvedDate: nextProps.data.approvedDate,
+                performancesCompleted: nextProps.data.performancesCompleted,
+                activePerformer: nextProps.data.activePerformer
             });
         }
     },
@@ -46,7 +55,15 @@ var Component = React.createClass({
             state: this.state.state,
             zipcode: this.state.zipcode,
             phone: this.state.phone,
-            website: this.state.website
+            website: this.state.website,
+            contactEmail: this.state.contactEmail,
+            references: this.state.references,
+            instruments: this.state.instruments,
+            approvedToPerform: this.state.approvedToPerform,
+            approvedBy: this.state.approvedBy,
+            approvedDate: this.state.approvedDate,
+            performancesCompleted: this.state.performancesCompleted,
+            activePerformer: this.state.activePerformer
         });
     },
     render: function () {
@@ -155,6 +172,75 @@ var Component = React.createClass({
                     help={this.props.data.help.website}
                     disabled={this.props.data.loading}
                 />
+                <TextControl
+                    name="contactEmail"
+                    label="Contact Email"
+                    hasError={this.props.data.hasError.contactEmail}
+                    valueLink={this.linkState('contactEmail')}
+                    help={this.props.data.help.contactEmail}
+                    disabled={this.props.data.loading}
+                />
+                <TextAreaControl
+                    name="references"
+                    label="References"
+                    rows="5"
+                    hasError={this.props.data.hasError.references}
+                    valueLink={this.linkState('references')}
+                    help={this.props.data.help.references}
+                    disabled={this.props.data.loading}
+                />
+                <TextAreaControl
+                    name="instruments"
+                    label="Instruments"
+                    rows="5"
+                    hasError={this.props.data.hasError.instruments}
+                    valueLink={this.linkState('instruments')}
+                    help={this.props.data.help.instruments}
+                    disabled={this.props.data.loading}
+                />
+                <TextControl
+                    name="approvedToPerform"
+                    label="Approved To Perform"
+                    hasError={this.props.data.hasError.approvedToPerform}
+                    valueLink={this.linkState('approvedToPerform')}
+                    help={this.props.data.help.approvedToPerform}
+                    disabled={this.props.data.loading}
+                />
+                <TextControl
+                    name="approvedBy"
+                    label="Approved By"
+                    hasError={this.props.data.hasError.approvedBy}
+                    valueLink={this.linkState('approvedBy')}
+                    help={this.props.data.help.approvedBy}
+                    disabled={this.props.data.loading}
+                />
+                <TextControl
+                    name="approvedDate"
+                    label="Approved Date"
+                    hasError={this.props.data.hasError.approvedDate}
+                    valueLink={this.linkState('approvedDate')}
+                    help={this.props.data.help.approvedDate}
+                    disabled={this.props.data.loading}
+                />
+                <TextControl
+                    name="performancesCompleted"
+                    label="Performances Completed"
+                    hasError={this.props.data.hasError.performancesCompleted}
+                    valueLink={this.linkState('performancesCompleted')}
+                    help={this.props.data.help.performancesCompleted}
+                    disabled={this.props.data.loading}
+                />
+                <TextControl
+                    name="activePerformer"
+                    label="Active Performer"
+                    hasError={this.props.data.hasError.activePerformer}
+                    valueLink={this.linkState('activePerformer')}
+                    help={this.props.data.help.activePerformer}
+                    disabled={this.props.data.loading}
+                />
+
+
+
                 <ControlGroup hideLabel={true} hideHelp={true}>
                     <Button
                         type="submit"
