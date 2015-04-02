@@ -21,7 +21,12 @@ var Component = React.createClass({
                 contactFirstName: nextProps.data.contactFirstName,
                 contactLastName: nextProps.data.contactLastName,
                 address1: nextProps.data.address1,
-                address2: nextProps.data.address2
+                address2: nextProps.data.address2,
+                city: nextProps.data.city,
+                state: nextProps.data.state,
+                zipcode: nextProps.data.zipcode,
+                phone: nextProps.data.phone,
+                website: nextProps.data.website
             });
         }
     },
@@ -36,7 +41,12 @@ var Component = React.createClass({
             contactFirstName: this.state.contactFirstName,
             contactLastName: this.state.contactLastName,
             address1: this.state.address1,
-            address2: this.state.address2
+            address2: this.state.address2,
+            city: this.state.city,
+            state: this.state.state,
+            zipcode: this.state.zipcode,
+            phone: this.state.phone,
+            website: this.state.website
         });
     },
     render: function () {
@@ -103,6 +113,46 @@ var Component = React.createClass({
                     hasError={this.props.data.hasError.address2}
                     valueLink={this.linkState('address2')}
                     help={this.props.data.help.address2}
+                    disabled={this.props.data.loading}
+                />
+                <TextControl
+                    name="city"
+                    label="City"
+                    hasError={this.props.data.hasError.city}
+                    valueLink={this.linkState('city')}
+                    help={this.props.data.help.city}
+                    disabled={this.props.data.loading}
+                />
+                <TextControl
+                    name="state"
+                    label="State"
+                    hasError={this.props.data.hasError.state}
+                    valueLink={this.linkState('state')}
+                    help={this.props.data.help.state}
+                    disabled={this.props.data.loading}
+                />
+                <TextControl
+                    name="zipcode"
+                    label="ZipCode"
+                    hasError={this.props.data.hasError.zipcode}
+                    valueLink={this.linkState('zipcode')}
+                    help={this.props.data.help.zipcode}
+                    disabled={this.props.data.loading}
+                />
+                <TextControl
+                    name="phone"
+                    label="Contact Phone"
+                    hasError={this.props.data.hasError.phone}
+                    valueLink={this.linkState('phone')}
+                    help={this.props.data.help.phone}
+                    disabled={this.props.data.loading}
+                />
+                <TextControl
+                    name="website"
+                    label="Website"
+                    hasError={this.props.data.hasError.website}
+                    valueLink={this.linkState('website')}
+                    help={this.props.data.help.website}
                     disabled={this.props.data.loading}
                 />
                 <ControlGroup hideLabel={true} hideHelp={true}>

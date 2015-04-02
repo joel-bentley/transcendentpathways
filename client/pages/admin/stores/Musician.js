@@ -179,6 +179,11 @@ var Store = FluxStore.extend({
             this.state.details.contactLastName = action.data.contactLastName;
             this.state.details.address1 = action.data.address1;
             this.state.details.address2 = action.data.address2;
+            this.state.details.city = action.data.city;
+            this.state.details.state = action.data.state;
+            this.state.details.zipcode = action.data.zipcode;
+            this.state.details.phone = action.data.phone;
+            this.state.details.website = action.data.website;
 
             this.emitChange();
         }
@@ -206,6 +211,11 @@ var Store = FluxStore.extend({
                 this.state.details.contactLastName = action.data.contactLastName;
                 this.state.details.address1 = action.data.address1;
                 this.state.details.address2 = action.data.address2;
+                this.state.details.city = action.data.city;
+                this.state.details.state = action.data.state;
+                this.state.details.zipcode = action.data.zipcode;
+                this.state.details.phone = action.data.phone;
+                this.state.details.website = action.data.website;
             }
 
             this.emitChange();
