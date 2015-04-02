@@ -29,8 +29,9 @@ var Component = React.createClass({
                             Edit
                         </Link>
                     </td>
-                    <td>{record.performerName}</td>
+                    <td className="nowrap">{record.performerName}</td>
                     <td>{record.contactLastName}</td>
+                    <td>{record.contactFirstName}</td>
                     <td className="nowrap">{record._id}</td>
                 </tr>
             );
@@ -42,8 +43,9 @@ var Component = React.createClass({
                     <thead>
                         <tr>
                             <th></th>
-                            <th>performerName</th>
-                            <th className="stretch">contactLastName</th>
+                            <th>Performer Name</th>
+                            <th>Last Name</th>
+                            <th className="stretch">First Name</th>
                             <th>id</th>
                         </tr>
                     </thead>
