@@ -47,8 +47,12 @@ Musician.create = function (payload, callback) {
         contactFirstName: payload.contactFirstName,
         contactLastName: payload.contactLastName,
         address1: payload.address1,
-        address2: payload.address2
-
+        address2: payload.address2,
+        city: payload.city,
+        state: payload.state,
+        zipcode: payload.zipcode,
+        phone: payload.phone,
+        website: payload.website
     };
 
     this.insert(document, function (err, musicians) {

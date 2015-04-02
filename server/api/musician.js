@@ -103,12 +103,12 @@ exports.register = function (server, options, next) {
                     contactFirstName: Joi.string().required(),
                     contactLastName: Joi.string().required(),
                     address1: Joi.string().required(),
-                    address2: Joi.string()
-                    //city: Joi.string().required,
-                    //state: Joi.string().required,
-                    //zipcode: Joi.string().required,
-                    //phone: Joi.string().required,
-                    //website: Joi.string()
+                    address2: Joi.string(),
+                    city: Joi.string().required(),
+                    state: Joi.string().required(),
+                    zipcode: Joi.string().required(),
+                    phone: Joi.string().required(),
+                    website: Joi.string()
                 }
             },
             pre: [
@@ -146,7 +146,12 @@ exports.register = function (server, options, next) {
                     contactFirstName: Joi.string(),
                     contactLastName: Joi.string(),
                     address1: Joi.string(),
-                    address2: Joi.string()
+                    address2: Joi.string(),
+                    city: Joi.string(),
+                    state: Joi.string(),
+                    zipcode: Joi.string(),
+                    phone: Joi.string(),
+                    website: Joi.string()
 
                 }
             },
@@ -164,8 +169,13 @@ exports.register = function (server, options, next) {
                     contactFirstName: request.payload.contactFirstName,
                     contactLastName: request.payload.contactLastName,
                     address1: request.payload.address1,
-                    address2: request.payload.address2
-                }
+                    address2: request.payload.address2,
+                    city: request.payload.city,
+                    state: request.payload.state,
+                    zipcode: request.payload.zipcode,
+                    phone: request.payload.phone,
+                    website: request.payload.website
+              }
             };
 
             Musician.findByIdAndUpdate(id, update, function (err, status) {

@@ -49,7 +49,7 @@ var Component = React.createClass({
                                 className="navbar-logo"
                                 src="/public/media/logo-square-inverse.png"
                             />
-                            <span className="navbar-brand-label">Aqua</span>
+                            <span className="navbar-brand-label">Transcendent Pathways</span>
                         </Link>
                         <button
                             className="navbar-toggle collapsed"
