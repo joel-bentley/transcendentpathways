@@ -101,7 +101,8 @@ exports.register = function (server, options, next) {
                 payload: {
                     performerName: Joi.string().required(),
                     contactFirstName: Joi.string().required(),
-                    contactLastName: Joi.string().required()
+                    contactLastName: Joi.string().required(),
+                    address1: Joi.string().required()
                     //address1: Joi.string().required(),
                     //address2: Joi.string(),
                     //city: Joi.string().required,
@@ -147,7 +148,8 @@ exports.register = function (server, options, next) {
                     id: Joi.string(),
                     performerName: Joi.string(),
                     contactFirstName: Joi.string(),
-                    contactLastName: Joi.string()
+                    contactLastName: Joi.string(),
+                    address1: Joi.string()
 
                 }
             },
@@ -163,7 +165,8 @@ exports.register = function (server, options, next) {
                 $set: {
                     performerName: request.payload.performerName,
                     contactFirstName: request.payload.contactFirstName,
-                    contactLastName: request.payload.contactLastName
+                    contactLastName: request.payload.contactLastName,
+                    address1: request.payload.address1
                 }
             };
 

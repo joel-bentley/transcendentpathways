@@ -45,7 +45,8 @@ Musician.create = function (payload, callback) {
         _id: Slug(payload.performerName + ' ' + payload.contactLastName).toLowerCase(),
         performerName: payload.performerName,
         contactFirstName: payload.contactFirstName,
-        contactLastName: payload.contactLastName
+        contactLastName: payload.contactLastName,
+        address1: payload.address1
 
     };
 
