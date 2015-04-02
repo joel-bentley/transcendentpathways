@@ -22,7 +22,7 @@ var Component = React.createClass({
                 <tr key={record._id}>
                     <td>
                         <Link
-                            className="btn btn-default btn-sm"
+                            className="btn btn-info btn-sm"
                             to="musicianDetails"
                             params={{ id: record._id }}>
 
@@ -39,7 +39,7 @@ var Component = React.createClass({
 
         return (
             <div className="table-responsive">
-                <table className="table table-striped table-results">
+                <table className="table table-striped table-results success">
                     <thead>
                         <tr>
                             <th></th>
