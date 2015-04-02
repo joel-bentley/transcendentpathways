@@ -178,6 +178,8 @@ var Store = FluxStore.extend({
             this.state.details.contactFirstName = action.data.contactFirstName;
             this.state.details.contactLastName = action.data.contactLastName;
             this.state.details.address1 = action.data.address1;
+            this.state.details.address2 = action.data.address2;
+
             this.emitChange();
         }
 
@@ -203,6 +205,7 @@ var Store = FluxStore.extend({
                 this.state.details.contactFirstName = action.data.contactFirstName;
                 this.state.details.contactLastName = action.data.contactLastName;
                 this.state.details.address1 = action.data.address1;
+                this.state.details.address2 = action.data.address2;
             }
 
             this.emitChange();

@@ -46,7 +46,8 @@ Musician.create = function (payload, callback) {
         performerName: payload.performerName,
         contactFirstName: payload.contactFirstName,
         contactLastName: payload.contactLastName,
-        address1: payload.address1
+        address1: payload.address1,
+        address2: payload.address2
 
     };
 
