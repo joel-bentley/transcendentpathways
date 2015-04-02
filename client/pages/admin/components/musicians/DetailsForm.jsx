@@ -19,7 +19,9 @@ var Component = React.createClass({
                 hydrated: nextProps.data.hydrated,
                 performerName: nextProps.data.performerName,
                 contactFirstName: nextProps.data.contactFirstName,
-                contactLastName: nextProps.data.contactLastName
+                contactLastName: nextProps.data.contactLastName,
+                address1: nextProps.data.address1,
+                address2: nextProps.data.address2
             });
         }
     },
@@ -32,7 +34,8 @@ var Component = React.createClass({
             id: this.props.data._id,
             performerName: this.state.performerName,
             contactFirstName: this.state.contactFirstName,
-            contactLastName: this.state.contactLastName
+            contactLastName: this.state.contactLastName,
+            address1: this.state.address1
         });
     },
     render: function () {
@@ -83,6 +86,14 @@ var Component = React.createClass({
                     hasError={this.props.data.hasError.contactLastName}
                     valueLink={this.linkState('contactLastName')}
                     help={this.props.data.help.contactLastName}
+                    disabled={this.props.data.loading}
+                />
+                <TextControl
+                    name="address1"
+                    label="Address Line 1"
+                    hasError={this.props.data.hasError.address1}
+                    valueLink={this.linkState('address1')}
+                    help={this.props.data.help.address1}
                     disabled={this.props.data.loading}
                 />
                 <ControlGroup hideLabel={true} hideHelp={true}>
