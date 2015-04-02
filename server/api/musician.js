@@ -102,9 +102,8 @@ exports.register = function (server, options, next) {
                     performerName: Joi.string().required(),
                     contactFirstName: Joi.string().required(),
                     contactLastName: Joi.string().required(),
-                    address1: Joi.string().required()
-                    //address1: Joi.string().required(),
-                    //address2: Joi.string(),
+                    address1: Joi.string().required(),
+                    address2: Joi.string()
                     //city: Joi.string().required,
                     //state: Joi.string().required,
                     //zipcode: Joi.string().required,
@@ -119,10 +118,7 @@ exports.register = function (server, options, next) {
         handler: function (request, reply) {
 
             var Musician = request.server.plugins['hapi-mongo-models'].Musician;
-            //var performerName = request.payload.performerName;
-            //var contactFirstName = request.payload.contactFirstName;
-            //var contactLastName = request.payload.contactLastName;
-
+            
             Musician.create(request.payload, function (err, status) {
 
                 if (err) {
@@ -149,7 +145,8 @@ exports.register = function (server, options, next) {
                     performerName: Joi.string(),
                     contactFirstName: Joi.string(),
                     contactLastName: Joi.string(),
-                    address1: Joi.string()
+                    address1: Joi.string(),
+                    address2: Joi.string()
 
                 }
             },
@@ -166,7 +163,8 @@ exports.register = function (server, options, next) {
                     performerName: request.payload.performerName,
                     contactFirstName: request.payload.contactFirstName,
                     contactLastName: request.payload.contactLastName,
-                    address1: request.payload.address1
+                    address1: request.payload.address1,
+                    address2: request.payload.address2
                 }
             };
 

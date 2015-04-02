@@ -35,7 +35,8 @@ var Component = React.createClass({
             performerName: this.state.performerName,
             contactFirstName: this.state.contactFirstName,
             contactLastName: this.state.contactLastName,
-            address1: this.state.address1
+            address1: this.state.address1,
+            address2: this.state.address2
         });
     },
     render: function () {
@@ -94,6 +95,14 @@ var Component = React.createClass({
                     hasError={this.props.data.hasError.address1}
                     valueLink={this.linkState('address1')}
                     help={this.props.data.help.address1}
+                    disabled={this.props.data.loading}
+                />
+                <TextControl
+                    name="address2"
+                    label="Address Line 2"
+                    hasError={this.props.data.hasError.address2}
+                    valueLink={this.linkState('address2')}
+                    help={this.props.data.help.address2}
                     disabled={this.props.data.loading}
                 />
                 <ControlGroup hideLabel={true} hideHelp={true}>
