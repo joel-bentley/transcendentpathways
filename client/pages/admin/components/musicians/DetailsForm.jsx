@@ -4,6 +4,7 @@ var TextControl = require('../../../../components/form/TextControl');
 var TextAreaControl = require('../../../../components/form/TextareaControl');
 var Button = require('../../../../components/form/Button');
 var Spinner = require('../../../../components/form/Spinner');
+var SelectControl = require('../../../../components/form/SelectControl');
 var Actions = require('../../actions/Musician');
 
 
@@ -198,14 +199,16 @@ var Component = React.createClass({
                     help={this.props.data.help.instruments}
                     disabled={this.props.data.loading}
                 />
-                <TextControl
+                <SelectControl
+                    default={false}
                     name="approvedToPerform"
                     label="Approved To Perform"
-                    hasError={this.props.data.hasError.approvedToPerform}
-                    valueLink={this.linkState('approvedToPerform')}
-                    help={this.props.data.help.approvedToPerform}
                     disabled={this.props.data.loading}
-                />
+                    valueLink={this.linkState('approvedToPerform')}>
+                    <option value={true}>Yes</option>
+                    <option value={false}>No</option>
+                </SelectControl>
+
                 <TextControl
                     name="approvedBy"
                     label="Approved By"
@@ -230,14 +233,15 @@ var Component = React.createClass({
                     help={this.props.data.help.performancesCompleted}
                     disabled={this.props.data.loading}
                 />
-                <TextControl
+                <SelectControl
+                    default={false}
                     name="activePerformer"
-                    label="Active Performer"
-                    hasError={this.props.data.hasError.activePerformer}
-                    valueLink={this.linkState('activePerformer')}
-                    help={this.props.data.help.activePerformer}
+                    label="Active Performer ?"
                     disabled={this.props.data.loading}
-                />
+                    valueLink={this.linkState('activePerformer')}>
+                    <option value={true}>Yes</option>
+                    <option value={false}>No</option>
+                </SelectControl>
 
 
 
