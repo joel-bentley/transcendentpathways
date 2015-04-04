@@ -80,6 +80,9 @@ var Component = React.createClass({
                             <li className={this.isNavActive(['musicians', 'musicianDetails'])}>
                                 <Link to="musicians">Musicians</Link>
                             </li>
+                            <li className={this.isNavActive(['facilities', 'facilityDetails'])}>
+                                <Link to="facilities">Facilities</Link>
+                            </li>
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
                             <li>

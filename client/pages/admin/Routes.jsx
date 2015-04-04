@@ -15,7 +15,8 @@ var UserSearch = require('./components/users/Search');
 var UserDetails = require('./components/users/Details');
 var MusicianSearch = require('./components/musicians/Search');
 var MusicianDetails = require('./components/musicians/Details');
-
+var FacilitySearch = require('./components/facilities/Search');
+var FacilityDetails = require('./components/facilities/Details');
 
 var Route = ReactRouter.Route;
 var DefaultRoute = ReactRouter.DefaultRoute;
@@ -39,7 +40,8 @@ var routes = (
         <Route path="users/:id" name="userDetails" handler={UserDetails} />
         <Route path="musicians" name="musicians" handler={MusicianSearch} />
         <Route path="musicians/:id" name="musicianDetails" handler={MusicianDetails} />
-
+        <Route path="facilities" name="facilities" handler={FacilitySearch} />
+        <Route path="facilities/:id" name="facilityDetails" handler={FacilityDetails} />
 
     </Route>
 );
