@@ -16,7 +16,7 @@ var Component = React.createClass({
                 <div className="row">
                     <div className="col-sm-6" id="app-mount"></div>
                     <div className="col-sm-6 text-center">
-                        <h1 className="page-header">Facility Signup</h1>
+                        <h3 className="page-header">Thank you!</h3>
                         <p className="lead">
                             Your facility is on the way to offering your paitients the
                             healing power of music! Thank you for helping to remind

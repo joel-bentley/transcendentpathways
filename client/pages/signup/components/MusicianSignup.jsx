@@ -106,7 +106,7 @@ var Component = React.createClass({
 
         return (
             <section>
-                <h1 className="page-header">Sign up</h1>
+                <h3 className="page-header">Musician Account</h3>
                 <form onSubmit={this.handleSubmit}>
                     {alerts}
                     {formElements}
