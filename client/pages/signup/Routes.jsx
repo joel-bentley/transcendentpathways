@@ -14,7 +14,7 @@ var NotFoundRoute = ReactRouter.NotFoundRoute;
 
 var Routes = (
     <Route path="/signup" name="app" handler={App}>
-        // <DefaultRoute name="home" handler={MusicianSignup} />
+        <DefaultRoute name="home" handler={App} />
         <NotFoundRoute name="notFound" handler={NotFound} />
 
         <Route path="musician" name="musician" handler={MusicianSignup} />
