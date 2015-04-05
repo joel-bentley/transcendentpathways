@@ -2,10 +2,10 @@ exports.register = function (plugin, options, next) {
 
     plugin.route({
         method: 'GET',
-        path: '/signup',
+        path: '/signup/musician',
         handler: function (request, reply) {
 
-            reply.view('signup/index');
+            reply.view('signup/musician');
         }
     });
 
@@ -15,5 +15,5 @@ exports.register = function (plugin, options, next) {
 
 
 exports.register.attributes = {
-    name: 'web/signup'
+    name: 'web/musician'
 };

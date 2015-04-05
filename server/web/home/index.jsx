@@ -42,8 +42,8 @@ var Component = React.createClass({
                                     who need it.
 
                                 </p>
-                                <a href="/musician" className="btn btn-default btn-block">
-                                    Musician Info
+                                <a href="/signup/musician" className="btn btn-default btn-block">
+                                    Create Account
                                 </a>
                             </div>
                         </div>
@@ -57,8 +57,8 @@ var Component = React.createClass({
                                      to those who feel marginalized by their affliction. Together we can
                                       remind individuals that they are never alone.
                                 </p>
-                                <a href="/signup" className="btn btn-default btn-block">
-                                    Schedule your Facility
+                                <a href="/signup/facility" className="btn btn-default btn-block">
+                                    Create Account
                                 </a>
                             </div>
                         </div>
