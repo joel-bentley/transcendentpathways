@@ -1,7 +1,7 @@
 var Dispatcher = require('flux-dispatcher');
 var FluxStore = require('flux-store');
 var CloneDeep = require('lodash/lang/cloneDeep');
-var Constants = require('./Constants');
+var Constants = require('../Constants');
 
 
 var ActionTypes = Constants.ActionTypes;
