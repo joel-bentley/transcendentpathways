@@ -1,10 +1,11 @@
 var React = require('react/addons');
-var ControlGroup = require('../../components/form/ControlGroup');
-var TextControl = require('../../components/form/TextControl');
-var Button = require('../../components/form/Button');
-var Spinner = require('../../components/form/Spinner');
-var Actions = require('./Actions');
-var Store = require('./Store');
+var ControlGroup = require('../../../components/form/ControlGroup');
+var TextControl = require('../../../components/form/TextControl');
+var Button = require('../../../components/form/Button');
+var Spinner = require('../../../components/form/Spinner');
+var Store = require('../stores/Store');
+var Actions = require('../Actions');
+
 
 
 var Component = React.createClass({
@@ -36,7 +37,8 @@ var Component = React.createClass({
             name: this.state.name,
             username: this.state.username,
             password: this.state.password,
-            email: this.state.email
+            email: this.state.email,
+            accountType: 'Facility'
         });
     },
     render: function () {
@@ -56,6 +58,16 @@ var Component = React.createClass({
         var formElements;
         if (!this.state.success) {
             formElements = <fieldset>
+                <TextControl
+                    name="accountType"
+                    label="Acount Type"
+                    ref="accountType"
+                    value="Facility"
+                    hasError={this.state.hasError.accountType}
+                    // valueLink={this.linkState('accountType')}
+                    help={this.state.help.accountType}
+                    disabled={true}
+                />
                 <TextControl
                     name="name"
                     label="Name"
@@ -105,7 +117,7 @@ var Component = React.createClass({
 
         return (
             <section>
-                <h1 className="page-header">Sign up</h1>
+                <h3 className="page-header">Facility Account</h3>
                 <form onSubmit={this.handleSubmit}>
                     {alerts}
                     {formElements}

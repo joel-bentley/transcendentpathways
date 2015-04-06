@@ -5,7 +5,7 @@ var Layout = require('../layouts/Default.jsx');
 var Component = React.createClass({
     render: function () {
 
-        var feet = <script src="/public/pages/signup.min.js"></script>;
+        var feet = <script src="/public/pages/signupFacility.min.js"></script>;
 
         return (
             <Layout
@@ -16,11 +16,12 @@ var Component = React.createClass({
                 <div className="row">
                     <div className="col-sm-6" id="app-mount"></div>
                     <div className="col-sm-6 text-center">
-                        <h1 className="page-header">Campy benefits</h1>
+                        <h3 className="page-header">Thank you!</h3>
                         <p className="lead">
-                            Really, you will love it inside. It's super great!
+                            Your facility is on the way to offering your paitients the
+                            healing power of music! Thank you for helping to remind
+                            them they are not alone!
                         </p>
-                        <i className="fa fa-thumbs-o-up bamf"></i>
                     </div>
                 </div>
             </Layout>
