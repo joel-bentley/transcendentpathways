@@ -20,7 +20,7 @@ var Component = React.createClass({
                     <br/>Matching musicians with facilities for the patients who need them.
 
                         <div>
-                            <a className="btn btn-success btn-lg" href="/login/forgot">
+                            <a className="btn btn-warning btn-md" href="/login/forgot">
                                 Reset your password
                             </a>
                         </div>
@@ -39,7 +39,7 @@ var Component = React.createClass({
                                     manage your bookings, and provide therapy to those
                                     who need it.
                                 </p>
-                                <a href="/signup/musician" className="btn btn-success btn-block">
+                                <a href="/signup/musician" className="btn btn-info btn-block">
                                     Create Account
                                 </a>
                             </div>
@@ -56,7 +56,7 @@ var Component = React.createClass({
                                      to those who feel marginalized by their affliction. We can remind individuals
                                      that they are never alone. Music has that power.
                                 </p>
-                                <a href="/signup/facility" className="btn btn-success btn-block">
+                                <a href="/signup/facility" className="btn btn-info btn-block">
                                     Create Account
                                 </a>
                             </div>
@@ -73,7 +73,7 @@ var Component = React.createClass({
                                      of hiring concert musicians to perform in local healthcare facilities
                                      where patients can benefit the most.
                                 </p>
-                                <a href="/contact" className="btn btn-success btn-block">
+                                <a href="/contact" className="btn btn-info btn-block">
                                     Learn more
                                 </a>
                             </div>

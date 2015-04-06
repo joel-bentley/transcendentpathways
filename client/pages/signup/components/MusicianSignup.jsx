@@ -37,7 +37,8 @@ var Component = React.createClass({
             name: this.state.name,
             username: this.state.username,
             password: this.state.password,
-            email: this.state.email
+            email: this.state.email,
+            accountType: this.state.accountType
         });
     },
     render: function () {
