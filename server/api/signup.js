@@ -27,7 +27,8 @@ exports.register = function (server, options, next) {
                     name: Joi.string().required(),
                     email: Joi.string().email().lowercase().required(),
                     username: Joi.string().token().lowercase().required(),
-                    password: Joi.string().required()
+                    password: Joi.string().required(),
+                    accountType: Joi.string()
                 }
             },
             pre: [{
@@ -97,8 +98,9 @@ exports.register = function (server, options, next) {
                     var username = request.payload.username;
                     var password = request.payload.password;
                     var email = request.payload.email;
+                    var accountType = request.payload.accountType;
 
-                    User.create(username, password, email, done);
+                    User.create(username, password, email, accountType, done);
                 },
                 account: ['user', function (done, results) {
 
