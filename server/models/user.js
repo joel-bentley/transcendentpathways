@@ -76,6 +76,7 @@ User.schema = Joi.object().keys({
     username: Joi.string().token().lowercase().required(),
     email: Joi.string().email().lowercase().required(),
     password: Joi.string(),
+    accountType: Joi.string(),
     roles: Joi.object().keys({
         admin: Joi.object().keys({
             id: Joi.string().required(),
@@ -124,7 +125,7 @@ User.generatePasswordHash = function (password, callback) {
     });
 };
 
-User.create = function (username, password, email, callback) {
+User.create = function (username, password, email, accountType, callback) {
 
     var self = this;
 
@@ -137,6 +138,7 @@ User.create = function (username, password, email, callback) {
                 username: username.toLowerCase(),
                 email: email.toLowerCase(),
                 password: results.passwordHash.hash,
+                accountType: accountType,
                 timeCreated: new Date()
             };
 
