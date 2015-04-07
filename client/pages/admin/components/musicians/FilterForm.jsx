@@ -8,8 +8,8 @@ var Component = React.createClass({
     mixins: [ React.addons.LinkedStateMixin ],
     defaultState: {
         performerName: '',
-        contactLastName: '',
-        sort: '_id',
+        contactName: '',
+        sort: 'performerName',
         limit: 20,
         page: 1
     },
@@ -48,16 +48,16 @@ var Component = React.createClass({
                     <div className="col-sm-3">
                         <TextControl
                             name="performerName"
-                            label="Performer search"
+                            label="Group/Performer Name Search"
                             valueLink={this.linkState('performerName')}
                             disabled={this.props.loading}
                         />
                     </div>
                     <div className="col-sm-3">
                         <TextControl
-                            name="contactLastName"
-                            label="Contact Last Name search"
-                            valueLink={this.linkState('contactLastName')}
+                            name="contactName"
+                            label="Contact Name Search"
+                            valueLink={this.linkState('contactName')}
                             disabled={this.props.loading}
                         />
                     </div>
@@ -69,12 +69,12 @@ var Component = React.createClass({
                             onChange={this.onMenuChange}
                             value={this.state.sort}>
 
-                            <option value="_id">id &#9650;</option>
-                            <option value="-_id">id &#9660;</option>
+{/*                         <option value="_id">id &#9650;</option>
+                            <option value="-_id">id &#9660;</option>         */}
                             <option value="performerName">Performer Name &#9650;</option>
                             <option value="-performerName">Performer Name &#9660;</option>
-                            <option value="contactLastName">Contact Last Name &#9650;</option>
-                            <option value="-contactLastName">Contact Last Name &#9660;</option>
+                            <option value="contactName">Contact Name &#9650;</option>
+                            <option value="-contactName">Contact Name &#9660;</option>
                         </SelectControl>
                     </div>
                     <div className="col-sm-3">

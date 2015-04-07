@@ -138,7 +138,7 @@ Async.auto({
             }],
             user: ['clean', function (done, dbResults) {
 
-                User.create('root', results.rootPassword, results.rootEmail, done);
+                User.create('root', results.rootPassword, results.rootEmail, null, done);
             }],
             adminMembership: ['admin', function (done, dbResults) {
 

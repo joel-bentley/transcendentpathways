@@ -14,7 +14,7 @@ var MusicianEntry = BaseModel.extend({
 MusicianEntry.schema = Joi.object().keys({
     id: Joi.string().required(),
     performerName: Joi.string().required(),
-    contactLastName: Joi.string().required(),
+    contactName: Joi.string().required(),
     timeCreated: Joi.date().required(),
     userCreated: Joi.object().keys({
         id: Joi.string().required(),

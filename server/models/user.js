@@ -126,6 +126,7 @@ User.generatePasswordHash = function (password, callback) {
 };
 
 User.create = function (username, password, email, accountType, callback) {
+//User.create = function (username, password, email, callback) {
 
     var self = this;
 

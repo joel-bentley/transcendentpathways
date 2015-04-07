@@ -26,9 +26,8 @@ var Store = FluxStore.extend({
             hasError: {},
             help: {},
             _id: undefined,
-            performerLastName: undefined,
-            contactFirstName: undefined,
-            contactLastName: undefined
+            facilityName: undefined,
+            contactName: undefined
         },
         details: {
             hydrated: false,
@@ -39,9 +38,8 @@ var Store = FluxStore.extend({
             hasError: {},
             help: {},
             _id: undefined,
-            performerName: undefined,
-            contactFirstName: undefined,
-            contactLastName: undefined
+            facilityName: undefined,
+            contactName: undefined
         },
         delete: {
             loading: false,
@@ -93,22 +91,22 @@ var Store = FluxStore.extend({
 
         this.state.delete = CloneDeep(this.defaultState.delete);
     },
-    resetValidationErrors: function (performerName) {
+    resetValidationErrors: function (facilityName) {
 
-        this.state[performerName].error = undefined;
-        this.state[performerName].hasError = {};
-        this.state[performerName].help = {};
+        this.state[facilityName].error = undefined;
+        this.state[facilityName].hasError = {};
+        this.state[facilityName].help = {};
     },
-    handleValidationErrors: function (performerName, data) {
+    handleValidationErrors: function (facilityName, data) {
 
         var validation = data.validation;
         if (validation && validation.keys) {
             var forField = validation.keys.pop();
-            this.state[performerName].hasError[forField] = true;
-            this.state[performerName].help[forField] = data.message;
+            this.state[facilityName].hasError[forField] = true;
+            this.state[facilityName].help[forField] = data.message;
         }
         else if (data.message) {
-            this.state[performerName].error = data.message;
+            this.state[facilityName].error = data.message;
         }
     },
     onDispatcherAction: function (payload) {
@@ -174,9 +172,8 @@ var Store = FluxStore.extend({
             this.state.details.fetchFailure = action.data.fetchFailure;
             this.state.details.success = action.data.success;
             this.state.details._id = action.data._id;
-            this.state.details.performerName = action.data.performerName;
-            this.state.details.contactFirstName = action.data.contactFirstName;
-            this.state.details.contactLastName = action.data.contactLastName;
+            this.state.details.facilityName = action.data.facilityName;
+            this.state.details.contactName = action.data.contactName;
             this.state.details.address1 = action.data.address1;
             this.state.details.address2 = action.data.address2;
             this.state.details.city = action.data.city;
@@ -184,14 +181,10 @@ var Store = FluxStore.extend({
             this.state.details.zipcode = action.data.zipcode;
             this.state.details.phone = action.data.phone;
             this.state.details.website = action.data.website;
-            this.state.details.contactEmail = action.data.contactEmail;
-            this.state.details.references = action.data.references;
             this.state.details.instruments = action.data.instruments;
             this.state.details.approvedToPerform = action.data.approvedToPerform;
-            this.state.details.approvedBy = action.data.approvedBy;
             this.state.details.approvedDate = action.data.approvedDate;
             this.state.details.performancesCompleted = action.data.performancesCompleted;
-            this.state.details.activePerformer = action.data.activePerformer;
             this.emitChange();
         }
 
@@ -213,9 +206,8 @@ var Store = FluxStore.extend({
                 }.bind(this), 2500);
 
                 this.resetValidationErrors('details');
-                this.state.details.performerName = action.data.performerName;
-                this.state.details.contactFirstName = action.data.contactFirstName;
-                this.state.details.contactLastName = action.data.contactLastName;
+                this.state.details.facilityName = action.data.facilityName;
+                this.state.details.contactName = action.data.contactName;
                 this.state.details.address1 = action.data.address1;
                 this.state.details.address2 = action.data.address2;
                 this.state.details.city = action.data.city;
@@ -223,14 +215,10 @@ var Store = FluxStore.extend({
                 this.state.details.zipcode = action.data.zipcode;
                 this.state.details.phone = action.data.phone;
                 this.state.details.website = action.data.website;
-                this.state.details.contactEmail = action.data.contactEmail;
-                this.state.details.references = action.data.references;
                 this.state.details.instruments = action.data.instruments;
                 this.state.details.approvedToPerform = action.data.approvedToPerform;
-                this.state.details.approvedBy = action.data.approvedBy;
                 this.state.details.approvedDate = action.data.approvedDate;
                 this.state.details.performancesCompleted = action.data.performancesCompleted;
-                this.state.details.activePerformer = action.data.activePerformer;
             }
 
             this.emitChange();

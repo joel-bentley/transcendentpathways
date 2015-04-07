@@ -18,8 +18,8 @@ exports.register = function (server, options, next) {
             },
             validate: {
                 query: {
-                    contactLastName: Joi.string().allow(''),
-                    performerName: Joi.string().allow(''),
+                    facilityName: Joi.string().allow(''),
+                    contactName: Joi.string().allow(''),
                     fields: Joi.string(),
                     sort: Joi.string().default('_id'),
                     limit: Joi.number().default(20),
@@ -34,11 +34,11 @@ exports.register = function (server, options, next) {
 
             var Facility = request.server.plugins['hapi-mongo-models'].Facility;
             var query = {};
-            if (request.query.performerName) {
-                query.performerName = new RegExp('^.*?' + request.query.performerName + '.*$', 'i');
+            if (request.query.facilityName) {
+                query.facilityName = new RegExp('^.*?' + request.query.facilityName + '.*$', 'i');
             }
-            if (request.query.contactLastName) {
-                query.contactLastName = new RegExp('^.*?' + request.query.contactLastName + '.*$', 'i');
+            if (request.query.contactName) {
+                query.contactName = new RegExp('^.*?' + request.query.contactName + '.*$', 'i');
             }
             var fields = request.query.fields;
             var sort = request.query.sort;
@@ -99,14 +99,13 @@ exports.register = function (server, options, next) {
             },
             validate: {
                 payload: {
-                    performerName: Joi.string().required(),
-                    contactFirstName: Joi.string().required(),
-                    contactLastName: Joi.string().required(),
+                    facilityName: Joi.string().required(),
+                    contactName: Joi.string().required(),
                     address1: Joi.string().required(),
-                    address2: Joi.string(),
+                    address2: Joi.string().allow(''),
                     city: Joi.string().required(),
                     state: Joi.string().required(),
-                    zipcode: Joi.string().required(),
+                    zipcode: Joi.number().required(),
                     phone: Joi.string().required(),
                     website: Joi.string()
                 }
@@ -118,7 +117,7 @@ exports.register = function (server, options, next) {
         handler: function (request, reply) {
 
             var Facility = request.server.plugins['hapi-mongo-models'].Facility;
-            
+
             Facility.create(request.payload, function (err, status) {
 
                 if (err) {
@@ -142,24 +141,18 @@ exports.register = function (server, options, next) {
             validate: {
                 payload: {
                     id: Joi.string(),
-                    performerName: Joi.string(),
-                    contactFirstName: Joi.string(),
-                    contactLastName: Joi.string(),
+                    facilityName: Joi.string(),
+                    contactName: Joi.string(),
                     address1: Joi.string(),
                     address2: Joi.string().allow(''),
                     city: Joi.string(),
                     state: Joi.string(),
-                    zipcode: Joi.string(),
+                    zipcode: Joi.number(),
                     phone: Joi.string(),
-                    website: Joi.string().allow(''),
-                    contactEmail: Joi.string().allow(''),
-                    references: Joi.any().allow(''),
-                    instruments: Joi.any().allow(''),
-                    approvedToPerform: Joi.string(),
-                    approvedBy: Joi.any().allow(''),
-                    approvedDate: Joi.any().allow(''),
-                    performancesCompleted: Joi.any().allow(''),
-                    activePerformer: Joi.string()
+                    website: Joi.string(),
+                    approvedToPerform: Joi.boolean(),
+                    approvedDate: Joi.date().allow(''),
+                    performancesCompleted: Joi.number().allow('')
                 }
             },
             pre: [
@@ -172,9 +165,8 @@ exports.register = function (server, options, next) {
             var id = request.params.id;
             var update = {
                 $set: {
-                    performerName: request.payload.performerName,
-                    contactFirstName: request.payload.contactFirstName,
-                    contactLastName: request.payload.contactLastName,
+                    facilityName: request.payload.facilityName,
+                    contactName: request.payload.contactName,
                     address1: request.payload.address1,
                     address2: request.payload.address2,
                     city: request.payload.city,
@@ -182,15 +174,10 @@ exports.register = function (server, options, next) {
                     zipcode: request.payload.zipcode,
                     phone: request.payload.phone,
                     website: request.payload.website,
-                    contactEmail: request.payload.contactEmail,
-                    references: request.payload.references,
-                    instruments: request.payload.instruments,
                     approvedToPerform: request.payload.approvedToPerform,
-                    approvedBy: request.payload.approvedBy,
                     approvedDate: request.payload.approvedDate,
-                    performancesCompleted: request.payload.performancesCompleted,
-                    activePerformer: request.payload.activePerformer
-              }
+                    performancesCompleted: request.payload.performancesCompleted
+                }
             };
 
             Facility.findByIdAndUpdate(id, update, function (err, status) {

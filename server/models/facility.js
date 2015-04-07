@@ -19,58 +19,53 @@ Facility._idClass = String;
 
 
 Facility.schema = Joi.object().keys({
-    performerName: Joi.string().required(),
-    contactFirstName: Joi.string().required(),
-    contactLastName: Joi.string().required(),
+    facilityName: Joi.string().required(),
+    contactName: Joi.string().required(),
     address1: Joi.string().required(),
     address2: Joi.string(),
     city: Joi.string().required(),
     state: Joi.string().required(),
-    zipcode: Joi.string().required(),
+    zipcode: Joi.number().required(),
     phone: Joi.string().required(),
     website: Joi.string(),
-    contactEmail: Joi.string(),
-    references: Joi.string(),
     instruments: Joi.string(),
-    approvedToPerform: Joi.string(),
-    approvedBy: Joi.string(),
+    approvedToPerform: Joi.boolean(),
     approvedDate: Joi.date(),
-    performancesCompleted: Joi.number(),
-    activePerformer: Joi.string()
+    performancesCompleted: Joi.number()
 
 });
 
 
 Facility.indexes = [
     [{ id: 1 }],
-    [{ performerName: 1 }],
-    [{ contactLastName: 1 }]
+    [{ facilityName: 1 }],
+    [{ contactName: 1 }]
 ];
 
 
 Facility.create = function (payload, callback) {
 
     var document = {
-        _id: Slug(payload.performerName + ' ' + payload.contactLastName).toLowerCase(),
-        performerName: payload.performerName,
-        contactFirstName: payload.contactFirstName,
-        contactLastName: payload.contactLastName,
+        _id: Slug(payload.facilityName + ' ' + payload.contactName).toLowerCase(),
+        facilityName: payload.facilityName,
+        contactName: payload.contactName,
         address1: payload.address1,
         address2: payload.address2,
         city: payload.city,
         state: payload.state,
         zipcode: payload.zipcode,
         phone: payload.phone,
-        website: payload.website
+        website: payload.website,
+        instruments: payload.instruments
     };
 
-    this.insert(document, function (err, facilities) {
+    this.insert(document, function (err, musicians) {
 
         if (err) {
             return callback(err);
         }
 
-        callback(null, facilities[0]);
+        callback(null, musicians[0]);
     });
 };
 
