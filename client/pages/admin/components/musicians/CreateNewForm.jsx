@@ -49,8 +49,7 @@ var Component = React.createClass({
 
         Actions.createNew({
             performerName: this.state.performerName,
-            contactLastName: this.state.contactLastName,
-            contactFirstName: this.state.contactFirstName,
+            contactName: this.state.contactName,
             address1: this.state.address1,
             address2: this.state.address2,
             city: this.state.city,
@@ -80,46 +79,25 @@ var Component = React.createClass({
         if (!this.props.data.success) {
             formElements = <fieldset>
                 {alerts}
-                <div className="row">
-                    <div className="col-md-4">
-                        <TextControl
-                            name="performerName"
-                            ref="performerName"
-                            label="Performer Name"
-                            placeholder="performer name"
-                            hasError={this.props.data.hasError.performerName}
-                            valueLink={this.linkState('performerName')}
-                            help={this.props.data.help.performerName}
-                            disabled={this.props.data.loading}
-                        />
-                    </div>
-                    <div className="col-md-4">
-                        <TextControl
-                            placeholder="first name"
-                            label="Contact First Name"
-                            ref="contactFirstName"
-                            hasError={this.props.data.hasError.contactFirstName}
-                            valueLink={this.linkState('contactFirstName')}
-                            help={this.props.data.help.contactFirstName}
-                            name="contactFirstName"
-                            disabled={this.props.data.loading}
-                        />
-                    </div>
-                    <div className="col-md-4">
-                        <TextControl
-                            placeholder="last name"
-                            name="contactLastName"
-                            label="Contact Last Name"
-                            ref="contactLastName"
-                            hasError={this.props.data.hasError.contactLastName}
-                            valueLink={this.linkState('contactLastName')}
-                            help={this.props.data.help.contactLastName}
-                            disabled={this.props.data.loading}
-                        />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-4">
+                <TextControl
+                    name="performerName"
+                    ref="performerName"
+                    label="Group/Performer Name"
+                    hasError={this.props.data.hasError.performerName}
+                    valueLink={this.linkState('performerName')}
+                    help={this.props.data.help.performerName}
+                    disabled={this.props.data.loading}
+                />
+                <TextControl
+                    label="Contact Name"
+                    ref="contactName"
+                    hasError={this.props.data.hasError.contactFirstName}
+                    valueLink={this.linkState('contactName')}
+                    help={this.props.data.help.contactName}
+                    name="contactName"
+                    disabled={this.props.data.loading}
+                />
+
                         <TextControl
                             placeholder="address line 1"
                             name="address1"
@@ -130,8 +108,7 @@ var Component = React.createClass({
                             help={this.props.data.help.address1}
                             disabled={this.props.data.loading}
                         />
-                    </div>
-                    <div className="col-md-4">
+
                         <TextControl
                             placeholder="address line 2"
                             label="Address Line 2"
@@ -142,7 +119,8 @@ var Component = React.createClass({
                             help={this.props.data.help.address2}
                             disabled={this.props.data.loading}
                         />
-                    </div>
+
+                <div className="row">
                     <div className="col-md-4">
                         <TextControl
                             placeholder="city"
@@ -155,8 +133,7 @@ var Component = React.createClass({
                             disabled={this.props.data.loading}
                         />
                     </div>
-                </div>
-                <div className="row">
+
                     <div className="col-md-2">
                         <TextControl
                             placeholder="state"
@@ -181,6 +158,8 @@ var Component = React.createClass({
                             disabled={this.props.data.loading}
                         />
                     </div>
+                </div>
+                <div className="row">
                     <div className="col-md-3">
                         <TextControl
                             placeholder="phone number"
@@ -193,11 +172,11 @@ var Component = React.createClass({
                             disabled={this.props.data.loading}
                         />
                     </div>
-                    <div className="col-md-5">
+                    <div className="col-md-6">
                         <TextControl
                             placeholder="http://"
                             name="website"
-                            label="Your Website"
+                            label="Website or Online Reference"
                             ref="website"
                             hasError={this.props.data.hasError.website}
                             valueLink={this.linkState('website')}
@@ -221,7 +200,7 @@ var Component = React.createClass({
 
         return (
             <Modal
-                header="Create new"
+                header="Manually Create New Musician Account"
                 show={this.props.data.show}
                 onClose={Actions.hideCreateNew}>
 

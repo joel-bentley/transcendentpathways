@@ -59,7 +59,7 @@ var Component = React.createClass({
         return (
             <section className="section-musician-details container">
                 <h1 className="page-header">
-                    <Link to="musicians">Musicians</Link> / {this.state.details._id}
+                    <Link to="musicians">Edit Musician Data</Link> / {this.state.details.performerName}
                 </h1>
                 <div className="row">
                     <div className="col-sm-6">
