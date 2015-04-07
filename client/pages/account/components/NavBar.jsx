@@ -46,7 +46,7 @@ var Component = React.createClass({
                     <div className="navbar-header">
                         <Link className="navbar-brand" to="home">
                             <img className="navbar-logo" src="/public/media/logo-square.png" />
-                            <span className="navbar-brand-label">Aqua</span>
+                            <span className="navbar-brand-label">Transcendent Pathways</span>
                         </Link>
                         <button
                             className="navbar-toggle collapsed"

@@ -39,7 +39,7 @@ var Component = React.createClass({
                 <div className="row">
                     <div className="col-sm-7">
                         <h1 className="page-header">Admin</h1>
-                        <div className="row">
+                        {/*<div className="row">
                             <div className="col-sm-4">
                                 <div className="well text-center">
                                     <div className="stat-value">
@@ -88,13 +88,13 @@ var Component = React.createClass({
                                     <div className="stat-label">day</div>
                                 </div>
                             </div>
-                        </div>
+                        </div>*/}
                     </div>
                     <div className="col-sm-5">
-                        <h1 className="page-header">Throttle guage</h1>
+                        {/*<h1 className="page-header">Throttle gauge</h1>
                         <div className="text-center">
                             <i className="fa fa-dashboard bamf"></i>
-                        </div>
+                        </div>*/}
                     </div>
                 </div>
             </section>
