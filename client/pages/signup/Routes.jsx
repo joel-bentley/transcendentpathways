@@ -5,6 +5,7 @@ var App = require('./components/App');
 var NotFound = require('./components/NotFound');
 var MusicianSignup = require('./components/MusicianSignup');
 var FacilitySignup = require('./components/FacilitySignup');
+var MusicianDetailsForm = require('./components/MusicianDetailsForm');
 
 
 var Route = ReactRouter.Route;
@@ -19,6 +20,7 @@ var Routes = (
 
         <Route path="musician" name="musician" handler={MusicianSignup} />
         <Route path="facility" name="facility" handler={FacilitySignup} />
+        <Route path="musicianDetailsForm" name = "musicianDetailsForm" handler={MusicianDetailsForm} />
     </Route>
 );
 

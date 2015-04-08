@@ -24,12 +24,33 @@ var Actions = {
         Fetch(request, function (err, response) {
 
             if (!err) {
-                window.location.href = '/account';
+                window.location.href = '/signup/musicianDetailsForm';
                 response.success = true;
             }
 
             dispatch(SERVER_ACTION, Types.RECEIVE_RESPONSE, response);
         });
+    },
+    saveDetails: function (data) {
+
+       dispatch(VIEW_ACTION, Types.SAVE_DETAILS, data);
+
+       var request = {
+            method: 'POST',
+            url: '/api/signupMusicianDetails',
+            data: data
+       };
+
+       Fetch(request, function (err, response) {
+
+            if (!err) {
+                window.location.href = '/signup/musicianSuccess';
+                response.success = true;
+            }
+
+            dispatch(SERVER_ACTION, Types.SAVE_DETAILS_RESPONSE, response);
+        });
+
     }
 };
 

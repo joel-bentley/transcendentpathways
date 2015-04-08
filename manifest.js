@@ -68,6 +68,7 @@ var manifest = {
         './server/api/statuses': { basePath: '/api' },
         './server/api/users': { basePath: '/api' },
         './server/api/musician': {basePath: '/api'},
+        './server/api/signupMusicianDetails': {basePath: '/api'},
         './server/api/facility': {basePath: '/api'},
         './server/web/about': {},
         './server/web/account': {},
@@ -77,6 +78,7 @@ var manifest = {
         './server/web/login': {},
         './server/web/public': {},
         './server/web/signup/musician': {},
+        './server/web/signup/musicianDetailsForm': {},
         './server/web/signup/facility': {}
     }
 };

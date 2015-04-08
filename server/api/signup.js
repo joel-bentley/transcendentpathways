@@ -90,7 +90,7 @@ exports.register = function (server, options, next) {
             var Account = request.server.plugins['hapi-mongo-models'].Account;
             var User = request.server.plugins['hapi-mongo-models'].User;
             var Session = request.server.plugins['hapi-mongo-models'].Session;
-            var mailer = request.server.plugins.mailer;
+            // var mailer = request.server.plugins.mailer;
 
             Async.auto({
                 user: function (done) {
@@ -138,26 +138,26 @@ exports.register = function (server, options, next) {
 
                     User.findByIdAndUpdate(id, update, done);
                 }],
-                welcome: ['linkUser', 'linkAccount', function (done, results) {
+                // welcome: ['linkUser', 'linkAccount', function (done, results) {
 
-                    var options = {
-                        subject: 'Your ' + Config.get('/projectName') + ' account',
-                        to: {
-                            name: request.payload.name,
-                            address: request.payload.email
-                        }
-                    };
-                    var template = 'welcome';
+                //     var options = {
+                //         subject: 'Your ' + Config.get('/projectName') + ' account',
+                //         to: {
+                //             name: request.payload.name,
+                //             address: request.payload.email
+                //         }
+                //     };
+                //     var template = 'welcome';
 
-                    mailer.sendEmail(options, template, request.payload, function (err) {
+                //     mailer.sendEmail(options, template, request.payload, function (err) {
 
-                        if (err) {
-                            console.warn('sending welcome email failed:', err.stack);
-                        }
-                    });
+                //         if (err) {
+                //             console.warn('sending welcome email failed:', err.stack);
+                //         }
+                //     });
 
-                    done();
-                }],
+                //     done();
+                // }],
                 session: ['linkUser', 'linkAccount', function (done, results) {
 
                     Session.create(results.user._id.toString(), done);
@@ -168,7 +168,7 @@ exports.register = function (server, options, next) {
                     return reply(err);
                 }
 
-                var user = results.linkAccount[0];
+                var user = results.linkAccount;
                 var credentials = user.username + ':' + results.session.key;
                 var authHeader = 'Basic ' + new Buffer(credentials).toString('base64');
                 var result = {
@@ -187,7 +187,6 @@ exports.register = function (server, options, next) {
             });
         }
     });
-
 
     next();
 };

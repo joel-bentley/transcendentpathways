@@ -20,8 +20,8 @@ Musician._idClass = String;
 
 Musician.schema = Joi.object().keys({
     performerName: Joi.string().required(),
-    contactFirstName: Joi.string().required(),
-    contactLastName: Joi.string().required(),
+    //contactFirstName: Joi.string(),
+    //contactLastName: Joi.string(),
     address1: Joi.string().required(),
     address2: Joi.string(),
     city: Joi.string().required(),
@@ -43,18 +43,18 @@ Musician.schema = Joi.object().keys({
 
 Musician.indexes = [
     [{ id: 1 }],
-    [{ performerName: 1 }],
-    [{ contactLastName: 1 }]
+    [{ performerName: 1 }]
+    // [{ contactLastName: 1 }]
 ];
 
 
 Musician.create = function (payload, callback) {
 
     var document = {
-        _id: Slug(payload.performerName + ' ' + payload.contactLastName).toLowerCase(),
+        //_id: Slug(payload.performerName + ' ' + payload.contactLastName).toLowerCase(),
         performerName: payload.performerName,
-        contactFirstName: payload.contactFirstName,
-        contactLastName: payload.contactLastName,
+        //contactFirstName: payload.contactFirstName,
+        //contactLastName: payload.contactLastName,
         address1: payload.address1,
         address2: payload.address2,
         city: payload.city,

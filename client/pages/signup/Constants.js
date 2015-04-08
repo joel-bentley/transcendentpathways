@@ -6,6 +6,8 @@ module.exports = {
     PayloadSources: PayloadSources,
     ActionTypes: FluxConstant.set([
         'SEND_REQUEST',
-        'RECEIVE_RESPONSE'
+        'RECEIVE_RESPONSE',
+        'SAVE_DETAIS',
+        'SAVE_DETAIS_RESPONSE'
     ])
 };
