@@ -118,7 +118,7 @@ exports.register = function (server, options, next) {
         handler: function (request, reply) {
 
             var Musician = request.server.plugins['hapi-mongo-models'].Musician;
-            
+
             Musician.create(request.payload, function (err, status) {
 
                 if (err) {

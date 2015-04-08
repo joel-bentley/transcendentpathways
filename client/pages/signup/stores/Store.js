@@ -29,7 +29,7 @@ var Store = FluxStore.extend({
 
         var action = payload.action;
 
-        if (ActionTypes.SEND_REQUEST === action.type) {
+        if (ActionTypes.SEND_REQUEST || ActionTypes.SAVE_DETAILS === action.type) {
             this.state.loading = true;
             this.state.success = false;
             this.state.error = undefined;
@@ -38,7 +38,7 @@ var Store = FluxStore.extend({
             this.emitChange();
         }
 
-        if (ActionTypes.RECEIVE_RESPONSE === action.type) {
+        if (ActionTypes.RECEIVE_RESPONSE || ActionTypes.SAVE_DETAILS_RESPONSE === action.type) {
             this.state.loading = false;
             this.state.success = action.data.success;
 
