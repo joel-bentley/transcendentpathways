@@ -26,9 +26,8 @@ var Store = FluxStore.extend({
             hasError: {},
             help: {},
             _id: undefined,
-            performerLastName: undefined,
-            contactFirstName: undefined,
-            contactLastName: undefined
+            performerName: undefined,
+            contactName: undefined
         },
         details: {
             hydrated: false,
@@ -40,8 +39,7 @@ var Store = FluxStore.extend({
             help: {},
             _id: undefined,
             performerName: undefined,
-            contactFirstName: undefined,
-            contactLastName: undefined
+            contactName: undefined
         },
         delete: {
             loading: false,
@@ -175,8 +173,7 @@ var Store = FluxStore.extend({
             this.state.details.success = action.data.success;
             this.state.details._id = action.data._id;
             this.state.details.performerName = action.data.performerName;
-            this.state.details.contactFirstName = action.data.contactFirstName;
-            this.state.details.contactLastName = action.data.contactLastName;
+            this.state.details.contactName = action.data.contactName;
             this.state.details.address1 = action.data.address1;
             this.state.details.address2 = action.data.address2;
             this.state.details.city = action.data.city;
@@ -184,14 +181,10 @@ var Store = FluxStore.extend({
             this.state.details.zipcode = action.data.zipcode;
             this.state.details.phone = action.data.phone;
             this.state.details.website = action.data.website;
-            this.state.details.contactEmail = action.data.contactEmail;
-            this.state.details.references = action.data.references;
             this.state.details.instruments = action.data.instruments;
             this.state.details.approvedToPerform = action.data.approvedToPerform;
-            this.state.details.approvedBy = action.data.approvedBy;
             this.state.details.approvedDate = action.data.approvedDate;
             this.state.details.performancesCompleted = action.data.performancesCompleted;
-            this.state.details.activePerformer = action.data.activePerformer;
             this.emitChange();
         }
 
@@ -214,8 +207,7 @@ var Store = FluxStore.extend({
 
                 this.resetValidationErrors('details');
                 this.state.details.performerName = action.data.performerName;
-                this.state.details.contactFirstName = action.data.contactFirstName;
-                this.state.details.contactLastName = action.data.contactLastName;
+                this.state.details.contactName = action.data.contactName;
                 this.state.details.address1 = action.data.address1;
                 this.state.details.address2 = action.data.address2;
                 this.state.details.city = action.data.city;
@@ -223,14 +215,10 @@ var Store = FluxStore.extend({
                 this.state.details.zipcode = action.data.zipcode;
                 this.state.details.phone = action.data.phone;
                 this.state.details.website = action.data.website;
-                this.state.details.contactEmail = action.data.contactEmail;
-                this.state.details.references = action.data.references;
                 this.state.details.instruments = action.data.instruments;
                 this.state.details.approvedToPerform = action.data.approvedToPerform;
-                this.state.details.approvedBy = action.data.approvedBy;
                 this.state.details.approvedDate = action.data.approvedDate;
                 this.state.details.performancesCompleted = action.data.performancesCompleted;
-                this.state.details.activePerformer = action.data.activePerformer;
             }
 
             this.emitChange();

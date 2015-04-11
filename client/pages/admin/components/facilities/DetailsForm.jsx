@@ -19,9 +19,8 @@ var Component = React.createClass({
         if (!this.state.hydrated) {
             this.setState({
                 hydrated: nextProps.data.hydrated,
-                performerName: nextProps.data.performerName,
-                contactFirstName: nextProps.data.contactFirstName,
-                contactLastName: nextProps.data.contactLastName,
+                facilityName: nextProps.data.facilityName,
+                contactName: nextProps.data.contactName,
                 address1: nextProps.data.address1,
                 address2: nextProps.data.address2,
                 city: nextProps.data.city,
@@ -29,14 +28,10 @@ var Component = React.createClass({
                 zipcode: nextProps.data.zipcode,
                 phone: nextProps.data.phone,
                 website: nextProps.data.website,
-                contactEmail: nextProps.data.contactEmail,
-                references: nextProps.data.references,
                 instruments: nextProps.data.instruments,
                 approvedToPerform: nextProps.data.approvedToPerform,
-                approvedBy: nextProps.data.approvedBy,
                 approvedDate: nextProps.data.approvedDate,
-                performancesCompleted: nextProps.data.performancesCompleted,
-                activePerformer: nextProps.data.activePerformer
+                performancesCompleted: nextProps.data.performancesCompleted
             });
         }
     },
@@ -47,9 +42,8 @@ var Component = React.createClass({
 
         Actions.saveDetails({
             id: this.props.data._id,
-            performerName: this.state.performerName,
-            contactFirstName: this.state.contactFirstName,
-            contactLastName: this.state.contactLastName,
+            facilityName: this.state.facilityName,
+            contactName: this.state.contactName,
             address1: this.state.address1,
             address2: this.state.address2,
             city: this.state.city,
@@ -57,14 +51,9 @@ var Component = React.createClass({
             zipcode: this.state.zipcode,
             phone: this.state.phone,
             website: this.state.website,
-            contactEmail: this.state.contactEmail,
-            references: this.state.references,
-            instruments: this.state.instruments,
             approvedToPerform: this.state.approvedToPerform,
-            approvedBy: this.state.approvedBy,
             approvedDate: this.state.approvedDate,
-            performancesCompleted: this.state.performancesCompleted,
-            activePerformer: this.state.activePerformer
+            performancesCompleted: this.state.performancesCompleted
         });
     },
     render: function () {
@@ -94,29 +83,21 @@ var Component = React.createClass({
                 <legend>Details</legend>
                 {alerts}
                 <TextControl
-                    name="performerName"
-                    label="Performer Name"
-                    hasError={this.props.data.hasError.performerName}
-                    valueLink={this.linkState('performerName')}
-                    help={this.props.data.help.performerName}
+                    name="facilityName"
+                    label="Facility Name"
+                    hasError={this.props.data.hasError.facilityName}
+                    valueLink={this.linkState('facilityName')}
+                    help={this.props.data.help.facilityName}
                     disabled={this.props.data.loading}
-                />
+                    />
                 <TextControl
-                    name="contactFirstName"
-                    label="Contact First Name"
-                    hasError={this.props.data.hasError.contactFirstName}
-                    valueLink={this.linkState('contactFirstName')}
-                    help={this.props.data.help.contactFirstName}
+                    name="contactName"
+                    label="Contact Name"
+                    hasError={this.props.data.hasError.contactName}
+                    valueLink={this.linkState('contactName')}
+                    help={this.props.data.help.contactName}
                     disabled={this.props.data.loading}
-                />
-                <TextControl
-                    name="contactLastName"
-                    label="Contact Last Name"
-                    hasError={this.props.data.hasError.contactLastName}
-                    valueLink={this.linkState('contactLastName')}
-                    help={this.props.data.help.contactLastName}
-                    disabled={this.props.data.loading}
-                />
+                    />
                 <TextControl
                     name="address1"
                     label="Address Line 1"
@@ -124,7 +105,7 @@ var Component = React.createClass({
                     valueLink={this.linkState('address1')}
                     help={this.props.data.help.address1}
                     disabled={this.props.data.loading}
-                />
+                    />
                 <TextControl
                     name="address2"
                     label="Address Line 2"
@@ -132,7 +113,7 @@ var Component = React.createClass({
                     valueLink={this.linkState('address2')}
                     help={this.props.data.help.address2}
                     disabled={this.props.data.loading}
-                />
+                    />
                 <TextControl
                     name="city"
                     label="City"
@@ -140,7 +121,7 @@ var Component = React.createClass({
                     valueLink={this.linkState('city')}
                     help={this.props.data.help.city}
                     disabled={this.props.data.loading}
-                />
+                    />
                 <TextControl
                     name="state"
                     label="State"
@@ -148,7 +129,7 @@ var Component = React.createClass({
                     valueLink={this.linkState('state')}
                     help={this.props.data.help.state}
                     disabled={this.props.data.loading}
-                />
+                    />
                 <TextControl
                     name="zipcode"
                     label="ZipCode"
@@ -156,7 +137,7 @@ var Component = React.createClass({
                     valueLink={this.linkState('zipcode')}
                     help={this.props.data.help.zipcode}
                     disabled={this.props.data.loading}
-                />
+                    />
                 <TextControl
                     name="phone"
                     label="Contact Phone"
@@ -164,7 +145,7 @@ var Component = React.createClass({
                     valueLink={this.linkState('phone')}
                     help={this.props.data.help.phone}
                     disabled={this.props.data.loading}
-                />
+                    />
                 <TextControl
                     name="website"
                     label="Website"
@@ -172,37 +153,11 @@ var Component = React.createClass({
                     valueLink={this.linkState('website')}
                     help={this.props.data.help.website}
                     disabled={this.props.data.loading}
-                />
-                <TextControl
-                    name="contactEmail"
-                    label="Contact Email"
-                    hasError={this.props.data.hasError.contactEmail}
-                    valueLink={this.linkState('contactEmail')}
-                    help={this.props.data.help.contactEmail}
-                    disabled={this.props.data.loading}
-                />
-                <TextAreaControl
-                    name="references"
-                    label="References"
-                    rows="5"
-                    hasError={this.props.data.hasError.references}
-                    valueLink={this.linkState('references')}
-                    help={this.props.data.help.references}
-                    disabled={this.props.data.loading}
-                />
-                <TextAreaControl
-                    name="instruments"
-                    label="Instruments"
-                    rows="5"
-                    hasError={this.props.data.hasError.instruments}
-                    valueLink={this.linkState('instruments')}
-                    help={this.props.data.help.instruments}
-                    disabled={this.props.data.loading}
-                />
+                    />
                 <SelectControl
                     default={false}
                     name="approvedToPerform"
-                    label="Approved To Perform"
+                    label="Approved?"
                     disabled={this.props.data.loading}
                     valueLink={this.linkState('approvedToPerform')}>
                     <option value={true}>Yes</option>
@@ -210,21 +165,13 @@ var Component = React.createClass({
                 </SelectControl>
 
                 <TextControl
-                    name="approvedBy"
-                    label="Approved By"
-                    hasError={this.props.data.hasError.approvedBy}
-                    valueLink={this.linkState('approvedBy')}
-                    help={this.props.data.help.approvedBy}
-                    disabled={this.props.data.loading}
-                />
-                <TextControl
                     name="approvedDate"
                     label="Approved Date"
                     hasError={this.props.data.hasError.approvedDate}
                     valueLink={this.linkState('approvedDate')}
                     help={this.props.data.help.approvedDate}
                     disabled={this.props.data.loading}
-                />
+                    />
                 <TextControl
                     name="performancesCompleted"
                     label="Performances Completed"
@@ -232,16 +179,7 @@ var Component = React.createClass({
                     valueLink={this.linkState('performancesCompleted')}
                     help={this.props.data.help.performancesCompleted}
                     disabled={this.props.data.loading}
-                />
-                <SelectControl
-                    default={false}
-                    name="activePerformer"
-                    label="Active Performer ?"
-                    disabled={this.props.data.loading}
-                    valueLink={this.linkState('activePerformer')}>
-                    <option value={true}>Yes</option>
-                    <option value={false}>No</option>
-                </SelectControl>
+                    />
 
 
 
