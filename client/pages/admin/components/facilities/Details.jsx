@@ -57,9 +57,9 @@ var Component = React.createClass({
         }
 
         return (
-            <section className="section-facility-details container">
+            <section className="section-musician-details container">
                 <h1 className="page-header">
-                    <Link to="facilities">Facilities</Link> / {this.state.details._id}
+                    <Link to="facilities">Edit Facility Data</Link> / {this.state.details.facilityName}
                 </h1>
                 <div className="row">
                     <div className="col-sm-6">
@@ -67,7 +67,7 @@ var Component = React.createClass({
                         <DeleteForm
                             details={this.state.details}
                             data={this.state.delete}
-                        />
+                            />
                     </div>
                 </div>
             </section>
