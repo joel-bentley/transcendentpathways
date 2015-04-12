@@ -1,0 +1,44 @@
+extends ../layout
+block content
+    .page-header
+        h3 Musician - Performer Details
+    form.form-horizontal(id='musicianDetails', method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .form-group
+            label.col-sm-3.control-label(for='performerName') Musician-Performer Name
+            .col-sm-7
+                input.form-control(type='text', name='performerName', id='performerName', placeholder="Musician-Performer Name",
+                autofocus)
+        .form-group
+            label.col-sm-3.control-label(for='address1') Address Line 1
+            .col-sm-7
+                input.form-control(type='text', name='address1', id='address1', placeholder='Address Line 1')
+        .form-group
+            label.col-sm-3.control-label(for='address2') Address Line 2
+            .col-sm-7
+                input.form-control(type='text', name='address2', id='address2', placeholder='Address Line 2')
+        .form-group
+            label.col-sm-3.control-label(for='city') City
+            .col-sm-7
+                input.form-control(type='text', name='city', id='city', placeholder='City')
+        .form-group
+            label.col-sm-3.control-label(for='state') State
+            .col-sm-7
+                input.form-control(type='text', name='State', id='State', placeholder='State')
+        .form-group
+            label.col-sm-3.control-label(for='zipcode') Zip Code
+            .col-sm-7
+                input.form-control(type='text', name='zipcode', id='zipcode', placeholder='Zip Code')
+        .form-group
+            label.col-sm-3.control-label(for='password') Password
+            .col-sm-7
+                input.form-control(type='password', name='password', id='password', placeholder='Password')
+        .form-group
+            label.col-sm-3.control-label(for='confirmPassword') Confirm Password
+            .col-sm-7
+                input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password')
+        .form-group
+            .col-sm-offset-3.col-sm-7
+                button.btn.btn-success(type='submit')
+                    span.ion-person-add
+                    | Signup
