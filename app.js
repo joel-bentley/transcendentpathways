@@ -28,6 +28,7 @@ var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
+var musicianController = require('./controllers/musician');
 
 /**
  * API keys and Passport configuration.
@@ -102,6 +103,15 @@ app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
+app.get('/signupMusician', userController.getSignupMusician);
+app.post('/signupMusician', userController.postSignup);
+app.get('/musicianDetails', userController.getMusicianDetails);
+app.post('/musicianDetails', userController.postMusicianDetails);
+app.get('/homeMusician', musicianController.getHomeMusician);
+app.get('/facilityDetails', userController.getFacilityDetails);
+app.post('/facilityDetails', userController.postFacilityDetails);
+app.get('/signupFacility', userController.getSignupFacility);
+app.post('/signupFacility', userController.postSignup);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
