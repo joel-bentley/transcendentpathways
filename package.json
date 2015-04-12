@@ -1,6 +1,9 @@
 {
-  "name": "hackathon-starter",
+  "name": "transcendent-pathways",
   "version": "3.0.1",
+  "engines": {
+    "node": "0.12.x"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/sahat/hackathon-starter.git"
