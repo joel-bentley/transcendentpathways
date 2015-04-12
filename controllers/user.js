@@ -4,6 +4,7 @@ var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 var passport = require('passport');
 var User = require('../models/User');
+var Musician = require('../models/Musician');
 var secrets = require('../config/secrets');
 
 /**
@@ -65,6 +66,53 @@ exports.getSignup = function(req, res) {
     title: 'Create Account'
   });
 };
+exports.getSignupMusician = function(req, res) {
+  if (req.user) return res.redirect('/');
+  res.render('account/signupMusician', {
+    title: 'Create Musician Account'
+  });
+};
+exports.getSignupFacility = function(req, res) {
+  if (req.user) return res.redirect('/');
+  res.render('account/signupFacility', {
+    title: 'Create Facility Account'
+  });
+};
+exports.getMusicianDetails = function(req, res){
+  if(!req.user) return res.redirect('/');
+  res.render('account/musicianDetails', {
+    title: 'Musician - Performer Details'
+  });
+};
+exports.getFacilityDetails = function(req, res){
+  if(!req.user) return res.redirect('/');
+  res.render('account/facilityDetails', {
+    title: 'Facility Details'
+  });
+};
+exports.postMusicianDetails = function(req, res, next){
+  //console.log(req.user);
+  var musician = new Musician({
+    performerName: req.body.performerName,
+    username: req.user._id,
+    contactName: req.body.contactName,
+    address1: req.body.address1,
+    address2: req.body.address2,
+    city: req.body.city,
+    state: req.body.state,
+    zipcode: req.body.zipcode,
+    phone: req.body.phone,
+    website: req.body.website
+  });
+  musician.save(function(err) {
+    if (err) return next(err);
+    res.redirect('/homeMusician');
+  });
+};
+exports.postFacilityDetails = function(req, res, next){
+
+};
+
 
 /**
  * POST /signup
@@ -74,6 +122,7 @@ exports.postSignup = function(req, res, next) {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('password', 'Password must be at least 4 characters long').len(4);
   req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
+  req.assert('accountType', 'Account type is not valid').notEmpty();
 
   var errors = req.validationErrors();
 
@@ -84,19 +133,32 @@ exports.postSignup = function(req, res, next) {
 
   var user = new User({
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    accountType: req.body.accountType
   });
 
   User.findOne({ email: req.body.email }, function(err, existingUser) {
     if (existingUser) {
       req.flash('errors', { msg: 'Account with that email address already exists.' });
-      return res.redirect('/signup');
+      if(req.body.accountType==='Musician') {
+        res.redirect('/signupMusician');
+      } else if (req.body.accountType==='Facility'){
+        res.redirect('/signupFacility');
+      } else {
+        res.redirect('/home');
+      }
     }
     user.save(function(err) {
       if (err) return next(err);
       req.logIn(user, function(err) {
         if (err) return next(err);
-        res.redirect('/');
+        if(req.body.accountType==='Musician' && !existingUser) {
+          res.redirect('/musicianDetails');
+        } else if (req.body.accountType==='Facility' && !existingUser){
+          res.redirect('/facilityDetails');
+        } else {
+          res.redirect('/home');
+        }
       });
     });
   });
