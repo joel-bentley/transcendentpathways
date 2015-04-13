@@ -37,7 +37,7 @@ Gulp.task('less', function () {
         return Gulp.src(bundleConfig.entries)
             .pipe(Newer(Path.join(bundleConfig.dest, bundleConfig.outputName)))
             .pipe(Concat(bundleConfig.outputName))
-            .pipe(Less({ compress: true }))
+            .pipe(Less({ compress: false }))
             .pipe(Gulp.dest(bundleConfig.dest));
     });
 });
@@ -74,7 +74,10 @@ Gulp.task('media', function () {
     var fonts = Gulp.src('views/fonts/**/*')
         .pipe(Gulp.dest(Path.join('./public', 'fonts')));
 
-    return Merge(general, fonts);
+    var javascript = Gulp.src('views/javascript/lib/*')
+        .pipe(Gulp.dest('./public/js/lib'));
+
+    return Merge(general, fonts, javascript);
 });
 
 
@@ -87,9 +90,9 @@ Gulp.task('webpack', function (callback) {
     var config = {
         watch: global.isWatching,
         entry: {
-            musician: './views/jsx/musician/app',
-            facility: './views/jsx/facility/app',
-            admin: './views/jsx/admin/app'
+            musician: './views/javascript/musician/app',
+            facility: './views/javascript/facility/app',
+            admin: './views/javascript/admin/app',
         },
         output: {
             path: './public/js',
