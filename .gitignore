@@ -13,6 +13,8 @@ logs
 results
 tmp
 
+public
+
 npm-debug.log
 node_modules
 .idea
