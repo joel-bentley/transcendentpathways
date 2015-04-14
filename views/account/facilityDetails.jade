@@ -1,44 +1,90 @@
 extends ../layout
+
 block content
     .page-header
-        h3 Musician - Performer Details
-    form.form-horizontal(id='musicianDetails', method='POST')
-        input(type='hidden', name='_csrf', value=_csrf)
-        .form-group
-            label.col-sm-3.control-label(for='performerName') Musician-Performer Name
-            .col-sm-7
-                input.form-control(type='text', name='performerName', id='performerName', placeholder="Musician-Performer Name",
-                autofocus)
-        .form-group
-            label.col-sm-3.control-label(for='address1') Address Line 1
-            .col-sm-7
-                input.form-control(type='text', name='address1', id='address1', placeholder='Address Line 1')
-        .form-group
-            label.col-sm-3.control-label(for='address2') Address Line 2
-            .col-sm-7
-                input.form-control(type='text', name='address2', id='address2', placeholder='Address Line 2')
-        .form-group
-            label.col-sm-3.control-label(for='city') City
-            .col-sm-7
-                input.form-control(type='text', name='city', id='city', placeholder='City')
-        .form-group
-            label.col-sm-3.control-label(for='state') State
-            .col-sm-7
-                input.form-control(type='text', name='State', id='State', placeholder='State')
-        .form-group
-            label.col-sm-3.control-label(for='zipcode') Zip Code
-            .col-sm-7
-                input.form-control(type='text', name='zipcode', id='zipcode', placeholder='Zip Code')
-        .form-group
-            label.col-sm-3.control-label(for='password') Password
-            .col-sm-7
-                input.form-control(type='password', name='password', id='password', placeholder='Password')
-        .form-group
-            label.col-sm-3.control-label(for='confirmPassword') Confirm Password
-            .col-sm-7
-                input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password')
-        .form-group
-            .col-sm-offset-3.col-sm-7
-                button.btn.btn-success(type='submit')
-                    span.ion-person-add
-                    | Signup
+        h3 Facility Details
+        form.form-horizontal(id='musicianDetails', method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            .form-group
+                label.col-sm-3.control-label(for='facilityName') Facility Name
+                .col-sm-7
+                    input.form-control(type='text', name='facilityName', id='facilityName', placeholder="Facility Name",
+                    autofocus)
+            .form-group
+                label.col-sm-3.control-label(for='address1') Address Line 1
+                .col-sm-7
+                    input.form-control(type='text', name='address1', id='address1', placeholder='Address Line 1')
+            .form-group
+                label.col-sm-3.control-label(for='address2') Address Line 2
+                .col-sm-7
+                    input.form-control(type='text', name='address2', id='address2', placeholder='Address Line 2')
+            .form-group
+                label.col-sm-3.control-label(for='city') City
+                .col-sm-7
+                    input.form-control(type='text', name='city', id='city', placeholder='City')
+            .form-group
+                label.col-sm-3.control-label(for='state') State
+                .col-sm-7
+                    input.form-control(type='text', name='State', id='State', placeholder='State')
+            .form-group
+                label.col-sm-3.control-label(for='zipcode') Zip Code
+                .col-sm-7
+                    input.form-control(type='text', name='zipcode', id='zipcode', placeholder='Zip Code')
+            .form-group
+                label.col-sm-3.control-label(for='contactName') Contact Name
+                .col-sm-7
+                    input.form-control(type='text', name='contactName', id='contactName', placeholder='Contact Name')
+            .form-group
+                label.col-sm-3.control-label(for='contactPhone') Contact Phone Number
+                .col-sm-7
+                    input.form-control(type='text', name='contactPhone', id='contactPhone', placeholder='Contact Phone Number')
+            .form-group
+                label.col-sm-3.control-label(for='contactEmail') Contact Email Address
+                .col-sm-7
+                    input.form-control(type='text', name='contactEmail', id='contactEmail', placeholder='Contact Email Address')
+            .form-group
+                label.col-sm-3.control-label(for='buildingName') Building Name for Performance
+                .col-sm-7
+                    input.form-control(type='text', name='buildingName', id='buildingName', placeholder='Building Name for Performance')
+            .form-group
+                label.col-sm-3.control-label(for='locationName') Location Name
+                .col-sm-7
+                    input.form-control(type='text', name='locationName', id='locationName', placeholder='Location Name for Performance')
+            .form-group
+                label.col-sm-3.control-label(for='securityNeeded') Security Needed?
+                .col-sm-7
+                    select.form-control(name="securityNeeded" id="securityNeeded")
+                        option(value='0') No
+                        option(value='1') Yes
+            .form-group
+                label.col-sm-3.control-label(for='securityQty') Number of Security Officers Needed
+                .col-sm-7
+                    input.form-control(type='text', name='securityQty', id='securityQty', placeholder='0', disabled)
+            .form-group
+                label.col-sm-3.control-label(for='performanceAreaLength') Performance Area Length (stage) in ft.
+                .col-sm-7
+                    input.form-control(type='text', name='performanceAreaLength', id='performanceAreaLength', placeholder='0')
+            .form-group
+                label.col-sm-3.control-label(for='performanceAreaWidth') Performance Area Width (stage) in ft.
+                .col-sm-7
+                    input.form-control(type='text', name='performanceAreaWidth', id='performanceAreaWidth', placeholder='0')
+            .form-group
+                label.col-sm-3.control-label(for='waiverNeeded') Liability Waiver Needed?
+                .col-sm-7
+                    select.form-control(name="waiverNeeded" id="waiverNeeded")
+                        option(value='0') No
+                        option(value='1') Yes
+            .form-group
+                label.col-sm-3.control-label(for='waiverURL') Link to Online Waiver Form
+                .col-sm-7
+                    input.form-control(type='text', name='waiverURL', id='waiverURL', placeholder='http://')
+            .form-group
+                label.col-sm-3.control-label(for='performanceAreaCapacity') Performance Area Capacity (people)
+                .col-sm-7
+                    input.form-control(type='text', name='performanceAreaCapacity', id='performanceAreaCapacity', placeholder='0')
+            .form-group
+                .col-sm-offset-3.col-sm-7
+                    button.btn.btn-success(type='submit')
+                        span.ion-person-add
+                        | Signup
+

@@ -54,7 +54,7 @@ Gulp.task('watch', function() {
 Gulp.task('nodemon', function () {
     Nodemon({
         script: 'app.js',
-        ext: 'js jsx',
+        ext: 'js jsx jade',
         ignore: [
             'public/**/*'
         ]

@@ -5,6 +5,7 @@ var nodemailer = require('nodemailer');
 var passport = require('passport');
 var User = require('../models/User');
 var Musician = require('../models/Musician');
+var Facility = require('../models/Facility');
 var secrets = require('../config/secrets');
 
 /**
@@ -91,7 +92,6 @@ exports.getFacilityDetails = function(req, res){
   });
 };
 exports.postMusicianDetails = function(req, res, next){
-  //console.log(req.user);
   var musician = new Musician({
     performerName: req.body.performerName,
     username: req.user._id,
@@ -110,9 +110,32 @@ exports.postMusicianDetails = function(req, res, next){
   });
 };
 exports.postFacilityDetails = function(req, res, next){
-
+  var facility = new Facility({
+    facilityName: req.body.facilityName,
+    username: req.user._id,
+    address1: req.body.address1,
+    address2: req.body.address2,
+    city: req.body.city,
+    state: req.body.state,
+    zipcode: req.body.zipcode,
+    contactName: req.body.contactName,
+    contactPhone: req.body.contactPhone,
+    contactEmail: req.body.contactEmail,
+    buildingName: req.body.buildingName,
+    locationName: req.body.locationName,
+    securityNeeded: req.body.securityNeeded,
+    securityQty: req.body.securityQty,
+    peformanceAreaLength: req.body.performanceAreaLength,
+    performanceAreaWidth: req.body.performanceAreaWidth,
+    waiverNeeded: req.body.waiverNeeded,
+    waiverURL: req.body.waiverURL,
+    performanceAreaCapacity: req.body.performanceAreaCapacity
+  });
+  facility.save(function(err) {
+    if (err) return next(err);
+    res.redirect('/homeFacility');
+  });
 };
-
 
 /**
  * POST /signup
