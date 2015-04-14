@@ -6,7 +6,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/fcctranscendentpathways/transcendent-pathways.git
+    "url": "https://bitbucket.org/fcctranscendentpathways/transcendent-pathways.git"
   },
   "scripts": {
     "start": "node app",
