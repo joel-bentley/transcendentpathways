@@ -430,8 +430,8 @@ exports.getClockwork = function(req, res) {
 exports.postClockwork = function(req, res, next) {
   var message = {
     To: req.body.telephone,
-    From: 'Hackathon',
-    Content: 'Hello from the Hackathon Starter'
+    From: 'Transcendent Pathways Scheduler',
+    Content: 'Hello from Transcendent Pathways'
   };
   clockwork.sendSms(message, function(err, responseData) {
     if (err) return next(err.errDesc);
@@ -621,7 +621,7 @@ exports.getPayPal = function(req, res, next) {
       cancel_url: secrets.paypal.cancelUrl
     },
     transactions: [{
-      description: 'Hackathon Starter',
+      description: 'Transcendent Pathways',
       amount: {
         currency: 'USD',
         total: '1.99'
