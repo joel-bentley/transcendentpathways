@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var facilitySchema = new mongoose.Schema({
     facilityName: String,
+    username: Array,
     address1: String,
     address2: String,
     city: String,
