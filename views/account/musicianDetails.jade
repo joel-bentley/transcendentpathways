@@ -5,18 +5,18 @@ block content
     form.form-horizontal(id='musicianDetails', method='POST')
         input(type='hidden', name='_csrf', value=_csrf)
         .form-group
-            label.col-sm-3.control-label(for='performerName') Musician-Performer Name
+            label.col-sm-3.control-label(for='performerName') Musician or Group Name
             .col-sm-7
-                input.form-control(type='text', name='performerName', id='performerName', placeholder="Musician-Performer Name",
+                input.form-control(type='text', name='performerName', id='performerName', placeholder="Musician or Group Name",
                 autofocus)
         .form-group
             label.col-sm-3.control-label(for='address1') Address Line 1
             .col-sm-7
-                input.form-control(type='text', name='address1', id='address1', placeholder='Address Line 1')
+                input.form-control(type='text', name='address1', id='address1', placeholder='Address')
         .form-group
             label.col-sm-3.control-label(for='address2') Address Line 2
             .col-sm-7
-                input.form-control(type='text', name='address2', id='address2', placeholder='Address Line 2')
+                input.form-control(type='text', name='address2', id='address2', placeholder='')
         .form-group
             label.col-sm-3.control-label(for='city') City
             .col-sm-7
@@ -30,14 +30,25 @@ block content
             .col-sm-7
                 input.form-control(type='text', name='zipcode', id='zipcode', placeholder='Zip Code')
         .form-group
-            label.col-sm-3.control-label(for='phone') Contact Phone
+            label.col-sm-3.control-label(for='phone') Contact Phone Number
             .col-sm-7
-                input.form-control(type='text', name='phone', id='phone', placeholder='Contact Phone Number')
+                input.form-control(type='text', name='phone', id='phone', placeholder='Phone Number')
         .form-group
-            label.col-sm-3.control-label(for='website') Website
+            label.col-sm-3.control-label(for='instruments') Instrument(s)
+            .col-sm-7
+                textarea.form-control(name='instruments', id='instruments', cols='40', rows='5')
+        .form-group
+            label.col-sm-3.control-label(for='website') Website or Online Reference
             .col-sm-7
                 input.form-control(type='text', name='website', id='website', placeholder='http://')
-
+        .form-group
+            label.col-sm-3.control-label(for='picture') Upload Headshot / Picture
+            .col-sm-7
+                input.form-control(type='text', name='picture', id='picture', placeholder='')
+        .form-group
+            label.col-sm-3.control-label(for='biography') Short Biography Text
+            .col-sm-7
+                textarea.form-control(name='biography', id='biography', cols='40', rows='5')
 
         .form-group
             .col-sm-offset-3.col-sm-7

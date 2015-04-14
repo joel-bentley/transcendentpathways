@@ -94,7 +94,7 @@ exports.getFacilityDetails = function(req, res){
 exports.postMusicianDetails = function(req, res, next){
   var musician = new Musician({
     performerName: req.body.performerName,
-    username: req.user._id,
+    userIds: req.user._id,
     contactName: req.body.contactName,
     address1: req.body.address1,
     address2: req.body.address2,
@@ -112,7 +112,7 @@ exports.postMusicianDetails = function(req, res, next){
 exports.postFacilityDetails = function(req, res, next){
   var facility = new Facility({
     facilityName: req.body.facilityName,
-    username: req.user._id,
+    userIds: req.user._id,
     address1: req.body.address1,
     address2: req.body.address2,
     city: req.body.city,

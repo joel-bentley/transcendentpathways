@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var facilitySchema = new mongoose.Schema({
     facilityName: String,
-    username: Array,
+    userIds: Array,
     address1: String,
     address2: String,
     city: String,
@@ -13,18 +13,15 @@ var facilitySchema = new mongoose.Schema({
     contactEmail: String,
     buildingName: String,
     locationName: String,
+    roomSize: String,
     securityNeeded: String,
-    securityQty: Number,
-    peformanceAreaLength: Number,
-    performanceAreaWidth: Number,
-    waiverNeeded: Boolean,
-    waiverURL: String,
-    performanceAreaCapacity: Number,
-    isActive: Boolean,
+    waiverNeeded: String,
+    patientNumber: String,
+
     approved: Boolean,
+    approvedDate: Date,
+    signUpDate: Date,
     approvedBy: String,
-    previousEngagements: Number,
-    canceledEngagements: Number,
     notes: Array
 });
 
