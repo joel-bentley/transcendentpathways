@@ -10,7 +10,8 @@
   },
   "scripts": {
     "start": "gulp",
-    "test": "mocha"
+    "test": "mocha",
+    "postinstall": "gulp build"
   },
   "dependencies": {
     "async": "^0.9.0",
