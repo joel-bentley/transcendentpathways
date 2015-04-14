@@ -60,9 +60,7 @@
     "twilio": "^1.11.1",
     "twit": "^1.1.20",
     "validator": "^3.33.0",
-    "yui": "^3.18.1"
-  },
-  "devDependencies": {
+    "yui": "^3.18.1",
     "babel-core": "^5.0.12",
     "babel-loader": "^5.0.0",
     "blessed": "^0.0.51",
@@ -80,5 +78,8 @@
     "nodemon": "^1.2.1",
     "supertest": "^0.15.0",
     "webpack": "^1.4.13"
+  },
+  "devDependencies": {
+    
   }
 }
