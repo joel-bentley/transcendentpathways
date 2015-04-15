@@ -43,15 +43,19 @@ exports.postLogin = function(req, res, next) {
     req.logIn(user, function(err) {
       if (err) return next(err);
       req.flash('success', { msg: 'Success! You are logged in.' });
-      if (user.accountType==='Admin'){
-        res.redirect(req.session.returnTo || '/homeAdmin');
-      } else if (user.accountType==='Musician'){
-        res.redirect(req.session.returnTo || '/homeMusician');
-      } else if (user.accountType==='Facility'){
-        res.redirect(req.session.returnTo || '/homeFacility');
-      } else {
-        res.redirect(req.session.returnTo || '/');
-      }
+//      if (user.accountType==='Admin' || user.approved) {
+        if (user.accountType==='Admin'){
+          res.redirect(req.session.returnTo || '/homeAdmin');
+        } else if (user.accountType==='Musician'){
+          res.redirect(req.session.returnTo || '/homeMusician');
+        } else if (user.accountType==='Facility'){
+          res.redirect(req.session.returnTo || '/homeFacility');
+        } else {
+          res.redirect(req.session.returnTo || '/');
+        }
+//      } else {
+//        res.redirect('/musicianDetails');
+//      }  
     });
   })(req, res, next);
 };

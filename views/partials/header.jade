@@ -24,6 +24,10 @@
             a(href='/login') Login
           //li(class=title=='Create Account'?'active':undefined)
             a(href='/signup') Create Account
+        else if title=='Musician - Performer Details'
+          | Add Details to Continue to Scheduling or &nbsp
+          a(href='/logout')
+                  |  Logout
         else
           li.dropdown(class=title=='Account Management'?'active':undefined)
             a.dropdown-toggle(href='#', data-toggle='dropdown')
