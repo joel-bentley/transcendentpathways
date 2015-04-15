@@ -6,6 +6,7 @@ var AddItem = React.createClass({
             newItem: ''
         }
     },
+
     handleChange: function(e){
         this.setState({
             newItem: e.target.value
