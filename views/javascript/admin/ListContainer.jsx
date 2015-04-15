@@ -9,6 +9,15 @@ var ListContainer = React.createClass({
             list: []
         }
     },
+    componentDidMount: function() {
+        $.get('/userData', function(result) {
+            if (this.isMounted()) {
+                this.setState({
+                    list: result
+                });
+            }
+        }.bind(this));
+    },
     handleAddItem: function(newItem){
         this.setState({
             list: this.state.list.concat([newItem])
@@ -25,7 +34,7 @@ var ListContainer = React.createClass({
         return (
             <div className="col-sm-6 col-md-offset-3">
                 <div className="col-sm-12">
-                    <h3 className="text-center"> Todo List </h3>
+                    <h3 className="text-center"> User List </h3>
                     <AddItem add={this.handleAddItem}/>
                     <List items={this.state.list} remove={this.handleRemoveItem}/>
                 </div>
