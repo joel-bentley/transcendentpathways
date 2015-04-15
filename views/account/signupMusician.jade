@@ -2,13 +2,10 @@ extends ../layout
 
 block content
   .page-header
-    h3 Musician Account SignUp
+    h3 Musician Account Sign up
   form.form-horizontal(id='signupMusician-form', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
-    .form-group
-      label.col-sm-3.control-label(for='accountType') Account Type
-      .col-sm-7
-        input.form-control(type='text', name='accountType', id='accountType', value='Musician', readOnly='readOnly')
+    input.form-control(type='hidden', name='accountType', id='accountType', value='Musician', readOnly='readOnly')
     .form-group
       label.col-sm-3.control-label(for='email') Email
       .col-sm-7

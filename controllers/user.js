@@ -101,16 +101,19 @@ exports.getFacilityDetails = function(req, res){
 };
 exports.postMusicianDetails = function(req, res, next){
   var musician = new Musician({
-    performerName: req.body.performerName,
-    username: req.user._id,
-    contactName: req.body.contactName,
-    address1: req.body.address1,
-    address2: req.body.address2,
-    city: req.body.city,
-    state: req.body.state,
-    zipcode: req.body.zipcode,
-    phone: req.body.phone,
-    website: req.body.website
+    performerName: req.body.performerName || '',                   // Not sure if   || ''  is needed
+    userIds: req.user._id || '',
+    contactName: req.body.contactName || '',
+    address1: req.body.address1 || '',
+    address2: req.body.address2 || '',
+    city: req.body.city || '',
+    state: req.body.state || '',
+    zipcode: req.body.zipcode || '',
+    phone: req.body.phone || '',
+    instruments: req.body.instruments || '',
+    website: req.body.website || '',
+    picture: req.body.picture || '',
+    biography: req.body.biography || ''
   });
   musician.save(function(err) {
     if (err) return next(err);
@@ -119,25 +122,22 @@ exports.postMusicianDetails = function(req, res, next){
 };
 exports.postFacilityDetails = function(req, res, next){
   var facility = new Facility({
-    facilityName: req.body.facilityName,
-    username: req.user._id,
-    address1: req.body.address1,
-    address2: req.body.address2,
-    city: req.body.city,
-    state: req.body.state,
-    zipcode: req.body.zipcode,
-    contactName: req.body.contactName,
-    contactPhone: req.body.contactPhone,
-    contactEmail: req.body.contactEmail,
-    buildingName: req.body.buildingName,
-    locationName: req.body.locationName,
-    securityNeeded: req.body.securityNeeded,
-    securityQty: req.body.securityQty,
-    peformanceAreaLength: req.body.performanceAreaLength,
-    performanceAreaWidth: req.body.performanceAreaWidth,
-    waiverNeeded: req.body.waiverNeeded,
-    waiverURL: req.body.waiverURL,
-    performanceAreaCapacity: req.body.performanceAreaCapacity
+    facilityName: req.body.facilityName || '',
+    userIds: req.user._id || '',
+    address1: req.body.address1 || '',
+    address2: req.body.address2 || '',
+    city: req.body.city || '',
+    state: req.body.state || '',
+    zipcode: req.body.zipcode || '',
+    contactName: req.body.contactName || '',
+    contactPhone: req.body.contactPhone || '',
+    contactEmail: req.body.contactEmail || '',
+    buildingName: req.body.buildingName || '',
+    locationName: req.body.locationName || '',
+    roomSize: req.body.roomSize || '',
+    securityNeeded: req.body.securityNeeded || '',
+    waiverNeeded: req.body.waiverNeeded || '',
+    patientNumber: req.body.patientNumber || ''
   });
   facility.save(function(err) {
     if (err) return next(err);
@@ -212,11 +212,9 @@ exports.getAccount = function(req, res) {
 exports.postUpdateProfile = function(req, res, next) {
   User.findById(req.user.id, function(err, user) {
     if (err) return next(err);
+
     user.email = req.body.email || '';
     user.profile.name = req.body.name || '';
-    user.profile.gender = req.body.gender || '';
-    user.profile.location = req.body.location || '';
-    user.profile.website = req.body.website || '';
 
     user.save(function(err) {
       if (err) return next(err);
@@ -225,6 +223,120 @@ exports.postUpdateProfile = function(req, res, next) {
     });
   });
 };
+
+
+exports.getUpdateMusicianDetails = function(req, res) {
+
+  Musician.findOne( { userIds : { $all : [ req.user._id ] } }, function(err, musician) {
+
+    if (musician === null) return null;
+
+    res.render('account/updateMusicianDetails', {
+      title: 'Update Musician Details',
+      performerName: musician._doc.performerName,
+      address1: musician._doc.address1,
+      address2: musician._doc.address2,
+      city: musician._doc.city,
+      state: musician._doc.state,
+      zipcode: musician._doc.zipcode,
+      phone: musician._doc.phone,
+      instruments: musician._doc.instruments,
+      website: musician._doc.website,
+      picture: musician._doc.picture,
+      biography: musician._doc.biography
+    });
+  });
+};
+
+
+exports.postUpdateMusicianDetails = function(req, res, next) {
+  Musician.findOne( { userIds : { $all : [ req.user._id ] } }, function(err, musician) {
+
+    if (err) return next(err);   // added to prevent crash, should change this to proper error
+
+    musician.performerName = req.body.performerName || '';
+    musician.address1 = req.body.address1 || '';
+    musician.address2 = req.body.address2 || '';
+    musician.city = req.body.city || '';
+    musician.state = req.body.state || '';
+    musician.zipcode = req.body.zipcode || '';
+    musician.phone = req.body.phone || '';
+    musician.instruments = req.body.instruments || '';
+    musician.website = req.body.website || '';
+    musician.picture = req.body.picture || '';
+    musician.biography = req.body.biography || '';
+
+    musician.save(function(err) {
+      if (err) return next(err);
+      req.flash('success', { msg: 'Musician Details Updated for ' + musician.performerName });
+      res.redirect('/account');
+    });
+  });
+};
+
+
+
+exports.getUpdateFacilityDetails = function(req, res) {
+
+  Facility.findOne( { userIds : { $all : [ req.user._id ] } }, function(err, facility) {
+
+    if (facility === null) return null;   // added to prevent crash, should change this to proper error
+
+    res.render('account/updateFacilityDetails', {
+      title: 'Update Facility Details',
+      facilityName: facility._doc.facilityName,
+      address1: facility._doc.address1,
+      address2: facility._doc.address2,
+      city: facility._doc.city,
+      state: facility._doc.state,
+      zipcode: facility._doc.zipcode,
+      contactName: facility._doc.contactName,
+      contactPhone: facility._doc.contactPhone,
+      contactEmail: facility._doc.contactEmail,
+      buildingName: facility._doc.buildingName,
+      locationName: facility._doc.locationName,
+      roomSize: facility._doc.roomSize,
+      securityNeeded: facility._doc.securityNeeded,
+      waiverNeeded: facility._doc.waiverNeeded,
+      patientNumber: facility._doc.patientNumber
+    });
+  });
+};
+
+exports.postUpdateFacilityDetails = function(req, res, next) {
+  Facility.findOne( { userIds : { $all : [ req.user._id ] } }, function(err, facility) {
+
+    if (err) return next(err);
+
+    facility.facilityName = req.body.facilityName || '';
+    facility.address1 = req.body.address1 || '';
+    facility.address2 = req.body.address2 || '';
+    facility.city = req.body.city || '';
+    facility.state = req.body.state || '';
+    facility.zipcode = req.body.zipcode || '';
+    facility.contactName = req.body.contactName || '';
+    facility.contactPhone = req.body.contactPhone || '';
+    facility.contactEmail = req.body.contactEmail || '';
+    facility.buildingName = req.body.buildingName || '';
+    facility.locationName = req.body.locationName || '';
+    facility.roomSize = req.body.roomSize || '';
+    facility.securityNeeded = req.body.securityNeeded || '';
+    facility.waiverNeeded = req.body.waiverNeeded || '';
+    facility.patientNumber = req.body.patientNumber || '';
+
+
+    facility.save(function(err) {
+      if (err) return next(err);
+      req.flash('success', { msg: 'Facility Details Updated for ' + facility.facilityName });
+      res.redirect('/account');
+    });
+  });
+};
+
+
+
+
+
 
 /**
  * POST /account/password
@@ -357,8 +469,8 @@ exports.postReset = function(req, res, next) {
       });
       var mailOptions = {
         to: user.email,
-        from: 'hackathon@starter.com',
-        subject: 'Your Hackathon Starter password has been changed',
+        from: 'tp@example.com',
+        subject: 'Your Transcendent Pathways Scheduler password has been changed',
         text: 'Hello,\n\n' +
           'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
       };
@@ -432,8 +544,8 @@ exports.postForgot = function(req, res, next) {
       });
       var mailOptions = {
         to: user.email,
-        from: 'hackathon@starter.com',
-        subject: 'Reset your password on Hackathon Starter',
+        from: 'tp@example.com',
+        subject: 'Reset your password on Transcendent Pathways Scheduler',
         text: 'You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
           'http://' + req.headers.host + '/reset/' + token + '\n\n' +
