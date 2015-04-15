@@ -112,8 +112,18 @@ app.get('/signupFacility', userController.getSignupFacility);
 app.post('/signupFacility', userController.postSignup);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
+
+
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
+
+
+app.get('/account/updateMusicianDetails', passportConf.isAuthenticated, userController.getUpdateMusicianDetails);
+app.post('/account/updateMusicianDetails', passportConf.isAuthenticated, userController.postUpdateMusicianDetails);
+app.get('/account/updateFacilityDetails', passportConf.isAuthenticated, userController.getUpdateFacilityDetails);
+app.post('/account/updateFacilityDetails', passportConf.isAuthenticated, userController.postUpdateFacilityDetails);
+
+
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
