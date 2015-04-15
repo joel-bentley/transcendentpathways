@@ -11,26 +11,9 @@ block content
       .col-sm-4
         input.form-control(type='email', name='email', id='email', value='#{user.email}')
     .form-group
-      label.col-sm-2.control-label(for='name') Name
+      label.col-sm-2.control-label(for='name') Login Account Name
       .col-sm-4
         input.form-control(type='text', name='name', id='name', value='#{user.profile.name}')
-    .form-group
-      label.col-sm-2.control-label(for='gender') Gender
-      .col-sm-4
-        label.radio
-          input(type='radio', checked=user.profile.gender=='male', name='gender', value='male', data-toggle='radio')
-          span Male
-        label.radio
-          input(type='radio', checked=user.profile.gender=='female', name='gender', value='female', data-toggle='radio')
-          span Female
-    .form-group
-      label.col-sm-2.control-label(for='location') Location
-      .col-sm-4
-        input.form-control(type='text', name='location', id='location', value='#{user.profile.location}')
-    .form-group
-      label.col-sm-2.control-label(for='website') Website
-      .col-sm-4
-        input.form-control(type='text', name='website', id='website', value='#{user.profile.website}')
     .form-group
       label.col-sm-2.control-label(for='gravatar') Gravatar
       .col-sm-4
@@ -40,6 +23,24 @@ block content
         button.btn.btn.btn-primary(type='submit')
           span.ion-edit
           | Update Profile
+
+  br
+  hr
+
+  h3 Edit #{user.accountType} Details
+    .form-group
+      .col-sm-offset-2.col-sm-4
+        if user.accountType == 'Musician'
+          a.btn.btn.btn-primary(href='/account/updateMusicianDetails')
+            span.ion-edit
+            | Edit #{user.accountType} Details
+        if user.accountType == 'Facility'
+          a.btn.btn.btn-primary(href='/account/updateFacilityDetails')
+            span.ion-edit
+            | Edit #{user.accountType} Details
+
+  br
+  hr
 
   .page-header
     h3 Change Password
@@ -73,11 +74,6 @@ block content
   .page-header
     h3 Linked Accounts
 
-  if user.instagram
-    p: a.text-danger(href='/account/unlink/instagram') Unlink your Instagram account
-  else
-    p: a(href='/auth/instagram') Link your Instagram account
-
   if user.google
     p: a.text-danger(href='/account/unlink/google') Unlink your Google account
   else
@@ -92,13 +88,3 @@ block content
     p: a.text-danger(href='/account/unlink/twitter') Unlink your Twitter account
   else
     p: a(href='/auth/twitter') Link your Twitter account
-
-  if user.github
-    p: a.text-danger(href='/account/unlink/github') Unlink your GitHub account
-  else
-    p: a(href='/auth/github') Link your GitHub account
-
-  if user.linkedin
-    p: a.text-danger(href='/account/unlink/linkedin') Unlink your LinkedIn account
-  else
-    p: a(href='/auth/linkedin') Link your LinkedIn account

@@ -1,0 +1,56 @@
+extends ../layout
+block content
+    .page-header
+        h3 Musician - Performer Details
+    form.form-horizontal(action='/account/UpdateMusicianDetails', method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .form-group
+            label.col-sm-3.control-label(for='performerName') Musician or Group Name
+            .col-sm-7
+                input.form-control(type='text', name='performerName', id='performerName', value='#{performerName}')
+        .form-group
+            label.col-sm-3.control-label(for='address1') Address Line 1
+            .col-sm-7
+                input.form-control(type='text', name='address1', id='address1',value='#{address1}')
+        .form-group
+            label.col-sm-3.control-label(for='address2') Address Line 2
+            .col-sm-7
+                input.form-control(type='text', name='address2', id='address2',value='#{address2}')
+        .form-group
+            label.col-sm-3.control-label(for='city') City
+            .col-sm-7
+                input.form-control(type='text', name='city', id='city',value='#{city}')
+        .form-group
+            label.col-sm-3.control-label(for='state') State
+            .col-sm-7
+                input.form-control(type='text', name='state', id='state', value='#{state}')
+        .form-group
+            label.col-sm-3.control-label(for='zipcode') Zip Code
+            .col-sm-7
+                input.form-control(type='text', name='zipcode', id='zipcode',value='#{zipcode}')
+        .form-group
+            label.col-sm-3.control-label(for='phone') Contact Phone Number
+            .col-sm-7
+                input.form-control(type='text', name='phone', id='phone',value='#{phone}')
+        .form-group
+            label.col-sm-3.control-label(for='instruments') Instrument(s)
+            .col-sm-7
+                textarea.form-control(name='instruments', id='instruments', value='#{instruments}', cols='40', rows='5')
+        .form-group
+            label.col-sm-3.control-label(for='website') Website or Online Reference
+            .col-sm-7
+                input.form-control(type='text', name='website', id='website', value='#{website}')
+        .form-group
+            label.col-sm-3.control-label(for='picture') Upload Headshot / Picture
+            .col-sm-7
+                input.form-control(type='text', name='picture', id='picture', value='#{picture}')
+        .form-group
+            label.col-sm-3.control-label(for='biography') Short Biography Text
+            .col-sm-7
+                textarea.form-control(name='biography', id='biography', value='#{biography}', cols='40', rows='5')
+
+        .form-group
+            .col-sm-offset-3.col-sm-7
+                button.btn.btn-success(type='submit')
+                    span.ion-music-note
+                    | Submit
