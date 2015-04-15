@@ -14,4 +14,16 @@ exports.getHomeAdmin = function(req, res) {
     });
 };
 
+exports.getUserData = function(req, response) {
+    User.find({}, function (err, user) {
+        var userData = user.map(function(e){
+            return e.email;
+        });
+        console.log(userData);
+        console.log(JSON.stringify(userData));
+        response.writeHead(200, {'Content-Type': 'application/json'});
+        response.end(JSON.stringify(userData));
+    });
+};
+
 
