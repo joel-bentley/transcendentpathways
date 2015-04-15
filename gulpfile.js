@@ -10,13 +10,18 @@ var Merge = require('merge-stream');
 var Newer = require('gulp-newer');
 var Concat = require('gulp-concat');
 
-var Gutil = require('gulp-util');
-var Webpack = require('webpack');
+var browserify = require('browserify');
+var reactify = require('reactify');
+var source = require('vinyl-source-stream');
+
+
+//var Gutil = require('gulp-util');
+//var Webpack = require('webpack');
 
 
 Gulp.task('default', ['watch', 'build', 'nodemon']);    // Build and watch
 
-Gulp.task('build', ['less', 'webpack', 'media']);        // Just build
+Gulp.task('build', ['less', 'jsx', 'media']);        // Just build
 
 
 Gulp.task('clean', function () {
@@ -56,7 +61,8 @@ Gulp.task('nodemon', function () {
         script: 'app.js',
         ext: 'js jsx',
         ignore: [
-            'public/**/*'
+            'public/**/*',
+            'node_modules/**/*'
         ]
     })
         .on('restart', function (files) {
@@ -81,76 +87,81 @@ Gulp.task('media', function () {
 });
 
 
+Gulp.task('jsx', ['musicianjs', 'facilityjs', 'adminjs']);
 
-var CommonsChunkPlugin = Webpack.optimize.CommonsChunkPlugin;
-var UglifyJsPlugin = Webpack.optimize.UglifyJsPlugin;
-var executionCount = 0;
-
-Gulp.task('webpack', function (callback) {
-    var config = {
-        watch: global.isWatching,
-        entry: {
-            musician: './views/javascript/musician/app',
-            facility: './views/javascript/facility/app',
-            admin: './views/javascript/admin/app',
-        },
-        output: {
-            path: './public/js',
-            filename: '[name].min.js',
-            sourceMapFilename: '[name].map.js'
-        },
-        resolve: {
-            extensions: ['', '.js', '.jsx']
-        },
-        module: {
-            loaders: [
-                { test: /\.jsx$/, exclude: /node_modules/, loader: 'babel-loader'}
-            ]
-        },
-        devtool: 'source-map',
-        plugins: [
-            new CommonsChunkPlugin('../core.min.js', undefined, 2),
-            new UglifyJsPlugin({ compress: { warnings: false } })
-        ]
-    };
-    Webpack(config, function (err, stats) {
-
-        if (err) {
-            throw new Gutil.PluginError('webpack', err);
-        }
-
-        Gutil.log('[webpack]', stats.toString({
-            colors: true,
-            chunkModules: false
-        }));
-
-        if (executionCount === 0) {
-            callback();
-        }
-        executionCount += 1;
-    });
-});
-
-
-
-
-
-
-
-
-
-///////////////////////
-
-//var browserify = require('browserify');
-//var reactify = require('reactify');
-//var source = require('vinyl-source-stream');
-
-/*
-gulp.task('js', function(){
-    browserify('./views/jsx/app.jsx')
+Gulp.task('musicianjs', function(){
+    browserify('./views/javascript/musician/App.jsx')
         .transform(reactify)
         .bundle()
-        .pipe(source('app.js'))
-        .pipe(gulp.dest('public/js/'));
+        .pipe(source('musician.min.js'))
+        .pipe(Gulp.dest('public/js/'));
 });
-     */
+
+Gulp.task('facilityjs', function(){
+    browserify('./views/javascript/facility/App.jsx')
+        .transform(reactify)
+        .bundle()
+        .pipe(source('facility.min.js'))
+        .pipe(Gulp.dest('public/js/'));
+});
+
+Gulp.task('adminjs', function(){
+    browserify('./views/javascript/admin/App.jsx')
+        .transform(reactify)
+        .bundle()
+        .pipe(source('admin.min.js'))
+        .pipe(Gulp.dest('public/js/'));
+});
+
+
+/*
+
+ var CommonsChunkPlugin = Webpack.optimize.CommonsChunkPlugin;
+ var UglifyJsPlugin = Webpack.optimize.UglifyJsPlugin;
+ var executionCount = 0;
+
+ Gulp.task('webpack', function (callback) {
+ var config = {
+ watch: global.isWatching,
+ entry: {
+ musician: './views/javascript/musician/app',
+ facility: './views/javascript/facility/app',
+ admin: './views/javascript/admin/app',
+ },
+ output: {
+ path: './public/js',
+ filename: '[name].min.js',
+ sourceMapFilename: '[name].map.js'
+ },
+ resolve: {
+ extensions: ['', '.js', '.jsx']
+ },
+ module: {
+ loaders: [
+ { test: /\.jsx$/, exclude: /node_modules/, loader: 'babel-loader'}
+ ]
+ },
+ devtool: 'source-map',
+ plugins: [
+ new CommonsChunkPlugin('../core.min.js', undefined, 2),
+ new UglifyJsPlugin({ compress: { warnings: false } })
+ ]
+ };
+ Webpack(config, function (err, stats) {
+
+ if (err) {
+ throw new Gutil.PluginError('webpack', err);
+ }
+
+ Gutil.log('[webpack]', stats.toString({
+ colors: true,
+ chunkModules: false
+ }));
+
+ if (executionCount === 0) {
+ callback();
+ }
+ executionCount += 1;
+ });
+ });
+ */

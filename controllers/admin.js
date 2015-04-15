@@ -10,5 +10,8 @@ var Facility = require('../models/Facility');
 exports.getHomeAdmin = function(req, res) {
     res.render('homeAdmin', {
         title: 'Admin Home'
+        //scripts: ["js/admin.min.js"]
     });
 };
+
+
