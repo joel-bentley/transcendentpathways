@@ -15,11 +15,7 @@ var userSchema = new mongoose.Schema({
   tokens: Array,
 
   profile: {
-    name: { type: String },
-    gender: { type: String},
-    location: { type: String},
-    website: { type: String},
-    picture: { type: String}
+    name: { type: String, default: '' },
   },
 
   resetPasswordToken: String,

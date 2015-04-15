@@ -89,6 +89,7 @@ Gulp.task('media', function () {
 
 Gulp.task('jsx', ['musicianjs', 'facilityjs', 'adminjs']);
 
+
 Gulp.task('musicianjs', function(){
     browserify('./views/javascript/musician/App.jsx')
         .transform(reactify)
@@ -114,8 +115,8 @@ Gulp.task('adminjs', function(){
 });
 
 
-/*
 
+/*
  var CommonsChunkPlugin = Webpack.optimize.CommonsChunkPlugin;
  var UglifyJsPlugin = Webpack.optimize.UglifyJsPlugin;
  var executionCount = 0;
