@@ -87,24 +87,25 @@ Gulp.task('media', function () {
 });
 
 
-Gulp.task('jsx', ['musicianjs', 'facilityjs', 'adminjs']);
+//Gulp.task('jsx', ['musicianjs', 'facilityjs', 'adminjs']);
+Gulp.task('jsx', ['adminjs']);
 
 
-Gulp.task('musicianjs', function(){
-    browserify('./views/javascript/musician/App.jsx')
-        .transform(reactify)
-        .bundle()
-        .pipe(source('musician.min.js'))
-        .pipe(Gulp.dest('public/js/'));
-});
-
-Gulp.task('facilityjs', function(){
-    browserify('./views/javascript/facility/App.jsx')
-        .transform(reactify)
-        .bundle()
-        .pipe(source('facility.min.js'))
-        .pipe(Gulp.dest('public/js/'));
-});
+//Gulp.task('musicianjs', function(){
+//    browserify('./views/javascript/musician/App.jsx')
+//        .transform(reactify)
+//        .bundle()
+//        .pipe(source('musician.min.js'))
+//        .pipe(Gulp.dest('public/js/'));
+//});
+//
+//Gulp.task('facilityjs', function(){
+//    browserify('./views/javascript/facility/App.jsx')
+//        .transform(reactify)
+//        .bundle()
+//        .pipe(source('facility.min.js'))
+//        .pipe(Gulp.dest('public/js/'));
+//});
 
 Gulp.task('adminjs', function(){
     browserify('./views/javascript/admin/App.jsx')
