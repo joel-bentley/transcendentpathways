@@ -5,3 +5,4 @@ React.render(
     <HelloWorld />,
     document.getElementById('example')
 );
+
