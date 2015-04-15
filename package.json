@@ -71,13 +71,13 @@
     "twit": "^1.1.20",
     "validator": "^3.33.0",
     "vinyl-source-stream": "^1.1.0",
-    "yui": "^3.18.1"
+    "yui": "^3.18.1",
+    "gulp-nodemon": "^1.0.4"
   },
   "devDependencies": {
     "blessed": "^0.0.51",
     "chai": "^2.1.1",
     "gulp-clean": "^0.3.1",
-    "gulp-nodemon": "^1.0.4",
     "mocha": "^2.2.1",
     "supertest": "^0.15.0"
   }
