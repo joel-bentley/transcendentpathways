@@ -95,7 +95,7 @@ Gulp.task('facilityjs', function(){
 
 Gulp.task('adminjs', function(){
     browserify('./views/javascript/admin/musician/App.jsx')
-        .transform("babelify")
+        .transform("reactify")
         .bundle()
         .pipe(source('admin.min.js'))
         .pipe(Gulp.dest('public/js/'));

@@ -5,17 +5,17 @@ var Results = require('./Results.jsx');
 var App = React.createClass({
     render: function(){
         return (
-            <div>
-            <div className="container">
-                <div className="row">
-                    <Search />
+            <div id="app1">
+                <div className="container">
+                    <div className="row">
+                        <Search />
+                    </div>
                 </div>
-            </div>
-            <div className="container">
-                <div className="row">
-                    <Results />
+                <div className="container">
+                    <div className="row">
+                        <Results />
+                    </div>
                 </div>
-            </div>
             </div>
         )
     }
@@ -23,5 +23,5 @@ var App = React.createClass({
 
 React.render(
     <App />,
-    document.getElementById('app')
+    document.getElementById('app1')
 );
