@@ -52,6 +52,7 @@ Gulp.task('less', function () {
 Gulp.task('watch', function() {
     global.isWatching = true;
     Gulp.watch('./views/stylesheets/**/*.less', ['less']);
+    Gulp.watch('./views/javascript/**/*.jsx', ['jsx']);
 });
 
 
