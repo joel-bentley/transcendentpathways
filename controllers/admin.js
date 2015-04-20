@@ -1,6 +1,6 @@
 var _ = require('lodash');
 var async = require('async');
-var User = require('../models/User');
+var Musician = require('../models/Musician');
 var Facility = require('../models/Facility');
 
 /**
@@ -14,16 +14,17 @@ exports.getHomeAdmin = function(req, res) {
     });
 };
 
-exports.getUserData = function(req, response) {
-    User.find({}, function (err, user) {
-        var userData = user.map(function(e){
-            return e.email;
-        });
-        console.log(userData);
-        console.log(JSON.stringify(userData));
+exports.getMusicianData = function(req, response) {
+    Musician.find({}, 'performerName contactName approvedToPerform').exec(function(err, musician){
+        var musicianData = musician;
         response.writeHead(200, {'Content-Type': 'application/json'});
-        response.end(JSON.stringify(userData));
+        response.end(JSON.stringify(musicianData));
     });
 };
 
 
+exports.getMusician = function(req, res) {
+    Musician.findOne({_id: req.params.id}).exec(function (err, doc) {
+        console.log(doc);
+    });
+};

@@ -69,6 +69,7 @@
     "passport-twitter": "^1.0.3",
     "paypal-rest-sdk": "^1.5.1",
     "react": "^0.13.1",
+    "react-router": "^0.13.1",
     "reactify": "^1.1.0",
     "request": "^2.53.0",
     "stripe": "^3.3.2",
@@ -81,5 +82,8 @@
     "webpack": "^1.4.13",
     "yui": "^3.18.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "babelify": "^6.0.2",
+    "gulp-babel": "^5.1.0"
+  }
 }
