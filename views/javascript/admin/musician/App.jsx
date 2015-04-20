@@ -1,13 +1,21 @@
 var React = require('react');
-var ListContainer = require('./ListContainer.jsx');
+var Search = require('./Search.jsx');
+var Results = require('./Results.jsx');
 
 var App = React.createClass({
     render: function(){
         return (
+            <div>
             <div className="container">
                 <div className="row">
-                    <ListContainer />
+                    <Search />
                 </div>
+            </div>
+            <div className="container">
+                <div className="row">
+                    <Results />
+                </div>
+            </div>
             </div>
         )
     }
