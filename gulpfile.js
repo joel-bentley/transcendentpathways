@@ -14,6 +14,8 @@ var browserify = require('browserify');
 var reactify = require('reactify');
 var source = require('vinyl-source-stream');
 
+var babelify = require('babelify');
+
 
 //var Gutil = require('gulp-util');
 //var Webpack = require('webpack');
@@ -110,7 +112,8 @@ Gulp.task('jsx', ['adminjs']);
 
 Gulp.task('adminjs', function(){
     browserify('./views/javascript/admin/App.jsx')
-        .transform(reactify)
+    //    .transform(reactify)
+        .transform(babelify)
         .bundle()
         .pipe(source('admin.min.js'))
         .pipe(Gulp.dest('public/js/'));
