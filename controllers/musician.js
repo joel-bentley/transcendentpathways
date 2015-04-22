@@ -90,6 +90,7 @@ exports.getUpdateMusicianDetails = function(req, res) {
         res.render('account/updateMusicianDetails', {
             title: 'Update Musician Details',
             performerName: musician.performerName,
+            contactName: musician.contactName,
             address1: musician.address1,
             address2: musician.address2,
             city: musician.city,
@@ -111,6 +112,7 @@ exports.postUpdateMusicianDetails = function(req, res, next) {
         if (err) return next(err);
 
         musician.performerName = req.body.performerName || '';
+        musician.contactName = req.body.contactName || '';
         musician.address1 = req.body.address1 || '';
         musician.address2 = req.body.address2 || '';
         musician.city = req.body.city || '';
