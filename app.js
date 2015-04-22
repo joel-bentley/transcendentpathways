@@ -138,7 +138,7 @@ app.get('/userData', adminController.getUserData);
 /**
  * API examples routes.
  */
-app.get('/api', apiController.getApi);
+//app.get('/api', apiController.getApi);
 //app.get('/api/lastfm', apiController.getLastfm);
 //app.get('/api/nyt', apiController.getNewYorkTimes);
 //app.get('/api/aviary', apiController.getAviary);
@@ -152,10 +152,10 @@ app.get('/api', apiController.getApi);
 //app.post('/api/clockwork', apiController.postClockwork);
 //app.get('/api/foursquare', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getFoursquare);
 //app.get('/api/tumblr', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getTumblr);
-app.get('/api/facebook', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getFacebook);
+//app.get('/api/facebook', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getFacebook);
 //app.get('/api/github', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getGithub);
-app.get('/api/twitter', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getTwitter);
-app.post('/api/twitter', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.postTwitter);
+//app.get('/api/twitter', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getTwitter);
+//app.post('/api/twitter', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.postTwitter);
 //app.get('/api/venmo', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getVenmo);
 //app.post('/api/venmo', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.postVenmo);
 //app.get('/api/linkedin', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getLinkedin);
@@ -170,30 +170,102 @@ app.post('/api/twitter', passportConf.isAuthenticated, passportConf.isAuthorized
 /**
  * OAuth authentication routes. (Sign in)
  */
-app.get('/auth/instagram', passport.authenticate('instagram'));
-app.get('/auth/instagram/callback', passport.authenticate('instagram', { failureRedirect: '/login' }), function(req, res) {
-  res.redirect(req.session.returnTo || '/');
-});
+//app.get('/auth/instagram', passport.authenticate('instagram'));
+//app.get('/auth/instagram/callback', passport.authenticate('instagram', { failureRedirect: '/login' }), function(req, res) {
+//  res.redirect(req.session.returnTo || '/');
+//});
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), function(req, res) {
-  res.redirect(req.session.returnTo || '/');
+
+  if (req.user) {
+
+    if (req.user.detailIds.length) {
+      if (req.user.accountType==='Musician') {
+        res.redirect('/homeMusician');
+      } else if (req.user.accountType==='Facility'){
+        res.redirect('/homeFacility');
+      } else {
+        res.redirect('/');
+      }
+    } else {
+      if (req.user.accountType==='Musician') {
+        res.redirect('/musicianDetails');
+      } else if (req.user.accountType==='Facility'){
+        res.redirect('/facilityDetails');
+      } else {
+        res.redirect('/');
+      }
+    }
+
+  } else {
+    res.redirect('/');
+  }
+//  res.redirect(req.session.returnTo || '/');
 });
-app.get('/auth/github', passport.authenticate('github'));
-app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), function(req, res) {
-  res.redirect(req.session.returnTo || '/');
-});
+//app.get('/auth/github', passport.authenticate('github'));
+//app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), function(req, res) {
+//  res.redirect(req.session.returnTo || '/');
+//});
 app.get('/auth/google', passport.authenticate('google', { scope: 'profile email' }));
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), function(req, res) {
-  res.redirect(req.session.returnTo || '/');
+
+  if (req.user) {
+
+    if (req.user.detailIds.length) {
+      if (req.user.accountType==='Musician') {
+        res.redirect('/homeMusician');
+      } else if (req.user.accountType==='Facility'){
+        res.redirect('/homeFacility');
+      } else {
+        res.redirect('/');
+      }
+    } else {
+      if (req.user.accountType==='Musician') {
+        res.redirect('/musicianDetails');
+      } else if (req.user.accountType==='Facility'){
+        res.redirect('/facilityDetails');
+      } else {
+        res.redirect('/');
+      }
+    }
+
+  } else {
+    res.redirect('/');
+  }
+//  res.redirect(req.session.returnTo || '/');
 });
 app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), function(req, res) {
-  res.redirect(req.session.returnTo || '/');
+
+  if (req.user) {
+
+    if (req.user.detailIds.length) {
+      if (req.user.accountType==='Musician') {
+        res.redirect('/homeMusician');
+      } else if (req.user.accountType==='Facility'){
+        res.redirect('/homeFacility');
+      } else {
+        res.redirect('/');
+      }
+    } else {
+      if (req.user.accountType==='Musician') {
+        res.redirect('/musicianDetails');
+      } else if (req.user.accountType==='Facility'){
+        res.redirect('/facilityDetails');
+      } else {
+        res.redirect('/');
+      }
+    }
+
+  } else {
+    res.redirect('/');
+  }
+//  res.redirect(req.session.returnTo || '/');
 });
-app.get('/auth/linkedin', passport.authenticate('linkedin', { state: 'SOME STATE' }));
-app.get('/auth/linkedin/callback', passport.authenticate('linkedin', { failureRedirect: '/login' }), function(req, res) {
-  res.redirect(req.session.returnTo || '/');
-});
+//app.get('/auth/linkedin', passport.authenticate('linkedin', { state: 'SOME STATE' }));
+//app.get('/auth/linkedin/callback', passport.authenticate('linkedin', { failureRedirect: '/login' }), function(req, res) {
+//  res.redirect(req.session.returnTo || '/');
+//});
 
 /**
  * OAuth authorization routes. (API examples)

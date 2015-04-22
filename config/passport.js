@@ -113,7 +113,7 @@ passport.use(new FacebookStrategy(secrets.facebook, function(req, accessToken, r
           user.facebook = profile.id;
           user.tokens.push({ kind: 'facebook', accessToken: accessToken });
           user.profile.name = user.profile.name || profile.displayName;
-          user.profile.gender = user.profile.gender || profile._json.gender;
+//          user.profile.gender = user.profile.gender || profile._json.gender;
           user.profile.picture = user.profile.picture || 'https://graph.facebook.com/' + profile.id + '/picture?type=large';
           user.save(function(err) {
             req.flash('info', { msg: 'Facebook account has been linked.' });
@@ -132,12 +132,15 @@ passport.use(new FacebookStrategy(secrets.facebook, function(req, accessToken, r
         } else {
           var user = new User();
           user.email = profile._json.email;
+
+          user.accountType = 'Musician';      // Default to creating musician account with facebook login, for now.
+
           user.facebook = profile.id;
           user.tokens.push({ kind: 'facebook', accessToken: accessToken });
           user.profile.name = profile.displayName;
-          user.profile.gender = profile._json.gender;
+//          user.profile.gender = profile._json.gender;
           user.profile.picture = 'https://graph.facebook.com/' + profile.id + '/picture?type=large';
-          user.profile.location = (profile._json.location) ? profile._json.location.name : '';
+//          user.profile.location = (profile._json.location) ? profile._json.location.name : '';
           user.save(function(err) {
             done(err, user);
           });
@@ -209,7 +212,7 @@ passport.use(new TwitterStrategy(secrets.twitter, function(req, accessToken, tok
           user.twitter = profile.id;
           user.tokens.push({ kind: 'twitter', accessToken: accessToken, tokenSecret: tokenSecret });
           user.profile.name = user.profile.name || profile.displayName;
-          user.profile.location = user.profile.location || profile._json.location;
+//          user.profile.location = user.profile.location || profile._json.location;
           user.profile.picture = user.profile.picture || profile._json.profile_image_url_https;
           user.save(function(err) {
             req.flash('info', { msg: 'Twitter account has been linked.' });
@@ -227,10 +230,13 @@ passport.use(new TwitterStrategy(secrets.twitter, function(req, accessToken, tok
       // But a person’s twitter username is guaranteed to be unique
       // so we can "fake" a twitter email address as follows:
       user.email = profile.username + "@twitter.com";
+
+      user.accountType = 'Musician';      // Default to creating musician account with twitter login, for now.
+
       user.twitter = profile.id;
       user.tokens.push({ kind: 'twitter', accessToken: accessToken, tokenSecret: tokenSecret });
       user.profile.name = profile.displayName;
-      user.profile.location = profile._json.location;
+//      user.profile.location = profile._json.location;
       user.profile.picture = profile._json.profile_image_url_https;
       user.save(function(err) {
         done(err, user);
@@ -253,7 +259,7 @@ passport.use(new GoogleStrategy(secrets.google, function(req, accessToken, refre
           user.google = profile.id;
           user.tokens.push({ kind: 'google', accessToken: accessToken });
           user.profile.name = user.profile.name || profile.displayName;
-          user.profile.gender = user.profile.gender || profile._json.gender;
+//          user.profile.gender = user.profile.gender || profile._json.gender;
           user.profile.picture = user.profile.picture || profile._json.picture;
           user.save(function(err) {
             req.flash('info', { msg: 'Google account has been linked.' });
@@ -272,10 +278,13 @@ passport.use(new GoogleStrategy(secrets.google, function(req, accessToken, refre
         } else {
           var user = new User();
           user.email = profile._json.email;
+
+          user.accountType = 'Musician';      // Default to creating musician account with google login, for now.
+
           user.google = profile.id;
           user.tokens.push({ kind: 'google', accessToken: accessToken });
           user.profile.name = profile.displayName;
-          user.profile.gender = profile._json.gender;
+//          user.profile.gender = profile._json.gender;
           user.profile.picture = profile._json.picture;
           user.save(function(err) {
             done(err, user);

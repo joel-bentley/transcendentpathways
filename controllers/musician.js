@@ -5,7 +5,10 @@ var User = require('../models/User');
 var Musician = require('../models/Musician');
 
 
-
+/**
+ * GET /signupMusician
+ * Signup as Musician
+ */
 
 exports.getSignupMusician = function(req, res) {
     if (req.user) return res.redirect('/');
@@ -13,6 +16,8 @@ exports.getSignupMusician = function(req, res) {
         title: 'Create Musician Account'
     });
 };
+
+
 exports.getMusicianDetails = function(req, res){
     if(!req.user) return res.redirect('/');
     res.render('account/musicianDetails', {
@@ -23,7 +28,7 @@ exports.getMusicianDetails = function(req, res){
 exports.postMusicianDetails = function(req, res, next){
     var musician = new Musician({
         performerName: req.body.performerName || '',                   // Not sure if   || ''  is needed
-        userIds: req.user._id || '',
+        userIds: req.user.id || '',
         contactName: req.body.contactName || '',
         address1: req.body.address1 || '',
         address2: req.body.address2 || '',
@@ -38,9 +43,23 @@ exports.postMusicianDetails = function(req, res, next){
     });
     musician.save(function(err) {
         if (err) return next(err);
+
+        User.findById(req.user.id, function(err, user) {                    // Save Id from Musician in User
+            if (err) return next(err);
+
+            user.detailIds.push(musician.id);
+
+            user.save(function(err) {
+                if (err) return next(err);
+            });
+        });
+
         res.redirect('/homeMusician');
     });
+
 };
+
+
 
 exports.getHomeMusician = function(req, res) {
     res.render('homeMusician', {
@@ -51,32 +70,32 @@ exports.getHomeMusician = function(req, res) {
 
 exports.getUpdateMusicianDetails = function(req, res) {
 
-    Musician.findOne( { userIds : { $all : [ req.user._id ] } }, function(err, musician) {
+    Musician.findOne( { userIds : { $all : [ req.user.id ] } }, function(err, musician) {
 
-        if (musician === null) return null;
+        if (musician === null) return null;  // added to prevent crash when musician account doesn't exist, correct?
 
         res.render('account/updateMusicianDetails', {
             title: 'Update Musician Details',
-            performerName: musician._doc.performerName,
-            address1: musician._doc.address1,
-            address2: musician._doc.address2,
-            city: musician._doc.city,
-            state: musician._doc.state,
-            zipcode: musician._doc.zipcode,
-            phone: musician._doc.phone,
-            instruments: musician._doc.instruments,
-            website: musician._doc.website,
-            picture: musician._doc.picture,
-            biography: musician._doc.biography
+            performerName: musician.performerName,
+            address1: musician.address1,
+            address2: musician.address2,
+            city: musician.city,
+            state: musician.state,
+            zipcode: musician.zipcode,
+            phone: musician.phone,
+            instruments: musician.instruments,
+            website: musician.website,
+            picture: musician.picture,
+            biography: musician.biography
         });
     });
 };
 
 
 exports.postUpdateMusicianDetails = function(req, res, next) {
-    Musician.findOne( { userIds : { $all : [ req.user._id ] } }, function(err, musician) {
+    Musician.findOne( { userIds : { $all : [ req.user.id ] } }, function(err, musician) {
 
-        if (err) return next(err);   // added to prevent crash, should change this to proper error
+        if (err) return next(err);
 
         musician.performerName = req.body.performerName || '';
         musician.address1 = req.body.address1 || '';

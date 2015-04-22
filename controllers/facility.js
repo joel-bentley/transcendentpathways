@@ -23,7 +23,7 @@ exports.getFacilityDetails = function(req, res){
 exports.postFacilityDetails = function(req, res, next){
     var facility = new Facility({
         facilityName: req.body.facilityName || '',
-        userIds: req.user._id || '',
+        userIds: req.user.id || '',
         address1: req.body.address1 || '',
         address2: req.body.address2 || '',
         city: req.body.city || '',
@@ -41,6 +41,17 @@ exports.postFacilityDetails = function(req, res, next){
     });
     facility.save(function(err) {
         if (err) return next(err);
+
+        User.findById(req.user.id, function(err, user) {                    // Save Id from Facility in User
+            if (err) return next(err);
+
+            user.detailIds.push(facility.id);
+
+            user.save(function(err) {
+                if (err) return next(err);
+            });
+        });
+
         res.redirect('/homeFacility');
     });
 };
@@ -53,43 +64,35 @@ exports.getHomeFacility = function(req, res) {
 };
 
 
-
-
-
-
-
-
-
-
 exports.getUpdateFacilityDetails = function(req, res) {
 
-    Facility.findOne( { userIds : { $all : [ req.user._id ] } }, function(err, facility) {
+    Facility.findOne( { userIds : { $all : [ req.user.id ] } }, function(err, facility) {
 
-        if (facility === null) return null;   // added to prevent crash, should change this to proper error
+        if (facility === null) return null;   // added to prevent crash when facility account doesn't exist, correct?
 
         res.render('account/updateFacilityDetails', {
             title: 'Update Facility Details',
-            facilityName: facility._doc.facilityName,
-            address1: facility._doc.address1,
-            address2: facility._doc.address2,
-            city: facility._doc.city,
-            state: facility._doc.state,
-            zipcode: facility._doc.zipcode,
-            contactName: facility._doc.contactName,
-            contactPhone: facility._doc.contactPhone,
-            contactEmail: facility._doc.contactEmail,
-            buildingName: facility._doc.buildingName,
-            locationName: facility._doc.locationName,
-            roomSize: facility._doc.roomSize,
-            securityNeeded: facility._doc.securityNeeded,
-            waiverNeeded: facility._doc.waiverNeeded,
-            patientNumber: facility._doc.patientNumber
+            facilityName: facility.facilityName,
+            address1: facility.address1,
+            address2: facility.address2,
+            city: facility.city,
+            state: facility.state,
+            zipcode: facility.zipcode,
+            contactName: facility.contactName,
+            contactPhone: facility.contactPhone,
+            contactEmail: facility.contactEmail,
+            buildingName: facility.buildingName,
+            locationName: facility.locationName,
+            roomSize: facility.roomSize,
+            securityNeeded: facility.securityNeeded,
+            waiverNeeded: facility.waiverNeeded,
+            patientNumber: facility.patientNumber
         });
     });
 };
 
 exports.postUpdateFacilityDetails = function(req, res, next) {
-    Facility.findOne( { userIds : { $all : [ req.user._id ] } }, function(err, facility) {
+    Facility.findOne( { userIds : { $all : [ req.user.id ] } }, function(err, facility) {
 
         if (err) return next(err);
 

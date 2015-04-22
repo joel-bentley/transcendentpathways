@@ -18,7 +18,7 @@ var facilitySchema = new mongoose.Schema({
     waiverNeeded: String,
     patientNumber: String,
 
-    approved: Boolean,
+    approved:  { type: Boolean, default: true },    // will change to false when admin panel able to approve
     approvedDate: Date,
     signUpDate: Date,
     approvedBy: String,

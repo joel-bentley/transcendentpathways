@@ -6,14 +6,18 @@ var userSchema = new mongoose.Schema({
   email: { type: String, unique: true, lowercase: true },
   password: String,
   accountType: String,
+
   facebook: String,
   twitter: String,
   google: String,
-  approved: { type: Boolean, default: false },
   tokens: Array,
+
+  approved: { type: Boolean, default: true },  // will change to false when admin panel able to approve
+  detailIds: Array,                           // Array of Ids pointing to entries for musician or facility in database
 
   profile: {
     name: { type: String, default: '' },
+    picture: { type: String, default: '' }
   },
 
   resetPasswordToken: String,
