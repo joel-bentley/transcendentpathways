@@ -15,7 +15,7 @@ var userSchema = new mongoose.Schema({
     picture: String,
     biography: String,
 
-    approved: Boolean,
+    approved:  { type: Boolean, default: true },    // will change to false when admin panel able to approve
     approvedDate: Date,
     signUpDate: Date,
     approvedBy: String,
