@@ -115,25 +115,25 @@ app.get('/account/unlink/:provider', passportConf.isAuthenticated, userControlle
 
 app.get('/signupMusician', musicianController.getSignupMusician);
 app.post('/signupMusician', userController.postSignup);
-app.get('/musicianDetails', musicianController.getMusicianDetails);
-app.post('/musicianDetails', musicianController.postMusicianDetails);
-app.get('/homeMusician', musicianController.getHomeMusician);
+app.get('/musicianDetails', passportConf.isAuthenticated, musicianController.getMusicianDetails);
+app.post('/musicianDetails', passportConf.isAuthenticated, musicianController.postMusicianDetails);
+app.get('/homeMusician', passportConf.isAuthenticated, musicianController.getHomeMusician);
 app.get('/account/updateMusicianDetails', passportConf.isAuthenticated, musicianController.getUpdateMusicianDetails);
 app.post('/account/updateMusicianDetails', passportConf.isAuthenticated, musicianController.postUpdateMusicianDetails);
 
 
 app.get('/signupFacility', facilityController.getSignupFacility);
 app.post('/signupFacility', userController.postSignup);
-app.get('/facilityDetails', facilityController.getFacilityDetails);
-app.post('/facilityDetails', facilityController.postFacilityDetails);
-app.get('/homeFacility', facilityController.getHomeFacility);
+app.get('/facilityDetails', passportConf.isAuthenticated, facilityController.getFacilityDetails);
+app.post('/facilityDetails', passportConf.isAuthenticated, facilityController.postFacilityDetails);
+app.get('/homeFacility', passportConf.isAuthenticated, facilityController.getHomeFacility);
 app.get('/account/updateFacilityDetails', passportConf.isAuthenticated, facilityController.getUpdateFacilityDetails);
 app.post('/account/updateFacilityDetails', passportConf.isAuthenticated, facilityController.postUpdateFacilityDetails);
 
 
-app.get('/homeAdmin', adminController.getHomeAdmin);
-app.get('/musicianData', adminController.getMusicianData);
-app.get('/musicianLookup/:id', adminController.getMusician);
+app.get('/homeAdmin', passportConf.isAuthenticated, adminController.getHomeAdmin);
+app.get('/musicianData', passportConf.isAuthenticated, adminController.getMusicianData);
+app.get('/musicianLookup/:id', passportConf.isAuthenticated, adminController.getMusician);
 
 
 

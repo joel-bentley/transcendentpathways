@@ -58,9 +58,21 @@ exports.postFacilityDetails = function(req, res, next){
 
 
 exports.getHomeFacility = function(req, res) {
-    res.render('homeFacility', {
-        title: 'Facility Home'
-    });
+
+    if (req.user.accountType==='Facility') {
+
+        if (req.user.detailIds.length) {
+            res.render('homeFacility', {
+                title: 'Facility Home'
+            });
+        } else {
+            res.redirect('/facilityDetails');
+        }
+
+    } else {
+        res.redirect('/');
+    }
+
 };
 
 

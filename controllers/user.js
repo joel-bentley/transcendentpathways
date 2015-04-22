@@ -50,7 +50,7 @@ exports.postLogin = function(req, res, next) {
       }
 
       if (user.accountType==='Admin') {
-          res.redirect(req.session.returnTo || '/homeAdmin');
+        res.redirect(req.session.returnTo || '/homeAdmin');
       } else if (user.accountType==='Musician'){
         res.redirect(req.session.returnTo || '/homeMusician');
       } else if (user.accountType==='Facility'){

@@ -62,9 +62,21 @@ exports.postMusicianDetails = function(req, res, next){
 
 
 exports.getHomeMusician = function(req, res) {
-    res.render('homeMusician', {
-        title: 'Musician-Performer Home'
-    });
+
+    if (req.user.accountType==='Musician') {
+
+        if (req.user.detailIds.length) {
+            res.render('homeMusician', {
+                title: 'Musician-Performer Home'
+            });
+        } else {
+            res.redirect('/musicianDetails');
+        }
+
+    } else {
+        res.redirect('/');
+    }
+
 };
 
 
