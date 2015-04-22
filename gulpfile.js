@@ -1,5 +1,5 @@
 var Gulp = require('gulp');
-var babelify = require('babelify');
+//var babelify = require('babelify');
 
 var Less = require('gulp-less');
 var Nodemon = require('gulp-nodemon');
@@ -100,7 +100,7 @@ Gulp.task('jsx', ['adminjs']);
 
 Gulp.task('adminjs', function(){
     browserify('./views/javascript/admin/musician/App.jsx')
-        .transform("babelify")
+        .transform(reactify)
         .bundle()
         .pipe(source('admin.min.js'))
         .pipe(Gulp.dest('public/js/'));
