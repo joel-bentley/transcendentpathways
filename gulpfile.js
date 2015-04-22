@@ -1,5 +1,4 @@
 var Gulp = require('gulp');
-//var babelify = require('babelify');
 
 var Less = require('gulp-less');
 var Nodemon = require('gulp-nodemon');
@@ -12,7 +11,8 @@ var Newer = require('gulp-newer');
 var Concat = require('gulp-concat');
 
 var browserify = require('browserify');
-var reactify = require('reactify');
+//var reactify = require('reactify');
+var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 
 
@@ -79,7 +79,7 @@ Gulp.task('media', function () {
 
 
 //Gulp.task('jsx', ['musicianjs', 'facilityjs', 'adminjs']);
-Gulp.task('jsx', ['adminjs']);
+Gulp.task('jsx', ['adminjs', 'adminjs2']);
 
 
 //Gulp.task('musicianjs', function(){
@@ -99,9 +99,17 @@ Gulp.task('jsx', ['adminjs']);
 //});
 
 Gulp.task('adminjs', function(){
-    browserify('./views/javascript/admin/musician/App.jsx')
-        .transform(reactify)
+    browserify('./views/javascript/admin/musician/griddle/App.jsx')
+        .transform(babelify)
         .bundle()
         .pipe(source('admin.min.js'))
+        .pipe(Gulp.dest('public/js/'));
+});
+
+Gulp.task('adminjs2', function(){
+    browserify('./views/javascript/admin/musician/codepen/App.jsx')
+        .transform(babelify)
+        .bundle()
+        .pipe(source('admin2.min.js'))
         .pipe(Gulp.dest('public/js/'));
 });
