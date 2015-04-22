@@ -1,4 +1,5 @@
 var Gulp = require('gulp');
+var babelify = require('babelify');
 
 var Less = require('gulp-less');
 var Nodemon = require('gulp-nodemon');
@@ -14,28 +15,21 @@ var browserify = require('browserify');
 var reactify = require('reactify');
 var source = require('vinyl-source-stream');
 
-var babelify = require('babelify');
 
 
-//var Gutil = require('gulp-util');
-//var Webpack = require('webpack');
+Gulp.task('default', ['watch', 'build', 'nodemon']);
 
-
-Gulp.task('default', ['watch', 'build', 'nodemon']);    // Build and watch
-
-Gulp.task('build', ['less', 'jsx', 'media']);        // Just build
-
+Gulp.task('build', ['less', 'jsx', 'media']);
 
 Gulp.task('clean', function () {
     return Gulp.src('./public/*', { read: false }).pipe(Clean());
 });
 
-
-
 Gulp.task('less', function () {
     var bundleConfigs = [{
         entries: [
-            './views/stylesheets/main.less'
+            './views/stylesheets/main.less',
+            './views/stylesheets/griddle.css'
         ],
         dest: './public/css',
         outputName: 'main.min.css'
@@ -49,15 +43,11 @@ Gulp.task('less', function () {
     });
 });
 
-
-
 Gulp.task('watch', function() {
     global.isWatching = true;
     Gulp.watch('./views/stylesheets/**/*.less', ['less']);
     Gulp.watch('./views/javascript/**/*.jsx', ['jsx']);
 });
-
-
 
 Gulp.task('nodemon', function () {
     Nodemon({
@@ -73,8 +63,6 @@ Gulp.task('nodemon', function () {
             console.log('change detected:', files);
         });
 });
-
-
 
 Gulp.task('media', function () {
     var general = Gulp.src('./views/media/**/*')
@@ -111,63 +99,9 @@ Gulp.task('jsx', ['adminjs']);
 //});
 
 Gulp.task('adminjs', function(){
-    browserify('./views/javascript/admin/App.jsx')
-    //    .transform(reactify)
-        .transform(babelify)
+    browserify('./views/javascript/admin/musician/App.jsx')
+        .transform("babelify")
         .bundle()
         .pipe(source('admin.min.js'))
         .pipe(Gulp.dest('public/js/'));
 });
-
-
-
-/*
- var CommonsChunkPlugin = Webpack.optimize.CommonsChunkPlugin;
- var UglifyJsPlugin = Webpack.optimize.UglifyJsPlugin;
- var executionCount = 0;
-
- Gulp.task('webpack', function (callback) {
- var config = {
- watch: global.isWatching,
- entry: {
- musician: './views/javascript/musician/app',
- facility: './views/javascript/facility/app',
- admin: './views/javascript/admin/app',
- },
- output: {
- path: './public/js',
- filename: '[name].min.js',
- sourceMapFilename: '[name].map.js'
- },
- resolve: {
- extensions: ['', '.js', '.jsx']
- },
- module: {
- loaders: [
- { test: /\.jsx$/, exclude: /node_modules/, loader: 'babel-loader'}
- ]
- },
- devtool: 'source-map',
- plugins: [
- new CommonsChunkPlugin('../core.min.js', undefined, 2),
- new UglifyJsPlugin({ compress: { warnings: false } })
- ]
- };
- Webpack(config, function (err, stats) {
-
- if (err) {
- throw new Gutil.PluginError('webpack', err);
- }
-
- Gutil.log('[webpack]', stats.toString({
- colors: true,
- chunkModules: false
- }));
-
- if (executionCount === 0) {
- callback();
- }
- executionCount += 1;
- });
- });
- */
