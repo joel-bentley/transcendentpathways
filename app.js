@@ -132,6 +132,8 @@ app.post('/account/updateFacilityDetails', passportConf.isAuthenticated, facilit
 
 
 app.get('/homeAdmin', passportConf.isAuthenticated, adminController.getHomeAdmin);
+app.get('/homeAdmin2', passportConf.isAuthenticated, adminController.getHomeAdmin2);   // temporary
+
 app.get('/musicianData', passportConf.isAuthenticated, adminController.getMusicianData);
 app.get('/musicianLookup/:id', passportConf.isAuthenticated, adminController.getMusician);
 

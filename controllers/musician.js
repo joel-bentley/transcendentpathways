@@ -20,6 +20,7 @@ exports.getSignupMusician = function(req, res) {
 
 exports.getMusicianDetails = function(req, res){
     if(!req.user) return res.redirect('/');
+
     res.render('account/musicianDetails', {
         title: 'Musician - Performer Details'
     });
@@ -53,7 +54,6 @@ exports.postMusicianDetails = function(req, res, next){
                 if (err) return next(err);
             });
         });
-
         res.redirect('/homeMusician');
     });
 
@@ -70,6 +70,7 @@ exports.getHomeMusician = function(req, res) {
                 title: 'Musician-Performer Home'
             });
         } else {
+
             res.redirect('/musicianDetails');
         }
 

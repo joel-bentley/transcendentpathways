@@ -66,6 +66,7 @@ exports.getHomeFacility = function(req, res) {
                 title: 'Facility Home'
             });
         } else {
+            req.flash('info', 'Please complete this for to continue.' );
             res.redirect('/facilityDetails');
         }
 

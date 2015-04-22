@@ -9,15 +9,20 @@
       a.navbar-brand(href='/')
         span
           img(src="/media/logo-square.png" height="30" width="30")
-          | &nbsp Transcendent Pathways &nbsp
+          | &nbsp Transcendent Pathways &nbsp &nbsp
     .collapse.navbar-collapse
       ul.nav.navbar-nav
-        li(class=title=='Home'?'active':undefined)
-          a(href='/') Home
+
+        li
+          a(href='/homeAdmin') [ Basic Musician Listing App ] &nbsp
+        li
+          a(href='/homeAdmin2') [ Basic Musician Approval App ]
+        //li(class=title=='Home'?'active':undefined)
+        //  a(href='/') Home
         //li(class=title=='API Examples'?'active':undefined)
           a(href='/api') API Examples
-        li(class=title=='Contact'?'active':undefined)
-          a(href='/contact') Contact
+        //li(class=title=='Contact'?'active':undefined)
+        //  a(href='/contact') Contact
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=title=='Login'?'active':undefined)

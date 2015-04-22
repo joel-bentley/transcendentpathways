@@ -15,5 +15,5 @@ var App = React.createClass({
 
 React.render(
     <App />,
-    document.getElementById('app1')
+    document.getElementById('griddleApp')
 );
