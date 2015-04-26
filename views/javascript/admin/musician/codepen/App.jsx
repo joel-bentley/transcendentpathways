@@ -1,123 +1,193 @@
 var React = require('react');
+var _ = require('lodash');
+
+var AccountFields = React.createClass({
+    render: function() {
+        return (
+            <div>
+                <label>Peformer Name</label>
+                <input type="text" ref="performerName" defaultValue={this.props.fieldValues.performerName} />
+
+                <label>Phone</label>
+                <input type="text" ref="phone" defaultValue={this.props.fieldValues.phone} />
+
+                <label>Address 1</label>
+                <input type="text" ref="address1" defaultValue={this.props.fieldValues.address1} />
+
+                <button onClick={this.saveAndContinue}>Save and Continue</button>
+            </div>
+        )
+    },
+
+    saveAndContinue: function(e) {
+        e.preventDefault()
+
+        // Get values via this.refs
+
+        var data = {
+            performerName     : this.refs.performerName.getDOMNode().value,
+            phone : this.refs.phone.getDOMNode().value,
+            address1    : this.refs.address1.getDOMNode().value
+        };
+
+        this.props.saveValues(data);
+    }
+});
+
+var DetailsBar = React.createClass({
+    render: function(){
+        return (
+            <div className="Detail">
+                <div className="panel panel-primary">
+                    <div className="panel-heading">
+                        <h3 className="panel-title">{this.props.musician.performerName}</h3>
+                    </div>
+                    <div className="panel-body">
+                        <form className="form-horizontal">
+                            <div className="form-group">
+                                    <AccountFields  fieldValues = {this.props.musician}
+                                                    saveValues = {this.props.saveValues}
+                                    />
+                            </div>
+                        </form>
+
+
+
+
+
+
+                        Contact Phone: {this.props.musician.phone}<br/>
+                        Address Line 1: {this.props.musician.address1}<br/>
+                        Address Line 2: {this.props.musician.address2}<br/>
+                        City: {this.props.musician.city}<br/>
+                        State: {this.props.musician.props}<br/>
+                        ZipCode: {this.props.musician.zipcode}<br/>
+                        Website URL: {this.props.musician.website}<br/>
+                        References: {this.props.musician.references}<br/>
+                        Instruments: {this.props.musician.instruments}<br/>
+                        Approved Date: {this.props.musician.approvedDate}<br/>
+                        Approved By: {this.props.musician.approvedBy}<br/>
+                        Sign-Up Date: {this.props.musician.signUpDate}<br/>
+                        Approved Status: {this.props.musician.approvedToPerform.toString()}<br/><br/>
+                        <button type="input" className="btn btn-default" onClick={this.props.handleChangedData.bind(null, this.props.musician)}>Approve</button>
+                    </div>
+                </div>
+            </div>
+        )}
+});
 
 var MusicianRow = React.createClass({
-    getInitialState: function() {
-        return { showResults: false };
+    propTypes: {
+        musician: React.PropTypes.any.isRequired,
+        showDetails: React.PropTypes.func.isRequired
     },
-    onClick: function() {
-        this.setState({ showResults: !this.state.showResults });
+    changeState: function(musician){
+        this.props.showDetails(musician);
     },
     render: function() {
         var name = this.props.musician.approvedToPerform ?
-            this.props.musician.performerName : (
-            <span style={{color: 'red'}}>
+            this.props.musician.performerName :<span style={{color: 'red'}}>
                 {this.props.musician.performerName}
-            </span>
-            );
-        var styles = {
-            detail: {
-                position: 'absolute',
-                left: '300px',
-                top: '60px',
-                bottom: '0',
-                right: '0',
-                overflow: 'inherit',
-                padding: '40px',
-                minHeight: '300px'
-            }
-        };
+            </span>;
         return (
             <div>
                 <tr>
-                    <td><a onClick={this.onClick}> {name} </a></td>
+                    <td><a onClick={this.changeState.bind(null, this.props.musician)}> {name} </a></td>
                 </tr>
-                <container className="Detail" style={styles.detail}> { this.state.showResults ?  <DetailsBar musician={this.props.musician} /> : null }</container>
             </div>
         );
     }
 });
 
 var MusicianTable = React.createClass({
+    propTypes: {
+        musicians: React.PropTypes.array.isRequired
+    },
+    getInitialState: function(){
+        return {
+            musicians: this.props.musicians,
+            showResults: false,
+            musician: null,
+            test: null
+        }
+    },
+    showDetails: function(musician){
+            this.setState({
+                showResults: !this.state.showResults,
+                musician: musician
+            })
+    },
+    saveValues: function(fields) {
+            var x = this.state.musician;
+            x.performerName = fields.performerName;
+            x.phone = fields.phone;
+            x.address1 = fields.address1;
+            this.handleChangedData(x);
+    },
+    handleChangedData: function(musician){
+            var x = this.state.musicians;
+        //_.find(arr, musician => musician._id === musician._id);
+            x.forEach(function(elem,index){
+               if (elem._id===musician._id){
+                   x[index] = musician;
+               }
+            }.bind(this));
+            this.setState({
+                musicans: x,
+                musician: musician,
+                showResults: false
+            });
+
+
+        /*this.state.musicians.forEach(function(e,i){
+            if(e._id === musician._id){
+                //this.state.musicians[i].approvedToPerform = true;
+            }
+        }.bind(this));
+        this.setState({
+            musicians: this.state.musicians,
+            showResults: false
+        });
+        console.log('musicians updated');
+        */
+    },
     render: function() {
         var rowsApproved = [];
         var rowsNotApproved = [];
-        this.props.musicians.forEach(function(musician) {
-            if (musician.approvedToPerform ===false ){
-                rowsNotApproved.push(<MusicianRow musician = {musician} key={musician._id}/>);
+        this.state.musicians.forEach(function(musician) {
+            if (musician.approvedToPerform === false ){
+                rowsNotApproved.push(
+                    <MusicianRow
+                        musician = {musician}
+                        key = {musician._id}
+                        showDetails={this.showDetails}
+                        />
+                );
             } else {
-                rowsApproved.push(<MusicianRow musician = {musician} key={musician._id}/>);
+                rowsApproved.push(
+                    <MusicianRow
+                        musician = {musician}
+                        key= {musician._id}
+                        showDetails={this.showDetails}
+                        />
+                );
             }
-        });
-        return (
-            <table>
-                <thead>
-                <tr>
-                    <th>Performer Name</th>
-                </tr>
-                </thead>
-                <tbody>{rowsNotApproved}{rowsApproved}</tbody>
-
-            </table>
-        );
-    }
-});
-
-var DetailsBar = React.createClass({
-    onClickApprove: function(){
-
-    },
-    render: function(){
+        }.bind(this));
         return (
             <div>
-                <div className="panel panel-primary">
-                    <div className="panel-heading">
-                        <h3 className="panel-title">{this.props.musician.performerName}</h3>
-                    </div>
-                    <div className="panel-body">
-                        <td><a onClick={this.onClick}> {name} </a></td>
-                        Contact Phone: {this.props.musician.phone}<br/>
-                        Address Line 1: {this.props.musician.address1}<br/>
-                        Address Line 2: {this.props.musician.address2}<br/>
-                        City: {this.props.musician.city}<br/>
-                        State: {this.props.musician.state}<br/>
-                        ZipCode: {this.props.musician.zipcode}<br/>
-                        Website URL: {this.props.musician.website}<br/>
-                        References: {this.props.musician.references}<br/>
-                        Instruments: {this.props.musician.instruments}<br/>
-                        Appoved Date: {this.props.musician.approvedDate}<br/>
-                        Approved By: {this.props.musician.approvedBy}<br/>
-                        Sign-Up Date: {this.props.musician.signUpDate}<br/>
-                        Approved Status: {this.props.musician.approvedToPerform.toString()}<br/><br/>
-                        <button type="button" className="btn btn-success" onClick={this.onClickApprove}>Approve</button>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-});
-
-var FilterableMusicianTable = React.createClass({
-    render: function() {
-        return (
-            <div>
-                <MusicianTable musicians={this.props.musicians} />
-            </div>
-        );
-    }
-});
-
-var Search = React.createClass({
-    getInitialState: function() {
-        return { showResults: false };
-    },
-    onClick: function() {
-        this.setState({ showResults: !this.state.showResults });
-    },
-    render: function() {
-        return (
-            <div>
-                <input type="submit" value="SearchBar" onClick={this.onClick} />
-                { this.state.showResults ?  <SearchBar/> : null }
+                <table className="table-striped PerformerList">
+                    <thead>
+                    <tr>
+                        <th>Performer Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>{rowsNotApproved} {rowsApproved}</tbody>
+                </table>
+                {this.state.showResults ?
+                    <DetailsBar musician={this.state.musician}
+                                handleChangedData={this.handleChangedData}
+                                saveValues={this.saveValues}
+                        /> : null}
             </div>
         );
     }
@@ -882,371 +952,8 @@ var MUSICIANS = [
         "approvedDate": "2014-07-20",
         "signUpDate": "2014-11-26",
         "approvedBy": "Mark Ackerly"
-    },
-    {
-        "_id": "55366eaf9a2d533be8fb9800",
-        "performerName": "Ceprene",
-        "address1": "6170 Imlay Street",
-        "address2": "Suite 333",
-        "city": "Kingstowne",
-        "state": "North Dakota",
-        "zipcode": 50456,
-        "phone": "(944) 542-3944",
-        "website": "www.veniam.com",
-        "references": [
-            "ut exercitation sint",
-            "esse ad veniam",
-            "sint proident consequat",
-            "labore amet enim",
-            "ex non elit",
-            "culpa cupidatat qui",
-            "aliquip ipsum aliquip"
-        ],
-        "instruments": [
-            "anim",
-            "nostrud",
-            "deserunt",
-            "veniam",
-            "est",
-            "sunt",
-            "officia"
-        ],
-        "approvedToPerform": false,
-        "approvedDate": "2014-03-20",
-        "signUpDate": "2015-01-06",
-        "approvedBy": "Mark Ackerly"
-    },
-    {
-        "_id": "55366eaf266e6d40050f3e86",
-        "performerName": "Kinetica",
-        "address1": "2019 Jamison Lane",
-        "address2": "Suite 334",
-        "city": "Marenisco",
-        "state": "Kentucky",
-        "zipcode": 98434,
-        "phone": "(889) 511-3753",
-        "website": "www.eu.com",
-        "references": [
-            "tempor do excepteur",
-            "sint aute dolor",
-            "cupidatat excepteur esse",
-            "occaecat duis adipisicing",
-            "sit labore ut",
-            "voluptate cupidatat irure",
-            "irure laboris aliquip"
-        ],
-        "instruments": [
-            "et",
-            "et",
-            "irure",
-            "adipisicing",
-            "esse",
-            "commodo",
-            "Lorem"
-        ],
-        "approvedToPerform": true,
-        "approvedDate": "2014-01-25",
-        "signUpDate": "2015-03-11",
-        "approvedBy": "Mark Ackerly"
-    },
-    {
-        "_id": "55366eaf5c2dfd9ef85c9659",
-        "performerName": "Equitox",
-        "address1": "4193 McKibben Street",
-        "address2": "Suite 889",
-        "city": "Bainbridge",
-        "state": "Missouri",
-        "zipcode": 13495,
-        "phone": "(888) 583-3346",
-        "website": "www.sint.com",
-        "references": [
-            "voluptate deserunt dolor",
-            "nulla occaecat magna",
-            "id laborum dolore",
-            "aliquip ut qui",
-            "irure reprehenderit cupidatat",
-            "amet non ipsum",
-            "laborum aliquip do"
-        ],
-        "instruments": [
-            "eiusmod",
-            "anim",
-            "qui",
-            "Lorem",
-            "est",
-            "ad",
-            "sunt"
-        ],
-        "approvedToPerform": false,
-        "approvedDate": "2014-09-20",
-        "signUpDate": "2015-03-12",
-        "approvedBy": "Mark Ackerly"
-    },
-    {
-        "_id": "55366eafda901ef346dcd228",
-        "performerName": "Hatology",
-        "address1": "3169 Strickland Avenue",
-        "address2": "Suite 438",
-        "city": "Gilgo",
-        "state": "Ohio",
-        "zipcode": 97740,
-        "phone": "(855) 417-3896",
-        "website": "www.cupidatat.com",
-        "references": [
-            "anim aliquip esse",
-            "laboris occaecat fugiat",
-            "qui id aliquip",
-            "ad labore non",
-            "consectetur ex ea",
-            "voluptate sunt est",
-            "ad labore dolore"
-        ],
-        "instruments": [
-            "elit",
-            "non",
-            "nostrud",
-            "labore",
-            "et",
-            "fugiat",
-            "adipisicing"
-        ],
-        "approvedToPerform": true,
-        "approvedDate": "2014-05-10",
-        "signUpDate": "2015-02-14",
-        "approvedBy": "Mark Ackerly"
-    },
-    {
-        "_id": "55366eafcff718fe9f3e06bc",
-        "performerName": "Apextri",
-        "address1": "7658 Brightwater Court",
-        "address2": "Suite 124",
-        "city": "Waverly",
-        "state": "Louisiana",
-        "zipcode": 31528,
-        "phone": "(945) 502-3677",
-        "website": "www.anim.com",
-        "references": [
-            "ipsum exercitation deserunt",
-            "anim quis cupidatat",
-            "in fugiat tempor",
-            "ipsum ipsum commodo",
-            "nostrud dolore voluptate",
-            "fugiat sint fugiat",
-            "minim sunt tempor"
-        ],
-        "instruments": [
-            "sit",
-            "amet",
-            "occaecat",
-            "cupidatat",
-            "culpa",
-            "esse",
-            "labore"
-        ],
-        "approvedToPerform": false,
-        "approvedDate": "2014-12-25",
-        "signUpDate": "2014-01-12",
-        "approvedBy": "Mark Ackerly"
-    },
-    {
-        "_id": "55366eaf127c942788376cd3",
-        "performerName": "Comfirm",
-        "address1": "7664 Bush Street",
-        "address2": "Suite 675",
-        "city": "Stewartville",
-        "state": "New Hampshire",
-        "zipcode": 33960,
-        "phone": "(829) 532-2981",
-        "website": "www.eu.com",
-        "references": [
-            "id dolore velit",
-            "eiusmod veniam anim",
-            "mollit proident minim",
-            "nisi sunt occaecat",
-            "id labore occaecat",
-            "dolor voluptate ex",
-            "exercitation Lorem do"
-        ],
-        "instruments": [
-            "eiusmod",
-            "aliqua",
-            "pariatur",
-            "consequat",
-            "qui",
-            "et",
-            "labore"
-        ],
-        "approvedToPerform": true,
-        "approvedDate": "2014-05-17",
-        "signUpDate": "2014-08-27",
-        "approvedBy": "Mark Ackerly"
-    },
-    {
-        "_id": "55366eafb3a86b9d0d96c3f5",
-        "performerName": "Rockyard",
-        "address1": "1862 Ridgewood Avenue",
-        "address2": "Suite 183",
-        "city": "Northchase",
-        "state": "Wyoming",
-        "zipcode": 63732,
-        "phone": "(843) 526-2620",
-        "website": "www.quis.com",
-        "references": [
-            "culpa elit quis",
-            "anim ut nostrud",
-            "enim elit labore",
-            "Lorem esse ex",
-            "consequat consequat officia",
-            "deserunt et aliqua",
-            "nostrud tempor nisi"
-        ],
-        "instruments": [
-            "exercitation",
-            "anim",
-            "aliquip",
-            "veniam",
-            "id",
-            "deserunt",
-            "aliqua"
-        ],
-        "approvedToPerform": false,
-        "approvedDate": "2014-01-23",
-        "signUpDate": "2014-12-28",
-        "approvedBy": "Mark Ackerly"
-    },
-    {
-        "_id": "55366eafdd99a92a17b90c97",
-        "performerName": "Ronbert",
-        "address1": "7954 Oxford Walk",
-        "address2": "Suite 103",
-        "city": "Orason",
-        "state": "Marshall Islands",
-        "zipcode": 41514,
-        "phone": "(872) 425-3177",
-        "website": "www.ipsum.com",
-        "references": [
-            "deserunt veniam est",
-            "reprehenderit enim exercitation",
-            "magna elit cupidatat",
-            "reprehenderit eu sit",
-            "irure deserunt deserunt",
-            "aute tempor enim",
-            "quis sint non"
-        ],
-        "instruments": [
-            "quis",
-            "aute",
-            "ullamco",
-            "et",
-            "labore",
-            "et",
-            "excepteur"
-        ],
-        "approvedToPerform": true,
-        "approvedDate": "2014-12-22",
-        "signUpDate": "2014-02-10",
-        "approvedBy": "Mark Ackerly"
-    },
-    {
-        "_id": "55366eafb83fe295722a907e",
-        "performerName": "Bluegrain",
-        "address1": "4838 Provost Street",
-        "address2": "Suite 330",
-        "city": "Fillmore",
-        "state": "Oregon",
-        "zipcode": 28153,
-        "phone": "(912) 495-3546",
-        "website": "www.quis.com",
-        "references": [
-            "pariatur consectetur incididunt",
-            "aute tempor esse",
-            "excepteur commodo ullamco",
-            "consequat do fugiat",
-            "minim sunt incididunt",
-            "culpa velit fugiat",
-            "minim aliquip dolor"
-        ],
-        "instruments": [
-            "elit",
-            "laboris",
-            "minim",
-            "sit",
-            "aute",
-            "et",
-            "magna"
-        ],
-        "approvedToPerform": false,
-        "approvedDate": "2015-02-15",
-        "signUpDate": "2014-04-21",
-        "approvedBy": "Mark Ackerly"
-    },
-    {
-        "_id": "55366eaf5d6a9e0f6fafeb81",
-        "performerName": "Kengen",
-        "address1": "6099 Fountain Avenue",
-        "address2": "Suite 821",
-        "city": "Avalon",
-        "state": "North Carolina",
-        "zipcode": 19272,
-        "phone": "(911) 460-3248",
-        "website": "www.consequat.com",
-        "references": [
-            "magna esse anim",
-            "nostrud sunt consequat",
-            "consequat labore sit",
-            "enim ullamco consectetur",
-            "excepteur proident aliquip",
-            "mollit irure nisi",
-            "duis consectetur eu"
-        ],
-        "instruments": [
-            "quis",
-            "ad",
-            "eiusmod",
-            "deserunt",
-            "ex",
-            "reprehenderit",
-            "quis"
-        ],
-        "approvedToPerform": false,
-        "approvedDate": "2015-02-20",
-        "signUpDate": "2014-01-16",
-        "approvedBy": "Mark Ackerly"
-    },
-    {
-        "_id": "55366eafa6ce4e32f9c3c2c3",
-        "performerName": "Snacktion",
-        "address1": "5523 Stuart Street",
-        "address2": "Suite 398",
-        "city": "Kiskimere",
-        "state": "Kansas",
-        "zipcode": 66088,
-        "phone": "(877) 521-2069",
-        "website": "www.do.com",
-        "references": [
-            "dolor aliqua culpa",
-            "ex enim quis",
-            "id culpa cillum",
-            "minim aliqua veniam",
-            "aliquip voluptate elit",
-            "pariatur mollit labore",
-            "occaecat irure Lorem"
-        ],
-        "instruments": [
-            "nostrud",
-            "voluptate",
-            "ad",
-            "nulla",
-            "aliqua",
-            "nisi",
-            "dolor"
-        ],
-        "approvedToPerform": false,
-        "approvedDate": "2014-03-07",
-        "signUpDate": "2015-01-29",
-        "approvedBy": "Mark Ackerly"
     }
 ];
 
+React.render(<MusicianTable musicians={MUSICIANS} />, document.getElementById("codepenApp"));
 
-React.render(<FilterableMusicianTable musicians={MUSICIANS} />, document.getElementById('codepenApp'));
