@@ -1,0 +1,22 @@
+.Detail {
+    position: absolute;
+    left: 250px;
+    width: 600px;
+    top: 120px;
+    bottom: 0;
+    right: 200px;
+    overflow: auto;
+    padding: 40px;
+    min-height: 300px;
+}
+
+.PerformerList {
+    position: absolute;
+    left: 50px;
+    width: 150px;
+    top: 120px;
+    bottom: 250px;
+    overflow: auto;
+    padding: 40px;
+    min-height: 300px;
+}
