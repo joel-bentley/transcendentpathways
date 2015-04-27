@@ -1,35 +1,143 @@
 var React = require('react');
 var _ = require('lodash');
 
-var AccountFields = React.createClass({
+var MusicianFields = React.createClass({
     render: function() {
         return (
             <div>
-                <label>Peformer Name</label>
-                <input type="text" ref="performerName" defaultValue={this.props.fieldValues.performerName} />
+                <form className="form-horizontal">
+                    <div className="form-group">
+                        <label className="col-sm-4 control-label"> Peformer Name</label>
+                        <div>
+                            <input type="text" className="col-sm-7" ref="performerName"
+                                   defaultValue={this.props.fieldValues.performerName} />
+                        </div>
+                    </div>
+                    <div className ="form-group">
+                        <label className="col-sm-4 control-label">Phone</label>
+                        <div>
+                            <input type="text" className="col-sm-7" ref="phone"
+                                   defaultValue={this.props.fieldValues.phone} />
+                        </div>
+                    </div>
+                    <div className ="form-group">
+                        <label className="col-sm-4 control-label">Address Line 1</label>
+                        <div>
+                            <input type="text" className="col-sm-7" ref="address1"
+                                   defaultValue={this.props.fieldValues.address1} />
+                        </div>
+                    </div>
+                    <div className ="form-group">
+                        <label className="col-sm-4 control-label">Address Line 2</label>
+                        <div>
+                            <input type="text" className="col-sm-7" ref="address2"
+                                   defaultValue={this.props.fieldValues.address2} />
+                        </div>
+                    </div>
+                    <div className ="form-group">
+                        <label className="col-sm-4 control-label">City</label>
+                        <div>
+                            <input type="text" className="col-sm-7" ref="city"
+                                   defaultValue={this.props.fieldValues.city} />
+                        </div>
+                    </div>
+                    <div className ="form-group">
+                        <label className="col-sm-4 control-label">State</label>
+                        <div>
+                            <input type="text" className="col-sm-7" ref="state"
+                                   defaultValue={this.props.fieldValues.state} />
+                        </div>
+                    </div>
+                    <div className ="form-group">
+                        <label className="col-sm-4 control-label">Zip Code</label>
+                        <div>
+                            <input type="text" className="col-sm-7" ref="zipcode"
+                                   defaultValue={this.props.fieldValues.zipcode} />
+                        </div>
+                    </div>
+                    <div className ="form-group">
+                        <label className="col-sm-4 control-label">Website URL</label>
+                        <div>
+                            <input type="text" className="col-sm-7" ref="website"
+                                   defaultValue={this.props.fieldValues.website} />
+                        </div>
+                    </div>
+                    <div className ="form-group">
+                        <label className="col-sm-4 control-label">References</label>
+                        <div>
+                            <textarea className="col-sm-7"  rows="2"
+                                      ref="references" defaultValue={this.props.fieldValues.references} />
+                        </div>
+                    </div>
+                    <div className ="form-group">
+                        <label className="col-sm-4 control-label">Instruments</label>
+                        <div>
+                            <textarea className="col-sm-7"  rows="2"
+                                      ref="instruments" defaultValue={this.props.fieldValues.instruments} />
+                        </div>
+                    </div>
+                    <div className ="form-group">
+                        <label className="col-sm-4 control-label">Approval Date</label>
+                        <div>
+                            <input type="text" className="col-sm-7" ref="approvalDate"
+                                   defaultValue={this.props.fieldValues.approvalDate} />
+                        </div>
+                    </div>
+                    <div className ="form-group">
+                        <label className="col-sm-4 control-label">Approved By</label>
+                        <div>
+                            <input type="text" className="col-sm-7" ref="approvedBy"
+                                   defaultValue={this.props.fieldValues.approvedBy} />
+                        </div>
+                    </div>
+                    <div className ="form-group">
+                        <label className="col-sm-4 control-label">Sign-Up Date</label>
+                        <div>
+                            <input type="text" className="col-sm-7" ref="signUpDate"
+                                   defaultValue={this.props.fieldValues.signUpDate} />
+                        </div>
+                    </div>
+                    <div className ="form-group">
+                        <label className="col-sm-4 control-label">Approved To Perform</label>
+                        <div>
+                            <select className="col-sm-7" defaultValue={this.props.fieldValues.approvedToPerform}
+                                    ref="approvedToPerform">
+                                <option value="">No</option>
+                                <option value="true">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <button className="btn btn-primary" onClick={this.saveAndContinue}>Submit</button>
+                    </div>
 
-                <label>Phone</label>
-                <input type="text" ref="phone" defaultValue={this.props.fieldValues.phone} />
-
-                <label>Address 1</label>
-                <input type="text" ref="address1" defaultValue={this.props.fieldValues.address1} />
-
-                <button onClick={this.saveAndContinue}>Save and Continue</button>
+                </form>
             </div>
+
         )
     },
 
-    saveAndContinue: function(e) {
-        e.preventDefault()
+    saveAndContinue: function(event) {
+        event.preventDefault();
 
         // Get values via this.refs
-
         var data = {
-            performerName     : this.refs.performerName.getDOMNode().value,
-            phone : this.refs.phone.getDOMNode().value,
-            address1    : this.refs.address1.getDOMNode().value
+            _id: this.props.fieldValues._id,
+            performerName: this.refs.performerName.getDOMNode().value,
+            phone: this.refs.phone.getDOMNode().value,
+            address1: this.refs.address1.getDOMNode().value,
+            address2: this.refs.address2.getDOMNode().value,
+            city: this.refs.city.getDOMNode().value,
+            state: this.refs.state.getDOMNode().value,
+            zipcode: this.refs.zipcode.getDOMNode().value,
+            website: this.refs.website.getDOMNode().value,
+            references: this.refs.references.getDOMNode().value,
+            instruments: this.refs.instruments.getDOMNode().value,
+            approvalDate: this.refs.approvalDate.getDOMNode().value,
+            approvedBy: this.refs.approvedBy.getDOMNode().value,
+            signUpDate: this.refs.signUpDate.getDOMNode().value,
+            approvedToPerform: this.refs.approvedToPerform.getDOMNode().value
         };
-
         this.props.saveValues(data);
     }
 });
@@ -38,38 +146,14 @@ var DetailsBar = React.createClass({
     render: function(){
         return (
             <div className="Detail">
-                <div className="panel panel-primary">
+                <div className="panel panel-default">
                     <div className="panel-heading">
                         <h3 className="panel-title">{this.props.musician.performerName}</h3>
                     </div>
                     <div className="panel-body">
-                        <form className="form-horizontal">
-                            <div className="form-group">
-                                    <AccountFields  fieldValues = {this.props.musician}
-                                                    saveValues = {this.props.saveValues}
-                                    />
-                            </div>
-                        </form>
-
-
-
-
-
-
-                        Contact Phone: {this.props.musician.phone}<br/>
-                        Address Line 1: {this.props.musician.address1}<br/>
-                        Address Line 2: {this.props.musician.address2}<br/>
-                        City: {this.props.musician.city}<br/>
-                        State: {this.props.musician.props}<br/>
-                        ZipCode: {this.props.musician.zipcode}<br/>
-                        Website URL: {this.props.musician.website}<br/>
-                        References: {this.props.musician.references}<br/>
-                        Instruments: {this.props.musician.instruments}<br/>
-                        Approved Date: {this.props.musician.approvedDate}<br/>
-                        Approved By: {this.props.musician.approvedBy}<br/>
-                        Sign-Up Date: {this.props.musician.signUpDate}<br/>
-                        Approved Status: {this.props.musician.approvedToPerform.toString()}<br/><br/>
-                        <button type="input" className="btn btn-default" onClick={this.props.handleChangedData.bind(null, this.props.musician)}>Approve</button>
+                        <MusicianFields  fieldValues = {this.props.musician}
+                                        saveValues = {this.props.saveValues}
+                        />
                     </div>
                 </div>
             </div>
@@ -90,11 +174,9 @@ var MusicianRow = React.createClass({
                 {this.props.musician.performerName}
             </span>;
         return (
-            <div>
-                <tr>
-                    <td><a onClick={this.changeState.bind(null, this.props.musician)}> {name} </a></td>
-                </tr>
-            </div>
+            <tr>
+                <td key={this.props.musician._id} onClick={this.changeState.bind(this, this.props.musician)}> {name} </td>
+            </tr>
         );
     }
 });
@@ -107,8 +189,7 @@ var MusicianTable = React.createClass({
         return {
             musicians: this.props.musicians,
             showResults: false,
-            musician: null,
-            test: null
+            musician: null
         }
     },
     showDetails: function(musician){
@@ -119,9 +200,22 @@ var MusicianTable = React.createClass({
     },
     saveValues: function(fields) {
             var x = this.state.musician;
+            x._id = fields._id;
             x.performerName = fields.performerName;
             x.phone = fields.phone;
             x.address1 = fields.address1;
+            x.address2 = fields.address2;
+            x.city = fields.city;
+            x.state = fields.state;
+            x.zipcode = fields.zipcode;
+            x.website = fields.website;
+            x.references = fields.references;
+            x.instruments = fields.instruments;
+            x.approvedDate = fields.approvedDate;
+            x.approvedBy = fields.approvedBy;
+            x.signUpDate = fields.signUpDate;
+            x.approvedToPerform = fields.approvedToPerform;
+
             this.handleChangedData(x);
     },
     handleChangedData: function(musician){
@@ -137,37 +231,24 @@ var MusicianTable = React.createClass({
                 musician: musician,
                 showResults: false
             });
-
-
-        /*this.state.musicians.forEach(function(e,i){
-            if(e._id === musician._id){
-                //this.state.musicians[i].approvedToPerform = true;
-            }
-        }.bind(this));
-        this.setState({
-            musicians: this.state.musicians,
-            showResults: false
-        });
-        console.log('musicians updated');
-        */
     },
     render: function() {
         var rowsApproved = [];
         var rowsNotApproved = [];
         this.state.musicians.forEach(function(musician) {
-            if (musician.approvedToPerform === false ){
-                rowsNotApproved.push(
+            if (musician.approvedToPerform != false){
+                rowsApproved.push(
                     <MusicianRow
                         musician = {musician}
-                        key = {musician._id}
+                        key = {musician.performerName}
                         showDetails={this.showDetails}
                         />
                 );
             } else {
-                rowsApproved.push(
+                rowsNotApproved.push(
                     <MusicianRow
                         musician = {musician}
-                        key= {musician._id}
+                        key= {musician.performerName}
                         showDetails={this.showDetails}
                         />
                 );
@@ -175,7 +256,7 @@ var MusicianTable = React.createClass({
         }.bind(this));
         return (
             <div>
-                <table className="table-striped PerformerList">
+                <table className="PerformerList">
                     <thead>
                     <tr>
                         <th>Performer Name</th>
@@ -187,7 +268,7 @@ var MusicianTable = React.createClass({
                     <DetailsBar musician={this.state.musician}
                                 handleChangedData={this.handleChangedData}
                                 saveValues={this.saveValues}
-                        /> : null}
+                        />: null }
             </div>
         );
     }
