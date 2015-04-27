@@ -70,6 +70,7 @@
     "passport-twitter": "^1.0.3",
     "paypal-rest-sdk": "^1.5.1",
     "react": "^0.13.2",
+    "react-addons": "^0.9.1-deprecated",
     "react-router": "^0.13.2",
     "reactify": "^1.1.0",
     "request": "^2.53.0",
