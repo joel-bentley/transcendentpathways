@@ -28,7 +28,7 @@ block content
             .form-group
                 label.col-sm-3.control-label(for='zipcode') Zip Code
                 .col-sm-7
-                    input.form-control(type='text', name='zipcode', id='zipcode', value='#{zipcode}')
+                    input.form-control(type='number', name='zipcode', id='zipcode', value='#{zipcode}')
             .form-group
                 label.col-sm-3.control-label(for='contactName') Point of Contact Name
                 .col-sm-7
@@ -36,13 +36,13 @@ block content
             .form-group
                 label.col-sm-3.control-label(for='contactPhone') Point of Contact Phone Number
                 .col-sm-7
-                    input.form-control(type='text', name='contactPhone', id='contactPhone', value='#{contactPhone}')
+                    input.form-control(type='tel', name='contactPhone', id='contactPhone', value='#{contactPhone}')
             .form-group
                 label.col-sm-3.control-label(for='contactEmail') Point of Contact Email Address
                 .col-sm-7
-                    input.form-control(type='text', name='contactEmail', id='contactEmail', value='#{contactEmail}')
+                    input.form-control(type='email', name='contactEmail', id='contactEmail', value='#{contactEmail}')
             .form-group
-                label.col-sm-3.control-label(for='buildingName') Building for Performances
+                label.col-sm-3.control-label(for='buildingName') Building Number (if applicable)
                 .col-sm-7
                     input.form-control(type='text', name='buildingName', id='buildingName', value='#{buildingName}')
             .form-group
@@ -57,6 +57,7 @@ block content
                 label.col-sm-3.control-label(for='securityNeeded') Is security necessary during performances?
                 .col-sm-7
                     select.form-control(name="securityNeeded" id="securityNeeded" value='#{securityNeeded}')
+                        option(value='-') -
                         option(value='no') No
                         option(value='yes') Yes
             .form-group
