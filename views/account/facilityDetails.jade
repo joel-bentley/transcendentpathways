@@ -31,7 +31,7 @@ block content
             .form-group
                 label.col-sm-3.control-label(for='zipcode') Zip Code
                 .col-sm-7
-                    input.form-control(type='text', name='zipcode', id='zipcode', placeholder='Zip Code')
+                    input.form-control(type='number', name='zipcode', id='zipcode', placeholder='Zip Code')
             .form-group
                 label.col-sm-3.control-label(for='contactName') Point of Contact Name
                 .col-sm-7
@@ -39,15 +39,15 @@ block content
             .form-group
                 label.col-sm-3.control-label(for='contactPhone') Point of Contact Phone Number
                 .col-sm-7
-                    input.form-control(type='text', name='contactPhone', id='contactPhone', placeholder='Contact Phone Number')
+                    input.form-control(type='tel', name='contactPhone', id='contactPhone', placeholder='Contact Phone Number')
             .form-group
                 label.col-sm-3.control-label(for='contactEmail') Point of Contact Email Address
                 .col-sm-7
-                    input.form-control(type='text', name='contactEmail', id='contactEmail', placeholder='Contact Email Address')
+                    input.form-control(type='email', name='contactEmail', id='contactEmail', placeholder='Contact Email Address')
             .form-group
-                label.col-sm-3.control-label(for='buildingName') Building for Performances
+                label.col-sm-3.control-label(for='buildingName') Building Number (if applicable)
                 .col-sm-7
-                    input.form-control(type='text', name='buildingName', id='buildingName', placeholder='Building for Performances')
+                    input.form-control(type='text', name='buildingName', id='buildingName', placeholder='Building Number (if applicable)')
             .form-group
                 label.col-sm-3.control-label(for='locationName') Room / Location
                 .col-sm-7
@@ -60,6 +60,7 @@ block content
                 label.col-sm-3.control-label(for='securityNeeded') Is security necessary during performances?
                 .col-sm-7
                     select.form-control(name="securityNeeded" id="securityNeeded")
+                        option(value='-') -
                         option(value='no') No
                         option(value='yes') Yes
             .form-group

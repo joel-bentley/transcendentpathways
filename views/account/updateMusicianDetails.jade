@@ -31,11 +31,11 @@ block content
         .form-group
             label.col-sm-3.control-label(for='zipcode') Zip Code
             .col-sm-7
-                input.form-control(type='text', name='zipcode', id='zipcode',value='#{zipcode}')
+                input.form-control(type='number', name='zipcode', id='zipcode',value='#{zipcode}')
         .form-group
             label.col-sm-3.control-label(for='phone') Contact Phone Number
             .col-sm-7
-                input.form-control(type='text', name='phone', id='phone',value='#{phone}')
+                input.form-control(type='tel', name='phone', id='phone',value='#{phone}')
         .form-group
             label.col-sm-3.control-label(for='instruments') Instrument(s)
             .col-sm-7
@@ -43,7 +43,7 @@ block content
         .form-group
             label.col-sm-3.control-label(for='website') Website or Online Reference
             .col-sm-7
-                input.form-control(type='text', name='website', id='website', value='#{website}')
+                input.form-control(type='url', name='website', id='website', value='#{website}')
         .form-group
             label.col-sm-3.control-label(for='picture') Upload Headshot / Picture
             .col-sm-7
