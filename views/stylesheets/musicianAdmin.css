@@ -2,24 +2,24 @@
     position: absolute;
     left: 250px;
     width: 600px;
-    top: 150px;
+    top: 40px;
     bottom: 140px;
     right: 200px;
     overflow: auto;
     padding: 10px;
-    min-height: 300px;
+    min-height: 800px;
     overflow-y:scroll;
 }
 
 .PerformerList {
     position: absolute;
-    left: 50px;
-    width: 150px;
-    top: 150px;
+    left: 10px;
+    width: 200px;
+    top: 40px;
     bottom: 140px;
     overflow: auto;
-    padding: 40px;
-    min-height: 300px;
+    padding: 10px;
+    min-height: 800px;
 }
 
 .panel-success > .panel-footer {
@@ -30,4 +30,21 @@
 .panel-heading > .table, .panel-heading > .table th {
     margin: 50px;
     border: 50px;
+}
+
+.example-enter {
+    opacity: 0.01;
+    transition: opacity .5s ease-in;
+}
+
+.example-enter.example-enter-active {
+    opacity: 1;
+}
+.example-leave {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+}
+
+.example-leave.example-leave-active {
+    opacity: 0.01;
 }

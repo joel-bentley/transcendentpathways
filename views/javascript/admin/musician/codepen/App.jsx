@@ -1,5 +1,7 @@
-var React = require('react');
-var _ = require('lodash');
+var React = require('react/addons');
+//var _ = require('lodash');
+
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 var MusicianFields = React.createClass({
     render: function() {
@@ -146,16 +148,13 @@ var DetailsBar = React.createClass({
     render: function(){
         return (
             <div className="Detail">
-                <div className="panel panel-default">
-                    <div className="panel-heading">
-                        <h3 className="panel-title">{this.props.musician.performerName}</h3>
-                    </div>
-                    <div className="panel-body">
-                        <MusicianFields  fieldValues = {this.props.musician}
-                                        saveValues = {this.props.saveValues}
+
+                <div className="panel-body">
+                    <MusicianFields  fieldValues = {this.props.musician}
+                                     saveValues = {this.props.saveValues}
                         />
-                    </div>
                 </div>
+
             </div>
         )}
 });
@@ -174,9 +173,8 @@ var MusicianRow = React.createClass({
                 {this.props.musician.performerName}
             </span>;
         return (
-            <tr>
-                <td key={this.props.musician._id} onClick={this.changeState.bind(this, this.props.musician)}> {name} </td>
-            </tr>
+            <a href="#" className="list-group-item" key={this.props.musician._id}
+               onClick={this.changeState.bind(this, this.props.musician)}> {name} </a>
         );
     }
 });
@@ -193,44 +191,43 @@ var MusicianTable = React.createClass({
         }
     },
     showDetails: function(musician){
-            this.setState({
-                showResults: !this.state.showResults,
-                musician: musician
-            })
+        this.setState({
+            showResults: !this.state.showResults,
+            musician: musician
+        })
     },
     saveValues: function(fields) {
-            var x = this.state.musician;
-            x._id = fields._id;
-            x.performerName = fields.performerName;
-            x.phone = fields.phone;
-            x.address1 = fields.address1;
-            x.address2 = fields.address2;
-            x.city = fields.city;
-            x.state = fields.state;
-            x.zipcode = fields.zipcode;
-            x.website = fields.website;
-            x.references = fields.references;
-            x.instruments = fields.instruments;
-            x.approvedDate = fields.approvedDate;
-            x.approvedBy = fields.approvedBy;
-            x.signUpDate = fields.signUpDate;
-            x.approvedToPerform = fields.approvedToPerform;
+        var x = this.state.musician;
+        x._id = fields._id;
+        x.performerName = fields.performerName;
+        x.phone = fields.phone;
+        x.address1 = fields.address1;
+        x.address2 = fields.address2;
+        x.city = fields.city;
+        x.state = fields.state;
+        x.zipcode = fields.zipcode;
+        x.website = fields.website;
+        x.references = fields.references;
+        x.instruments = fields.instruments;
+        x.approvedDate = fields.approvedDate;
+        x.approvedBy = fields.approvedBy;
+        x.signUpDate = fields.signUpDate;
+        x.approvedToPerform = fields.approvedToPerform;
 
-            this.handleChangedData(x);
+        this.handleChangedData(x);
     },
     handleChangedData: function(musician){
-            var x = this.state.musicians;
-        //_.find(arr, musician => musician._id === musician._id);
-            x.forEach(function(elem,index){
-               if (elem._id===musician._id){
-                   x[index] = musician;
-               }
-            }.bind(this));
-            this.setState({
-                musicans: x,
-                musician: musician,
-                showResults: false
-            });
+        var x = this.state.musicians;
+        x.forEach(function(elem,index){
+            if (elem._id===musician._id){
+                x[index] = musician;
+            }
+        }.bind(this));
+        this.setState({
+            musicans: x,
+            musician: musician,
+            showResults: false
+        });
     },
     render: function() {
         var rowsApproved = [];
@@ -255,20 +252,19 @@ var MusicianTable = React.createClass({
             }
         }.bind(this));
         return (
-            <div>
-                <table className="PerformerList">
-                    <thead>
-                    <tr>
-                        <th>Performer Name</th>
-                    </tr>
-                    </thead>
-                    <tbody>{rowsNotApproved} {rowsApproved}</tbody>
-                </table>
-                {this.state.showResults ?
-                    <DetailsBar musician={this.state.musician}
-                                handleChangedData={this.handleChangedData}
-                                saveValues={this.saveValues}
-                        />: null }
+            <div className="col-sm-4">
+                <div className="list-group PerformerList">
+                    <a href="#" className="list-group-item active"> Performer List</a>
+                    {rowsNotApproved} {rowsApproved}
+
+
+                </div>
+                <div>
+                    <ReactCSSTransitionGroup transitionName="example">
+                        {this.state.showResults ? <DetailsBar musician={this.state.musician}
+                            handleChangedData={this.handleChangedData} saveValues={this.saveValues} />: null }
+                    </ReactCSSTransitionGroup>
+                </div>
             </div>
         );
     }
