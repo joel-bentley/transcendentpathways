@@ -2,21 +2,32 @@
     position: absolute;
     left: 250px;
     width: 600px;
-    top: 120px;
-    bottom: 0;
+    top: 150px;
+    bottom: 140px;
     right: 200px;
     overflow: auto;
-    padding: 40px;
+    padding: 10px;
     min-height: 300px;
+    overflow-y:scroll;
 }
 
 .PerformerList {
     position: absolute;
     left: 50px;
     width: 150px;
-    top: 120px;
-    bottom: 250px;
+    top: 150px;
+    bottom: 140px;
     overflow: auto;
     padding: 40px;
     min-height: 300px;
+}
+
+.panel-success > .panel-footer {
+    color: #468847;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+.panel-heading > .table, .panel-heading > .table th {
+    margin: 50px;
+    border: 50px;
 }
