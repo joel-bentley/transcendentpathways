@@ -13,7 +13,9 @@ var userSchema = new mongoose.Schema({
   tokens: Array,
 
   approved: { type: Boolean, default: true },  // will change to false when admin panel able to approve
-  detailIds: Array,                           // Array of Ids pointing to entries for musician or facility in database
+  detailIds:  [{
+    type: mongoose.Schema.Types.ObjectId
+  }],                           // Array of Ids pointing to entries for musician or facility in database
 
   profile: {
     name: { type: String, default: '' },

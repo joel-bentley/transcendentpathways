@@ -21,14 +21,22 @@ exports.getSignupMusician = function(req, res) {
 exports.getMusicianDetails = function(req, res){
     if(!req.user) return res.redirect('/');
 
-    res.render('account/musicianDetails', {
-        title: 'Musician - Performer Details'
-    });
+    if(req.user.detailIds.length) return res.redirect('/homeMusician');
+
+    if(req.user.accountType=='Musician') {
+
+        res.render('account/musicianDetails', {
+            title: 'Musician - Performer Details'
+        });
+
+    } else {
+        res.redirect('/');
+    }
 };
 
 exports.postMusicianDetails = function(req, res, next){
     var musician = new Musician({
-        performerName: req.body.performerName || '',                   // Not sure if   || ''  is needed
+        performerName: req.body.performerName || '',
         userIds: req.user.id || '',
         contactName: req.body.contactName || '',
         address1: req.body.address1 || '',
@@ -85,23 +93,27 @@ exports.getUpdateMusicianDetails = function(req, res) {
 
     Musician.findOne( { userIds : { $all : [ req.user.id ] } }, function(err, musician) {
 
-        if (musician === null) return null;  // added to prevent crash when musician account doesn't exist, correct?
+        if (musician === null) {
+            req.flash('error', { msg: 'Musician account not found.' });
+            res.redirect('/musicianDetails');
+        } else {
 
-        res.render('account/updateMusicianDetails', {
-            title: 'Update Musician Details',
-            performerName: musician.performerName,
-            contactName: musician.contactName,
-            address1: musician.address1,
-            address2: musician.address2,
-            city: musician.city,
-            state: musician.state,
-            zipcode: musician.zipcode,
-            phone: musician.phone,
-            instruments: musician.instruments,
-            website: musician.website,
-            picture: musician.picture,
-            biography: musician.biography
-        });
+            res.render('account/updateMusicianDetails', {
+                title: 'Update Musician Details',
+                performerName: musician.performerName,
+                contactName: musician.contactName,
+                address1: musician.address1,
+                address2: musician.address2,
+                city: musician.city,
+                state: musician.state,
+                zipcode: musician.zipcode,
+                phone: musician.phone,
+                instruments: musician.instruments,
+                website: musician.website,
+                picture: musician.picture,
+                biography: musician.biography
+            });
+        }
     });
 };
 
