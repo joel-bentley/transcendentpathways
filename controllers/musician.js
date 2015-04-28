@@ -143,3 +143,8 @@ exports.postUpdateMusicianDetails = function(req, res, next) {
         });
     });
 };
+
+
+exports.getGigListing = function(req, res, next) {
+
+};

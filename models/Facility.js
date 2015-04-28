@@ -29,7 +29,7 @@ var facilitySchema = new mongoose.Schema({
     gigs: [{
         start: Date,
         end: Date,
-        details: { type: String},
+        details: { type: String, default: ''},
         musician: {
             type: mongoose.Schema.Types.ObjectId, ref: 'Musician'
         }
