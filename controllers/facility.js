@@ -13,12 +13,24 @@ exports.getSignupFacility = function(req, res) {
     });
 };
 
+
 exports.getFacilityDetails = function(req, res){
     if(!req.user) return res.redirect('/');
-    res.render('account/facilityDetails', {
-        title: 'Facility Details'
-    });
+
+    if(req.user.detailIds.length) return res.redirect('/homeFaciltiy');
+
+    if(req.user.accountType=='Facility') {
+
+        res.render('account/facilityDetails', {
+            title: 'Facility Details'
+        });
+
+    } else {
+        res.redirect('/');
+    }
 };
+
+
 
 exports.postFacilityDetails = function(req, res, next){
     var facility = new Facility({
@@ -80,26 +92,30 @@ exports.getUpdateFacilityDetails = function(req, res) {
 
     Facility.findOne( { userIds : { $all : [ req.user.id ] } }, function(err, facility) {
 
-        if (facility === null) return null;   // added to prevent crash when facility account doesn't exist, correct?
+        if (facility === null) {
+            req.flash('error', { msg: 'Facility account not found.' });
+            res.redirect('/facilityDetails');
+        } else {
 
-        res.render('account/updateFacilityDetails', {
-            title: 'Update Facility Details',
-            facilityName: facility.facilityName,
-            address1: facility.address1,
-            address2: facility.address2,
-            city: facility.city,
-            state: facility.state,
-            zipcode: facility.zipcode,
-            contactName: facility.contactName,
-            contactPhone: facility.contactPhone,
-            contactEmail: facility.contactEmail,
-            buildingName: facility.buildingName,
-            locationName: facility.locationName,
-            roomSize: facility.roomSize,
-            securityNeeded: facility.securityNeeded,
-            waiverNeeded: facility.waiverNeeded,
-            patientNumber: facility.patientNumber
-        });
+            res.render('account/updateFacilityDetails', {
+                title: 'Update Facility Details',
+                facilityName: facility.facilityName,
+                address1: facility.address1,
+                address2: facility.address2,
+                city: facility.city,
+                state: facility.state,
+                zipcode: facility.zipcode,
+                contactName: facility.contactName,
+                contactPhone: facility.contactPhone,
+                contactEmail: facility.contactEmail,
+                buildingName: facility.buildingName,
+                locationName: facility.locationName,
+                roomSize: facility.roomSize,
+                securityNeeded: facility.securityNeeded,
+                waiverNeeded: facility.waiverNeeded,
+                patientNumber: facility.patientNumber
+            });
+        }
     });
 };
 

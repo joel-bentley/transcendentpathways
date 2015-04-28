@@ -2,7 +2,9 @@ var mongoose = require('mongoose');
 
 var userSchema = new mongoose.Schema({
     performerName: { type: String, unique: true },
-    userIds: Array,
+    userIds:  [{
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'
+    }],
     contactName: String,
     address1: String,
     address2: String,
@@ -19,7 +21,7 @@ var userSchema = new mongoose.Schema({
     approvedDate: Date,
     signUpDate: Date,
     approvedBy: String,
-    notes: Array
+    notes:  [ {type: String} ]
 });
 
 module.exports = mongoose.model('Musician', userSchema);

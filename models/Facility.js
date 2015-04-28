@@ -2,7 +2,9 @@ var mongoose = require('mongoose');
 
 var facilitySchema = new mongoose.Schema({
     facilityName: String,
-    userIds: Array,
+    userIds:  [{
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'
+    }],
     address1: String,
     address2: String,
     city: String,
@@ -22,7 +24,17 @@ var facilitySchema = new mongoose.Schema({
     approvedDate: Date,
     signUpDate: Date,
     approvedBy: String,
-    notes: Array
+    notes: [ {type: String} ],
+
+    gigs: [{
+        start: Date,
+        end: Date,
+        details: { type: String},
+        musician: {
+            type: mongoose.Schema.Types.ObjectId, ref: 'Musician'
+        }
+    }]
+
 });
 
 module.exports = mongoose.model('Facility', facilitySchema);

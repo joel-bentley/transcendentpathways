@@ -206,7 +206,7 @@ exports.postDeleteAccount = function(req, res, next) {
   //  req.logout();
   //  req.flash('info', { msg: 'Your account has been deleted.' });
     res.redirect('/');
-  });
+  //});
 };
 
 /**
