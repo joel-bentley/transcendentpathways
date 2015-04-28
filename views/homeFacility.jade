@@ -11,7 +11,25 @@ block content
       p
 
     .col-sm-6
-      h2 {Booking Calendar Here}
-      p
-      p
+      //h2 {Booking Calendar Here}
+      h2 Post Event
+      form.form-horizontal(action='/postGigDetails', method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .form-group
+          label.col-sm-2.control-label(for='date') Date
+          .col-sm-4
+            input.form-control(type='text', name='date', id='date', placeholder='January 1, 2015')
+        .form-group
+          label.col-sm-2.control-label(for='startTime') Start Time
+          .col-sm-4
+            input.form-control(type='text', name='startTime', id='startTime', placeholder='3:00 pm')
+        .form-group
+          label.col-sm-2.control-label(for='endTime') End Time
+          .col-sm-4
+            input.form-control(type='text', name='endTime', id='endTime', placeholder='4:00 pm')
+        .form-group
+          .col-sm-offset-2.col-sm-4
+            button.btn.btn.btn-primary(type='submit')
+              span.ion-edit
+              | Post Event
 

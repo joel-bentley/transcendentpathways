@@ -129,7 +129,7 @@ app.post('/facilityDetails', passportConf.isAuthenticated, facilityController.po
 app.get('/homeFacility', passportConf.isAuthenticated, facilityController.getHomeFacility);
 app.get('/account/updateFacilityDetails', passportConf.isAuthenticated, facilityController.getUpdateFacilityDetails);
 app.post('/account/updateFacilityDetails', passportConf.isAuthenticated, facilityController.postUpdateFacilityDetails);
-
+app.post('/postGigDetails', passportConf.isAuthenticated, facilityController.postGigDetails);
 
 app.get('/homeAdmin', passportConf.isAuthenticated, adminController.getHomeAdmin);
 app.get('/homeAdmin2', passportConf.isAuthenticated, adminController.getHomeAdmin2);   // temporary

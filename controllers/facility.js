@@ -148,3 +148,28 @@ exports.postUpdateFacilityDetails = function(req, res, next) {
         });
     });
 };
+
+
+exports.postGigDetails = function(req, res, next) {
+    Facility.findOne( { userIds : { $all : [ req.user.id ] } }, function(err, facility) {
+
+        if (err) return next(err);
+
+        var gig = {
+            start: new Date(req.body.date + ' ' + req.body.startTime),
+            end: new Date(req.body.date + ' ' + req.body.endTime),
+            details: ''
+        };
+        console.dir(gig.start);
+        console.dir(gig.end);
+
+        facility.gigs.push(gig);
+
+
+        facility.save(function(err) {
+            if (err) return next(err);
+            req.flash('success', { msg: 'Event details posted for ' + facility.facilityName });
+            res.redirect('/homeFacility');
+        });
+    });
+};
