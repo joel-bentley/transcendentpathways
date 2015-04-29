@@ -1,5 +1,6 @@
 var React = require('react/addons');
-//var _ = require('lodash');
+var _ = require('lodash');
+
 
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
@@ -7,12 +8,21 @@ var MusicianFields = React.createClass({
     render: function() {
         return (
             <div>
-                <form className="form-horizontal">
+
+                <form className="form-horizontal" action='/admin/UpdateMusicianDetails' method='POST'>
                     <div className="form-group">
-                        <label className="col-sm-4 control-label"> Peformer Name</label>
+                        <input type='hidden' name='csrf-token'  value='_csrf'> </input>
+                        <label className="col-sm-4 control-label"> Performer Name</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="performerName"
                                    defaultValue={this.props.fieldValues.performerName} />
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label className="col-sm-4 control-label">Contact Name</label>
+                        <div>
+                            <input type="text" className="col-sm-7" ref="contactName"
+                                   defaultValue={this.props.fieldValues.contactName} />
                         </div>
                     </div>
                     <div className ="form-group">
@@ -65,10 +75,10 @@ var MusicianFields = React.createClass({
                         </div>
                     </div>
                     <div className ="form-group">
-                        <label className="col-sm-4 control-label">References</label>
+                        <label className="col-sm-4 control-label">Biography</label>
                         <div>
                             <textarea className="col-sm-7"  rows="2"
-                                      ref="references" defaultValue={this.props.fieldValues.references} />
+                                      ref="biography" defaultValue={this.props.fieldValues.biography} />
                         </div>
                     </div>
                     <div className ="form-group">
@@ -78,11 +88,18 @@ var MusicianFields = React.createClass({
                                       ref="instruments" defaultValue={this.props.fieldValues.instruments} />
                         </div>
                     </div>
+                    <div className="form-group">
+                        <label className="col-sm-4 control-label">Picture</label>
+                        <div>
+                            <input type="text" className="col-sm-7" ref="picture"
+                                   defaultValue={this.props.fieldValues.picture} />
+                        </div>
+                    </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Approval Date</label>
                         <div>
-                            <input type="text" className="col-sm-7" ref="approvalDate"
-                                   defaultValue={this.props.fieldValues.approvalDate} />
+                            <input type="text" className="col-sm-7" ref="approvedDate"
+                                   defaultValue={this.props.fieldValues.approvedDate} />
                         </div>
                     </div>
                     <div className ="form-group">
@@ -102,8 +119,8 @@ var MusicianFields = React.createClass({
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Approved To Perform</label>
                         <div>
-                            <select className="col-sm-7" defaultValue={this.props.fieldValues.approvedToPerform}
-                                    ref="approvedToPerform">
+                            <select className="col-sm-7" defaultValue={this.props.fieldValues.approved}
+                                    ref="approved">
                                 <option value="">No</option>
                                 <option value="true">Yes</option>
                             </select>
@@ -112,7 +129,6 @@ var MusicianFields = React.createClass({
                     <div>
                         <button className="btn btn-primary" onClick={this.saveAndContinue}>Submit</button>
                     </div>
-
                 </form>
             </div>
         )
@@ -123,6 +139,7 @@ var MusicianFields = React.createClass({
         var data = {
             _id: this.props.fieldValues._id,
             performerName: this.refs.performerName.getDOMNode().value,
+            contactName: this.refs.contactName.getDOMNode().value,
             phone: this.refs.phone.getDOMNode().value,
             address1: this.refs.address1.getDOMNode().value,
             address2: this.refs.address2.getDOMNode().value,
@@ -130,14 +147,17 @@ var MusicianFields = React.createClass({
             state: this.refs.state.getDOMNode().value,
             zipcode: this.refs.zipcode.getDOMNode().value,
             website: this.refs.website.getDOMNode().value,
-            references: this.refs.references.getDOMNode().value,
+            biography: this.refs.biography.getDOMNode().value,
             instruments: this.refs.instruments.getDOMNode().value,
-            approvalDate: this.refs.approvalDate.getDOMNode().value,
+            picture: this.refs.picture.getDOMNode().value,
+            approvedDate: this.refs.approvedDate.getDOMNode().value,
             approvedBy: this.refs.approvedBy.getDOMNode().value,
             signUpDate: this.refs.signUpDate.getDOMNode().value,
-            approvedToPerform: this.refs.approvedToPerform.getDOMNode().value
+            approved: this.refs.approved.getDOMNode().value
         };
         this.props.saveValues(data);
+
+
     }
 });
 
@@ -165,13 +185,13 @@ var MusicianRow = React.createClass({
         this.props.showDetails(musician);
     },
     render: function() {
-        var name = this.props.musician.approvedToPerform ?
-            this.props.musician.performerName :<span style={{color: 'red'}}>
+        var name = this.props.musician.approved ?
+            this.props.musician.performerName :<span style={{color: 'blue'}}>
                 {this.props.musician.performerName}
             </span>;
         return (
             <a href="#" className="list-group-item" key={this.props.musician._id}
-               onClick={this.changeState.bind(this, this.props.musician)}> {name} </a>
+               onClick={this.changeState.bind(this, this.props.musician)}><h4> {name}</h4> </a>
         );
     }
 });
@@ -180,11 +200,18 @@ var MusicianTable = React.createClass({
     propTypes: {
         musicians: React.PropTypes.array.isRequired
     },
+    getDefaultProps: function(){
+        return {
+            source: '/musicianData',
+            postRoute: '/admin/updateMusicianDetails'
+        }
+    },
     getInitialState: function(){
         return {
-            musicians: this.props.musicians,
+            musicians: [],
             showResults: false,
-            musician: null
+            musician: null,
+            token: this.props.token
         }
     },
     showDetails: function(musician){
@@ -197,6 +224,7 @@ var MusicianTable = React.createClass({
         var x = this.state.musician;
         x._id = fields._id;
         x.performerName = fields.performerName;
+        x.contactName = fields.contactName;
         x.phone = fields.phone;
         x.address1 = fields.address1;
         x.address2 = fields.address2;
@@ -204,12 +232,13 @@ var MusicianTable = React.createClass({
         x.state = fields.state;
         x.zipcode = fields.zipcode;
         x.website = fields.website;
-        x.references = fields.references;
+        x.biography = fields.biography;
         x.instruments = fields.instruments;
+        x.picture = fields.picture;
         x.approvedDate = fields.approvedDate;
         x.approvedBy = fields.approvedBy;
         x.signUpDate = fields.signUpDate;
-        x.approvedToPerform = fields.approvedToPerform;
+        x.approved = fields.approved;
 
         this.handleChangedData(x);
     },
@@ -225,12 +254,32 @@ var MusicianTable = React.createClass({
             musician: musician,
             showResults: false
         });
+        //save admin changes to the musician here with this.state.musician
+        // exports.postUpdateMusicianDetails used in admin.js controller
+        // route create in app.js /admin/updateMusicianDetails-->this.state.postRoute
+        // jQuery.post( url [, data ] [, success ] [, dataType ] )
+        $.post(this.props.postRoute, this.state.musician, function(result){
+            //console.log(result);
+        });
     },
+componentDidMount: function() {                                 //csh loading the musicians into this.state.musicians
+        $.get(this.props.source, function(result) {
+            var musicianData = result;
+            if (this.isMounted()) {
+                this.setState({
+                    musicians: musicianData
+                });
+            }
+        }.bind(this));
+
+
+
+},
     render: function() {
         var rowsApproved = [];
         var rowsNotApproved = [];
         this.state.musicians.forEach(function(musician) {
-            if (musician.approvedToPerform != false){
+            if (musician.approved != false){
                 rowsApproved.push(
                     <MusicianRow
                         musician = {musician}
@@ -265,74 +314,8 @@ var MusicianTable = React.createClass({
     }
 });
 
-var MUSICIANS = [
-    {
-        "_id": "55366eafc0d4f65c3233726d",
-        "performerName": "Quadeebo",
-        "address1": "8488 Dobbin Street",
-        "address2": "Suite 343",
-        "city": "Belgreen",
-        "state": "South Carolina",
-        "zipcode": 69914,
-        "phone": "(968) 578-3100",
-        "website": "www.incididunt.com",
-        "references": [
-            "commodo in ullamco",
-            "sunt eu ad",
-            "esse qui ullamco",
-            "enim eiusmod laboris",
-            "amet minim Lorem",
-            "enim nostrud irure",
-            "eu adipisicing non"
-        ],
-        "instruments": [
-            "occaecat",
-            "ea",
-            "eu",
-            "elit",
-            "do",
-            "esse",
-            "commodo"
-        ],
-        "approvedToPerform": false,
-        "approvedDate": "2014-03-18",
-        "signUpDate": "2014-02-08",
-        "approvedBy": "Mark Ackerly"
-    },
-    {
-        "_id": "55366eafd5e8495d9816cf62",
-        "performerName": "Inventure",
-        "address1": "8630 Sumner Place",
-        "address2": "Suite 483",
-        "city": "Alden",
-        "state": "South Dakota",
-        "zipcode": 14431,
-        "phone": "(986) 498-3001",
-        "website": "www.magna.com",
-        "references": [
-            "ea commodo duis",
-            "in dolor deserunt",
-            "qui amet et",
-            "incididunt tempor in",
-            "aute proident voluptate",
-            "duis ea magna",
-            "exercitation dolore dolore"
-        ],
-        "instruments": [
-            "laboris",
-            "ad",
-            "commodo",
-            "proident",
-            "non",
-            "elit",
-            "adipisicing"
-        ],
-        "approvedToPerform": false,
-        "approvedDate": "2014-08-31",
-        "signUpDate": "2014-09-19",
-        "approvedBy": "Mark Ackerly"
-    }
-];
 
-React.render(<MusicianTable musicians={MUSICIANS} />, document.getElementById("codepenApp"));
+
+
+React.render(<MusicianTable token={document.getElementsByTagName('csrf-token')} />, document.getElementById("codepenApp"));
 
