@@ -74,9 +74,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(lusca({
-  csrf: true,
+  csrf: false,
   xframe: 'SAMEORIGIN',
-  xssProtection: true
+  xssProtection: true,
+    policy: {
+        'default-src': '\'self\'',
+        'img-src': '*'
+    }
 }));
 app.use(function(req, res, next) {
   res.locals.user = req.user;
@@ -132,13 +136,14 @@ app.post('/postGigDetails', passportConf.isAuthenticated, facilityController.pos
 
 app.get('/gigListing', passportConf.isAuthenticated, facilityController.getGigListing);
 
-app.get('/homeAdmin', passportConf.isAuthenticated, adminController.getHomeAdmin);
+app.get('/homeAdmin', passportConf.isAuthenticated, adminController.getHomeAdmin2);
 app.get('/homeAdmin2', passportConf.isAuthenticated, adminController.getHomeAdmin2);   // temporary
 
 app.get('/musicianData', passportConf.isAuthenticated, adminController.getMusicianData);
 app.get('/musicianLookup/:id', passportConf.isAuthenticated, adminController.getMusician);
 
-
+//for react musician admin csh
+app.post('/admin/updateMusicianDetails', passportConf.isAuthenticated, adminController.postUpdateMusicianDetails);
 
 /**
  * API examples routes.
