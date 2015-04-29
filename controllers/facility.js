@@ -178,7 +178,7 @@ exports.getGigListing = function(req, res, next) {
 
         if (err) return next(err);
 
-        if (!gigs===null) {
+        if (!(gigs===null)) {
             res.json(gigs);
         }
     });
