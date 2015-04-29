@@ -121,7 +121,6 @@ app.get('/homeMusician', passportConf.isAuthenticated, musicianController.getHom
 app.get('/account/updateMusicianDetails', passportConf.isAuthenticated, musicianController.getUpdateMusicianDetails);
 app.post('/account/updateMusicianDetails', passportConf.isAuthenticated, musicianController.postUpdateMusicianDetails);
 
-
 app.get('/signupFacility', facilityController.getSignupFacility);
 app.post('/signupFacility', userController.postSignup);
 app.get('/facilityDetails', passportConf.isAuthenticated, facilityController.getFacilityDetails);
@@ -130,6 +129,8 @@ app.get('/homeFacility', passportConf.isAuthenticated, facilityController.getHom
 app.get('/account/updateFacilityDetails', passportConf.isAuthenticated, facilityController.getUpdateFacilityDetails);
 app.post('/account/updateFacilityDetails', passportConf.isAuthenticated, facilityController.postUpdateFacilityDetails);
 app.post('/postGigDetails', passportConf.isAuthenticated, facilityController.postGigDetails);
+
+app.get('/gigListing', passportConf.isAuthenticated, facilityController.getGigListing);
 
 app.get('/homeAdmin', passportConf.isAuthenticated, adminController.getHomeAdmin);
 app.get('/homeAdmin2', passportConf.isAuthenticated, adminController.getHomeAdmin2);   // temporary
