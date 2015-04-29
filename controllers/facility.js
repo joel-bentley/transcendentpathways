@@ -158,10 +158,8 @@ exports.postGigDetails = function(req, res, next) {
         var gig = {
             start: new Date(req.body.date + ' ' + req.body.startTime),
             end: new Date(req.body.date + ' ' + req.body.endTime),
-            details: ''
+            details: req.body.details
         };
-        console.dir(gig.start);
-        console.dir(gig.end);
 
         facility.gigs.push(gig);
 
