@@ -4,6 +4,7 @@ var nodemailer = require('nodemailer');
 var User = require('../models/User');
 var Musician = require('../models/Musician');
 
+var Facility = require('../models/Facility');
 
 /**
  * GET /signupMusician
@@ -60,11 +61,11 @@ exports.postMusicianDetails = function(req, res, next){
 
             user.save(function(err) {
                 if (err) return next(err);
+
+                res.redirect('/homeMusician');
             });
         });
-        res.redirect('/homeMusician');
     });
-
 };
 
 
@@ -142,9 +143,4 @@ exports.postUpdateMusicianDetails = function(req, res, next) {
             res.redirect('/account');
         });
     });
-};
-
-
-exports.getGigListing = function(req, res, next) {
-
 };

@@ -61,10 +61,10 @@ exports.postFacilityDetails = function(req, res, next){
 
             user.save(function(err) {
                 if (err) return next(err);
+
+                res.redirect('/homeFacility');
             });
         });
-
-        res.redirect('/homeFacility');
     });
 };
 
@@ -171,5 +171,15 @@ exports.postGigDetails = function(req, res, next) {
             req.flash('success', { msg: 'Event details posted for ' + facility.facilityName });
             res.redirect('/homeFacility');
         });
+    });
+};
+
+
+exports.getGigListing = function(req, res, next) {
+    Facility.find( {} , { gigs: true, facilityName: true, _id: false}, function(err, gigs) {
+
+        if (err) return next(err);
+
+        res.json(gigs);
     });
 };
