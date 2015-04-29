@@ -135,7 +135,7 @@ app.get('/account/updateFacilityDetails', passportConf.isAuthenticated, facility
 app.post('/account/updateFacilityDetails', passportConf.isAuthenticated, facilityController.postUpdateFacilityDetails);
 
 
-app.get('/homeAdmin', passportConf.isAuthenticated, adminController.getHomeAdmin);
+app.get('/homeAdmin', passportConf.isAuthenticated, adminController.getHomeAdmin2);
 app.get('/homeAdmin2', passportConf.isAuthenticated, adminController.getHomeAdmin2);   // temporary
 
 app.get('/musicianData', passportConf.isAuthenticated, adminController.getMusicianData);
