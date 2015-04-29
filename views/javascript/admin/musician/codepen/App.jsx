@@ -198,7 +198,7 @@ var MusicianRow = React.createClass({
 
 var MusicianTable = React.createClass({
     propTypes: {
-        musicians: React.PropTypes.array.isRequired
+        //musicians: React.PropTypes.array.isRequired
     },
     getDefaultProps: function(){
         return {
