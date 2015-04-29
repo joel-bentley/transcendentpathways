@@ -178,6 +178,8 @@ exports.getGigListing = function(req, res, next) {
 
         if (err) return next(err);
 
-        res.json(gigs);
+        if (!gigs===null) {
+            res.json(gigs);
+        }
     });
 };
