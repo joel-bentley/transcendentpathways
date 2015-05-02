@@ -16,3 +16,8 @@ if messages.success
       span.ion-close-circled
     for success in messages.success
       div= success.msg
+
+script.
+  setTimeout(function () {
+    $('.alert').alert('close')
+  }, 5000)
