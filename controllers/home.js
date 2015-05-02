@@ -12,11 +12,15 @@ exports.index = function(req, res) {
     } else if (req.user.accountType==='Admin') {
       res.redirect('/homeAdmin');
     } else {
-      res.redirect('/');
-    }
-  }
 
-  res.render('home', {
-    title: 'Home'
-  });
+      res.render('home', {
+        title: 'Home'
+      });
+    }
+  } else {
+
+    res.render('home', {
+      title: 'Home'
+    });
+  }
 };
