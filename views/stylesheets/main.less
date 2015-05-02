@@ -62,3 +62,12 @@ footer {
 [class^='ion-'] {
   margin-right: 6px;
 }
+
+// Required form fields
+// -------------------------
+.form-group.required {
+  .control-label:after {
+    content:"*";
+    color:red;
+  }
+}
