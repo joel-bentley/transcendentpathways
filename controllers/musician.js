@@ -24,15 +24,13 @@ exports.getMusicianDetails = function(req, res){
 
     if(req.user.detailIds.length) return res.redirect('/homeMusician');
 
-    if(req.user.accountType=='Musician') {
+    if(req.user.accountType==='Musician') {
 
-        res.render('account/musicianDetails', {
+        return res.render('account/musicianDetails', {
             title: 'Musician - Performer Details'
         });
-
-    } else {
-        res.redirect('/');
     }
+    res.redirect('/');
 };
 
 exports.postMusicianDetails = function(req, res, next){
@@ -75,18 +73,14 @@ exports.getHomeMusician = function(req, res) {
     if (req.user.accountType==='Musician') {
 
         if (req.user.detailIds.length) {
-            res.render('homeMusician', {
+            return res.render('homeMusician', {
                 title: 'Musician-Performer Home'
             });
         } else {
-
-            res.redirect('/musicianDetails');
+            return res.redirect('/musicianDetails');
         }
-
-    } else {
-        res.redirect('/');
     }
-
+    res.redirect('/');
 };
 
 
@@ -96,10 +90,10 @@ exports.getUpdateMusicianDetails = function(req, res) {
 
         if (musician === null) {
             req.flash('error', { msg: 'Musician account not found.' });
-            res.redirect('/musicianDetails');
+            return res.redirect('/musicianDetails');
         } else {
 
-            res.render('account/updateMusicianDetails', {
+            return res.render('account/updateMusicianDetails', {
                 title: 'Update Musician Details',
                 performerName: musician.performerName,
                 contactName: musician.contactName,
@@ -140,7 +134,7 @@ exports.postUpdateMusicianDetails = function(req, res, next) {
         musician.save(function(err) {
             if (err) return next(err);
             req.flash('success', { msg: 'Musician Details Updated for ' + musician.performerName });
-            res.redirect('/account');
+            return res.redirect('/account');
         });
     });
 };

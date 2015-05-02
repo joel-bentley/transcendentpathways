@@ -17,17 +17,15 @@ exports.getSignupFacility = function(req, res) {
 exports.getFacilityDetails = function(req, res){
     if(!req.user) return res.redirect('/');
 
-    if(req.user.detailIds.length) return res.redirect('/homeFaciltiy');
+    if(req.user.detailIds.length) return res.redirect('/homeFacility');
 
-    if(req.user.accountType=='Facility') {
+    if(req.user.accountType==='Facility') {
 
-        res.render('account/facilityDetails', {
+        return res.render('account/facilityDetails', {
             title: 'Facility Details'
         });
-
-    } else {
-        res.redirect('/');
     }
+    res.redirect('/');
 };
 
 
@@ -74,17 +72,14 @@ exports.getHomeFacility = function(req, res) {
     if (req.user.accountType==='Facility') {
 
         if (req.user.detailIds.length) {
-            res.render('homeFacility', {
+            return res.render('homeFacility', {
                 title: 'Facility Home'
             });
         } else {
-            res.redirect('/facilityDetails');
+            return res.redirect('/facilityDetails');
         }
-
-    } else {
-        res.redirect('/');
     }
-
+    res.redirect('/');
 };
 
 
@@ -94,10 +89,10 @@ exports.getUpdateFacilityDetails = function(req, res) {
 
         if (facility === null) {
             req.flash('error', { msg: 'Facility account not found.' });
-            res.redirect('/facilityDetails');
+            return res.redirect('/facilityDetails');
         } else {
 
-            res.render('account/updateFacilityDetails', {
+            return res.render('account/updateFacilityDetails', {
                 title: 'Update Facility Details',
                 facilityName: facility.facilityName,
                 address1: facility.address1,
@@ -144,7 +139,7 @@ exports.postUpdateFacilityDetails = function(req, res, next) {
         facility.save(function(err) {
             if (err) return next(err);
             req.flash('success', { msg: 'Facility Details Updated for ' + facility.facilityName });
-            res.redirect('/account');
+            return res.redirect('/account');
         });
     });
 };
@@ -167,7 +162,7 @@ exports.postGigDetails = function(req, res, next) {
         facility.save(function(err) {
             if (err) return next(err);
             req.flash('success', { msg: 'Event details posted for ' + facility.facilityName });
-            res.redirect('/homeFacility');
+            return res.redirect('/homeFacility');
         });
     });
 };
