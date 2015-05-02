@@ -7,55 +7,55 @@ block content
 
         form.form-horizontal(id='facilityDetails', method='POST')
             input(type='hidden', name='_csrf', value=_csrf)
-            .form-group
+            .form-group.required
                 label.col-sm-3.control-label(for='facilityName') Facility Name
                 .col-sm-7
-                    input.form-control(type='text', name='facilityName', id='facilityName', placeholder="Facility Name",
+                    input.form-control(type='text', required='required', name='facilityName', id='facilityName', placeholder="Facility Name",
                     autofocus)
-            .form-group
+            .form-group.required
                 label.col-sm-3.control-label(for='address1') Address Line 1
                 .col-sm-7
-                    input.form-control(type='text', name='address1', id='address1', placeholder='Address')
+                    input.form-control(type='text', required='required', name='address1', id='address1', placeholder='Address')
             .form-group
                 label.col-sm-3.control-label(for='address2') Address Line 2
                 .col-sm-7
                     input.form-control(type='text', name='address2', id='address2', placeholder='')
-            .form-group
+            .form-group.required
                 label.col-sm-3.control-label(for='city') City
                 .col-sm-7
-                    input.form-control(type='text', name='city', id='city', placeholder='City')
-            .form-group
+                    input.form-control(type='text', required='required', name='city', id='city', placeholder='City')
+            .form-group.required
                 label.col-sm-3.control-label(for='state') State
                 .col-sm-7
-                    input.form-control(type='text', name='State', id='State', placeholder='State')
-            .form-group
+                    input.form-control(type='text', required='required', name='State', id='State', placeholder='State')
+            .form-group.required
                 label.col-sm-3.control-label(for='zipcode') Zip Code
                 .col-sm-7
-                    input.form-control(type='number', name='zipcode', id='zipcode', placeholder='Zip Code')
-            .form-group
+                    input.form-control(type='number', required='required', name='zipcode', id='zipcode', placeholder='Zip Code')
+            .form-group.required
                 label.col-sm-3.control-label(for='contactName') Point of Contact Name
                 .col-sm-7
-                    input.form-control(type='text', name='contactName', id='contactName', placeholder='Contact Name')
-            .form-group
+                    input.form-control(type='text', required='required', name='contactName', id='contactName', placeholder='Contact Name')
+            .form-group.required
                 label.col-sm-3.control-label(for='contactPhone') Point of Contact Phone Number
                 .col-sm-7
-                    input.form-control(type='tel', name='contactPhone', id='contactPhone', placeholder='Contact Phone Number')
-            .form-group
+                    input.form-control(type='tel', required='required', name='contactPhone', id='contactPhone', placeholder='Contact Phone Number')
+            .form-group.required
                 label.col-sm-3.control-label(for='contactEmail') Point of Contact Email Address
                 .col-sm-7
-                    input.form-control(type='email', name='contactEmail', id='contactEmail', placeholder='Contact Email Address')
+                    input.form-control(type='email', required='required', name='contactEmail', id='contactEmail', placeholder='Contact Email Address')
             .form-group
                 label.col-sm-3.control-label(for='buildingName') Building Number (if applicable)
                 .col-sm-7
                     input.form-control(type='text', name='buildingName', id='buildingName', placeholder='Building Number (if applicable)')
-            .form-group
+            .form-group.required
                 label.col-sm-3.control-label(for='locationName') Room / Location
                 .col-sm-7
-                    input.form-control(type='text', name='locationName', id='locationName', placeholder='Room / Location')
-            .form-group
+                    input.form-control(type='text', required='required', name='locationName', id='locationName', placeholder='Room / Location')
+            .form-group.required
                 label.col-sm-3.control-label(for='roomSize') Room Size
                 .col-sm-7
-                    input.form-control(type='text', name='roomSize', id='roomSize', placeholder='Room Size')
+                    input.form-control(type='text', required='required', name='roomSize', id='roomSize', placeholder='Room Size')
             .form-group
                 label.col-sm-3.control-label(for='securityNeeded') Is security necessary during performances?
                 .col-sm-7
@@ -70,10 +70,10 @@ block content
                         option(value='-') -
                         option(value='no') No
                         option(value='yes') Yes
-            .form-group
+            .form-group.required
                 label.col-sm-3.control-label(for='patientNumber') Expected Number of Patients at performances
                 .col-sm-7
-                    input.form-control(type='text', name='patientNumber', id='patientNumber', placeholder='')
+                    input.form-control(type='text', required='required', name='patientNumber', id='patientNumber', placeholder='')
             .form-group
                 .col-sm-offset-3.col-sm-7
                     button.btn.btn-success(type='submit')
