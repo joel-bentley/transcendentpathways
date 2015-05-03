@@ -55,7 +55,7 @@ exports.postUpdateMusicianDetails = function(req, res, next) {
 
         musician.save(function(err) {
             if (err) return next(err);
-            req.flash('success', { msg: 'Musician Details Updated for ' + musician.performerName });
+            //req.flash('success', { msg: 'Musician Details Updated for ' + musician.performerName });
             //res.redirect('/account');
         });
     });

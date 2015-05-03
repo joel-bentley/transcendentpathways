@@ -39,10 +39,10 @@ block content
             label.col-sm-3.control-label(for='phone') Contact Phone Number
             .col-sm-7
                 input.form-control(type='tel', required='required', name='phone', id='phone', placeholder='Phone Number')
-        .form-group
+        .form-group.required
             label.col-sm-3.control-label(for='instruments') Instrument(s)
             .col-sm-7
-                textarea.form-control(name='instruments', id='instruments', cols='40', rows='5')
+                textarea.form-control(required='required', name='instruments', id='instruments', cols='40', rows='5')
         .form-group.required
             label.col-sm-3.control-label(for='website') Website or Online Reference
             .col-sm-7
@@ -51,10 +51,10 @@ block content
             label.col-sm-3.control-label(for='picture') Upload Headshot / Picture
             .col-sm-7
                 input.form-control(type='text', name='picture', id='picture', placeholder='')
-        .form-group
+        .form-group.required
             label.col-sm-3.control-label(for='biography') Short Biography Text
             .col-sm-7
-                textarea.form-control(name='biography', id='biography', cols='40', rows='5')
+                textarea.form-control(required='required', name='biography', id='biography', cols='40', rows='5')
 
         .form-group
             .col-sm-offset-3.col-sm-7
