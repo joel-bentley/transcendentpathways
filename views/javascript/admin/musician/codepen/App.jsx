@@ -15,111 +15,111 @@ var MusicianFields = React.createClass({
                         <label className="col-sm-4 control-label"> Performer Name</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="performerName"
-                                   defaultValue={this.props.fieldValues.performerName} />
+                                   value={this.props.fieldValues.performerName} />
                         </div>
                     </div>
                     <div className="form-group">
                         <label className="col-sm-4 control-label">Contact Name</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="contactName"
-                                   defaultValue={this.props.fieldValues.contactName} />
+                                   value={this.props.fieldValues.contactName} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Phone</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="phone"
-                                   defaultValue={this.props.fieldValues.phone} />
+                                   value={this.props.fieldValues.phone} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Address Line 1</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="address1"
-                                   defaultValue={this.props.fieldValues.address1} />
+                                   value={this.props.fieldValues.address1} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Address Line 2</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="address2"
-                                   defaultValue={this.props.fieldValues.address2} />
+                                   value={this.props.fieldValues.address2} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">City</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="city"
-                                   defaultValue={this.props.fieldValues.city} />
+                                   value={this.props.fieldValues.city} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">State</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="state"
-                                   defaultValue={this.props.fieldValues.state} />
+                                   value={this.props.fieldValues.state} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Zip Code</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="zipcode"
-                                   defaultValue={this.props.fieldValues.zipcode} />
+                                   value={this.props.fieldValues.zipcode} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Website URL</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="website"
-                                   defaultValue={this.props.fieldValues.website} />
+                                   value={this.props.fieldValues.website} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Biography</label>
                         <div>
                             <textarea className="col-sm-7"  rows="2"
-                                      ref="biography" defaultValue={this.props.fieldValues.biography} />
+                                      ref="biography" value={this.props.fieldValues.biography} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Instruments</label>
                         <div>
                             <textarea className="col-sm-7"  rows="2"
-                                      ref="instruments" defaultValue={this.props.fieldValues.instruments} />
+                                      ref="instruments" value={this.props.fieldValues.instruments} />
                         </div>
                     </div>
                     <div className="form-group">
                         <label className="col-sm-4 control-label">Picture</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="picture"
-                                   defaultValue={this.props.fieldValues.picture} />
+                                   value={this.props.fieldValues.picture} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Approval Date</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="approvedDate"
-                                   defaultValue={this.props.fieldValues.approvedDate} />
+                                   value={this.props.fieldValues.approvedDate} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Approved By</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="approvedBy"
-                                   defaultValue={this.props.fieldValues.approvedBy} />
+                                   value={this.props.fieldValues.approvedBy} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Sign-Up Date</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="signUpDate"
-                                   defaultValue={this.props.fieldValues.signUpDate} />
+                                   value={this.props.fieldValues.signUpDate} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Approved To Perform</label>
                         <div>
-                            <select className="col-sm-7" defaultValue={this.props.fieldValues.approved}
+                            <select className="col-sm-7" value={this.props.fieldValues.approved}
                                     ref="approved">
                                 <option value="">No</option>
                                 <option value="true">Yes</option>
@@ -216,9 +216,11 @@ var MusicianTable = React.createClass({
     },
     showDetails: function(musician){
         this.setState({
-            showResults: !this.state.showResults,
+            showResults: true,
             musician: musician
-        })
+        });
+
+        //MusicianTable.forceUpdate()
     },
     saveValues: function(fields) {
         var x = this.state.musician;
@@ -250,7 +252,7 @@ var MusicianTable = React.createClass({
             }
         }.bind(this));
         this.setState({
-            musicans: x,
+            musicians: x,
             musician: musician,
             showResults: false
         });
@@ -262,7 +264,7 @@ var MusicianTable = React.createClass({
             //console.log(result);
         });
     },
-componentDidMount: function() {                                 //csh loading the musicians into this.state.musicians
+    componentDidMount: function() {                                 //csh loading the musicians into this.state.musicians
         $.get(this.props.source, function(result) {
             var musicianData = result;
             if (this.isMounted()) {
@@ -274,7 +276,7 @@ componentDidMount: function() {                                 //csh loading th
 
 
 
-},
+    },
     render: function() {
         var rowsApproved = [];
         var rowsNotApproved = [];
