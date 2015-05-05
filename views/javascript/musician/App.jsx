@@ -1,8 +1,8 @@
 var React = require('react');
-var GigListing = require('./GigListings.jsx');
+var GigListings = require('./GigListings.jsx');
 
 React.render(
-    <GigListing />,
+    <GigListings />,
     document.getElementById('gigListingApp')
 );
 
