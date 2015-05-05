@@ -9,124 +9,139 @@ var MusicianFields = React.createClass({
         return (
             <div>
 
-                <form className="form-horizontal" action='/admin/UpdateMusicianDetails' method='POST'>
+                <form className="form-horizontal">
                     <div className="form-group">
-                        <input type='hidden' name='csrf-token'  value='_csrf'> </input>
                         <label className="col-sm-4 control-label"> Performer Name</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="performerName"
-                                   value={this.props.fieldValues.performerName} />
+                                   defaultValue={this.props.fieldValues.performerName}
+                                   key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
                     <div className="form-group">
                         <label className="col-sm-4 control-label">Contact Name</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="contactName"
-                                   value={this.props.fieldValues.contactName} />
+                                   defaultValue={this.props.fieldValues.contactName}
+                                   key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Phone</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="phone"
-                                   value={this.props.fieldValues.phone} />
+                                   defaultValue={this.props.fieldValues.phone}
+                                   key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Address Line 1</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="address1"
-                                   value={this.props.fieldValues.address1} />
+                                   defaultValue={this.props.fieldValues.address1}
+                                   key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Address Line 2</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="address2"
-                                   value={this.props.fieldValues.address2} />
+                                   defaultValue={this.props.fieldValues.address2}
+                                   key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">City</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="city"
-                                   value={this.props.fieldValues.city} />
+                                   defaultValue={this.props.fieldValues.city}
+                                   key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">State</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="state"
-                                   value={this.props.fieldValues.state} />
+                                   defaultValue={this.props.fieldValues.state}
+                                   key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Zip Code</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="zipcode"
-                                   value={this.props.fieldValues.zipcode} />
+                                   defaultValue={this.props.fieldValues.zipcode}
+                                   key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Website URL</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="website"
-                                   value={this.props.fieldValues.website} />
+                                   defaultValue={this.props.fieldValues.website}
+                                   key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Biography</label>
                         <div>
                             <textarea className="col-sm-7"  rows="2"
-                                      ref="biography" value={this.props.fieldValues.biography} />
+                                      ref="biography" defaultValue={this.props.fieldValues.biography}
+                                      key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Instruments</label>
                         <div>
                             <textarea className="col-sm-7"  rows="2"
-                                      ref="instruments" value={this.props.fieldValues.instruments} />
+                                      ref="instruments" defaultValue={this.props.fieldValues.instruments}
+                                      key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
                     <div className="form-group">
                         <label className="col-sm-4 control-label">Picture</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="picture"
-                                   value={this.props.fieldValues.picture} />
+                                   defaultValue={this.props.fieldValues.picture}
+                                   key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Approval Date</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="approvedDate"
-                                   value={this.props.fieldValues.approvedDate} />
+                                   defaultValue={this.props.fieldValues.approvedDate}
+                                   key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Approved By</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="approvedBy"
-                                   value={this.props.fieldValues.approvedBy} />
+                                   defaultValue={this.props.fieldValues.approvedBy}
+                                   key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Sign-Up Date</label>
                         <div>
                             <input type="text" className="col-sm-7" ref="signUpDate"
-                                   value={this.props.fieldValues.signUpDate} />
+                                   defaultValue={this.props.fieldValues.signUpDate}
+                                   key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
                     <div className ="form-group">
                         <label className="col-sm-4 control-label">Approved To Perform</label>
                         <div>
-                            <select className="col-sm-7" value={this.props.fieldValues.approved}
-                                    ref="approved">
+                            <select className="col-sm-7" defaultValue={this.props.fieldValues.approved}
+                                    ref="approved" key={this.props.fieldValues.performerName} >
                                 <option value="">No</option>
                                 <option value="true">Yes</option>
                             </select>
                         </div>
                     </div>
                     <div>
+
                         <button className="btn btn-primary" onClick={this.saveAndContinue}>Submit</button>
                     </div>
                 </form>
@@ -181,7 +196,8 @@ var MusicianRow = React.createClass({
         musician: React.PropTypes.any.isRequired,
         showDetails: React.PropTypes.func.isRequired
     },
-    changeState: function(musician){
+    changeState: function(){
+        var musician=this.props.musician;
         this.props.showDetails(musician);
     },
     render: function() {
@@ -191,7 +207,7 @@ var MusicianRow = React.createClass({
             </span>;
         return (
             <a href="#" className="list-group-item" key={this.props.musician._id}
-               onClick={this.changeState.bind(this, this.props.musician)}><h4> {name}</h4> </a>
+               onClick={this.changeState}><h4> {name}</h4> </a>
         );
     }
 });
@@ -210,17 +226,15 @@ var MusicianTable = React.createClass({
         return {
             musicians: [],
             showResults: false,
-            musician: null,
-            token: this.props.token
+            musician: null
         }
     },
     showDetails: function(musician){
         this.setState({
             showResults: true,
             musician: musician
-        });
 
-        //MusicianTable.forceUpdate()
+        });
     },
     saveValues: function(fields) {
         var x = this.state.musician;
@@ -244,6 +258,16 @@ var MusicianTable = React.createClass({
 
         this.handleChangedData(x);
     },
+    getCSRFTokenValue: function() {
+        var metas = document.getElementsByTagName('meta');
+
+        for (var i=0; i<metas.length; i++) {
+            if (metas[i].getAttribute("name") == 'csrf-token') {
+                return metas[i].getAttribute('content');
+            }
+        }
+        return '';
+    },
     handleChangedData: function(musician){
         var x = this.state.musicians;
         x.forEach(function(elem,index){
@@ -260,9 +284,16 @@ var MusicianTable = React.createClass({
         // exports.postUpdateMusicianDetails used in admin.js controller
         // route create in app.js /admin/updateMusicianDetails-->this.state.postRoute
         // jQuery.post( url [, data ] [, success ] [, dataType ] )
-        $.post(this.props.postRoute, this.state.musician, function(result){
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-Token': this.getCSRFTokenValue()
+            }
+        });
+        $.post(this.props.postRoute, musician, function(result){
             //console.log(result);
         });
+
     },
     componentDidMount: function() {                                 //csh loading the musicians into this.state.musicians
         $.get(this.props.source, function(result) {
@@ -299,6 +330,7 @@ var MusicianTable = React.createClass({
                 );
             }
         }.bind(this));
+
         return (
             <div className="col-sm-4">
                 <div className="list-group PerformerList">
@@ -317,7 +349,4 @@ var MusicianTable = React.createClass({
 });
 
 
-
-
-React.render(<MusicianTable token={document.getElementsByTagName('csrf-token')} />, document.getElementById("codepenApp"));
-
+React.render(<MusicianTable />, document.getElementById("codepenApp"));

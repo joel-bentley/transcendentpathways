@@ -74,13 +74,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(lusca({
-  csrf: false,
+  csrf: true,
   xframe: 'SAMEORIGIN',
-  xssProtection: true,
-    policy: {
-        'default-src': '\'self\'',
-        'img-src': '*'
-    }
+  xssProtection: true
 }));
 app.use(function(req, res, next) {
   res.locals.user = req.user;
