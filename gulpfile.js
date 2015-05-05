@@ -29,7 +29,6 @@ Gulp.task('less', function () {
     var bundleConfigs = [{
         entries: [
             './views/stylesheets/main.less',
-            './views/stylesheets/griddle.css',
             './views/stylesheets/musicianAdmin.css'
 
         ],
@@ -81,7 +80,7 @@ Gulp.task('media', function () {
 
 
 //Gulp.task('jsx', ['musicianjs', 'facilityjs', 'adminjs']);
-Gulp.task('jsx', ['adminjs', 'adminjs2', 'musicianjs']);
+Gulp.task('jsx', ['adminjs', 'musicianjs']);
 
 
 Gulp.task('musicianjs', function(){
@@ -100,18 +99,11 @@ Gulp.task('musicianjs', function(){
 //        .pipe(Gulp.dest('public/js/'));
 //});
 
+
 Gulp.task('adminjs', function(){
-    browserify('./views/javascript/admin/musician/griddle/App.jsx')
+    browserify('./views/javascript/admin/musician/App.jsx')
         .transform(babelify)
         .bundle()
         .pipe(source('admin.min.js'))
-        .pipe(Gulp.dest('public/js/'));
-});
-
-Gulp.task('adminjs2', function(){
-    browserify('./views/javascript/admin/musician/codepen/App.jsx')
-        .transform(babelify)
-        .bundle()
-        .pipe(source('admin2.min.js'))
         .pipe(Gulp.dest('public/js/'));
 });
