@@ -132,8 +132,8 @@ app.post('/postGigDetails', passportConf.isAuthenticated, facilityController.pos
 
 app.get('/gigListing', passportConf.isAuthenticated, facilityController.getGigListing);
 
-app.get('/homeAdmin', passportConf.isAuthenticated, adminController.getHomeAdmin2);
-app.get('/homeAdmin2', passportConf.isAuthenticated, adminController.getHomeAdmin2);   // temporary
+app.get('/homeAdmin', passportConf.isAuthenticated, adminController.getHomeAdmin);
+//app.get('/homeAdmin2', passportConf.isAuthenticated, adminController.getHomeAdmin2);   // temporary
 
 app.get('/musicianData', passportConf.isAuthenticated, adminController.getMusicianData);
 app.get('/musicianLookup/:id', passportConf.isAuthenticated, adminController.getMusician);
