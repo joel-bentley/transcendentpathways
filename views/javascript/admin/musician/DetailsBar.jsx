@@ -4,9 +4,9 @@ var MusicianFields = require('./MusicianFields.jsx');
 var DetailsBar = React.createClass({
     render: function(){
         return (
-            <div className="Detail">
+            <div >
 
-                <div className="panel-body">
+                <div className="Detail">
                     <MusicianFields  fieldValues = {this.props.musician}
                                      saveValues = {this.props.saveValues}
                         />
