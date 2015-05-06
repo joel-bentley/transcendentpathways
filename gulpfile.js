@@ -72,7 +72,7 @@ Gulp.task('media', function () {
     var fonts = Gulp.src('views/fonts/**/*')
         .pipe(Gulp.dest(Path.join('./public', 'fonts')));
 
-    var javascript = Gulp.src('views/javascript/lib/*')
+    var javascript = Gulp.src('views/javascript/lib/**/*')
         .pipe(Gulp.dest('./public/js/lib'));
 
     return Merge(general, fonts, javascript);
