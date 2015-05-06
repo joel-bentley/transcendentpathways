@@ -80,7 +80,7 @@ Gulp.task('media', function () {
 
 
 //Gulp.task('jsx', ['musicianjs', 'facilityjs', 'adminjs']);
-Gulp.task('jsx', ['adminjs', 'musicianjs', 'adminFacilityjs']);
+Gulp.task('jsx', ['adminjs', 'musicianjs', 'adminFacilityjs', 'adminNotes']);
 
 
 Gulp.task('musicianjs', function(){
@@ -92,7 +92,7 @@ Gulp.task('musicianjs', function(){
 });
 //
 //Gulp.task('facilityjs', function(){
-//    browserify('./views/javascript/facility/App.jsx')
+//    browserify('./views/javascript/facility/Notes.jsx')
 //        .transform(babelify)
 //        .bundle()
 //        .pipe(source('facility.min.js'))
@@ -112,5 +112,13 @@ Gulp.task('adminjs', function(){
         .transform(babelify)
         .bundle()
         .pipe(source('admin.min.js'))
+        .pipe(Gulp.dest('public/js/'));
+});
+
+Gulp.task('adminNotes', function(){
+    browserify('./views/javascript/admin/notes/Notes.jsx')
+        .transform(babelify)
+        .bundle()
+        .pipe(source('notes.min.js'))
         .pipe(Gulp.dest('public/js/'));
 });

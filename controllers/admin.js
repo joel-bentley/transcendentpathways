@@ -88,6 +88,7 @@ exports.postUpdateFacilityDetails = function(req, res, next) {
         facility.approvedDate = req.body.approvedDate;
         facility.signUpDate = req.body.signUpDate;
         facility.approvedBy = req.body.approvedBy;
+        facility.notes = req.body.notes;
 
         facility.save(function(err) {
             if (err) return next(err);

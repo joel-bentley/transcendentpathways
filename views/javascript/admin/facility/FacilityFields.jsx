@@ -176,6 +176,7 @@ var FacilityFields = React.createClass({
 
         var data = {
             _id: this.props.fieldValues._id,
+            notes: this.props.fieldValues.notes,
             facilityName: this.refs.facilityName.getDOMNode().value,
             address1: this.refs.address1.getDOMNode().value,
             address2: this.refs.address2.getDOMNode().value,
