@@ -104,7 +104,6 @@ var MusicianTable = React.createClass({
 
     },
     getNotes: function(){
-        this.
         return this.state.musician.notes;
 
     },
