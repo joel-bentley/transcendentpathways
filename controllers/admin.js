@@ -13,8 +13,8 @@ exports.getHomeAdmin = function(req, res) {
     });
 };
 
-exports.getHomeAdmin2 = function(req, res) {
-    res.render('homeAdmin2', {
+exports.getHomeAdminFacility = function(req, res) {
+    res.render('homeAdminFacility', {
         title: 'Admin Home'
     });
 };
@@ -27,6 +27,13 @@ exports.getMusicianData = function(req, response) {
     });
 };
 
+exports.getFacilityData = function(req, response) {
+    Facility.find({}).exec(function(err, facility){
+        var facilityData = facility;
+        response.writeHead(200, {'Content-Type': 'application/json'});
+        response.end(JSON.stringify(facilityData));
+    });
+};
 
 exports.getMusician = function(req, res) {
     Musician.findOne({_id: req.params.id}).exec(function (err, doc) {
@@ -52,11 +59,40 @@ exports.postUpdateMusicianDetails = function(req, res, next) {
         musician.approvedBy = req.body.approvedBy;
         musician.signUpDate = req.body.signUpDate;
         musician.approved = req.body.approved;
+        musician.notes = req.body.notes;
 
         musician.save(function(err) {
             if (err) return next(err);
             //req.flash('success', { msg: 'Musician Details Updated for ' + musician.performerName });
             //res.redirect('/account');
+        });
+    });
+};
+exports.postUpdateFacilityDetails = function(req, res, next) {
+    Facility.findOne({_id: req.body._id}).exec(function(err, facility) {
+        if (err) return next(err);
+        facility.facilityName = req.body.facilityName || '';
+        facility.address1 = req.body.address1 || '';
+        facility.address2 = req.body.address2 || '';
+        facility.city = req.body.city || '';
+        facility.state = req.body.state || '';
+        facility.zipcode = req.body.zipcode || '';
+        facility.contactName = req.body.contactName || '';
+        facility.contactPhone = req.body.contactPhone || '';
+        facility.buildingName = req.body.buildingName || '';
+        facility.locationName = req.body.locationName || '';
+        facility.roomSize = req.body.roomSize || '';
+        facility.securityNeeded = req.body.securityNeeded || '';
+        facility.waiverNeeded = req.body.waiverNeeded;
+        facility.patientNumber = req.body.patientNumber;
+        facility.approved = req.body.approved;
+        facility.approvedDate = req.body.approvedDate;
+        facility.signUpDate = req.body.signUpDate;
+        facility.approvedBy = req.body.approvedBy;
+        facility.notes = req.body.notes;
+
+        facility.save(function(err) {
+            if (err) return next(err);
         });
     });
 };
