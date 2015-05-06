@@ -104,7 +104,9 @@ var MusicianTable = React.createClass({
 
     },
     getNotes: function(){
+        this.
         return this.state.musician.notes;
+
     },
     setNotes: function(notes) {
         var x = this.state.musician;
@@ -151,6 +153,7 @@ var MusicianTable = React.createClass({
                 <div>
                     {this.state.showResults ?
                         <Notes
+                            ref = "Notes"
                             name = {this.state.musician.performerName}
                             getNotes={this.getNotes}
                             setNotes={this.setNotes}

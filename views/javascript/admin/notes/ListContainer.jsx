@@ -34,7 +34,10 @@ var ListContainer = React.createClass({
     },
     componentWillUpdate: function() {
         if (this.state.name !== this.props.name){
-            this.componentDidMount();
+            this.setState({
+                list: this.props.getNotes(),
+                name: this.props.name
+            })
         }
     },
     render: function(){
