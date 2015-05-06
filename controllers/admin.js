@@ -59,6 +59,7 @@ exports.postUpdateMusicianDetails = function(req, res, next) {
         musician.approvedBy = req.body.approvedBy;
         musician.signUpDate = req.body.signUpDate;
         musician.approved = req.body.approved;
+        musician.notes = req.body.notes;
 
         musician.save(function(err) {
             if (err) return next(err);
