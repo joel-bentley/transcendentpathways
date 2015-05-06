@@ -1,6 +1,7 @@
 var React = require('react/addons');
 var MusicianRow = require('./MusicianRow.jsx');
 var DetailsBar = require('./DetailsBar.jsx');
+var Notes = require('../notes/Notes.jsx');
 
 //var _ = require('lodash');
 
@@ -102,6 +103,16 @@ var MusicianTable = React.createClass({
 
 
     },
+    getNotes: function(){
+        return this.state.musician.notes;
+    },
+    setNotes: function(notes) {
+        var x = this.state.musician;
+        x.notes = notes;
+        this.setState({
+            musician: x
+        });
+    },
     render: function() {
         var rowsApproved = [];
         var rowsNotApproved = [];
@@ -136,6 +147,14 @@ var MusicianTable = React.createClass({
                         {this.state.showResults ? <DetailsBar musician={this.state.musician}
                                                               handleChangedData={this.handleChangedData} saveValues={this.saveValues} />: null }
                     </ReactCSSTransitionGroup>
+                </div>
+                <div>
+                    {this.state.showResults ?
+                        <Notes
+                            name = {this.state.musician.performerName}
+                            getNotes={this.getNotes}
+                            setNotes={this.setNotes}
+                            /> : null}
                 </div>
             </div>
         );

@@ -1,6 +1,7 @@
 var React = require('react/addons');
 var FacilityRow = require('./FacilityRow.jsx');
 var DetailsBar = require('./DetailsBar.jsx');
+var Notes = require('../notes/Notes.jsx');
 
 //var _ = require('lodash');
 
@@ -20,13 +21,14 @@ var FacilityTable = React.createClass({
         return {
             facilities: [],
             showResults: false,
-            faciltiy: null
+            facility: null
         }
     },
     showDetails: function(facility){
         this.setState({
             showResults: true,
             facility: facility
+
 
         });
     },
@@ -55,6 +57,7 @@ var FacilityTable = React.createClass({
         x.approvedDate = fields.approvedDate;
         x.signUpDate = fields.signUpDate;
         x.approvedBy = fields.approvedBy;
+        x.notes = fields.notes;
 
         this.handleChangedData(x);
     },
@@ -104,9 +107,16 @@ var FacilityTable = React.createClass({
                 });
             }
         }.bind(this));
-
-
-
+    },
+    getNotes: function(){
+        return this.state.facility.notes;
+    },
+    setNotes: function(notes) {
+        var x = this.state.facility;
+        x.notes = notes;
+        this.setState({
+            facility: x
+        });
     },
     render: function() {
         var rowsApproved = [];
@@ -142,6 +152,14 @@ var FacilityTable = React.createClass({
                         {this.state.showResults ? <DetailsBar facility={this.state.facility}
                                                               handleChangedData={this.handleChangedData} saveValues={this.saveValues} />: null }
                     </ReactCSSTransitionGroup>
+                </div>
+                <div>
+                    {this.state.showResults ?
+                        <Notes
+                            name = {this.state.facility.facilityName}
+                            getNotes={this.getNotes}
+                            setNotes={this.setNotes}
+                        /> : null}
                 </div>
             </div>
         );
