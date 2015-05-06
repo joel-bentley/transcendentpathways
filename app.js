@@ -133,13 +133,18 @@ app.post('/postGigDetails', passportConf.isAuthenticated, facilityController.pos
 app.get('/gigListing', passportConf.isAuthenticated, facilityController.getGigListing);
 
 app.get('/homeAdmin', passportConf.isAuthenticated, adminController.getHomeAdmin);
-//app.get('/homeAdmin2', passportConf.isAuthenticated, adminController.getHomeAdmin2);   // temporary
-
 app.get('/musicianData', passportConf.isAuthenticated, adminController.getMusicianData);
 app.get('/musicianLookup/:id', passportConf.isAuthenticated, adminController.getMusician);
 
+// retrieves the jade file for react admin facility loading page
+app.get('/homeAdminFacility', passportConf.isAuthenticated, adminController.getHomeAdminFacility);
+//retrieves facility data for react admin facility main component
+app.get('/homeAdminFacilityData', passportConf.isAuthenticated, adminController.getFacilityData);
 //for react musician admin csh
 app.post('/admin/updateMusicianDetails', passportConf.isAuthenticated, adminController.postUpdateMusicianDetails);
+//for react facility admin csh
+app.post('/admin/updateFacilityDetails', passportConf.isAuthenticated, adminController.postUpdateFacilityDetails);
+
 
 /**
  * API examples routes.
