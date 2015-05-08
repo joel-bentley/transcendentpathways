@@ -116,7 +116,7 @@ Gulp.task('adminjs', function(){
 });
 
 Gulp.task('adminNotes', function(){
-    browserify('./views/javascript/admin/notes/Notes.jsx')
+    browserify('./views/javascript/admin/notes/ListContainer.jsx')
         .transform(babelify)
         .bundle()
         .pipe(source('notes.min.js'))
