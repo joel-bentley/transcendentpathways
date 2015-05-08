@@ -1,16 +1,10 @@
 var React = require('react/addons');
 var FacilityRow = require('./FacilityRow.jsx');
 var DetailsBar = require('./DetailsBar.jsx');
-var Notes = require('../notes/Notes.jsx');
+var ListContainer = require('../notes/ListContainer.jsx');
 
-//var _ = require('lodash');
-
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 var FacilityTable = React.createClass({
-    propTypes: {
-        //musicians: React.PropTypes.array.isRequired
-    },
     getDefaultProps: function(){
         return {
             source: '/homeAdminFacilityData',
@@ -24,12 +18,10 @@ var FacilityTable = React.createClass({
             facility: null
         }
     },
-    showDetails: function(facility){
+    showDetails: function(facilityNew){
         this.setState({
             showResults: true,
-            facility: facility
-
-
+            facility: facilityNew
         });
     },
     saveValues: function(fields) {
@@ -83,11 +75,6 @@ var FacilityTable = React.createClass({
             facility: facility,
             showResults: false
         });
-        //save admin changes to the facility here with this.state.facility
-        // exports.postUpdateMusicianDetails used in admin.js controller
-        // route create in app.js /admin/updateMusicianDetails-->this.state.postRoute
-        // jQuery.post( url [, data ] [, success ] [, dataType ] )
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-Token': this.getCSRFTokenValue()
@@ -96,7 +83,6 @@ var FacilityTable = React.createClass({
         $.post(this.props.postRoute, facility, function(result){
             //console.log(result);
         });
-
     },
     componentDidMount: function() {                                 //csh loading the facilities into this.state.facilities
         $.get(this.props.source, function(result) {
@@ -148,14 +134,16 @@ var FacilityTable = React.createClass({
                     {rowsNotApproved} {rowsApproved}
                 </div>
                 <div>
-                    <ReactCSSTransitionGroup transitionName="example">
-                        {this.state.showResults ? <DetailsBar facility={this.state.facility}
-                                                              handleChangedData={this.handleChangedData} saveValues={this.saveValues} />: null }
-                    </ReactCSSTransitionGroup>
+                    {this.state.showResults ?
+                            <DetailsBar
+                                facility={this.state.facility}
+                                handleChangedData={this.handleChangedData}
+                                saveValues={this.saveValues}
+                            />: null }
                 </div>
                 <div>
                     {this.state.showResults ?
-                        <Notes
+                        <ListContainer
                             name = {this.state.facility.facilityName}
                             getNotes={this.getNotes}
                             setNotes={this.setNotes}
