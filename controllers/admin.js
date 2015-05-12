@@ -61,6 +61,8 @@ exports.postUpdateMusicianDetails = function(req, res, next) {
         musician.approved = req.body.approved;
         musician.notes = req.body.notes;
 
+        console.log(req.body.notes);
+
         musician.save(function(err) {
             if (err) return next(err);
             //req.flash('success', { msg: 'Musician Details Updated for ' + musician.performerName });

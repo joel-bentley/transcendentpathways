@@ -15,7 +15,6 @@ var ListContainer = React.createClass({
         this.setState({
             list: this.state.list.concat([newItem])
         });
-
         this.props.setNotes(this.props.getNotes().concat([newItem]));
     },
     handleRemoveItem: function(index){
@@ -34,6 +33,7 @@ var ListContainer = React.createClass({
                     <AddItem
                         add={this.handleAddItem}
                     />
+                    <br/>
                     <List
                         items={this.props.getNotes()}
                         remove={this.handleRemoveItem}
