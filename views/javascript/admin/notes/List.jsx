@@ -23,7 +23,7 @@ var List = React.createClass({
                             <span
                                 style={styles.todoItemDate}
                                 onClick = {this.props.remove.bind(null, index)}
-                                className="label label-primary">DELETE</span>
+                                className="label label-primary">Delete</span>
                         </div>
                     </div>
                     <div className="panel-body">

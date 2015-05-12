@@ -128,26 +128,28 @@ var FacilityTable = React.createClass({
         }.bind(this));
 
         return (
-            <div className="col-sm-4">
-                <div className="list-group PerformerList">
-                    <a href="#" className="list-group-item active"> Facility List</a>
-                    {rowsNotApproved} {rowsApproved}
-                </div>
-                <div>
-                    {this.state.showResults ?
-                            <DetailsBar
-                                facility={this.state.facility}
-                                handleChangedData={this.handleChangedData}
-                                saveValues={this.saveValues}
-                            />: null }
-                </div>
-                <div>
-                    {this.state.showResults ?
-                        <ListContainer
-                            name = {this.state.facility.facilityName}
-                            getNotes={this.getNotes}
-                            setNotes={this.setNotes}
-                        /> : null}
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-sm-2 list-group">
+                        <a href="#" className="list-group-item active"> Facility List</a>
+                        {rowsNotApproved} {rowsApproved}
+                    </div>
+                    <div className="col-sm-7">
+                        {this.state.showResults ?
+                                <DetailsBar
+                                    facility={this.state.facility}
+                                    handleChangedData={this.handleChangedData}
+                                    saveValues={this.saveValues}
+                                />: null }
+                    </div>
+                    <div className="col-sm-3">
+                        {this.state.showResults ?
+                            <ListContainer
+                                name = {this.state.facility.facilityName}
+                                getNotes={this.getNotes}
+                                setNotes={this.setNotes}
+                            /> : null}
+                    </div>
                 </div>
             </div>
         );

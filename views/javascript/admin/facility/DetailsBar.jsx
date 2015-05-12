@@ -6,7 +6,7 @@ var DetailsBar = React.createClass({
         return (
             <div >
 
-                <div className="Detail">
+                <div >
                     <FacilityFields  fieldValues = {this.props.facility}
                                      saveValues = {this.props.saveValues}
                         />
