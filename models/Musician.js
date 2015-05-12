@@ -21,7 +21,10 @@ var userSchema = new mongoose.Schema({
     approvedDate: Date,
     signUpDate: Date,
     approvedBy: String,
-    notes:  [ {type: String} ]
+    notes: [{
+        noteDate: Date,
+        noteText: String
+    }]
 });
 
 module.exports = mongoose.model('Musician', userSchema);
