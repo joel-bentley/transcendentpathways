@@ -27,8 +27,8 @@ var ListContainer = React.createClass({
     render: function(){
 
         return (
-            <div className="col-sm-12">
-                <div className="col-sm-12 Notes">
+            <div>
+                <div>
                     <h5 className="text-center"> Notes for {this.props.name}</h5>
                     <AddItem
                         add={this.handleAddItem}

@@ -6,7 +6,7 @@ var FacilityFields = React.createClass({
             <div>
 
                 <form className="form-horizontal">
-                    <div className="form-group form-group-sm">
+                    <div className="form-group">
                         <label className="col-sm-4 control-label"> Facility Name</label>
                         <div className="col-sm-7">
                             <input className="form-control" type="text"  ref="facilityName"
@@ -14,7 +14,7 @@ var FacilityFields = React.createClass({
                                    key={this.props.fieldValues.facilityName} />
                         </div>
                     </div>
-                    <div className="form-group form-group-sm">
+                    <div className="form-group">
                         <label className="col-sm-4 control-label">Address Line 1</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="address1"
@@ -22,7 +22,7 @@ var FacilityFields = React.createClass({
                                    key={this.props.fieldValues.address1} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Address Line 2</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="address2"
@@ -30,7 +30,7 @@ var FacilityFields = React.createClass({
                                    key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">City</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="city"
@@ -38,7 +38,7 @@ var FacilityFields = React.createClass({
                                    key={this.props.fieldValues.city} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">State</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="state"
@@ -46,7 +46,7 @@ var FacilityFields = React.createClass({
                                    key={this.props.fieldValues.state} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Zipcode</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="zipcode"
@@ -54,7 +54,7 @@ var FacilityFields = React.createClass({
                                    key={this.props.fieldValues.zipcode} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Contact Name</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="contactName"
@@ -62,7 +62,7 @@ var FacilityFields = React.createClass({
                                    key={this.props.fieldValues.contactName} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Contact Phone</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="contactPhone"
@@ -70,7 +70,7 @@ var FacilityFields = React.createClass({
                                    key={this.props.fieldValues.contactPhone} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Contact Email</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="contactEmail"
@@ -78,7 +78,7 @@ var FacilityFields = React.createClass({
                                    key={this.props.fieldValues.contactEmail} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Building Name</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="buildingName"
@@ -86,7 +86,7 @@ var FacilityFields = React.createClass({
                                     key={this.props.fieldValues.buildingName} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Location Name</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control"ref="locationName"
@@ -94,7 +94,7 @@ var FacilityFields = React.createClass({
                                     key={this.props.fieldValues.locationName} />
                         </div>
                     </div>
-                    <div className="form-group form-group-sm">
+                    <div className="form-group">
                         <label className="col-sm-4 control-label">Room Size</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="roomSize"
@@ -102,7 +102,7 @@ var FacilityFields = React.createClass({
                                    key={this.props.fieldValues.roomSize} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Security Needed</label>
                         <div className="col-sm-7">
                             <select className="form-control" defaultValue={this.props.fieldValues.securityNeeded}
@@ -112,7 +112,7 @@ var FacilityFields = React.createClass({
                             </select>
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Waiver Needed</label>
                         <div className="col-sm-7">
                             <select className="form-control" defaultValue={this.props.fieldValues.waiverNeeded}
@@ -122,7 +122,7 @@ var FacilityFields = React.createClass({
                             </select>
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Patient Number</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="patientNumber"
@@ -130,7 +130,7 @@ var FacilityFields = React.createClass({
                                    key={this.props.fieldValues.patientNumber} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Approved Date</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="approvedDate"
@@ -138,7 +138,7 @@ var FacilityFields = React.createClass({
                                    key={this.props.fieldValues.approvedDate} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Sign-Up Date</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="signUpDate"
@@ -146,7 +146,7 @@ var FacilityFields = React.createClass({
                                    key={this.props.fieldValues.signUpDate} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Approved By</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="approvedBy"
@@ -154,7 +154,7 @@ var FacilityFields = React.createClass({
                                    key={this.props.fieldValues.approvedBy} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Approved</label>
                         <div className="col-sm-7">
                             <select className="form-control" defaultValue={this.props.fieldValues.approved}

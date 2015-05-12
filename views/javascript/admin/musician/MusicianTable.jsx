@@ -121,25 +121,27 @@ var MusicianTable = React.createClass({
         }.bind(this));
 
         return (
-            <div className="col-sm-4">
-                <div className="list-group PerformerList">
-                    <a href="#" className="list-group-item active"> Performer List</a>
-                    {rowsNotApproved} {rowsApproved}
-                </div>
-                    <div>
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-sm-2 list-group">
+                        <a href="#" className="list-group-item active"> Performer List</a>
+                        {rowsNotApproved} {rowsApproved}
+                    </div>
+                    <div className="col-sm-7">
                         {this.state.showResults ? <DetailsBar
                             musician={this.state.musician}
                             handleChangedData={this.handleChangedData}
                             saveValues={this.saveValues}
                         />: null }
                     </div>
-                <div>
-                    {this.state.showResults ?
-                        <ListContainer
-                            name = {this.state.musician.performerName}
-                            getNotes={this.getNotes}
-                            setNotes={this.setNotes}
-                        /> : null}
+                    <div className="col-sm-3">
+                        {this.state.showResults ?
+                            <ListContainer
+                                name = {this.state.musician.performerName}
+                                getNotes={this.getNotes}
+                                setNotes={this.setNotes}
+                            /> : null}
+                    </div>
                 </div>
             </div>
         );
