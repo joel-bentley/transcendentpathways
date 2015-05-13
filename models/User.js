@@ -12,7 +12,7 @@ var userSchema = new mongoose.Schema({
   google: String,
   tokens: Array,
 
-  approved: { type: Boolean, default: true },  // will change to false when admin panel able to approve
+  approved: { type: Boolean, default: false },  // will change to false when admin panel able to approve
   detailIds:  [{
     type: mongoose.Schema.Types.ObjectId
   }],                           // Array of Ids pointing to entries for musician or facility in database

@@ -3,10 +3,6 @@ var async = require('async');
 var Musician = require('../models/Musician');
 var Facility = require('../models/Facility');
 
-/**
- * GET /login
- * Login page.
- */
 exports.getHomeAdmin = function(req, res) {
     res.render('homeAdmin', {
         title: 'Admin Home'
@@ -37,7 +33,6 @@ exports.getFacilityData = function(req, response) {
 
 exports.getMusician = function(req, res) {
     Musician.findOne({_id: req.params.id}).exec(function (err, doc) {
-        console.log(doc);
     });
 };
 exports.postUpdateMusicianDetails = function(req, res, next) {
@@ -60,8 +55,6 @@ exports.postUpdateMusicianDetails = function(req, res, next) {
         musician.signUpDate = req.body.signUpDate;
         musician.approved = req.body.approved;
         musician.notes = req.body.notes;
-
-        console.log(req.body.notes);
 
         musician.save(function(err) {
             if (err) return next(err);
@@ -98,3 +91,13 @@ exports.postUpdateFacilityDetails = function(req, res, next) {
         });
     });
 };
+// returns all facilities that have gigs sorted by start date, facility
+exports.getAllFacilityGigs = function(req, res, next){
+    Facility.find({'gigs' : {$not: {$size: 0}}}, {'gigs':1, 'facilityName': 1})
+        .sort({'gigs.start': 1, 'facilityName':1}).exec(function(err, gigListing){
+            if (err) return next(err);
+            response.writeHead(200, {'Content-Type': 'application/json'});
+            response.end(JSON.stringify(gigListing));
+        });
+};
+
