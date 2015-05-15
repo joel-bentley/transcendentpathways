@@ -12,11 +12,11 @@ var FacilityRow = React.createClass({
     render: function() {
         var name = this.props.facility.approved ?
             this.props.facility.facilityName :<span style={{color: 'blue'}}>
-                {this.props.facility.facilityName}
+                <h5>{this.props.facility.facilityName}</h5>
             </span>;
         return (
             <a href="#" className="list-group-item" key={this.props.facility._id}
-               onClick={this.changeState}><h4> {name}</h4> </a>
+               onClick={this.changeState}><h5> {name}</h5> </a>
         );
     }
 });

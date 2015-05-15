@@ -131,7 +131,7 @@ var FacilityTable = React.createClass({
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-sm-2 list-group">
-                        <a href="#" className="list-group-item active"> Facility List</a>
+                        <a href="#" className="list-group-item active"> <h5>Facility List</h5></a>
                         {rowsNotApproved} {rowsApproved}
                     </div>
                     <div className="col-sm-7">
