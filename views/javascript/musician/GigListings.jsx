@@ -1,6 +1,8 @@
 var React = require('react');
 var Gig = require('./Gig.jsx');
 
+var moment = require('moment');
+
 module.exports = React.createClass({
     getInitialState: function() {
         return {
@@ -29,12 +31,16 @@ module.exports = React.createClass({
                         var startTime = new Date(gig.start);
                         var endTime = new Date(gig.end);
 
+                        var dateString = moment(startTime).format('dddd MMMM Do YYYY');
+                        var startTimeString = moment(startTime).format('h:mm a');
+                        var endTimeString = moment(endTime).format('h:mm a');
+                        var timeString = startTimeString + " - " + endTimeString;
+
                         return (
                             <Gig
                                 facilityName={facility.facilityName}
-                                date={startTime.toDateString()}
-                                startTime={startTime.toLocaleTimeString()}
-                                endTime={endTime.toLocaleTimeString()}
+                                dateString={dateString}
+                                timeString={timeString}
                                 details={gig.details}
                                 />
                         )
