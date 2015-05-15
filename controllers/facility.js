@@ -1,8 +1,10 @@
 var _ = require('lodash');
 var async = require('async');
 var nodemailer = require('nodemailer');
+
 var User = require('../models/User');
 var Facility = require('../models/Facility');
+var Event = require('../models/Event');
 
 
 
@@ -17,7 +19,7 @@ exports.getSignupFacility = function(req, res) {
 exports.getFacilityDetails = function(req, res){
     if(!req.user) return res.redirect('/');
 
-    if(req.user.detailIds.length) return res.redirect('/homeFacility');
+    if(req.user.detailsId) return res.redirect('/homeFacility');
 
     if(req.user.accountType==='Facility') {
 
@@ -55,7 +57,7 @@ exports.postFacilityDetails = function(req, res, next){
         User.findById(req.user.id, function(err, user) {                    // Save Id from Facility in User
             if (err) return next(err);
 
-            user.detailIds.push(facility.id);
+            user.detailsId = facility.id;
 
             user.save(function(err) {
                 if (err) return next(err);
@@ -71,7 +73,7 @@ exports.getHomeFacility = function(req, res) {
 
     if (req.user.accountType==='Facility') {
 
-        if (req.user.detailIds.length) {
+        if (req.user.detailsId) {
             return res.render('homeFacility', {
                 title: 'Facility Home'
             });
@@ -146,20 +148,20 @@ exports.postUpdateFacilityDetails = function(req, res, next) {
 
 
 exports.postGigDetails = function(req, res, next) {
-    Facility.findOne( { userIds : { $all : [ req.user.id ] } }, function(err, facility) {
+
+    Facility.findById( req.user.detailsId, function(err, facility) {
 
         if (err) return next(err);
 
-        var gig = {
-            start: new Date(req.body.date + ' ' + req.body.startTime),
-            end: new Date(req.body.date + ' ' + req.body.endTime),
-            details: req.body.details
-        };
+        var event = new Event({
+            facilityName: facility.facilityName,
+            facilityId: facility.id,
+            startTime: new Date(req.body.date + ' ' + req.body.startTime),
+            endTime: new Date(req.body.date + ' ' + req.body.endTime),
+            description: req.body.description
+        });
 
-        facility.gigs.push(gig);
-
-
-        facility.save(function(err) {
+        event.save(function(err) {
             if (err) return next(err);
             req.flash('success', { msg: 'Event details posted for ' + facility.facilityName });
             return res.redirect('/homeFacility');
@@ -169,12 +171,18 @@ exports.postGigDetails = function(req, res, next) {
 
 
 exports.getGigListing = function(req, res, next) {
-    Facility.find( {} , { gigs: true, facilityName: true, _id: false}, function(err, gigs) {
+    Event.find( { 'status.open': true } , {
+            facilityName: true,
+            startTime: true,
+            endTime: true,
+            description: true,
+            _id: false
+        }, {sort: {startTime: 1}}, function(err, gigs) {
 
-        if (err) return next(err);
+            if (err) return next(err);
 
-        if (!(gigs===null)) {
-            res.json(gigs);
+            if (!(gigs===null)) {
+                res.json(gigs);
         }
     });
 };

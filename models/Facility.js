@@ -20,23 +20,25 @@ var facilitySchema = new mongoose.Schema({
     waiverNeeded: String,
     patientNumber: String,
 
-    approved:  { type: Boolean, default: false },    // will change to false when admin panel able to approve
+    approved:  { type: Boolean, default: false },
     approvedDate: Date,
     signUpDate: Date,
     approvedBy: String,
     notes: [{
         noteDate: Date,
         noteText: String
-    }],
-    gigs: [{
-        start: Date,
-        end: Date,
-        details: { type: String, default: ''},
-        musician: {
-            type: mongoose.Schema.Types.ObjectId, ref: 'Musician'
-        }
     }]
-
 });
 
 module.exports = mongoose.model('Facility', facilitySchema);
+
+
+
+//gigs: [{
+//    start: Date,
+//    end: Date,
+//    details: { type: String, default: ''},
+//    musician: {
+//        type: mongoose.Schema.Types.ObjectId, ref: 'Musician'
+//    }
+//}]

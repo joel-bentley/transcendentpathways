@@ -198,7 +198,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRe
 
   if (req.user) {
 
-    if (req.user.detailIds.length) {
+    if (req.user.detailsId) {
       if (req.user.accountType==='Musician') {
         res.redirect('/homeMusician');
       } else if (req.user.accountType==='Facility'){
@@ -230,7 +230,7 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
 
   if (req.user) {
 
-    if (req.user.detailIds.length) {
+    if (req.user.detailsId) {
       if (req.user.accountType==='Musician') {
         res.redirect('/homeMusician');
       } else if (req.user.accountType==='Facility'){
@@ -258,7 +258,7 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedi
 
   if (req.user) {
 
-    if (req.user.detailIds.length) {
+    if (req.user.detailsId) {
       if (req.user.accountType==='Musician') {
         res.redirect('/homeMusician');
       } else if (req.user.accountType==='Facility'){
