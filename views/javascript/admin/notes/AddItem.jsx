@@ -1,7 +1,7 @@
 var React = require('react');
 
 var AddItem = React.createClass({
-    getIntialState: function(){
+    getInitialState: function(){
         return {
             newItem: ''
         }
@@ -13,7 +13,11 @@ var AddItem = React.createClass({
     },
     handleSubmit: function(e){
         if(e.keyCode===13){
-            this.props.add(this.state.newItem);
+            var newItemObj = {
+                noteDate: new Date().toLocaleString(),
+                noteText: this.state.newItem
+            };
+            this.props.add(newItemObj);
             this.setState({
                 newItem: ''
             });
@@ -24,7 +28,7 @@ var AddItem = React.createClass({
             <div>
                 <input type="text"
                        className = "form-control"
-                       value = {this.props.newItem}
+                       value = {this.state.newItem}
                        placeholder = "New Note"
                        onKeyDown = {this.handleSubmit}
                        onChange = {this.handleChange} />

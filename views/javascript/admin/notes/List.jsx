@@ -7,36 +7,31 @@ var List = React.createClass({
                 paddingLeft: 0,
                 listStyleType: "none"
             },
-            listGroup: {
-                margin: '5px 0',
-                borderRadius: 5
-            },
-            removeItem: {
-                fontSize: 20,
-                float: "left",
-                position: "absolute",
-                top: 12,
-                left: 6,
+            todoItemDate: {
                 cursor: "pointer",
-                color: "rgb(0, 0, 255)"
-            },
-            todoItem: {
-                paddingLeft: 20,
+                float: "right",
                 fontSize: 14
+
             }
         };
-
         var listItems = this.props.items.map(function(item, index){
             return(
-                <li className = "list-group-item" style = {styles.listGroup} key={this.props.name+item}>
-                <span
-                    className = "glyphicon glyphicon-remove"
-                    style = {styles.removeItem}
-                    onClick =  {this.props.remove.bind(null, index)}>
-                </span>
-                <span style = {styles.todoItem}>
-                    {item}
-                </span>
+                <li className = "panel panel-default"  key={this.props.name+index+item.noteText}>
+                    <div className="panel-heading">
+                        <div>
+                            {new Date(item.noteDate).toDateString()}
+                            <span
+                                style={styles.todoItemDate}
+                                onClick = {this.props.remove.bind(null, index)}
+                                className="label label-primary">Delete</span>
+                        </div>
+                    </div>
+                    <div className="panel-body">
+
+                        <span>
+                            {item.noteText}
+                        </span>
+                    </div>
                 </li>
             )
         }.bind(this));
