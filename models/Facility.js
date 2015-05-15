@@ -20,12 +20,14 @@ var facilitySchema = new mongoose.Schema({
     waiverNeeded: String,
     patientNumber: String,
 
-    approved:  { type: Boolean, default: true },    // will change to false when admin panel able to approve
+    approved:  { type: Boolean, default: false },    // will change to false when admin panel able to approve
     approvedDate: Date,
     signUpDate: Date,
     approvedBy: String,
-    notes: [ {type: String} ],
-
+    notes: [{
+        noteDate: Date,
+        noteText: String
+    }],
     gigs: [{
         start: Date,
         end: Date,

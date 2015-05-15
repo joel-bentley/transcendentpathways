@@ -6,15 +6,15 @@ var MusicianFields = React.createClass({
             <div>
 
                 <form className="form-horizontal">
-                    <div className="form-group form-group-sm">
-                        <label className="col-sm-4 control-label"> Performer Name</label>
+                    <div className="form-group">
+                        <label className="col-sm-4 control-label">Performer Name</label>
                         <div className="col-sm-7">
                             <input className="form-control" type="text"  ref="performerName"
                                    defaultValue={this.props.fieldValues.performerName}
                                    key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
-                    <div className="form-group form-group-sm">
+                    <div className="form-group">
                         <label className="col-sm-4 control-label">Contact Name</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="contactName"
@@ -22,7 +22,7 @@ var MusicianFields = React.createClass({
                                    key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Phone</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="phone"
@@ -30,7 +30,7 @@ var MusicianFields = React.createClass({
                                    key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Address Line 1</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="address1"
@@ -38,7 +38,7 @@ var MusicianFields = React.createClass({
                                    key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Address Line 2</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="address2"
@@ -46,7 +46,7 @@ var MusicianFields = React.createClass({
                                    key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">City</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="city"
@@ -54,7 +54,7 @@ var MusicianFields = React.createClass({
                                    key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">State</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="state"
@@ -62,7 +62,7 @@ var MusicianFields = React.createClass({
                                    key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Zip Code</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="zipcode"
@@ -70,7 +70,7 @@ var MusicianFields = React.createClass({
                                    key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Website URL</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="website"
@@ -78,7 +78,7 @@ var MusicianFields = React.createClass({
                                    key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Biography</label>
                         <div className="col-sm-7">
                             <textarea className="form-control"  rows="2"
@@ -86,7 +86,7 @@ var MusicianFields = React.createClass({
                                       key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Instruments</label>
                         <div className="col-sm-7">
                             <textarea className="form-control"  rows="2"
@@ -94,7 +94,7 @@ var MusicianFields = React.createClass({
                                       key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
-                    <div className="form-group form-group-sm">
+                    <div className="form-group">
                         <label className="col-sm-4 control-label">Picture</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="picture"
@@ -102,7 +102,7 @@ var MusicianFields = React.createClass({
                                    key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Approval Date</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="approvedDate"
@@ -110,7 +110,7 @@ var MusicianFields = React.createClass({
                                    key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Approved By</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="approvedBy"
@@ -118,7 +118,7 @@ var MusicianFields = React.createClass({
                                    key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Sign-Up Date</label>
                         <div className="col-sm-7">
                             <input type="text" className="form-control" ref="signUpDate"
@@ -126,7 +126,7 @@ var MusicianFields = React.createClass({
                                    key={this.props.fieldValues.performerName} />
                         </div>
                     </div>
-                    <div className ="form-group form-group-sm">
+                    <div className ="form-group">
                         <label className="col-sm-4 control-label">Approved To Perform</label>
                         <div className="col-sm-7">
                             <select className="form-control" defaultValue={this.props.fieldValues.approved}

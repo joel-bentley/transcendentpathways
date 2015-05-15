@@ -134,17 +134,25 @@ app.get('/gigListing', passportConf.isAuthenticated, facilityController.getGigLi
 
 app.get('/homeAdmin', passportConf.isAuthenticated, adminController.getHomeAdmin);
 app.get('/musicianData', passportConf.isAuthenticated, adminController.getMusicianData);
-app.get('/musicianLookup/:id', passportConf.isAuthenticated, adminController.getMusician);
 
-// retrieves the jade file for react admin facility loading page
-app.get('/homeAdminFacility', passportConf.isAuthenticated, adminController.getHomeAdminFacility);
-//retrieves facility data for react admin facility main component
-app.get('/homeAdminFacilityData', passportConf.isAuthenticated, adminController.getFacilityData);
 //for react musician admin csh
 app.post('/admin/updateMusicianDetails', passportConf.isAuthenticated, adminController.postUpdateMusicianDetails);
+
+// retrieves the jade file for react admin facility loading page csh
+app.get('/homeAdminFacility', passportConf.isAuthenticated, adminController.getHomeAdminFacility);
+//retrieves facility data for react admin facility main component csh
+app.get('/homeAdminFacilityData', passportConf.isAuthenticated, adminController.getFacilityData);
 //for react facility admin csh
 app.post('/admin/updateFacilityDetails', passportConf.isAuthenticated, adminController.postUpdateFacilityDetails);
 
+// retrieves the jade file for react admin event loading page csh
+app.get('/homeAdminEvent', passportConf.isAuthenticated, adminController.getHomeAdminEvent);
+//retrieves event data for react admin facility main component csh
+app.get('/homeAdminEventData', passportConf.isAuthenticated, adminController.getEventData);
+//for react event admin csh
+app.post('/admin/updateEventDetails', passportConf.isAuthenticated, adminController.postUpdateEventDetails);
+//retrieves facility info for each event tab
+app.post('/getFacilityInfo/', passportConf.isAuthenticated, adminController.getFacilityInfo);
 
 /**
  * API examples routes.

@@ -1,16 +1,9 @@
 var React = require('react/addons');
 var MusicianRow = require('./MusicianRow.jsx');
 var DetailsBar = require('./DetailsBar.jsx');
-var Notes = require('../notes/Notes.jsx');
-
-//var _ = require('lodash');
-
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+var ListContainer = require('../notes/ListContainer.jsx');
 
 var MusicianTable = React.createClass({
-    propTypes: {
-        //musicians: React.PropTypes.array.isRequired
-    },
     getDefaultProps: function(){
         return {
             source: '/musicianData',
@@ -28,7 +21,6 @@ var MusicianTable = React.createClass({
         this.setState({
             showResults: true,
             musician: musician
-
         });
     },
     saveValues: function(fields) {
@@ -75,11 +67,6 @@ var MusicianTable = React.createClass({
             musician: musician,
             showResults: false
         });
-        //save admin changes to the musician here with this.state.musician
-        // exports.postUpdateMusicianDetails used in admin.js controller
-        // route create in app.js /admin/updateMusicianDetails-->this.state.postRoute
-        // jQuery.post( url [, data ] [, success ] [, dataType ] )
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-Token': this.getCSRFTokenValue()
@@ -99,13 +86,9 @@ var MusicianTable = React.createClass({
                 });
             }
         }.bind(this));
-
-
-
     },
     getNotes: function(){
         return this.state.musician.notes;
-
     },
     setNotes: function(notes) {
         var x = this.state.musician;
@@ -138,25 +121,27 @@ var MusicianTable = React.createClass({
         }.bind(this));
 
         return (
-            <div className="col-sm-4">
-                <div className="list-group PerformerList">
-                    <a href="#" className="list-group-item active"> Performer List</a>
-                    {rowsNotApproved} {rowsApproved}
-                </div>
-                <div>
-                    <ReactCSSTransitionGroup transitionName="example">
-                        {this.state.showResults ? <DetailsBar musician={this.state.musician}
-                                                              handleChangedData={this.handleChangedData} saveValues={this.saveValues} />: null }
-                    </ReactCSSTransitionGroup>
-                </div>
-                <div>
-                    {this.state.showResults ?
-                        <Notes
-                            ref = "Notes"
-                            name = {this.state.musician.performerName}
-                            getNotes={this.getNotes}
-                            setNotes={this.setNotes}
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-sm-2 list-group">
+                        <a href="#" className="list-group-item active"> <h5>Performer List</h5></a>
+                        {rowsNotApproved} {rowsApproved}
+                    </div>
+                    <div className="col-sm-7">
+                        {this.state.showResults ? <DetailsBar
+                            musician={this.state.musician}
+                            handleChangedData={this.handleChangedData}
+                            saveValues={this.saveValues}
+                        />: null }
+                    </div>
+                    <div className="col-sm-3">
+                        {this.state.showResults ?
+                            <ListContainer
+                                name = {this.state.musician.performerName}
+                                getNotes={this.getNotes}
+                                setNotes={this.setNotes}
                             /> : null}
+                    </div>
                 </div>
             </div>
         );

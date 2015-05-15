@@ -2,24 +2,27 @@ var _ = require('lodash');
 var async = require('async');
 var Musician = require('../models/Musician');
 var Facility = require('../models/Facility');
+var Event = require('../models/Event');
 
-/**
- * GET /login
- * Login page.
- */
 exports.getHomeAdmin = function(req, res) {
     res.render('homeAdmin', {
-        title: 'Admin Home'
+        title: 'Admin Musicians'
     });
 };
 
 exports.getHomeAdminFacility = function(req, res) {
     res.render('homeAdminFacility', {
-        title: 'Admin Home'
+        title: 'Admin Facilities'
     });
 };
 
-exports.getMusicianData = function(req, response) {
+exports.getHomeAdminEvent = function(req, res){
+    res.render('homeAdminEvent', {
+        title: 'Admin Events'
+    })
+};
+
+ exports.getMusicianData = function(req, response) {
     Musician.find({}).exec(function(err, musician){
         var musicianData = musician;
         response.writeHead(200, {'Content-Type': 'application/json'});
@@ -35,11 +38,25 @@ exports.getFacilityData = function(req, response) {
     });
 };
 
-exports.getMusician = function(req, res) {
-    Musician.findOne({_id: req.params.id}).exec(function (err, doc) {
-        console.log(doc);
+exports.getEventData = function(req, response) {
+    Event.find({}).exec(function(err, event){
+        var eventData = event;
+        response.writeHead(200, {'Content-Type': 'application/json'});
+        response.end(JSON.stringify(eventData));
     });
 };
+
+exports.getFacilityInfo = function(req, response, next){
+    console.log('mongo search for req.body.name: %s', req.body.name);
+    Facility.findOne({facilityName: req.body.name}).exec(function(err, facility){
+        if (err) return next(err);
+        var facilityData = facility;
+        //console.log(facility);
+        response.writeHead(200, {'Content-Type': 'application/json'});
+        response.end(JSON.stringify(facilityData));
+    });
+};
+
 exports.postUpdateMusicianDetails = function(req, res, next) {
     Musician.findOne({_id: req.body._id}).exec(function(err, musician) {
         if (err) return next(err);
@@ -96,3 +113,25 @@ exports.postUpdateFacilityDetails = function(req, res, next) {
         });
     });
 };
+
+exports.postUpdateEventDetails = function(req, res, next) {
+    Event.findOne({_id: req.body._id}).exec(function(err, event) {
+        if (err) return next(err);
+        event.facilityName = req.body.facilityName || '';
+        event.startTime = req.body.startTime || '';
+        event.endTime = req.body.endTime || '';
+        event.description = req.body.description || '';
+        event.status = req.body.status;
+        event.requestedBy = req.body.requestedBy || '';
+        event.approvedMusician = req.body.approvedMusician || '';
+        event.payment = req.body.payment || '';
+        event.performance = req.body.performance || '';
+
+        event.save(function(err) {
+            if (err) return next(err);
+        });
+    });
+};
+
+
+

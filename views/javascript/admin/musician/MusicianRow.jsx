@@ -12,11 +12,11 @@ var MusicianRow = React.createClass({
     render: function() {
         var name = this.props.musician.approved ?
             this.props.musician.performerName :<span style={{color: 'blue'}}>
-                {this.props.musician.performerName}
+                <h5>{this.props.musician.performerName}</h5>
             </span>;
         return (
             <a href="#" className="list-group-item" key={this.props.musician._id}
-               onClick={this.changeState}><h4> {name}</h4> </a>
+               onClick={this.changeState}><h5> {name}</h5> </a>
         );
     }
 });
