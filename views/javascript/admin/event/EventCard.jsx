@@ -37,6 +37,11 @@ var EventCard = React.createClass({
                             </div>
                         </div>
                         <div className="row">
+                            <div className="col-xs-12 col-xs-offset-0">
+                                <h5>{this.props.event.description}</h5>
+                            </div>
+                        </div>
+                        <div className="row">
                             <div className="col-xs-10 col-xs-offset-1">
                                 <h5>Facility Contact {this.props.facility.contactName}</h5>
                             </div>
