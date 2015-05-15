@@ -12,12 +12,12 @@ var EventCard = React.createClass({
                     <div className="panel-title">
                         <div className="container-fluid">
                             <div className="row">
-                                <div className="col-xs-7">
+                                <div className="col-xs-6">
                                     <span style={{color: 'blue'}}>
                                         <h5>{this.props.event.facilityName}</h5>
                                     </span>
                                 </div>
-                                <div className="col-xs-5">
+                                <div className="col-xs-6">
                                     <span style={{color: 'indigo'}}>
                                         <h5>{new Date(this.props.event.startTime).toDateString()}</h5>
                                     </span>
@@ -34,6 +34,12 @@ var EventCard = React.createClass({
                             </div>
                             <div className="col-xs-6">
                                 <h5>End: {new Date(this.props.event.endTime).toLocaleTimeString()}</h5>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-xs-12 col-xs-offset-0">
+                                <hr></hr>
+                                <h5>{this.props.event.description}</h5>
                             </div>
                         </div>
                         <div className="row">
