@@ -1,5 +1,6 @@
 var React = require('react');
 var EventCard = require('./EventCard.jsx');
+var StatusCard = require('./StatusCard.jsx');
 
 
 var EventContainer = React.createClass({
@@ -64,13 +65,15 @@ var EventContainer = React.createClass({
         var completeEvents = [];
         var upcomingEvents = [];
         this.state.events.forEach(function(event) {
-            if (event.startTime >= new Date()){
+            if (new Date(event.startTime) >= new Date()){
                 upcomingEvents.push(
                     <EventCard
                         event = {event}
                         key = {event._id}
                         getFacilityInfo = {this.getFacilityInfo}
                         facility = {this.state.facility}
+                        showDetails = {this.showDetails}
+
                     />
                 );
             } else {
@@ -80,6 +83,7 @@ var EventContainer = React.createClass({
                         key = {event._id}
                         getFacilityInfo = {this.getFacilityInfo}
                         facility = {this.state.facility}
+                        showDetails = {this.showDetails}
                     />
                 );
             }
@@ -87,16 +91,19 @@ var EventContainer = React.createClass({
         return (
             <div>
                 <div className="container-fluid">
+                    <h4>Upcoming Events</h4>
                     <div className="row">
                         <div className="col-sm-4 ">
                             {upcomingEvents}
-                        </div>
-                    </div>
-                </div>
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-sm-4 ">
+                            <hr></hr>
+                            <h4>Completed Events</h4>
                             {completeEvents}
+                        </div>
+                        <div className="col-sm-8 ">
+                            {this.state.showResults ?
+                                <StatusCard
+                                    event={this.state.event}
+                                /> :  null}
                         </div>
                     </div>
                 </div>
