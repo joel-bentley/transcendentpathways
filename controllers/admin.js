@@ -130,6 +130,8 @@ exports.postUpdateEventDetails = function(req, res, next) {
         event.save(function(err) {
             if (err) return next(err);
         });
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.end(JSON.stringify(event));
     });
 };
 
