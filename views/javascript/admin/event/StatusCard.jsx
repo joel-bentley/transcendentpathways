@@ -2,6 +2,7 @@ var React = require('react');
 var StatusIndicator = require('./StatusIndicator.jsx');
 var RequestedBy = require('./RequestedBy.jsx');
 var ApprovedMusician = require('./ApprovedMusician.jsx');
+var PaymentStatus = require('./PaymentStatus.jsx');
 
 var StatusCard = React.createClass({
     //getInitialState: function(){
@@ -16,7 +17,6 @@ var StatusCard = React.createClass({
     //},
 
     render: function() {
-
         return(
             <div className="panel panel-default">
                 <div className="panel-heading">
@@ -95,6 +95,9 @@ var StatusCard = React.createClass({
                                     enableSave = {this.props.enableSave}
                                 />
                             </div>
+                        </div>
+                        <div className='row'>
+                            <hr></hr>
                         </div>
                     </div>
                 </div>
