@@ -17,7 +17,6 @@ var ApprovedMusician = React.createClass({
                 }
             });
             $.post(this.props.postRoute, updatedEvent, function(result){
-                //console.log(result);
             });
     },
     getCSRFTokenValue: function() {
