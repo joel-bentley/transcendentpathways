@@ -59,6 +59,7 @@ var PaymentStatus = React.createClass({
                         <div className="col-sm-6" style={{"position":"relative"}}>
                             <fieldset>
                                 <input type="text"
+                                       disabled = {this.props.event.status.completed || this.props.event.status.canceled}
                                        className="form-control"
                                        ref="paidDate"
                                        placeholder='...'
@@ -71,7 +72,7 @@ var PaymentStatus = React.createClass({
                         <label className="col-sm-5 control-label"><h5>Reference Number (check number)</h5></label>
                         <div className="col-sm-6">
                             <input type="text" className="form-control" ref="paymentReference"
-                                   disabled = {this.props.event.status.completed}
+                                   disabled = {this.props.event.status.completed || this.props.event.status.canceled}
                                    defaultValue={this.props.event.payment.reference}
                                    key={this.props.event.payment.reference} />
                         </div>
@@ -79,7 +80,7 @@ var PaymentStatus = React.createClass({
                     <div className="form-group">
                         <div className="col-sm-2 col-sm-offset-9">
                             <div>
-                                {this.props.event.status.completed ? null :
+                                {this.props.event.status.completed || this.props.event.status.canceled ? null :
                                 <button className="btn btn-primary"
                                         onClick={this.saveAndContinue}>Submit
                                 </button>}

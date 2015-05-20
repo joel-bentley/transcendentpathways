@@ -3,6 +3,7 @@ var StatusIndicator = require('./StatusIndicator.jsx');
 var RequestedBy = require('./RequestedBy.jsx');
 var ApprovedMusician = require('./ApprovedMusician.jsx');
 var PaymentStatus = require('./PaymentStatus.jsx');
+var CancelEvent = require('./CancelEvent.jsx');
 
 var StatusCard = React.createClass({
     //getInitialState: function(){
@@ -109,6 +110,18 @@ var StatusCard = React.createClass({
                                     updateEvent = {this.props.updateEvent}
                                     enableSave = {this.props.enableSave}
                                 />
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <hr><h4>Cancel Event</h4></hr>
+                        </div>
+                        <div className='row'>
+                            <div className="col-sm-10 col-sm-1-offset">
+                                <CancelEvent
+                                    event = {this.props.event}
+                                    updateEvent = {this.props.updateEvent}
+                                    enableSave = {this.props.enableSave}
+                                    />
                             </div>
                         </div>
                     </div>
