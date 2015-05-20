@@ -20,14 +20,15 @@ var RequestedBy = React.createClass({
                         <div className="col-sm-10   ">
                             {elem.musicianName}
                         </div>
-                        <div className="col-sm-2">
-                            <span
-                                className="glyphicon glyphicon-music"
-                                style={{color:'gray'}}
-                                onClick={this.updateMusician.bind(null, elem.musicianName)}
-                            >
-                            </span>
-                        </div>
+                        {this.props.event.status.completed? null :
+                            <div className="col-sm-2">
+                                <span
+                                    className="glyphicon glyphicon-music"
+                                    style={{color:'gray'}}
+                                    onClick={this.updateMusician.bind(null, elem.musicianName)}
+                                >
+                                </span>
+                        </div>}
                     </div>
                 </li>
             )
