@@ -77,7 +77,7 @@ var StatusCard = React.createClass({
                             </div>
                         </div>
                         <div className='row'>
-                            <hr></hr>
+                            <hr><h4>Performer Status</h4></hr>
                         </div>
                         <div className="row">
                             <div className="col-sm-6">
@@ -98,6 +98,18 @@ var StatusCard = React.createClass({
                         </div>
                         <div className='row'>
                             <hr></hr>
+                        </div>
+                        <div className='row'>
+                            <hr><h4>Payment Status</h4></hr>
+                        </div>
+                        <div className='row'>
+                            <div className="col-sm-10 col-sm-1-offset">
+                                <PaymentStatus
+                                    event = {this.props.event}
+                                    updateEvent = {this.props.updateEvent}
+                                    enableSave = {this.props.enableSave}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
