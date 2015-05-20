@@ -7,10 +7,6 @@ var PaymentStatus = React.createClass({
             postRoute: '/admin/updateEventDetails'
         }
     },
-    //componentDidMount:function()
-    //{
-    //    $(React.findDOMNode(this.refs.paidDate)).pickadate();
-    //},
     componentDidUpdate: function(){
         $(React.findDOMNode(this.refs.paidDate)).pickadate();
     },
