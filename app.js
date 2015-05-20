@@ -130,7 +130,9 @@ app.get('/account/updateFacilityDetails', passportConf.isAuthenticated, facility
 app.post('/account/updateFacilityDetails', passportConf.isAuthenticated, facilityController.postUpdateFacilityDetails);
 app.post('/postGigDetails', passportConf.isAuthenticated, facilityController.postGigDetails);
 
-app.get('/gigListing', passportConf.isAuthenticated, facilityController.getGigListing);
+app.get('/gigListing', passportConf.isAuthenticated, musicianController.getGigListing);
+app.post('/postRequestGig', passportConf.isAuthenticated, musicianController.postRequestGig);
+app.get('/getMusicianId', passportConf.isAuthenticated, musicianController.getMusicianId);
 
 app.get('/homeAdmin', passportConf.isAuthenticated, adminController.getHomeAdmin);
 app.get('/musicianData', passportConf.isAuthenticated, adminController.getMusicianData);
@@ -153,6 +155,7 @@ app.get('/homeAdminEventData', passportConf.isAuthenticated, adminController.get
 app.post('/admin/updateEventDetails', passportConf.isAuthenticated, adminController.postUpdateEventDetails);
 //retrieves facility info for each event tab
 app.post('/getFacilityInfo/', passportConf.isAuthenticated, adminController.getFacilityInfo);
+
 
 /**
  * API examples routes.
@@ -198,7 +201,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRe
 
   if (req.user) {
 
-    if (req.user.detailIds.length) {
+    if (req.user.detailsId) {
       if (req.user.accountType==='Musician') {
         res.redirect('/homeMusician');
       } else if (req.user.accountType==='Facility'){
@@ -230,7 +233,7 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
 
   if (req.user) {
 
-    if (req.user.detailIds.length) {
+    if (req.user.detailsId) {
       if (req.user.accountType==='Musician') {
         res.redirect('/homeMusician');
       } else if (req.user.accountType==='Facility'){
@@ -258,7 +261,7 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedi
 
   if (req.user) {
 
-    if (req.user.detailIds.length) {
+    if (req.user.detailsId) {
       if (req.user.accountType==='Musician') {
         res.redirect('/homeMusician');
       } else if (req.user.accountType==='Facility'){

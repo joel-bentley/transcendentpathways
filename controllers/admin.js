@@ -39,7 +39,7 @@ exports.getFacilityData = function(req, response) {
 };
 
 exports.getEventData = function(req, response) {
-    Event.find({}).exec(function(err, event){
+    Event.find({}).sort('startTime').exec(function(err, event){
         var eventData = event;
         response.writeHead(200, {'Content-Type': 'application/json'});
         response.end(JSON.stringify(eventData));
@@ -130,6 +130,8 @@ exports.postUpdateEventDetails = function(req, res, next) {
         event.save(function(err) {
             if (err) return next(err);
         });
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.end(JSON.stringify(event));
     });
 };
 
