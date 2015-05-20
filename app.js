@@ -130,7 +130,9 @@ app.get('/account/updateFacilityDetails', passportConf.isAuthenticated, facility
 app.post('/account/updateFacilityDetails', passportConf.isAuthenticated, facilityController.postUpdateFacilityDetails);
 app.post('/postGigDetails', passportConf.isAuthenticated, facilityController.postGigDetails);
 
-app.get('/gigListing', passportConf.isAuthenticated, facilityController.getGigListing);
+app.get('/gigListing', passportConf.isAuthenticated, musicianController.getGigListing);
+app.post('/postRequestGig', passportConf.isAuthenticated, musicianController.postRequestGig);
+app.get('/getMusicianId', passportConf.isAuthenticated, musicianController.getMusicianId);
 
 app.get('/homeAdmin', passportConf.isAuthenticated, adminController.getHomeAdmin);
 app.get('/musicianData', passportConf.isAuthenticated, adminController.getMusicianData);
