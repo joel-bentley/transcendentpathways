@@ -139,3 +139,66 @@ exports.postUpdateMusicianDetails = function(req, res, next) {
         });
     });
 };
+
+exports.getGigListing = function(req, res, next) {
+    Event.find( { 'status.open': true } , {
+        facilityName: true,
+        startTime: true,
+        endTime: true,
+        description: true,
+        _id: true,
+        requestedBy: true
+    }, {sort: {startTime: 1}}, function(err, gigs) {
+
+        if (err) return next(err);
+
+        if (!(gigs===null)) {
+
+            //Musician.findOne( { userIds : { $all : [ req.user.id ] } }, function(err, musician) {
+            //    if (err) return next(err);
+            //
+            //
+            //    gigs.map( function(gig, index) {
+            //        console.dir(gig);
+            //        if (gig.requestedBy.indexOf({ musicianName: musician.performerName, musicianId: musician._id }) !== -1) {
+            //            gigs[index]._doc.requested = true;
+            //        } else {
+            //            gigs[index]._doc.requested = false;
+            //        }
+            //        console.dir(gigs[index]._doc.requested);
+            //    });
+            //
+            //});
+
+            //console.dir(JSON.stringify(gigs));
+
+            res.json(gigs);
+        }
+    });
+};
+
+exports.getMusicianId = function(req, res, next) {
+    Musician.findOne( { userIds : { $all : [ req.user.id ] } }, {performerName: true, _id: true}, function(err, musician) {
+        if (err) return next(err);
+        res.json(musician);
+    });
+};
+
+exports.postRequestGig = function(req, res, next) {
+    console.dir(req.body.gigId);
+
+    Musician.findOne( { userIds : { $all : [ req.user.id ] } }, function(err, musician) {
+        if (err) return next(err);
+
+        Event.findById(req.body.gigId, function(err, event) {
+            if (err) return next(err);
+
+            event.status.requested = true;
+            event.requestedBy.push({musicianName: musician.performerName, musicianId: musician.id})
+
+            event.save(function(err) {
+                if (err) return next(err);
+            });
+        });
+    });
+};
