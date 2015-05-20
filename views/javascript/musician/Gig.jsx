@@ -16,8 +16,8 @@ module.exports = React.createClass({
                 <p className="list-group-item-text">
                     <span>Details: { this.props.details }</span>
                 </p>
-                <p className="list-group-item-text">
-                    <span>{ this.props.requested ? 'Requested' : '' }</span>
+                <p style={{textAlign: 'right'}}>
+                    { this.props.requested ? <span className="glyphicon glyphicon-ok" style={{color: 'green'}}>Event Requested</span> : null }
                 </p>
             </a>
         );
