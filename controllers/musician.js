@@ -1,10 +1,11 @@
 var _ = require('lodash');
 var async = require('async');
 var nodemailer = require('nodemailer');
+
 var User = require('../models/User');
 var Musician = require('../models/Musician');
-
 var Facility = require('../models/Facility');
+var Event = require('../models/Event');
 
 /**
  * GET /signupMusician
@@ -22,7 +23,7 @@ exports.getSignupMusician = function(req, res) {
 exports.getMusicianDetails = function(req, res){
     if(!req.user) return res.redirect('/');
 
-    if(req.user.detailIds.length) return res.redirect('/homeMusician');
+    if(req.user.detailsId) return res.redirect('/homeMusician');
 
     if(req.user.accountType==='Musician') {
 
@@ -55,7 +56,7 @@ exports.postMusicianDetails = function(req, res, next){
         User.findById(req.user.id, function(err, user) {                    // Save Id from Musician in User
             if (err) return next(err);
 
-            user.detailIds.push(musician.id);
+            user.detailsId = musician.id;
 
             user.save(function(err) {
                 if (err) return next(err);
@@ -72,7 +73,7 @@ exports.getHomeMusician = function(req, res) {
 
     if (req.user.accountType==='Musician') {
 
-        if (req.user.detailIds.length) {
+        if (req.user.detailsId) {
             return res.render('homeMusician', {
                 title: 'Musician-Performer Home'
             });
@@ -135,6 +136,69 @@ exports.postUpdateMusicianDetails = function(req, res, next) {
             if (err) return next(err);
             req.flash('success', { msg: 'Musician Details Updated for ' + musician.performerName });
             return res.redirect('/account');
+        });
+    });
+};
+
+exports.getGigListing = function(req, res, next) {
+    Event.find( { 'status.open': true } , {
+        facilityName: true,
+        startTime: true,
+        endTime: true,
+        description: true,
+        _id: true,
+        requestedBy: true
+    }, {sort: {startTime: 1}}, function(err, gigs) {
+
+        if (err) return next(err);
+
+        if (!(gigs===null)) {
+
+            //Musician.findOne( { userIds : { $all : [ req.user.id ] } }, function(err, musician) {
+            //    if (err) return next(err);
+            //
+            //
+            //    gigs.map( function(gig, index) {
+            //        console.dir(gig);
+            //        if (gig.requestedBy.indexOf({ musicianName: musician.performerName, musicianId: musician._id }) !== -1) {
+            //            gigs[index]._doc.requested = true;
+            //        } else {
+            //            gigs[index]._doc.requested = false;
+            //        }
+            //        console.dir(gigs[index]._doc.requested);
+            //    });
+            //
+            //});
+
+            //console.dir(JSON.stringify(gigs));
+
+            res.json(gigs);
+        }
+    });
+};
+
+exports.getMusicianId = function(req, res, next) {
+    Musician.findOne( { userIds : { $all : [ req.user.id ] } }, {performerName: true, _id: true}, function(err, musician) {
+        if (err) return next(err);
+        res.json(musician);
+    });
+};
+
+exports.postRequestGig = function(req, res, next) {
+    console.dir(req.body.gigId);
+
+    Musician.findOne( { userIds : { $all : [ req.user.id ] } }, function(err, musician) {
+        if (err) return next(err);
+
+        Event.findById(req.body.gigId, function(err, event) {
+            if (err) return next(err);
+
+            event.status.requested = true;
+            event.requestedBy.push({musicianName: musician.performerName, musicianId: musician.id})
+
+            event.save(function(err) {
+                if (err) return next(err);
+            });
         });
     });
 };

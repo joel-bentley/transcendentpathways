@@ -2,24 +2,33 @@ var mongoose = require('mongoose');
 
 var eventSchema = new mongoose.Schema({
     facilityName: String,
+    facilityId: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'Facility'
+    },
     startTime: Date,
     endTime: Date,
-    description: String,
+    description: { type: String, default: ''},
     status: {
-        completed: Boolean,
-        canceled: Boolean,
-        open: Boolean,
-        requested: Boolean,
-        approved: Boolean
+        completed: { type: Boolean, default: false },
+        canceled: { type: Boolean, default: false },
+        open: { type: Boolean, default: true },
+        requested: { type: Boolean, default: false },
+        approved: { type: Boolean, default: false }
     },
     requestedBy: [{
-        musicianName: String
+        musicianName: String,
+        musicianId: {
+            type: mongoose.Schema.Types.ObjectId, ref: 'Musician'
+        }
     }],
-    approvedMusician: String,
+    approvedMusicianName: { type: String, default: '' },
+    approvedMusicianId: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'Musician'
+    },
     payment: {
-        status: String,
+        status: { type: String, default: '' },
         paidDate: Date,
-        reference: String
+        reference: { type: String, default: '' }
     },
     performance: {
         facilityRating: Number,

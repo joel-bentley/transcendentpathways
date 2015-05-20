@@ -1,8 +1,14 @@
 var React = require('react');
 var EventCard = require('./EventCard.jsx');
+var StatusCard = require('./StatusCard.jsx');
 
 
 var EventContainer = React.createClass({
+    enableSave: function(state){
+        this.setState({
+            enableSave: state
+        })
+    },
     getDefaultProps: function() {
         return {
             source: '/homeAdminEventData',
@@ -15,10 +21,17 @@ var EventContainer = React.createClass({
             events: [],
             event: [],
             showResults: false,
-            facility: []
+            facility: [],
+            enableSave: false
         }
     },
-
+    updateEvent: function(event){
+        if (event) {
+            this.setState({
+                event: event
+            });
+        }
+    },
     componentDidMount: function() {                                 //csh loading the events into this.state.events
         $.get(this.props.source, function(result) {
             var eventData = result;
@@ -34,6 +47,7 @@ var EventContainer = React.createClass({
             showResults: true,
             event: eventNew
         });
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
     },
     getCSRFTokenValue: function() {
         var metas = document.getElementsByTagName('meta');
@@ -64,14 +78,17 @@ var EventContainer = React.createClass({
         var completeEvents = [];
         var upcomingEvents = [];
         this.state.events.forEach(function(event) {
-            if (event.startTime >= new Date()){
+            if (!event.status.completed && !event.status.canceled){
                 upcomingEvents.push(
                     <EventCard
                         event = {event}
                         key = {event._id}
                         getFacilityInfo = {this.getFacilityInfo}
                         facility = {this.state.facility}
-                    />
+                        showDetails = {this.showDetails}
+                        enableSave = {this.enableSave}
+                        allowSave = {this.state.enableSave}
+                        />
                 );
             } else {
                 completeEvents.push(
@@ -80,23 +97,33 @@ var EventContainer = React.createClass({
                         key = {event._id}
                         getFacilityInfo = {this.getFacilityInfo}
                         facility = {this.state.facility}
-                    />
+                        showDetails = {this.showDetails}
+                        enableSave = {this.enableSave}
+                        allowSave = {this.state.enableSave}
+                        />
                 );
             }
         }.bind(this));
         return (
             <div>
                 <div className="container-fluid">
+                    <h4>Upcoming Events</h4>
                     <div className="row">
                         <div className="col-sm-4 ">
                             {upcomingEvents}
-                        </div>
-                    </div>
-                </div>
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-sm-4 ">
+                            <hr></hr>
+                            <h4>Completed Events</h4>
                             {completeEvents}
+                        </div>
+                        <div className="col-sm-8 ">
+                            {this.state.showResults ?
+                                <StatusCard
+                                    ref = "status"
+                                    event={this.state.event}
+                                    updateEvent={this.updateEvent}
+                                    allowSave = {this.state.enableSave}
+                                    enableSave = {this.enableSave}
+                                /> :  null}
                         </div>
                     </div>
                 </div>
