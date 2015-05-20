@@ -4,22 +4,26 @@ var React = require('react');
 var PaymentStatus = React.createClass({
     getDefaultProps: function() {
         return {
-            postRoute: '/admin/updateEventDetails',
+            postRoute: '/admin/updateEventDetails'
         }
     },
-    componentDidMount:function()
-    {
+    //componentDidMount:function()
+    //{
+    //    $(React.findDOMNode(this.refs.paidDate)).pickadate();
+    //},
+    componentDidUpdate: function(){
         $(React.findDOMNode(this.refs.paidDate)).pickadate();
     },
 
     saveAndContinue: function(){
-        debugger;
         var event = this.props.event;
         event.payment.status = 'PAID';
         event.payment.paidDate = React.findDOMNode(this.refs.paidDate).value;
         event.payment.reference = React.findDOMNode(this.refs.paymentReference).value;
         event.status.completed=true;
-        //console.log(event);
+        if (event.payment.paidDate === '' || event.payment.reference === ""){
+            return;
+        }
         $.ajaxSetup({
             headers: {
                 'X-CSRF-Token': this.getCSRFTokenValue()
@@ -46,21 +50,23 @@ var PaymentStatus = React.createClass({
                         <label className="col-sm-5 control-label"><h5>Payment Status</h5></label>
                         <div className="col-sm-6">
                             <input className="form-control" type="text"  ref="paymentStatus"
-                                   disabled = {this.props.event.status.completed}
+                                   disabled = {true}
                                    defaultValue={this.props.event.payment.status}
                                    key={this.props.event.payment.status} />
                         </div>
                     </div>
                     <div className="form-group">
                         <label className="col-sm-5 control-label"><h5>Paid Date</h5></label>
-                        <div className="col-sm-6">
-                            <input type="text"
-                                   disabled = {this.props.event.status.completed}
-                                   className="form-control"
-                                   ref="paidDate"
-                                   placeholder='...'
-                                   defaultValue={this.props.event.payment.paidDate}
-                                   key={this.props.event.payment.paidDate} />
+                        <div className="col-sm-6" style={{"position":"relative"}}>
+                            <fieldset>
+                                <input type="text"
+                                       disabled = {this.props.event.status.completed}
+                                       className="form-control"
+                                       ref="paidDate"
+                                       placeholder='...'
+                                       defaultValue={this.props.event.payment.paidDate}
+                                       key={this.props.event.payment.paidDate} />
+                            </fieldset>
                         </div>
                     </div>
                     <div className ="form-group">
