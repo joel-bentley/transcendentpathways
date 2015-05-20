@@ -78,7 +78,7 @@ var EventContainer = React.createClass({
         var completeEvents = [];
         var upcomingEvents = [];
         this.state.events.forEach(function(event) {
-            if (new Date(event.startTime) >= new Date()){
+            if (!event.status.completed){
                 upcomingEvents.push(
                     <EventCard
                         event = {event}
