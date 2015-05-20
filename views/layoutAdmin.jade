@@ -8,6 +8,9 @@ html
     title #{title} - Transcendent Pathways
     link(href='/css/main.min.css', rel='stylesheet')
     link(href='/media/favicon.ico', rel='shortcut icon')
+    link(href='/js/lib/pickadate/compressed/themes/classic.css', rel='stylesheet')
+    link(href='/js/lib/pickadate/compressed/themes/classic.date.css', rel='stylesheet')
+    link(href='/js/lib/pickadate/compressed/themes/classic.time.css', rel='stylesheet')
   body
     include partials/headerAdmin
 
@@ -17,3 +20,6 @@ html
 
     script(src='/js/lib/jquery-2.1.3.min.js')
     script(src='/js/lib/bootstrap.min.js')
+    script(src='/js/lib/pickadate/compressed/picker.js')
+    script(src='/js/lib/pickadate/compressed/picker.date.js')
+    script(src='/js/lib/pickadate/compressed/picker.time.js')

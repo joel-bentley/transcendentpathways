@@ -154,6 +154,7 @@ app.post('/admin/updateEventDetails', passportConf.isAuthenticated, adminControl
 //retrieves facility info for each event tab
 app.post('/getFacilityInfo/', passportConf.isAuthenticated, adminController.getFacilityInfo);
 
+
 /**
  * API examples routes.
  */

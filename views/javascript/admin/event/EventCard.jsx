@@ -1,12 +1,19 @@
 var React = require('react');
 
 var EventCard = React.createClass({
+    //getInitialState: function(){
+    //    return({
+    //        selected: false
+    //    })
+    //},
+
     componentDidMount: function(){
         this.props.getFacilityInfo(this.props.event.facilityName)
     },
     changeState: function(){
         var event = this.props.event;
         this.props.showDetails(event);
+        this.props.enableSave(false);
     },
     render: function() {
 
@@ -20,15 +27,24 @@ var EventCard = React.createClass({
                                     <span style={{color: 'blue'}}>
                                         <h5>{this.props.event.facilityName}</h5>
                                     </span>
+
                                 </div>
                                 <div className="col-xs-2">
-                                    <button
-                                        type="button"
-                                        className="btn btn-default"
-                                        onClick = {this.changeState}
-                                        >
-                                        <span className="glyphicon glyphicon-align-justify" ></span>
-                                    </button>
+
+                                    {this.props.allowSave ?
+                                        null :
+                                        <button
+                                            style={{padding: '2px 10px'}}
+                                            type="button"
+                                            className="btn btn-default"
+                                            onClick={this.changeState}
+                                            >
+
+                                            <span
+                                                className="glyphicon glyphicon-list"
+                                                style={{color: 'blue'}}></span>
+                                        </button>
+                                    }
                                 </div>
                             </div>
                             <div className="row">
