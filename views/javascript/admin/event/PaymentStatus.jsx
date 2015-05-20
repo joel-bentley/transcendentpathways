@@ -46,6 +46,7 @@ var PaymentStatus = React.createClass({
                         <label className="col-sm-5 control-label"><h5>Payment Status</h5></label>
                         <div className="col-sm-6">
                             <input className="form-control" type="text"  ref="paymentStatus"
+                                   disabled = {this.props.event.status.completed}
                                    defaultValue={this.props.event.payment.status}
                                    key={this.props.event.payment.status} />
                         </div>
@@ -53,7 +54,10 @@ var PaymentStatus = React.createClass({
                     <div className="form-group">
                         <label className="col-sm-5 control-label"><h5>Paid Date</h5></label>
                         <div className="col-sm-6">
-                            <input type="text" className="form-control" ref="paidDate"
+                            <input type="text"
+                                   disabled = {this.props.event.status.completed}
+                                   className="form-control"
+                                   ref="paidDate"
                                    placeholder='...'
                                    defaultValue={this.props.event.payment.paidDate}
                                    key={this.props.event.payment.paidDate} />
@@ -63,6 +67,7 @@ var PaymentStatus = React.createClass({
                         <label className="col-sm-5 control-label"><h5>Reference Number (check number)</h5></label>
                         <div className="col-sm-6">
                             <input type="text" className="form-control" ref="paymentReference"
+                                   disabled = {this.props.event.status.completed}
                                    defaultValue={this.props.event.payment.reference}
                                    key={this.props.event.payment.reference} />
                         </div>
@@ -70,7 +75,10 @@ var PaymentStatus = React.createClass({
                     <div className="form-group">
                         <div className="col-sm-2 col-sm-offset-9">
                             <div>
-                                <button className="btn btn-primary" onClick={this.saveAndContinue}>Submit</button>
+                                {this.props.event.status.completed ? null :
+                                <button className="btn btn-primary"
+                                        onClick={this.saveAndContinue}>Submit
+                                </button>}
                             </div>
                         </div>
                     </div>
