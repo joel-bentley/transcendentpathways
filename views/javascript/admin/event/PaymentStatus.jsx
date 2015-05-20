@@ -7,6 +7,9 @@ var PaymentStatus = React.createClass({
             postRoute: '/admin/updateEventDetails'
         }
     },
+    componentDidMount: function(){
+        $(React.findDOMNode(this.refs.paidDate)).pickadate();
+    },
     componentDidUpdate: function(){
         $(React.findDOMNode(this.refs.paidDate)).pickadate();
     },
@@ -56,7 +59,6 @@ var PaymentStatus = React.createClass({
                         <div className="col-sm-6" style={{"position":"relative"}}>
                             <fieldset>
                                 <input type="text"
-                                       disabled = {this.props.event.status.completed}
                                        className="form-control"
                                        ref="paidDate"
                                        placeholder='...'
