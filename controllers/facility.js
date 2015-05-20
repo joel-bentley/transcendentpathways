@@ -168,21 +168,3 @@ exports.postGigDetails = function(req, res, next) {
         });
     });
 };
-
-
-exports.getGigListing = function(req, res, next) {
-    Event.find( { 'status.open': true } , {
-            facilityName: true,
-            startTime: true,
-            endTime: true,
-            description: true,
-            _id: false
-        }, {sort: {startTime: 1}}, function(err, gigs) {
-
-            if (err) return next(err);
-
-            if (!(gigs===null)) {
-                res.json(gigs);
-        }
-    });
-};

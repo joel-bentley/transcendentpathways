@@ -21,14 +21,14 @@ var eventSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId, ref: 'Musician'
         }
     }],
-    approvedMusicianName: String,
-    approvedMusicianId:  {
+    approvedMusicianName: { type: String, default: '' },
+    approvedMusicianId: {
         type: mongoose.Schema.Types.ObjectId, ref: 'Musician'
     },
     payment: {
-        status: String,
+        status: { type: String, default: '' },
         paidDate: Date,
-        reference: String
+        reference: { type: String, default: '' }
     },
     performance: {
         facilityRating: Number,
