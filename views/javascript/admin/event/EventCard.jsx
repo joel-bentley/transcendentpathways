@@ -1,6 +1,11 @@
 var React = require('react');
 
 var EventCard = React.createClass({
+    //getInitialState: function(){
+    //    return({
+    //        selected: false
+    //    })
+    //},
 
     componentDidMount: function(){
         this.props.getFacilityInfo(this.props.event.facilityName)
@@ -22,9 +27,12 @@ var EventCard = React.createClass({
                                     <span style={{color: 'blue'}}>
                                         <h5>{this.props.event.facilityName}</h5>
                                     </span>
+
                                 </div>
                                 <div className="col-xs-2">
-                                    {this.props.allowSave ? null :
+
+                                    {this.props.allowSave ?
+                                        null :
                                         <button
                                             style={{padding: '2px 10px'}}
                                             type="button"

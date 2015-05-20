@@ -100,7 +100,7 @@ var EventContainer = React.createClass({
                         showDetails = {this.showDetails}
                         enableSave = {this.enableSave}
                         allowSave = {this.state.enableSave}
-                    />
+                        />
                 );
             }
         }.bind(this));
