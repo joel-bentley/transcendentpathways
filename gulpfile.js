@@ -84,7 +84,7 @@ Gulp.task('jsx', ['adminjs', 'musicianjs', 'adminFacilityjs', 'adminNotes', 'adm
 
 
 Gulp.task('musicianjs', function(){
-    browserify('./views/javascript/musician/App.jsx')
+    browserify('./views/javascript/musician/MusicianTable.jsx')
         .transform(babelify)
         .bundle()
         .pipe(source('musician.min.js'))

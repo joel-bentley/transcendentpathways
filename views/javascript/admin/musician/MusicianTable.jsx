@@ -77,7 +77,7 @@ var MusicianTable = React.createClass({
         });
 
     },
-    componentDidMount: function() {                                 //csh loading the musicians into this.state.musicians
+    componentDidMount: function() {                                 //csh loading the musician into this.state.musician
         $.get(this.props.source, function(result) {
             var musicianData = result;
             if (this.isMounted()) {

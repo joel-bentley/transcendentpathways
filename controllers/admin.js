@@ -47,7 +47,6 @@ exports.getEventData = function(req, response) {
 };
 
 exports.getFacilityInfo = function(req, response, next){
-    console.log('mongo search for req.body.name: %s', req.body.name);
     Facility.findOne({facilityName: req.body.name}).exec(function(err, facility){
         if (err) return next(err);
         var facilityData = facility;

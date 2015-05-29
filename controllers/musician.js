@@ -141,46 +141,21 @@ exports.postUpdateMusicianDetails = function(req, res, next) {
 };
 
 exports.getGigListing = function(req, res, next) {
-    Event.find( { 'status.open': true } , {
-        facilityName: true,
-        startTime: true,
-        endTime: true,
-        description: true,
-        _id: true,
-        requestedBy: true
-    }, {sort: {startTime: 1}}, function(err, gigs) {
-
+    Event.find( { 'status.open': true }).exec(function(err, gigs) {
         if (err) return next(err);
-
-        if (!(gigs===null)) {
-
-            //Musician.findOne( { userIds : { $all : [ req.user.id ] } }, function(err, musician) {
-            //    if (err) return next(err);
-            //
-            //
-            //    gigs.map( function(gig, index) {
-            //        console.dir(gig);
-            //        if (gig.requestedBy.indexOf({ musicianName: musician.performerName, musicianId: musician._id }) !== -1) {
-            //            gigs[index]._doc.requested = true;
-            //        } else {
-            //            gigs[index]._doc.requested = false;
-            //        }
-            //        console.dir(gigs[index]._doc.requested);
-            //    });
-            //
-            //});
-
-            //console.dir(JSON.stringify(gigs));
-
-            res.json(gigs);
-        }
+        var events = gigs;
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.end(JSON.stringify(events));
     });
 };
 
 exports.getMusicianId = function(req, res, next) {
-    Musician.findOne( { userIds : { $all : [ req.user.id ] } }, {performerName: true, _id: true}, function(err, musician) {
+    Musician.findOne( { userIds : { $all : [ req.user.id ] } }).exec(function(err, musician) {
         if (err) return next(err);
-        res.json(musician);
+        var myMusician = musician;
+        console.log(myMusician);
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.end(JSON.stringify(myMusician));
     });
 };
 
@@ -194,7 +169,7 @@ exports.postRequestGig = function(req, res, next) {
             if (err) return next(err);
 
             event.status.requested = true;
-            event.requestedBy.push({musicianName: musician.performerName, musicianId: musician.id})
+            event.requestedBy.push({musicianName: musician.performerName, musicianId: musician.id});
 
             event.save(function(err) {
                 if (err) return next(err);
