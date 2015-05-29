@@ -26,7 +26,7 @@ var eventSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, ref: 'Musician'
     },
     payment: {
-        status: { type: String, default: '' },
+        status: { type:  String, default: '' },
         paidDate: Date,
         reference: { type: String, default: '' }
     },
