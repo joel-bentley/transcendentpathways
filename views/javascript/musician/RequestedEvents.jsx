@@ -6,9 +6,8 @@ var RequestedEvents = React.createClass ({
 
         return(
             <div>
-                <hr></hr>
-                {this.props.requestedEvents}
-                <hr></hr>
+                Requested Events
+                <h5>{this.props.requestedEvents}</h5>
             </div>
         );
     }
