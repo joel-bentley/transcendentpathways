@@ -153,7 +153,6 @@ exports.getMusicianId = function(req, res, next) {
     Musician.findOne( { userIds : { $all : [ req.user.id ] } }).exec(function(err, musician) {
         if (err) return next(err);
         var myMusician = musician;
-        console.log(myMusician);
         res.writeHead(200, {'Content-Type': 'application/json'});
         res.end(JSON.stringify(myMusician));
     });

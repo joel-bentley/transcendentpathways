@@ -1,5 +1,6 @@
 var React = require('react');
 var RequestedEvents = require('./RequestedEvents.jsx');
+var ApprovedEvents = require('./ApprovedEvents.jsx');
 
 var MusicianTable = React.createClass({
     getInitialState: function(){
@@ -26,26 +27,33 @@ var MusicianTable = React.createClass({
     },
 
     render: function(){
-        debugger;
         var requestedEvents = [];
+        var approvedEvents = [];
         if (this.state.events && this.state.musician){
             this.state.events.map(function(event){
                 event.requestedBy.map(function(musician){
                     if(musician.musicianName === this.state.musician.performerName){
-                        requestedEvents.push(<li key={event._id}>{event.facilityName + " " + new Date(event.startTime).toLocaleDateString()}</li>);
+                        requestedEvents.push(<div key={event._id}>{event.facilityName
+                        + " " + new Date(event.startTime).toLocaleDateString()}</div>);
+                    }
+                    if(musician.approvedMusicianName === this.state.musician.performerName){
+                        approvedEvents.push(<div key={event._id}>{event.facilityName
+                        + " " + new Date(event.startTime).toLocaleDateString()}</div>);
                     }
                 }.bind(this));
             }.bind(this));
         }
-
         return(
             <div>
-                {requestedEvents ?
-                    <RequestedEvents
-                        requestedEvents={requestedEvents}
-                        /> :
-                    <p>Loading...</p>
-                }
+                <ApprovedEvents
+                    approvedEvents={approvedEvents}
+                />
+                <hr></hr>
+                <RequestedEvents
+                    requestedEvents={requestedEvents}
+                />
+                <hr></hr>
+
             </div>
         )
     }
