@@ -33,16 +33,22 @@ var MusicianTable = React.createClass({
             this.state.events.map(function(event){
                 event.requestedBy.map(function(musician){
                     if(musician.musicianName === this.state.musician.performerName){
-                        requestedEvents.push(<div key={event._id}>{event.facilityName
-                        + " " + new Date(event.startTime).toLocaleDateString()}</div>);
-                    }
-                    if(musician.approvedMusicianName === this.state.musician.performerName){
-                        approvedEvents.push(<div key={event._id}>{event.facilityName
+                        requestedEvents.push(<div key={event._id+musician._id}>{event.facilityName
                         + " " + new Date(event.startTime).toLocaleDateString()}</div>);
                     }
                 }.bind(this));
             }.bind(this));
         }
+        if (this.state.events && this.state.musician){
+            this.state.events.map(function(event){
+                if(event.approvedMusician === this.state.musician.performerName){
+                    approvedEvents.push(<div key={event._id}>{event.facilityName
+                    + " " + new Date(event.startTime).toLocaleDateString()}</div>);
+                }
+            }.bind(this));
+        }
+
+
         return(
             <div>
                 <ApprovedEvents
