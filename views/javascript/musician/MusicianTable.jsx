@@ -1,6 +1,7 @@
 var React = require('react');
 var RequestedEvents = require('./RequestedEvents.jsx');
 var ApprovedEvents = require('./ApprovedEvents.jsx');
+var CompletedEvents = require('./CompletedEvents.jsx');
 
 var MusicianTable = React.createClass({
     getInitialState: function(){
@@ -29,7 +30,11 @@ var MusicianTable = React.createClass({
     render: function(){
         var requestedEvents = [];
         var approvedEvents = [];
+        var completedEvents = [];
         if (this.state.events && this.state.musician){
+            this.state.events.sort(function(a,b){
+               return a.startTime > b.startTime;
+            });
             this.state.events.map(function(event){
                 event.requestedBy.map(function(musician){
                     if(musician.musicianName === this.state.musician.performerName){
@@ -41,8 +46,16 @@ var MusicianTable = React.createClass({
         }
         if (this.state.events && this.state.musician){
             this.state.events.map(function(event){
-                if(event.approvedMusician === this.state.musician.performerName){
+                if((event.approvedMusician === this.state.musician.performerName) && (event.status.completed === false)){
                     approvedEvents.push(<div key={event._id}>{event.facilityName
+                    + " " + new Date(event.startTime).toLocaleDateString()}</div>);
+                }
+            }.bind(this));
+        }
+        if (this.state.events && this.state.musician){
+            this.state.events.map(function(event){
+                if((event.approvedMusician === this.state.musician.performerName) && (event.status.completed === true)){
+                    completedEvents.push(<div key={event._id}>{event.facilityName
                     + " " + new Date(event.startTime).toLocaleDateString()}</div>);
                 }
             }.bind(this));
@@ -59,6 +72,9 @@ var MusicianTable = React.createClass({
                     requestedEvents={requestedEvents}
                 />
                 <hr></hr>
+                <CompletedEvents
+                    completedEvents={completedEvents}
+                />
 
             </div>
         )
