@@ -3,6 +3,7 @@ var RequestedEvents = require('./RequestedEvents.jsx');
 var ApprovedEvents = require('./ApprovedEvents.jsx');
 var CompletedEvents = require('./CompletedEvents.jsx');
 var SearchEvents = require('./SearchEvents.jsx');
+var DetailEvents = require('./DetailEvents.jsx');
 
 var MusicianTable = React.createClass({
     getInitialState: function(){
@@ -65,6 +66,8 @@ var MusicianTable = React.createClass({
 
         return(
             <div>
+                <SearchEvents />
+                <hr></hr>
                 <ApprovedEvents
                     approvedEvents={approvedEvents}
                 />
@@ -77,8 +80,8 @@ var MusicianTable = React.createClass({
                     completedEvents={completedEvents}
                 />
                 <hr></hr>
-                <SearchEvents />
 
+                <DetailEvents />
             </div>
         )
     }
