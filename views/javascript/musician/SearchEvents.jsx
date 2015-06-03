@@ -5,27 +5,33 @@ var SearchEvents = React.createClass ({
     render: function(){
 
         return(
-            <div>
-                <h4>Search Events</h4>
+            <div >
                 <div>
-                    <row>
-                        <div className="col-sm-3">
-                            <div className="form-group">
-                                <h5>Search For</h5>
-                                <input type="text" className="form-control" id="searchText" placeholder="Search..."></input>
-                            </div>
+                    <h4>Search</h4>
+                </div>
+                <div className="container-fluid">
+                    <form>
+                        <div className="col-md-4 ">
+                            <label>Search by Zip Code</label>
+                            <input type="text" className="form-control" id="searchText" placeholder="Search..."></input>
                         </div>
-                        <div className="col-sm-3">
-                            <div className="form-group">
-                                <h5>Sort By</h5>
-                                <select className="form-control" defaultValue="A">
-                                    <option value="C">Facility</option>
-                                    <option value="B">Event Date</option>
-                                    <option value="A">Zip Code</option>
-                                </select>
-                            </div>
+                        <div className="col-md-4 ">
+                            <label>Sort By</label>
+                            <select className="form-control" defaultValue="A">
+                                <option value="A">Zip Code</option>
+                                <option value="B">Event Date</option>
+                                <option value="C">Facility</option>
+                            </select>
                         </div>
-                    </row>
+                        <div className="col-md-4 ">
+                            <label>Event Limit</label>
+                            <select className="form-control" defaultValue="A">
+                                <option value="A">10 Events</option>
+                                <option value="B">25 Events</option>
+                                <option value="C">50 Events</option>
+                            </select>
+                        </div>
+                    </form>
                 </div>
             </div>
         );
