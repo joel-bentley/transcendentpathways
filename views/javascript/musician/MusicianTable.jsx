@@ -27,6 +27,11 @@ var MusicianTable = React.createClass({
                 });
         }.bind(this));
 
+        $.get('/homeAdminFacilityData', function(facilities) {
+            this.setState({
+                facilities: facilities
+            });
+        }.bind(this));
     },
 
     render: function(){
@@ -81,7 +86,11 @@ var MusicianTable = React.createClass({
                 />
                 <hr></hr>
 
-                <DetailEvents />
+                <DetailEvents
+                    events={this.state.events}
+                    facilities={this.state.facilities}
+                />
+
             </div>
         )
     }
