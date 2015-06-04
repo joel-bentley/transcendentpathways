@@ -5,12 +5,12 @@ var SearchEvents = React.createClass ({
     render: function(){
 
         return(
-            <div >
+            <div className="bg-warning">
                 <div>
                     <h4>Search</h4>
                 </div>
                 <div className="container-fluid">
-                    <form>
+                    <form >
                         <div className="col-md-4 ">
                             <label>Search by Zip Code</label>
                             <input type="text" className="form-control" id="searchText" placeholder="Search..."></input>
@@ -30,6 +30,12 @@ var SearchEvents = React.createClass ({
                                 <option value="B">25 Events</option>
                                 <option value="C">50 Events</option>
                             </select>
+                        </div>
+                        <div className="col-md-12">
+                            <label> </label>
+                        </div>
+                        <div className="col-md-12">
+                            <label> </label>
                         </div>
                     </form>
                 </div>
