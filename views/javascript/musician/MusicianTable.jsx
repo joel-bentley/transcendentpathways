@@ -10,6 +10,7 @@ var MusicianTable = React.createClass({
 
         return({
             events: null,
+            sortedEvents: null,
             musician: null
         })
     },
@@ -20,7 +21,6 @@ var MusicianTable = React.createClass({
                     events: gigs
                 });
         }.bind(this));
-
         $.get('/getMusicianId', function(musician) {
                 this.setState({
                     musician: musician
@@ -89,6 +89,7 @@ var MusicianTable = React.createClass({
                 <DetailEvents
                     events={this.state.events}
                     facilities={this.state.facilities}
+                    musician={this.state.musician}
                 />
 
             </div>
