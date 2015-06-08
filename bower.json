@@ -1,0 +1,20 @@
+{
+  "name": "transcendent-pathways",
+  "version": "0.0.1",
+  "main": "app.js",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fullcalendar": "~2.3.1",
+    "qtip2": "~2.2.1"
+  }
+}
