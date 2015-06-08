@@ -5,7 +5,7 @@ var SearchEvents = React.createClass ({
     render: function(){
 
         return(
-            <div className="bg-warning">
+            <div className="bg-default">
                 <div>
                     <h4>Search</h4>
                 </div>
