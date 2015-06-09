@@ -15,13 +15,13 @@ var browserify = require('browserify');
 var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 
-var mainBowerFiles = require('main-bower-files');
+//var mainBowerFiles = require('main-bower-files');
 
 
 
 Gulp.task('default', ['watch', 'build', 'nodemon']);
 
-Gulp.task('build', ['less', 'jsx', 'media','bowerfiles']);
+Gulp.task('build', ['less', 'jsx', 'media']);
 
 Gulp.task('clean', function () {
     return Gulp.src('./public/*', { read: false }).pipe(Clean());
@@ -80,9 +80,9 @@ Gulp.task('media', function () {
     return Merge(general, fonts, javascript);
 });
 
-Gulp.task('bowerfiles', function() {
-   return Gulp.src(mainBowerFiles()).pipe(Gulp.dest('./public/js/lib'))
-});
+//Gulp.task('bowerfiles', function() {
+//   return Gulp.src(mainBowerFiles()).pipe(Gulp.dest('./public/js/lib'))
+//});
 
 
 //Gulp.task('jsx', ['musicianjs', 'facilityjs', 'adminjs']);
