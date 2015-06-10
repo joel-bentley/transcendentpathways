@@ -56,7 +56,7 @@ var GetDistance = React.createClass({
        return(
            <div>
                {this.state.distanceResults ? 'Distance to Facility: '+this.state.distanceResults: 'Loading...'}
-               <GoogleMap musicianZipcode={this.props.musicianZipcode}/>
+               <GoogleMap musicianZipcode={this.props.musicianZipcode} facilityZipcode={this.props.facilityZipcode}/>
            </div>
        );
 
