@@ -50,7 +50,7 @@ var EventCard = React.createClass({
                             <div className="row">
                                 <div className="col-xs-6 col-xs-3-offset">
                                     <span style={{color: 'indigo'}}>
-                                        <h5>{new Date(this.props.event.startTime).toDateString()}</h5>
+                                        <h5>{new Date(this.props.event.start).toDateString()}</h5>
                                     </span>
                                 </div>
                             </div>
@@ -61,10 +61,10 @@ var EventCard = React.createClass({
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-xs-6">
-                                <h5>Start: {new Date(this.props.event.startTime).toLocaleTimeString()}</h5>
+                                <h5>Start: {new Date(this.props.event.start).toLocaleTimeString()}</h5>
                             </div>
                             <div className="col-xs-6">
-                                <h5>End: {new Date(this.props.event.endTime).toLocaleTimeString()}</h5>
+                                <h5>End: {new Date(this.props.event.end).toLocaleTimeString()}</h5>
                             </div>
                         </div>
                         <div className="row">

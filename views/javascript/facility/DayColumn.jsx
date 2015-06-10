@@ -11,10 +11,10 @@ module.exports = React.createClass({
                     <span>Date: { this.props.date }</span>
                 </p>
                 <p className="list-group-item-text">
-                    <span>Start Time: { this.props.startTime }</span>
+                    <span>Start Time: { this.props.start }</span>
                 </p>
                 <p className="list-group-item-text">
-                    <span>End Time: { this.props.endTime }</span>
+                    <span>End Time: { this.props.end }</span>
                 </p>
                 <p className="list-group-item-text">
                     <span>Details: { this.props.details }</span>
