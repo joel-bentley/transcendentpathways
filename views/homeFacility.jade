@@ -7,6 +7,32 @@ block content
 
   #calendar
 
+  #add-event(title='Add New Event' style="display:none;")
+    form#add-event-form(action='', name='add-event-form')
+      label(for='title') Event Name
+      input#title(type='text', name='title')
+      p
+        label(for='add-date') Date
+        input#event-date(type='text', name='event-date', tabindex='-1')
+      p
+        label(for='add-start-time') Start Time
+        input#start-time(type='text', name='start-time')
+      p
+        label(for='add-end-time') End Time
+        input#end-time(type='text', name='end-time')
+      p
+        label(for='repeats') repeat
+        input#repeats(type='checkbox', name='repeats', value='1')
+        #repeat-options
+          | Repeat every: day
+          input(type='radio', value='1', name='repeat-freq', align='bottom')
+          |              week
+          input(type='radio', value='7', name='repeat-freq', align='bottom')
+          |              two weeks
+          input(type='radio', value='14', name='repeat-freq', align='bottom')
+
+
+
 
   //h2 Post New Events Here
   //form.form-horizontal(action='/postGigDetails', method='POST')
@@ -20,7 +46,7 @@ block content
   //    label.col-sm-2.control-label(for='startTime') Start Time
   //    .col-sm-4
   //      div(style='position:relative')
-  //        input.form-control.starttimepicker(type='text', name='startTime', id='startTime', placeholder='...')
+  //        input.form-control.starttimepicker(type='text', name='startTi', id='startTime', placeholder='...')
   //  .form-group
   //    label.col-sm-2.control-label(for='endTime') End Time
   //    .col-sm-4

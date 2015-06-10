@@ -26,15 +26,15 @@ module.exports = React.createClass({
 
                     return facility.gigs.map(function (gig) {
 
-                        var startTime = new Date(gig.start);
-                        var endTime = new Date(gig.end);
+                        var start = new Date(gig.start);
+                        var end = new Date(gig.end);
 
                         return (
                             <Gig
                                 facilityName={facility.facilityName}
-                                date={startTime.toDateString()}
-                                startTime={startTime.toLocaleTimeString()}
-                                endTime={endTime.toLocaleTimeString()}
+                                date={start.toDateString()}
+                                start={start.toLocaleTimeString()}
+                                end={end.toLocaleTimeString()}
                                 details={gig.details}
                                 />
                         )

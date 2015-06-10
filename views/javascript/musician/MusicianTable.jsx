@@ -40,13 +40,13 @@ var MusicianTable = React.createClass({
         var completedEvents = [];
         if (this.state.events && this.state.musician){
             this.state.events.sort(function(a,b){
-               return a.startTime > b.startTime;
+               return a.start > b.start;
             });
             this.state.events.map(function(event){
                 event.requestedBy.map(function(musician){
                     if(musician.musicianName === this.state.musician.performerName){
                         requestedEvents.push(<div key={event._id+musician._id}>{event.facilityName
-                        + " " + new Date(event.startTime).toLocaleDateString()}</div>);
+                        + " " + new Date(event.start).toLocaleDateString()}</div>);
                     }
                 }.bind(this));
             }.bind(this));
@@ -55,7 +55,7 @@ var MusicianTable = React.createClass({
             this.state.events.map(function(event){
                 if((event.approvedMusician === this.state.musician.performerName) && (event.status.completed === false)){
                     approvedEvents.push(<div key={event._id}>{event.facilityName
-                    + " " + new Date(event.startTime).toLocaleDateString()}</div>);
+                    + " " + new Date(event.start).toLocaleDateString()}</div>);
                 }
             }.bind(this));
         }
@@ -63,7 +63,7 @@ var MusicianTable = React.createClass({
             this.state.events.map(function(event){
                 if((event.approvedMusician === this.state.musician.performerName) && (event.status.completed === true)){
                     completedEvents.push(<div key={event._id}>{event.facilityName
-                    + " " + new Date(event.startTime).toLocaleDateString()}</div>);
+                    + " " + new Date(event.start).toLocaleDateString()}</div>);
                 }
             }.bind(this));
         }

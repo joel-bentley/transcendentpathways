@@ -39,7 +39,7 @@ exports.getFacilityData = function(req, response) {
 };
 
 exports.getEventData = function(req, response) {
-    Event.find({}).sort('startTime').exec(function(err, event){
+    Event.find({}).sort('start').exec(function(err, event){
         var eventData = event;
         response.writeHead(200, {'Content-Type': 'application/json'});
         response.end(JSON.stringify(eventData));
@@ -117,8 +117,8 @@ exports.postUpdateEventDetails = function(req, res, next) {
     Event.findOne({_id: req.body._id}).exec(function(err, event) {
         if (err) return next(err);
         event.facilityName = req.body.facilityName || '';
-        event.startTime = req.body.startTime || '';
-        event.endTime = req.body.endTime || '';
+        event.start = req.body.start || '';
+        event.end = req.body.end || '';
         event.description = req.body.description || '';
         event.status = req.body.status;
         event.requestedBy = req.body.requestedBy || '';

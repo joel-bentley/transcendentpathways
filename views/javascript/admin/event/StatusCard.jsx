@@ -31,7 +31,7 @@ var StatusCard = React.createClass({
                                 </div>
                                 <div className="col-xs-4">
                                     <span style={{color: 'blue'}}>
-                                        <h5>{new Date(this.props.event.startTime).toDateString()}</h5>
+                                        <h5>{new Date(this.props.event.start).toDateString()}</h5>
                                     </span>
                                 </div>
                             </div>

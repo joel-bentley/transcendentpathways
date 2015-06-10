@@ -156,15 +156,15 @@ exports.postGigDetails = function(req, res, next) {
         var event = new Event({
             facilityName: facility.facilityName,
             facilityId: facility.id,
-            startTime: new Date(req.body.date + ' ' + req.body.startTime),
-            endTime: new Date(req.body.date + ' ' + req.body.endTime),
+            start: new Date(req.body.date + ' ' + req.body.start),
+            end: new Date(req.body.date + ' ' + req.body.end),
             description: req.body.description
         });
 
         event.save(function(err) {
             if (err) return next(err);
-            req.flash('success', { msg: 'Event details posted for ' + facility.facilityName });
-            return res.redirect('/homeFacility');
+            //req.flash('success', { msg: 'Event details posted for ' + facility.facilityName });
+            //return res.redirect('/homeFacility');
         });
     });
 };

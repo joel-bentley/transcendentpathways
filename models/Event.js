@@ -5,8 +5,9 @@ var eventSchema = new mongoose.Schema({
     facilityId: {
         type: mongoose.Schema.Types.ObjectId, ref: 'Facility'
     },
-    startTime: Date,
-    endTime: Date,
+    title: { type: String, default: 'Event' },
+    start: Date,
+    end: Date,
     description: { type: String, default: ''},
     status: {
         completed: { type: Boolean, default: false },
