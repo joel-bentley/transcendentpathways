@@ -11,7 +11,7 @@ html
 
     link(rel='stylesheet', href='/js/lib/fullcalendar.min.css')
     link(rel='stylesheet', href='/js/lib/fullcalendar.print.css',  media='print')
-
+    link(rel='stylesheet', href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css')
 
 
     //link(href='/js/lib/pickadate/compressed/themes/classic.css', rel='stylesheet')
@@ -27,7 +27,7 @@ html
 
     //include partials/footer
 
-    script(src='/js/lib/jquery-2.1.3.min.js')
+    script(src='/js/lib/jquery.min.js')
     script(src='/js/lib/jquery-ui.min.js')
     script(src='/js/lib/bootstrap.min.js')
     script(src='/js/lib/moment.min.js')
@@ -36,6 +36,7 @@ html
 
     script(type='text/javascript').
       $(document).ready(function() {
+
         $('#calendar').fullCalendar({
           header: {
             left: 'prev,next today',
@@ -55,44 +56,50 @@ html
             }
           },
           dayClick: function() {
-            alert('a day has been clicked!');
+            //alert('a day has been clicked!');
+            fnOpenNormalDialog();
           },
           eventClick: function (event, jsEvent, view) {
             //alert('an event has been clicked!');
-            fnOpenNormalDialog();
+            //fnOpenNormalDialog();
           }
         });
       });
 
-      /*      $("add-event").dialog({
-        autoOpen: true,
-        height: 'auto',
-        width: 'auto',
-        autoResize: true,
-        modal: false,
-        resizable: false,
-        open: function () {
-          $("#title").attr("tabindex", "1");
-        },
-        buttons: {
-          "Save Event": function () {
-            $.ajax({
-              type: "POST",
-              url: "includes/add-event.php",
-              data: $('#add-event-form').serialize(),
-              success: function () {
-                calendar.fullCalendar('refetchEvents');
-              }
-            });
-            $(this).dialog("close");
-          },
-          Cancel: function () {
-            $(this).dialog("close");
-          }
-        }
-      }); */
-
       function fnOpenNormalDialog() {
+        $("#add-event").dialog({
+          autoOpen: false,
+          height: 'auto',
+          width: 'auto',
+          autoResize: true,
+          modal: true,
+          resizable: false,
+          //open: function () {
+          //  $("#title").attr("tabindex", "1");
+          //},
+          buttons: {
+            "Save Event": function () {
+              //              $.ajax({
+              //                type: "POST",
+              //                url: "includes/add-event.php",
+              //                data: $('#add-event-form').serialize(),
+              //                success: function () {
+              //                  calendar.fullCalendar('refetchEvents');
+              //                }
+              //              });
+              $(this).dialog("close");
+            },
+            "Cancel": function () {
+              $(this).dialog("close");
+            }
+          }
+        });
+        $("#add-event").dialog('open');
+      }
+
+
+
+      /* function fnOpenNormalDialog() {
         $("#add-event").html("Confirm Dialog Box");
         // Define the Dialog and its properties.
         $("#add-event").dialog({
@@ -112,7 +119,7 @@ html
             }
           }
         });
-      }
+      } */
 
       function callback(value) {
         if (value) {
@@ -151,7 +158,7 @@ html
       }
 
 
-//script(src='/js/lib/bootstrap.min.js')
+    //script(src='/js/lib/bootstrap.min.js')
     //script(src='/js/lib/pickadate/compressed/picker.js')
     //script(src='/js/lib/pickadate/compressed/picker.date.js')
     //script(src='/js/lib/pickadate/compressed/picker.time.js')
