@@ -6,6 +6,15 @@ var User = require('../models/User');
 var Musician = require('../models/Musician');
 var Facility = require('../models/Facility');
 var Event = require('../models/Event');
+var http = require('http');
+
+var geocoderProvider = 'google';
+var httpAdapter = 'https';
+var extra = {
+    apiKey: "AIzaSyDumEXAOtWsGFb7FX9yoXZ6zNkZKTkvn5U",
+    formatter: null
+};
+var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
 
 /**
  * GET /signupMusician
@@ -21,6 +30,7 @@ exports.getSignupMusician = function(req, res) {
 
 
 exports.getMusicianDetails = function(req, res){
+
     if(!req.user) return res.redirect('/');
 
     if(req.user.detailsId) return res.redirect('/homeMusician');
@@ -35,6 +45,7 @@ exports.getMusicianDetails = function(req, res){
 };
 
 exports.postMusicianDetails = function(req, res, next){
+
     var musician = new Musician({
         performerName: req.body.performerName || '',
         userIds: req.user.id || '',
@@ -50,21 +61,50 @@ exports.postMusicianDetails = function(req, res, next){
         picture: req.body.picture || '',
         biography: req.body.biography || ''
     });
-    musician.save(function(err) {
-        if (err) return next(err);
 
-        User.findById(req.user.id, function(err, user) {                    // Save Id from Musician in User
-            if (err) return next(err);
+    var address = musician.address1 + ' ' + musician.address2 + ' ' + musician.city + ' ' + musician.state + ' ' +
+        musician.zipcode;
+    geocoder.geocode(address, function(err, response) {
+        console.log(error);
+        response = response.pop();
+        var lat = response.latitude;
+        var lon = response.longitude;
+        console.log(lat, lon);
+        musician.latitude = lat;
+        musician.longitude = lon;
 
-            user.detailsId = musician.id;
 
-            user.save(function(err) {
-                if (err) return next(err);
+        musician.save(function(err) {
+            if (err) {
+                console.log(err);
+                return next(err);
+            }
 
-                res.redirect('/homeMusician');
+            User.findById(req.user.id, function(err, user) {                    // Save Id from Musician in User
+                if (err) {
+                    console.log(err);
+                    return next(err);
+                }
+
+                user.detailsId = musician.id;
+
+                user.save(function(err) {
+                    if (err) {
+                        console.log(err);
+                        return next(err);
+                    }
+
+                    return res.redirect('/homeMusician');
+                });
             });
         });
     });
+
+    //$.get( "https://maps.googleapis.com/maps/api/geocode/json?address=4381 Rocking Chair Rd. , Florence, SC, 29505&key=AIzaSyDumEXAOtWsGFb7FX9yoXZ6zNkZKTkvn5U", function( response ) {
+    //    console.log(response.results[0].geometry.location.lat);
+    //    console.log(response.results[0].geometry.location.lng);
+    //} );
+
 };
 
 
@@ -86,6 +126,7 @@ exports.getHomeMusician = function(req, res) {
 
 
 exports.getUpdateMusicianDetails = function(req, res) {
+
 
     Musician.findOne( { userIds : { $all : [ req.user.id ] } }, function(err, musician) {
 
@@ -176,3 +217,9 @@ exports.postRequestGig = function(req, res, next) {
         });
     });
 };
+
+getCoordinates = function(address) {
+
+};
+
+
