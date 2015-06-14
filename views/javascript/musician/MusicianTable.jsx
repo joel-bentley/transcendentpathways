@@ -70,27 +70,32 @@ var MusicianTable = React.createClass({
 
 
         return(
-            <div>
-                <SearchEvents />
-                <hr></hr>
-                <ApprovedEvents
-                    approvedEvents={approvedEvents}
-                />
-                <hr></hr>
-                <RequestedEvents
-                    requestedEvents={requestedEvents}
-                />
-                <hr></hr>
-                <CompletedEvents
-                    completedEvents={completedEvents}
-                />
-                <hr></hr>
-
-                <DetailEvents
-                    events={this.state.events}
-                    facilities={this.state.facilities}
-                    musician={this.state.musician}
-                />
+            <div className = "container-fluid">
+                <div className = "row">
+                     <div className = "col-sm-5 ">
+                        <SearchEvents />
+                        <hr></hr>
+                        <ApprovedEvents
+                            approvedEvents={approvedEvents}
+                        />
+                        <hr></hr>
+                        <RequestedEvents
+                            requestedEvents={requestedEvents}
+                        />
+                        <hr></hr>
+                        <CompletedEvents
+                            completedEvents={completedEvents}
+                        />
+                        <hr></hr>
+                     </div>
+                    <div className="col-sm-7">
+                    <DetailEvents
+                        events={this.state.events}
+                        facilities={this.state.facilities}
+                        musician={this.state.musician}
+                    />
+                    </div>
+                </div>
 
             </div>
         )
