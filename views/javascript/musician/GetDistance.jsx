@@ -22,7 +22,9 @@ var GetDistance = React.createClass({
         var origin1 = this.props.musicianZipcode;
         var destinationA = this.props.facilityZipcode;
 
-        var service = new google.maps.DistanceMatrixService();
+        while(!service) {
+            var service = new google.maps.DistanceMatrixService();
+        }
         service.getDistanceMatrix(
             {
                 origins: [origin1],

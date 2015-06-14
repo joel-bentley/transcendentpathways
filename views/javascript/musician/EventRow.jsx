@@ -26,7 +26,7 @@ var EventRow = React.createClass({
                             /> :
                         null}
                     <div id="map-canvas"> </div>
-                    <div> <GoogleMap musicianZipcode={this.props.musicianZipcode} facilityZipcode={this.props.facilityZipcode}/></div>
+                    <div> <GoogleMap musician={this.props.musician} facility={this.props.facility}/></div>
 
 
                 </div>

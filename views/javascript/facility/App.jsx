@@ -1,8 +1,8 @@
 var React = require('react');
-var SchedulingCalendar = require('./SchedulingCalendar.jsx');
+var DayColumn = require('./DayColumn.jsx');
 
 React.render(
-    <SchedulingCalendar />,
+    <DayColumn/>,
     document.getElementById('schedulingApp')
 );
 

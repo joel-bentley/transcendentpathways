@@ -65,7 +65,7 @@ exports.postMusicianDetails = function(req, res, next){
     var address = musician.address1 + ' ' + musician.address2 + ' ' + musician.city + ' ' + musician.state + ' ' +
         musician.zipcode;
     geocoder.geocode(address, function(err, response) {
-        console.log(error);
+        console.log(err);
         response = response.pop();
         var lat = response.latitude;
         var lon = response.longitude;
