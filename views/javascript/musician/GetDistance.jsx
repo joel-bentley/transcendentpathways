@@ -4,38 +4,36 @@ var GoogleMap = require('./GoogleMap.jsx');
 var GetDistance = React.createClass({
     propTypes: function(){
         return({
-            musicianZipcode: null,
-            facilityZipcode: null
+            musician: React.PropTypes.object.isRequired,
+            facility: React.PropTypes.object.isRequired
         });
-        },
+    },
     getInitialState: function(){
         return({
-            distanceResults: null,
-            lat: 'x',
-            lon: 'x'
+            distanceResults: null
         })
     },
     geoCode: function(){
 
     },
     componentDidMount: function() {
-        var origin1 = this.props.musicianZipcode;
-        var destinationA = this.props.facilityZipcode;
+        var musician = this.props.musician;
+        var facility = this.props.facility;
+        var musicianAddress = musician.address1 + " " + musician.address2 + " " + musician.city + " " + musician.zipcode;
+        var facilityAddress = facility.address1 + " " + facility.address2 + " " + facility.city  + " " + facility.zipcode;
 
-        while(!service) {
-            var service = new google.maps.DistanceMatrixService();
-        }
+        var service = new google.maps.DistanceMatrixService;
         service.getDistanceMatrix(
             {
-                origins: [origin1],
-                destinations: [destinationA],
+                origins: [musicianAddress],
+                destinations: [facilityAddress],
                 travelMode: google.maps.TravelMode.DRIVING,
                 unitSystem: google.maps.UnitSystem.IMPERIAL,
-                durationInTraffic: true
+                durationInTraffic: false
             }, this.callback);
     },
 
-    callback: function(response, status) {
+    callback: function(response, status){
         if (status == google.maps.DistanceMatrixStatus.OK) {
             var origins = response.originAddresses;
             var destinations = response.destinationAddresses;
@@ -52,6 +50,8 @@ var GetDistance = React.createClass({
                     }
                 }
             }
+        } else {
+            console.log('distance matrix failuer');
         }
     },
    render: function(){
