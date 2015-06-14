@@ -126,6 +126,7 @@ app.post('/signupFacility', userController.postSignup);
 app.get('/facilityDetails', passportConf.isAuthenticated, facilityController.getFacilityDetails);
 app.post('/facilityDetails', passportConf.isAuthenticated, facilityController.postFacilityDetails);
 app.get('/homeFacility', passportConf.isAuthenticated, facilityController.getHomeFacility);
+app.get('/homeFacility2', passportConf.isAuthenticated, facilityController.getHomeFacility2);
 app.get('/account/updateFacilityDetails', passportConf.isAuthenticated, facilityController.getUpdateFacilityDetails);
 app.post('/account/updateFacilityDetails', passportConf.isAuthenticated, facilityController.postUpdateFacilityDetails);
 app.post('/postGigDetails', passportConf.isAuthenticated, facilityController.postGigDetails);

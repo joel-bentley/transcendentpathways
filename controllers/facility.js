@@ -84,6 +84,21 @@ exports.getHomeFacility = function(req, res) {
     res.redirect('/');
 };
 
+exports.getHomeFacility2 = function(req, res) {
+
+    if (req.user.accountType==='Facility') {
+
+        if (req.user.detailsId) {
+            return res.render('homeFacility2', {
+                title: 'Facility Home'
+            });
+        } else {
+            return res.redirect('/facilityDetails');
+        }
+    }
+    res.redirect('/');
+};
+
 
 exports.getUpdateFacilityDetails = function(req, res) {
 
@@ -156,8 +171,8 @@ exports.postGigDetails = function(req, res, next) {
         var event = new Event({
             facilityName: facility.facilityName,
             facilityId: facility.id,
-            start: new Date(req.body.date + ' ' + req.body.start),
-            end: new Date(req.body.date + ' ' + req.body.end),
+            start: new Date(req.body.date + ' ' + req.body.startTime),
+            end: new Date(req.body.date + ' ' + req.body.endTime),
             description: req.body.description
         });
 
