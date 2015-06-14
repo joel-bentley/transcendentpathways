@@ -1,6 +1,12 @@
 var React = require('react');
 
 var GoogleMap = React.createClass({
+    propTypes: function(){
+        return({
+            musician: React.PropTypes.object.isRequired,
+            facility: React.PropTypes.object.isRequired
+        });
+    },
     getDefaultProps: function () {
         return {
             initialZoom: 8,
@@ -9,12 +15,13 @@ var GoogleMap = React.createClass({
         };
     },
     componentDidMount: function () {
-        if (this.props.musician && this.props.facility) {
+        if (this.props.musician.latitude && this.props.facility.latitude) {
             var mapOptions = {
                     center: this.mapCenterLatLng(),
                     zoom: this.props.initialZoom
                 },
                 map = new google.maps.Map(this.getDOMNode(), mapOptions);
+            console.log(map);
             var markerMusician = new google.maps.Marker({
                 position: this.mapCenterLatLng2(),
                 title: this.props.musician.performerName, map: map
@@ -31,13 +38,13 @@ var GoogleMap = React.createClass({
             }
             map.setCenter(bounds.getCenter());
             map.fitBounds(bounds);
-            map.setZoom(map.getZoom() - 1);
+            map.setZoom(map.getZoom());
 
             this.setState({map: map});
         }
     },
     mapCenterLatLng: function () {
-        return new google.maps.LatLng(this.props.mapCenterLat, this.props.mapCenterLng);
+        return new google.maps.LatLng(this.props.musician.latitude, this.props.musician.longitude);
     },
     mapCenterLatLng2: function () {
         return new google.maps.LatLng(this.props.musician.latitude, this.props.musician.longitude);
