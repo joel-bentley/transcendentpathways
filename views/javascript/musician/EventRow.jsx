@@ -21,12 +21,12 @@ var EventRow = React.createClass({
                     {this.props.musician ? <div>Musician Zipcode: {this.props.musician.zipcode}</div>: null}
                     {this.props.musician ?
                         <GetDistance
-                            musicianZipcode={this.props.musician.zipcode}
-                            facilityZipcode={this.props.facility.zipcode}
+                            musician={this.props.musician}
+                            facility={this.props.facility}
                             /> :
                         null}
                     <div id="map-canvas"> </div>
-                    <div> <GoogleMap musician={this.props.musician} facility={this.props.facility}/></div>
+                    {this.props.musician && this.props.facility ? <GoogleMap musician={this.props.musician} facility={this.props.facility}/>: null}
 
 
                 </div>
