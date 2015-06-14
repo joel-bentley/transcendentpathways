@@ -6,6 +6,13 @@ var User = require('../models/User');
 var Facility = require('../models/Facility');
 var Event = require('../models/Event');
 
+var geocoderProvider = 'google';
+var httpAdapter = 'https';
+var extra = {
+    apiKey: "AIzaSyDumEXAOtWsGFb7FX9yoXZ6zNkZKTkvn5U",
+    formatter: null
+};
+var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
 
 
 exports.getSignupFacility = function(req, res) {
@@ -41,6 +48,8 @@ exports.postFacilityDetails = function(req, res, next){
         city: req.body.city || '',
         state: req.body.state || '',
         zipcode: req.body.zipcode || '',
+        latitude: Number,
+        longitude: Number,
         contactName: req.body.contactName || '',
         contactPhone: req.body.contactPhone || '',
         contactEmail: req.body.contactEmail || '',
@@ -51,23 +60,39 @@ exports.postFacilityDetails = function(req, res, next){
         waiverNeeded: req.body.waiverNeeded || '',
         patientNumber: req.body.patientNumber || ''
     });
-    facility.save(function(err) {
-        if (err) return next(err);
 
-        User.findById(req.user.id, function(err, user) {                    // Save Id from Facility in User
-            if (err) return next(err);
+    var address = facility.address1 + ' ' + facility.address2 + ' ' + facility.city + ' ' + facility.state + ' ' +
+        facility.zipcode;
+    geocoder.geocode(address, function(err, response) {
+        response = response.pop();
+        var lat = response.latitude;
+        var lon = response.longitude;
+        console.log('a'+ lat, lon);
+        facility.latitude = lat;
+        facility.longitude = lon;
+        console.log(facility.latitude);
+        console.log(facility.longitude);
 
-            user.detailsId = facility.id;
+        facility.save(function(err) {
+            if (err) {
+                console.log(err);
+                return next(err);
+            }
 
-            user.save(function(err) {
+            User.findById(req.user.id, function (err, user) {                    // Save Id from Facility in User
                 if (err) return next(err);
 
-                res.redirect('/homeFacility');
+                user.detailsId = facility.id;
+
+                user.save(function (err) {
+                    if (err) return next(err);
+
+                    res.redirect('/homeFacility');
+                });
             });
         });
     });
 };
-
 
 exports.getHomeFacility = function(req, res) {
 

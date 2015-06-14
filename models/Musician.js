@@ -16,6 +16,8 @@ var userSchema = new mongoose.Schema({
     website: String,
     picture: String,
     biography: String,
+    latitude: Number,
+    longitude: Number,
 
     approved:  { type: Boolean, default: false },
     approvedDate: Date,
@@ -26,6 +28,14 @@ var userSchema = new mongoose.Schema({
         noteText: String
     }]
 });
+
+
+userSchema.methods.getLocation = function() {
+    return ({
+        longitude: this.longitude,
+        latitude: this.latitude
+    });
+};
 
 module.exports = mongoose.model('Musician', userSchema);
 
