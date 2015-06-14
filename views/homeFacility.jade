@@ -7,21 +7,6 @@ block content
 
   #calendar
 
-  //#eventContent(title='Event Details', style='display:none;')
-  //  | Start:
-  //  span#startTime
-  //  br
-  //  |     End:
-  //  span#endTime
-  //  br
-  //  br
-  //  p#eventInfo
-  //  p
-  //    strong
-  //      a#eventLink(href='', target='_blank') Read More
-
-
-
 
   #add-event(title='Add New Event' style="display:none;")
     form#add-event-form(action='', name='add-event-form')
@@ -44,35 +29,3 @@ block content
           input(type='radio', value='7', name='repeat-freq', align='bottom')
           |              two weeks
           input(type='radio', value='14', name='repeat-freq', align='bottom')
-
-
-
-
-  //h2 Post New Events Here
-  //form.form-horizontal(action='/postGigDetails', method='POST')
-  //  input(type='hidden', name='_csrf', value=_csrf)
-  //  .form-group
-  //    label.col-sm-2.control-label(for='date') Date
-  //    .col-sm-4
-  //      div(style='position:relative')
-  //        input.form-control.datepicker(type='text', name='date', id='date', placeholder='...')
-  //  .form-group
-  //    label.col-sm-2.control-label(for='startTime') Start Time
-  //    .col-sm-4
-  //      div(style='position:relative')
-  //        input.form-control.starttimepicker(type='text', name='startTi', id='startTime', placeholder='...')
-  //  .form-group
-  //    label.col-sm-2.control-label(for='endTime') End Time
-  //    .col-sm-4
-  //      div(style='position:relative')
-  //        input.form-control.endtimepicker(type='text', name='endTime', id='endTime', placeholder='...')
-  //  .form-group
-  //    label.col-sm-2.control-label(for='details') Event Description
-  //    .col-sm-4
-  //      input.form-control(type='text', name='description', id='description', placeholder='')
-  //  .form-group
-  //    .col-sm-offset-2.col-sm-4
-  //      button.btn.btn.btn-primary(type='submit')
-  //        span.ion-edit
-  //        | Post Event
-
