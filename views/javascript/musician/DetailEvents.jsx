@@ -24,7 +24,11 @@ var DetailEvents = React.createClass({
                 }.bind(this));
                 if(new Date(event.start) > new Date() ){
                     eventRows.push(
-                        <EventRow key={event._id} event={event} facility={facility} musician={this.props.musician}/>
+                        <EventRow
+                            key={event._id}
+                            event={event} f
+                            facility={facility}
+                            musician={this.props.musician}/>
                     )
                 }
             }.bind(this));

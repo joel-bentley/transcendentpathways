@@ -19,10 +19,10 @@ var GetDistance = React.createClass({
     componentDidMount: function() {
         var musician = this.props.musician;
         var facility = this.props.facility;
+
         var musicianAddress = musician.address1 + " " + musician.address2 + " " + musician.city + " " + musician.zipcode;
         var facilityAddress = facility.address1 + " " + facility.address2 + " " + facility.city  + " " + facility.zipcode;
-
-        var service = new google.maps.DistanceMatrixService;
+        var service = new google.maps.DistanceMatrixService();
         service.getDistanceMatrix(
             {
                 origins: [musicianAddress],
