@@ -11,10 +11,7 @@ var SearchEvents = React.createClass ({
                 </div>
                 <div className="container-fluid">
                     <form >
-                        <div className="col-md-4 ">
-                            <label>Search by Zip Code</label>
-                            <input type="text" className="form-control" id="searchText" placeholder="Search..."></input>
-                        </div>
+
                         <div className="col-md-4 ">
                             <label>Sort By</label>
                             <select className="form-control" defaultValue="A">
