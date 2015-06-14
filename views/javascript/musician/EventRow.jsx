@@ -3,7 +3,10 @@ var GetDistance = require('./GetDistance.jsx');
 var GoogleMap = require('./GoogleMap.jsx');
 
 var EventRow = React.createClass({
+    handleClick: function(){
 
+
+    },
     render: function(){
 
         return(
@@ -16,12 +19,12 @@ var EventRow = React.createClass({
                     <div className = "container-fluid">
                         <div className="row">
                             <div className="col-sm-5">
-                                <h5>
+                                <h5 className="text-center">
                                 <div >Start Date: {new Date(this.props.event.start).toDateString()}</div>
                                 <div>Facility Name: {this.props.event.facilityName}</div>
-                                <div>Start Time: {new Date(this.props.event.start).toLocaleTimeString()}</div>
-                                <div>End Time: {new Date(this.props.event.end).toLocaleTimeString()}</div>
-                                <div>{this.props.musician ?
+                                <div>Start Time: {new Date(this.props.event.start).toLocaleTimeString().replace(/:\d\d([ ap]|$)/, " ")}</div>
+                                <div>End Time: {new Date(this.props.event.end).toLocaleTimeString().replace(/:\d\d([ ap]|$)/, " ")}</div>
+                                <div>{this.props.musician  && this.props.facility?
                                     <GetDistance
                                         musician={this.props.musician}
                                         facility={this.props.facility}
@@ -37,11 +40,11 @@ var EventRow = React.createClass({
                             <row>
                                 <div className="col-sm-12">
                                     <div className="col-sm-5">
-                                    <p className="text-center"> * Request does not an any way imply that you will be approved for this event!</p>
+                                    <p className="text-center"> * Request does not imply, in any way, that you will be approved for this event!</p>
                                     </div>
                                 </div>
                                 <div className="col-sm-6 col-sm-offset-1">
-                                    <button className="btn btn-danger" type="submit">Request Event  *</button>
+                                    <button className="btn btn-primary"  type="submit">Request Event  *</button>
                                 </div>
                             </row>
                         </div>

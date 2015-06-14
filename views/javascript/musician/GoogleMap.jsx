@@ -55,7 +55,7 @@ var GoogleMap = React.createClass({
     render: function () {
         return (
 
-                        <div className="map-gic"></div>
+        <div className="map-gic"></div>
 
         );
     }
