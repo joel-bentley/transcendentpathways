@@ -10,6 +10,8 @@ var facilitySchema = new mongoose.Schema({
     city: String,
     state: String,
     zipcode: String,
+    latitude: Number,
+    longitude: Number,
     contactName: String,
     contactPhone: String,
     contactEmail: String,

@@ -1,13 +1,8 @@
 var React = require('react');
 var GetDistance = require('./GetDistance.jsx');
+var GoogleMap = require('./GoogleMap.jsx');
 
 var EventRow = React.createClass({
-    getDefaultProps: function(){
-        return({
-            zipcodeApiUrl: 'http://www.zipcodeapi.com/rest/',
-            secretKey: 'SwIN9Y52MkGXHB1cjYG99bMJyai4FfVyMEmWDrYqMFntgpGAnnJxyvh7GzbmP7UB'
-        });
-    },
 
     render: function(){
 
@@ -31,6 +26,8 @@ var EventRow = React.createClass({
                             /> :
                         null}
                     <div id="map-canvas"> </div>
+                    <div> <GoogleMap musician={this.props.musician} facility={this.props.facility}/></div>
+
 
                 </div>
             </div>
