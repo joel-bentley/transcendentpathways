@@ -6,12 +6,18 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name='csrf-token', content=_csrf)
     title #{title} - Transcendent Pathways
-    link(href='/css/main.min.css', rel='stylesheet')
+
     link(href='/media/favicon.ico', rel='shortcut icon')
+
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/2.2.5/css/bootstrap.min.css')
+
+    link(href='/css/main.min.css', rel='stylesheet')
 
     link(rel='stylesheet', href='/js/lib/fullcalendar.min.css')
     link(rel='stylesheet', href='/js/lib/fullcalendar.print.css',  media='print')
+
     link(rel='stylesheet', href='/js/lib/jquery-ui.min.css')
+
 
   body
     include partials/headerFacility
@@ -22,9 +28,12 @@ html
 
     //include partials/footer
 
+    // 3.3.4
+
     script(src='/js/lib/jquery.min.js')
     script(src='/js/lib/jquery-ui.min.js')
-    script(src='/js/lib/bootstrap.min.js')
+    //script(src='/js/lib/bootstrap.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js')
     script(src='/js/lib/moment.min.js')
     script(src='/js/lib/fullcalendar.min.js')
 
@@ -32,7 +41,7 @@ html
     script(type='text/javascript').
       $(document).ready(function() {
 
-        $('#calendar').fullCalendar({
+        var calendar = $('#calendar').fullCalendar({
           header: {
             left: 'prev,next today',
             center: 'title',
@@ -43,111 +52,108 @@ html
           events: {
             url: '/gigListing',
             type: 'GET',
-            data: {
-            custom_attribute: 'test'
-            },
             error: function() {
               alert('There was an error while fetching events!');
             }
           },
-          dayClick: function() {
+          dayClick: function(date, jsEvent, view) {
             //alert('a day has been clicked!');
-            fnOpenNormalDialog();
+            //fnOpenNormalDialog(date);
+            //console.dir(date.format('MMMM Do YYYY'));
+            //var dateFormated = date.format('MMMM Do YYYY');
+            //$('#createEventModal #date').val(dateFormated);
+            $('#createEventModal').modal('show');
           },
           eventClick: function (event, jsEvent, view) {
-            //alert('an event has been clicked!');
+            alert('an event has been clicked!');
             //fnOpenNormalDialog();
           }
         });
       });
 
-      function fnOpenNormalDialog() {
-        $("#add-event").dialog({
-          autoOpen: false,
-          height: 'auto',
-          width: 'auto',
-          autoResize: true,
-          modal: true,
-          resizable: false,
-          //open: function () {
-          //  $("#title").attr("tabindex", "1");
-          //},
-          buttons: {
-            "Save Event": function () {
-              //              $.ajax({
-              //                type: "POST",
-              //                url: "includes/add-event.php",
-              //                data: $('#add-event-form').serialize(),
-              //                success: function () {
-              //                  calendar.fullCalendar('refetchEvents');
-              //                }
-              //              });
-              $(this).dialog("close");
-            },
-            "Cancel": function () {
-              $(this).dialog("close");
-            }
-          }
-        });
-        $("#add-event").dialog('open');
-      }
-
-
-
-      /* function fnOpenNormalDialog() {
-        $("#add-event").html("Confirm Dialog Box");
-        // Define the Dialog and its properties.
-        $("#add-event").dialog({
-          resizable: false,
-          modal: true,
-          title: "Modal",
-          height: 250,
-          width: 400,
-          buttons: {
-            "Yes": function () {
-              $(this).dialog('close');
-              callback(true);
-            },
-            "No": function () {
-              $(this).dialog('close');
-              callback(false);
-            }
-          }
-        });
-      } */
-
-      function callback(value) {
-        if (value) {
-          alert("Confirmed");
-        } else {
-          alert("Rejected");
+      /*var calendar = $('#calendar').fullCalendar({
+        defaultView: 'agendaWeek',
+        editable: true,
+        selectable: true,
+        //header and other values
+        select: function(start, end, allDay) {
+          endtime = $.fullCalendar.formatDate(end,'h:mm tt');
+          starttime = $.fullCalendar.formatDate(start,'ddd, MMM d, h:mm tt');
+          var mywhen = starttime + ' - ' + endtime;
+          $('#createEventModal #apptStartTime').val(start);
+          $('#createEventModal #apptEndTime').val(end);
+          $('#createEventModal #apptAllDay').val(allDay);
+          $('#createEventModal #when').text(mywhen);
+          $('#createEventModal').modal('show');
         }
-      }
+        });*/
 
-      function saveEventUpdate(event) {
-        var url = '/postGigDetails';
-        // Create a copy of the event object
-        var data = $.extend({}, event);
-        // Replace string date with timestamp (ms since epoch)
-        data.start = data.start.valueOf();
-        if (data.end != undefined) {
-          data.end = event.end.valueOf();
-        }
-        data.custom_attribute = 'test';
-        var ret_id = '';
-        var jqxhr = $.post(url, data, function (responseData) {
-          // Executed on successful update to backend
-          // Newly added event
-          if (event.id == undefined) {
-            // Get event ID from insert response
-            obj = jQuery.parseJSON(responseData);
-            ret_id = obj.id;
-            event.id = ret_id;
-            // Render the event on the calendar
-            $('#calendar').fullCalendar('renderEvent', event, true);
-          }
-        })
-        .fail(function () {
-          alert("Error sending update AJAX");
-        })
-      }
+//        $('#submitButton').on('click', function(e){
+//          // We don't want this to act as a link so cancel the link action
+//          e.preventDefault();
+//
+//          doSubmit();
+//        });
+//
+//
+//        function doSubmit(){
+//          $("#createEventModal").modal('hide');
+//            console.log($('#apptStartTime').val());
+//            console.log($('#apptEndTime').val());
+//            console.log($('#apptAllDay').val());
+//            alert("form submitted");
+//
+//          $("#calendar").fullCalendar('renderEvent',
+//          {
+//          title: $('#patientName').val(),
+//            start: new Date($('#apptStartTime').val()),
+//            end: new Date($('#apptEndTime').val()),
+//            allDay: ($('#apptAllDay').val() == "true"),
+//          },
+//          true);
+//        }
+
+
+//      function getCSRFTokenValue() {
+//        var metas = document.getElementsByTagName('meta');
+//
+//        for (var i=0; i<metas.length; i++) {
+//          if (metas[i].getAttribute("name") == 'csrf-token') {
+//            return metas[i].getAttribute('content');
+//          }
+//        }
+//        return '';
+//      }
+//
+//      $.ajaxSetup({
+//        headers: {
+//          'X-CSRF-Token': getCSRFTokenValue()
+//        }
+//      });
+//
+//      function fnOpenNormalDialog(date) {
+//        $("#add-event").dialog({
+//          autoOpen: false,
+//          height: 'auto',
+//          width: 'auto',
+//          autoResize: true,
+//          modal: false,
+//          resizable: false,
+//          open: function () {
+//            $("#title").attr("tabindex", "1");
+//          },
+//          buttons: {
+//            "Save Event": function () {
+//              //var event
+//
+//              $.post('/postGigDetails', musician, function(result){
+//                calendar.fullCalendar('refetchEvents');
+//                $(this).dialog("close");
+//              });
+//            },
+//            "Cancel": function () {
+//              $(this).dialog("close");
+//            }
+//          }
+//        });
+//        $("#add-event").dialog('open');
