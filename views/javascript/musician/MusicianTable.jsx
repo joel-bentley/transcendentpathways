@@ -153,7 +153,7 @@ var MusicianTable = React.createClass({
 
         return(
             <div className = "container-fluid">
-                     <div className = "col-sm-5"  style={styles.left}>
+                     <div className = "col-sm-5">
                         <SearchEvents />
                         <hr></hr>
                         <ApprovedEvents
