@@ -122,7 +122,7 @@ exports.postUpdateEventDetails = function(req, res, next) {
         event.description = req.body.description || '';
         event.status = req.body.status;
         event.requestedBy = req.body.requestedBy || '';
-        event.approvedMusician = req.body.approvedMusician || '';
+        event.approvedMusicianName = req.body.approvedMusicianName || '';
         event.payment = req.body.payment || '';
         event.performance = req.body.performance || '';
 

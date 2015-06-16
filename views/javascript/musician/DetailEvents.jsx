@@ -26,9 +26,10 @@ var DetailEvents = React.createClass({
                     eventRows.push(
                         <EventRow
                             key={event._id}
-                            event={event} f
+                            event={event}
                             facility={facility}
-                            musician={this.props.musician}/>
+                            musician={this.props.musician}
+                            updateEvent={this.props.updateEvent}/>
                     )
                 }
             }.bind(this));

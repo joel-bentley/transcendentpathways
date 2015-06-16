@@ -3,12 +3,24 @@ var GetDistance = require('./GetDistance.jsx');
 var GoogleMap = require('./GoogleMap.jsx');
 
 var EventRow = React.createClass({
-    handleClick: function(){
-
-
+    handleClick: function() {
+        var thisEvent = this.props.event;
+        var alreadyRegistered = false;
+        thisEvent.requestedBy.map(function (elem) {
+            if (elem.musicianName === this.props.musician.performerName) {
+                alreadyRegistered = true;
+            }
+        }.bind(this));
+        if (alreadyRegistered === false) {
+            this.props.event.requestedBy.push({
+                "musicianName": this.props.musician.performerName,
+                "musicianId": this.props.musician._id
+            });
+            //this.props.event.status.requested = true;
+        }
+    this.props.updateEvent(this.props.event);
     },
     render: function(){
-
         return(
             <div className="panel panel-primary" key={event._id}>
                 <div className="panel-heading">
@@ -44,7 +56,7 @@ var EventRow = React.createClass({
                                     </div>
                                 </div>
                                 <div className="col-sm-6 col-sm-offset-1">
-                                    <button className="btn btn-primary"  type="submit">Request Event  *</button>
+                                    <button className="btn btn-primary" onClick={this.handleClick} type="submit">Request Event  *</button>
                                 </div>
                             </row>
                         </div>
