@@ -30,6 +30,7 @@ var PaymentStatus = React.createClass({
         });
         $.post(this.props.postRoute, event, function(result){
         });
+        this.props.updateEvent(event);
     },
     getCSRFTokenValue: function() {
         var metas = document.getElementsByTagName('meta');
