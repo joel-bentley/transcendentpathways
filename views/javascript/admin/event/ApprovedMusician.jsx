@@ -3,14 +3,16 @@ var React = require('react');
 var ApprovedMusician = React.createClass({
     getDefaultProps: function() {
         return {
-            postRoute: '/admin/updateEventDetails',
+            postRoute: '/admin/updateEventDetails'
             }
     },
     updateEvent: function(){
+        debugger;
         this.props.enableSave(false);
         var updatedEvent = this.props.event;
             updatedEvent.status.approved = true;
             updatedEvent.status.requested = true;
+            updatedEvent.approvedMusicianName = this.props.event.approvedMusicianName;
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-Token': this.getCSRFTokenValue()
@@ -34,14 +36,14 @@ var ApprovedMusician = React.createClass({
             <div>
                 <div className="container-fixed">
                     <h5>Event Approved For (click note to approve)</h5>
-                    {this.props.event.approvedMusician ?
+                    {this.props.event.approvedMusicianName ?
                         <div className="list-group-item"
                              style={
                              {"paddingTop": "0px",
                              "paddingBottom": "0px",
                              "backgroundColor": "#6C9FE2"
                              }}>
-                                <h5>{this.props.event.approvedMusician}</h5>
+                                <h5>{this.props.event.approvedMusicianName}</h5>
                         </div> :
                         null
                     }

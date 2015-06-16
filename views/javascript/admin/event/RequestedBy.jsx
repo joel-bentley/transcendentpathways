@@ -2,11 +2,11 @@ var React = require('react');
 
 var RequestedBy = React.createClass({
     updateMusician: function(musician){
-        if (musician !== this.props.event.approvedMusician){
+        if (musician !== this.props.event.approvedMusicianName){
             this.props.enableSave(true);
         }
         var x = this.props.event;
-        x.approvedMusician = musician;
+        x.approvedMusicianName = musician;
         if (x) {
             this.props.updateEvent(x);
         }

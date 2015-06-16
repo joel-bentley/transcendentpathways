@@ -156,7 +156,8 @@ app.get('/homeAdminEventData', passportConf.isAuthenticated, adminController.get
 app.post('/admin/updateEventDetails', passportConf.isAuthenticated, adminController.postUpdateEventDetails);
 //retrieves facility info for each event tab
 app.post('/getFacilityInfo/', passportConf.isAuthenticated, adminController.getFacilityInfo);
-
+//post event update data when musician requests
+app.post('/postUpdateEventDetails', passportConf.isAuthenticated, musicianController.postUpdateEventDetails);
 
 /**
  * API examples routes.

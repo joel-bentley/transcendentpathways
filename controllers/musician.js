@@ -218,8 +218,25 @@ exports.postRequestGig = function(req, res, next) {
     });
 };
 
-getCoordinates = function(address) {
+exports.postUpdateEventDetails = function(req, res, next) {
+    Event.findOne({_id: req.body._id}).exec(function(err, event) {
+        if (err) return next(err);
+        event.facilityName = req.body.facilityName || '';
+        event.start = req.body.start || '';
+        event.end = req.body.end || '';
+        event.description = req.body.description || '';
+        event.status = req.body.status;
+        event.requestedBy = req.body.requestedBy || '';
+        event.approvedMusicianName = req.body.approvedMusicianName || '';
+        event.payment = req.body.payment || '';
+        event.performance = req.body.performance || '';
 
+        event.save(function(err) {
+            if (err) return next(err);
+        });
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.end(JSON.stringify(event));
+    });
 };
 
 
