@@ -47,12 +47,13 @@ var MusicianTable = React.createClass({
             if (err) {
                 return console.error(err);
             }
-            console.log(data);
-            this.setState({
-                events: data.events,
-                musician: data.musicianData,
-                facilities: data.facilityData
-            });
+                this.setState({
+                    events: data.events.sort(function(a, b) {
+                        return a.start > b.start;
+                    }),
+                    musician: data.musicianData,
+                    facilities: data.facilityData
+                });
         }.bind(this));
     },
 
@@ -93,7 +94,6 @@ var MusicianTable = React.createClass({
             }
         });
         $.post('/postUpdateEventDetails',saveEvent, function(result){
-            console.log(result);
             this.gigList();
         }.bind(this));
     },
@@ -110,46 +110,35 @@ var MusicianTable = React.createClass({
     },
 
     render: function(){
-        console.log('rendering');
-        console.log(this.state);
 
         var requestedEvents = [];
         var approvedEvents = [];
         var completedEvents = [];
         if (this.state.events && this.state.musician){
-            this.state.events.sort(function(a,b){
-                return a.start > b.start;
-            });
             this.state.events.map(function(event){
                 event.requestedBy.map(function(musician){
+
                     if(musician.musicianName === this.state.musician.performerName){
-                        console.log('building requested events');
                         requestedEvents.push(<div key={event._id+musician._id}>{event.facilityName
                         + " " + new Date(event.start).toLocaleDateString()}</div>);
                     }
                 }.bind(this));
             }.bind(this));
-        }
-        if (this.state.events && this.state.musician){
+
             this.state.events.map(function(event){
                 if((event.approvedMusicianName === this.state.musician.performerName) && (event.status.completed === false)){
-                    console.log('buildings approvedEvents');
                     approvedEvents.push(<div key={event._id}>{event.facilityName
                     + " " + new Date(event.start).toLocaleDateString()}</div>);
                 }
             }.bind(this));
-        }
-        if (this.state.events && this.state.musician){
+
             this.state.events.map(function(event){
                 if((event.approvedMusicianName === this.state.musician.performerName) && (event.status.completed === true)){
-                    console.log('building completedEvents');
                     completedEvents.push(<div key={event._id}>{event.facilityName
                     + " " + new Date(event.start).toLocaleDateString()}</div>);
                 }
             }.bind(this));
         }
-
-        console.log(approvedEvents, requestedEvents, completedEvents);
 
         return(
             <div className = "container-fluid">
