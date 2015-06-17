@@ -9,23 +9,46 @@ block content
 
 
   #add-event(title='Add New Event' style="display:none;")
-    form#add-event-form(action='', name='add-event-form')
+    form#add-event-form(action='/facility/postGigDetails', method='POST', name='add-event-form')
       //label(for='title') Event Name
       //input#title(type='text', name='title')
       //p
       //  label(for='add-date') Date
       //  input#event-date(type='text', name='event-date', tabindex='-1')
+
+      input(type='hidden', name='_csrf', value=_csrf)
+      input#date(type='hidden' name='date')
       p
-        label(for='add-start-time') Start Time
-        input#start-time(type='text', name='start-time')
+        #when
       p
-        label(for='add-end-time') End Time
-        input#end-time(type='text', name='end-time')
+        label(for='startTime') Start Time
+        input.starttimepicker(type='text', name='startTime', id='startTime', placeholder='')
       p
-        //label(for='repeats') repeat
-        //input#repeats(type='checkbox', name='repeats', value='1')
-        #repeat-options
-          | Repeat every: week
-          input(type='radio', value='7', name='repeat-freq', align='bottom')
-          |              two weeks
-          input(type='radio', value='14', name='repeat-freq', align='bottom')
+        label(for='endTime') End Time
+        input.endtimepicker(type='text', name='endTime', id='endTime', placeholder='')
+      p
+        label(for='description') Event Description
+        input(type='text', name='description', id='description', placeholder='')
+      //p
+      //  label(for='repeats') repeat
+      //  input#repeats(type='checkbox', name='repeats', value='1')
+      //  #repeat-options
+      //    | Repeat every: week
+      //    input(type='radio', value='7', name='repeat-freq', align='bottom')
+      //    |              two weeks
+      //    input(type='radio', value='14', name='repeat-freq', align='bottom')
+      button.btn.btn.btn-primary(type='submit')
+        span.ion-edit
+        | Post Event
+
+
+
+  #event-details(title='Event Details' style="display:none;")
+    h3
+      #eventDate
+    h3
+      #startTime
+    h3
+      #endTime
+    h3
+      #description

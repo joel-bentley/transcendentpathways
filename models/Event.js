@@ -5,7 +5,6 @@ var eventSchema = new mongoose.Schema({
     facilityId: {
         type: mongoose.Schema.Types.ObjectId, ref: 'Facility'
     },
-    title: { type: String, default: 'Event' },
     start: Date,
     end: Date,
     description: { type: String, default: ''},
