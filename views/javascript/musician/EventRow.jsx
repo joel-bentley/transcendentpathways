@@ -21,6 +21,7 @@ var EventRow = React.createClass({
     this.props.updateEvent(this.props.event);
     },
     render: function(){
+        console.log('logging props in row', this.props);
         return(
             <div className="panel panel-primary" key={event._id}>
                 <div className="panel-heading">
