@@ -6,18 +6,15 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name='csrf-token', content=_csrf)
     title #{title} - Transcendent Pathways
-
-    link(href='/media/favicon.ico', rel='shortcut icon')
-
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/2.2.5/css/bootstrap.min.css')
-
     link(href='/css/main.min.css', rel='stylesheet')
+    link(href='/media/favicon.ico', rel='shortcut icon')
 
     link(rel='stylesheet', href='/js/lib/fullcalendar.min.css')
     link(rel='stylesheet', href='/js/lib/fullcalendar.print.css',  media='print')
-
     link(rel='stylesheet', href='/js/lib/jquery-ui.min.css')
 
+    link(href='/js/lib/pickadate/compressed/themes/classic.css', rel='stylesheet')
+    link(href='/js/lib/pickadate/compressed/themes/classic.time.css', rel='stylesheet')
 
   body
     include partials/headerFacility
@@ -28,14 +25,26 @@ html
 
     //include partials/footer
 
-    // 3.3.4
-
     script(src='/js/lib/jquery.min.js')
     script(src='/js/lib/jquery-ui.min.js')
-    //script(src='/js/lib/bootstrap.min.js')
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js')
+    script(src='/js/lib/bootstrap.min.js')
     script(src='/js/lib/moment.min.js')
     script(src='/js/lib/fullcalendar.min.js')
+
+    script(src='/js/lib/pickadate/compressed/picker.js')
+    script(src='/js/lib/pickadate/compressed/picker.time.js')
+    script.
+      $('#add-event .starttimepicker').pickatime({
+        interval: 15,
+        min: [7,0],
+        max: [22,0]
+       });
+      $('#add-event .endtimepicker').pickatime({
+        //editable: true,
+        interval: 15,
+        min: [7,0],
+        max: [22,0]
+      });
 
 
     script(type='text/javascript').
@@ -50,110 +59,85 @@ html
           eventLimit: true, // allow "more" link when too many events
           allDayDefault: false,
           events: {
-            url: '/gigListing',
+            url: '/facility/getGigListing',
             type: 'GET',
             error: function() {
               alert('There was an error while fetching events!');
             }
           },
+          timezone: 'local',
           dayClick: function(date, jsEvent, view) {
             //alert('a day has been clicked!');
-            //fnOpenNormalDialog(date);
-            //console.dir(date.format('MMMM Do YYYY'));
-            //var dateFormated = date.format('MMMM Do YYYY');
-            //$('#createEventModal #date').val(dateFormated);
-            $('#createEventModal').modal('show');
+            fnAddEventDialog(date);
           },
           eventClick: function (event, jsEvent, view) {
-            alert('an event has been clicked!');
-            //fnOpenNormalDialog();
+            //alert('an event has been clicked!');
+            fnEventDetailsDialog(event);
           }
         });
+
       });
 
-      /*var calendar = $('#calendar').fullCalendar({
-        defaultView: 'agendaWeek',
-        editable: true,
-        selectable: true,
-        //header and other values
-        select: function(start, end, allDay) {
-          endtime = $.fullCalendar.formatDate(end,'h:mm tt');
-          starttime = $.fullCalendar.formatDate(start,'ddd, MMM d, h:mm tt');
-          var mywhen = starttime + ' - ' + endtime;
-          $('#createEventModal #apptStartTime').val(start);
-          $('#createEventModal #apptEndTime').val(end);
-          $('#createEventModal #apptAllDay').val(allDay);
-          $('#createEventModal #when').text(mywhen);
-          $('#createEventModal').modal('show');
-        }
-        });*/
+      function fnAddEventDialog(date) {
+        $("#add-event").dialog({
+          //autoOpen: false,
+          //height: 'auto',
+          //width: 'auto',
+          //autoResize: true,
+          modal: true,
+          resizable: false,
+          minWidth: 400,
+          minHeight: 400,
+          width: 400,
+          height: 400,
+          buttons: {
+            'Cancel': function() {
+              $(this).dialog("close");
+            }
+          }
+        });
+        var dateFormated = date.format('D MMMM, YYYY');
+        $('#add-event #when').text(dateFormated);
+        $('#add-event #date').val(dateFormated);
+        $('#add-event').dialog('open');
+      }
 
-//        $('#submitButton').on('click', function(e){
-//          // We don't want this to act as a link so cancel the link action
-//          e.preventDefault();
-//
-//          doSubmit();
-//        });
-//
-//
-//        function doSubmit(){
-//          $("#createEventModal").modal('hide');
-//            console.log($('#apptStartTime').val());
-//            console.log($('#apptEndTime').val());
-//            console.log($('#apptAllDay').val());
-//            alert("form submitted");
-//
-//          $("#calendar").fullCalendar('renderEvent',
-//          {
-//          title: $('#patientName').val(),
-//            start: new Date($('#apptStartTime').val()),
-//            end: new Date($('#apptEndTime').val()),
-//            allDay: ($('#apptAllDay').val() == "true"),
-//          },
-//          true);
-//        }
+      function fnEventDetailsDialog(event) {
+        $('#event-details').dialog({
+          autoOpen: false,
+          height: 'auto',
+          width: 'auto',
+          autoResize: true,
+          modal: true,
+          resizable: false,
+          //minWidth: 600,
+          //minHeight: 400,
+          //width: 600,
+          //height: 400
+          buttons: {
+            'Remove Event': function() {
+              $(this).dialog("close");
+            },
+
+            'Cancel': function() {
+              $(this).dialog("close");
+            }
+          }
+        });
+        var eventDate = event.start.format('D MMMM, YYYY');
+        var startTime = 'Start Time:  ' + event.start.format('h:mm a');
+        var endTime = 'End time:  ' + event.end.format('h:mm a') + '  (' + event.end.diff(event.start, 'minutes') + ' minutes)' ;
+        var description = event.description;
+
+        $('#event-details #eventDate').text(eventDate);
+        $('#event-details #startTime').text(startTime);
+        $('#event-details #endTime').text(endTime);
+        $('#event-details #description').text(description);
+        $('#event-details').dialog('open');
+      }
 
 
-//      function getCSRFTokenValue() {
-//        var metas = document.getElementsByTagName('meta');
-//
-//        for (var i=0; i<metas.length; i++) {
-//          if (metas[i].getAttribute("name") == 'csrf-token') {
-//            return metas[i].getAttribute('content');
-//          }
-//        }
-//        return '';
-//      }
-//
-//      $.ajaxSetup({
-//        headers: {
-//          'X-CSRF-Token': getCSRFTokenValue()
-//        }
-//      });
-//
-//      function fnOpenNormalDialog(date) {
-//        $("#add-event").dialog({
-//          autoOpen: false,
-//          height: 'auto',
-//          width: 'auto',
-//          autoResize: true,
-//          modal: false,
-//          resizable: false,
-//          open: function () {
-//            $("#title").attr("tabindex", "1");
-//          },
-//          buttons: {
-//            "Save Event": function () {
-//              //var event
-//
-//              $.post('/postGigDetails', musician, function(result){
-//                calendar.fullCalendar('refetchEvents');
-//                $(this).dialog("close");
-//              });
-//            },
-//            "Cancel": function () {
-//              $(this).dialog("close");
-//            }
-//          }
-//        });
-//        $("#add-event").dialog('open');
+      //$("add-event-form").on("submit", function (event) {
+      //  $('#add-event').dialog("close");
+      //  calendar.fullCalendar('refetchEvents');
+      //});
