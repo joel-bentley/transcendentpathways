@@ -11,6 +11,8 @@ var CancelEvent = React.createClass({
     saveAndContinue: function(){
         var event = this.props.event;
         event.status.canceled=true;
+        event.status.open=false;
+        event.status.completed=true;
         $.ajaxSetup({
             headers: {
                 'X-CSRF-Token': this.getCSRFTokenValue()

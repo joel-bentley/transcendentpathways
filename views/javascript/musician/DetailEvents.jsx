@@ -13,6 +13,7 @@ var DetailEvents = React.createClass({
         })
     },
     render: function() {
+        debugger;
         var eventRows = [];
         var facility = null;
         if (this.props.events && this.props.facilities) {
