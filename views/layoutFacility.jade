@@ -13,6 +13,9 @@ html
     link(rel='stylesheet', href='/js/lib/fullcalendar.print.css',  media='print')
     link(rel='stylesheet', href='/js/lib/jquery-ui.min.css')
 
+    link(href='/js/lib/pickadate/compressed/themes/classic.css', rel='stylesheet')
+    link(href='/js/lib/pickadate/compressed/themes/classic.time.css', rel='stylesheet')
+
   body
     include partials/headerFacility
 
@@ -28,11 +31,26 @@ html
     script(src='/js/lib/moment.min.js')
     script(src='/js/lib/fullcalendar.min.js')
 
+    script(src='/js/lib/pickadate/compressed/picker.js')
+    script(src='/js/lib/pickadate/compressed/picker.time.js')
+    script.
+      $('#add-event .starttimepicker').pickatime({
+        interval: 15,
+        min: [7,0],
+        max: [22,0]
+       });
+      $('#add-event .endtimepicker').pickatime({
+        //editable: true,
+        interval: 15,
+        min: [7,0],
+        max: [22,0]
+      });
+
 
     script(type='text/javascript').
       $(document).ready(function() {
 
-        $('#calendar').fullCalendar({
+        var calendar = $('#calendar').fullCalendar({
           header: {
             left: 'prev,next today',
             center: 'title',
@@ -41,113 +59,85 @@ html
           eventLimit: true, // allow "more" link when too many events
           allDayDefault: false,
           events: {
-            url: '/gigListing',
+            url: '/facility/getGigListing',
             type: 'GET',
-            data: {
-            custom_attribute: 'test'
-            },
             error: function() {
               alert('There was an error while fetching events!');
             }
           },
-          dayClick: function() {
+          timezone: 'local',
+          dayClick: function(date, jsEvent, view) {
             //alert('a day has been clicked!');
-            fnOpenNormalDialog();
+            fnAddEventDialog(date);
           },
           eventClick: function (event, jsEvent, view) {
             //alert('an event has been clicked!');
-            //fnOpenNormalDialog();
+            fnEventDetailsDialog(event);
           }
         });
+
       });
 
-      function fnOpenNormalDialog() {
+      function fnAddEventDialog(date) {
         $("#add-event").dialog({
+          //autoOpen: false,
+          //height: 'auto',
+          //width: 'auto',
+          //autoResize: true,
+          modal: true,
+          resizable: false,
+          minWidth: 400,
+          minHeight: 400,
+          width: 400,
+          height: 400,
+          buttons: {
+            'Cancel': function() {
+              $(this).dialog("close");
+            }
+          }
+        });
+        var dateFormated = date.format('D MMMM, YYYY');
+        $('#add-event #when').text(dateFormated);
+        $('#add-event #date').val(dateFormated);
+        $('#add-event').dialog('open');
+      }
+
+      function fnEventDetailsDialog(event) {
+        $('#event-details').dialog({
           autoOpen: false,
           height: 'auto',
           width: 'auto',
           autoResize: true,
           modal: true,
           resizable: false,
-          //open: function () {
-          //  $("#title").attr("tabindex", "1");
-          //},
+          //minWidth: 600,
+          //minHeight: 400,
+          //width: 600,
+          //height: 400
           buttons: {
-            "Save Event": function () {
-              //              $.ajax({
-              //                type: "POST",
-              //                url: "includes/add-event.php",
-              //                data: $('#add-event-form').serialize(),
-              //                success: function () {
-              //                  calendar.fullCalendar('refetchEvents');
-              //                }
-              //              });
+            'Remove Event': function() {
               $(this).dialog("close");
             },
-            "Cancel": function () {
+
+            'Cancel': function() {
               $(this).dialog("close");
             }
           }
         });
-        $("#add-event").dialog('open');
+        var eventDate = event.start.format('D MMMM, YYYY');
+        var startTime = 'Start Time:  ' + event.start.format('h:mm a');
+        var endTime = 'End time:  ' + event.end.format('h:mm a') + '  (' + event.end.diff(event.start, 'minutes') + ' minutes)' ;
+        var description = event.description;
+
+        $('#event-details #eventDate').text(eventDate);
+        $('#event-details #startTime').text(startTime);
+        $('#event-details #endTime').text(endTime);
+        $('#event-details #description').text(description);
+        $('#event-details').dialog('open');
       }
 
 
-
-      /* function fnOpenNormalDialog() {
-        $("#add-event").html("Confirm Dialog Box");
-        // Define the Dialog and its properties.
-        $("#add-event").dialog({
-          resizable: false,
-          modal: true,
-          title: "Modal",
-          height: 250,
-          width: 400,
-          buttons: {
-            "Yes": function () {
-              $(this).dialog('close');
-              callback(true);
-            },
-            "No": function () {
-              $(this).dialog('close');
-              callback(false);
-            }
-          }
-        });
-      } */
-
-      function callback(value) {
-        if (value) {
-          alert("Confirmed");
-        } else {
-          alert("Rejected");
-        }
-      }
-
-      function saveEventUpdate(event) {
-        var url = '/postGigDetails';
-        // Create a copy of the event object
-        var data = $.extend({}, event);
-        // Replace string date with timestamp (ms since epoch)
-        data.start = data.start.valueOf();
-        if (data.end != undefined) {
-          data.end = event.end.valueOf();
-        }
-        data.custom_attribute = 'test';
-        var ret_id = '';
-        var jqxhr = $.post(url, data, function (responseData) {
-          // Executed on successful update to backend
-          // Newly added event
-          if (event.id == undefined) {
-            // Get event ID from insert response
-            obj = jQuery.parseJSON(responseData);
-            ret_id = obj.id;
-            event.id = ret_id;
-            // Render the event on the calendar
-            $('#calendar').fullCalendar('renderEvent', event, true);
-          }
-        })
-        .fail(function () {
-          alert("Error sending update AJAX");
-        })
-      }
+      //$("add-event-form").on("submit", function (event) {
+      //  $('#add-event').dialog("close");
+      //  calendar.fullCalendar('refetchEvents');
+      //});
