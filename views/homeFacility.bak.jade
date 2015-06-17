@@ -1,0 +1,75 @@
+extends layoutFacility
+
+block content
+  h1 Transcendent Pathways
+  p.lead Scheduling System
+  hr
+
+  #calendar
+
+
+  #createEventModal.modal.hide(tabindex='-1', role='dialog', aria-labelledby='myModalLabel1', aria-hidden='true')
+    .modal-header
+      button.close(type='button', data-dismiss='modal', aria-hidden='true') x
+      h3#myModalLabel1 Create Event
+    .modal-body
+    //  form#createEventForm.form-horizontal
+    //
+    //    .form-group
+    //      label.col-sm-2.control-label(for='date') Date
+    //      div(style='position:relative')
+    //          input.form-control.datepicker(type='text', name='date', id='date', placeholder='...')
+    //    .form-group
+    //      label.col-sm-2.control-label(for='startTime') Start Time
+    //      div(style='position:relative')
+    //          input.form-control.starttimepicker(type='text', name='startTime', id='startTime', placeholder='...')
+    //    .form-group
+    //      label.col-sm-2.control-label(for='endTime') End Time
+    //      div(style='position:relative')
+    //          input.form-control.endtimepicker(type='text', name='endTime', id='endTime', placeholder='...')
+    //    .form-group
+    //      label.col-sm-2.control-label(for='details') Event Description
+    //      input.form-control(type='text', name='description', id='description', placeholder='')
+
+
+
+
+    //.control-group
+    //  label.control-label(for='startTime') Patient:
+    //  .controls
+    //    input#startTime(type='text', name='patientName', style='margin: 0 auto;', data-provide='typeahead', data-items='4', data-source='["Value 1","Value 2","Value 3"]')
+    //    input#apptStartTime(type='hidden')
+    //    input#apptEndTime(type='hidden')
+    //    input#apptAllDay(type='hidden')
+    //.control-group
+    //  label.control-label(for='when') When:
+    //  #when.controls.controls-row(style='margin-top:5px;')
+
+    .modal-footer
+      button.btn(data-dismiss='modal', aria-hidden='true') Cancel
+      button#submitButton.btn.btn-primary(type='submit') Save
+
+
+
+
+  //#add-event(title='Add New Event' style="display:none;")
+  //  form#add-event-form(action='', name='add-event-form')
+  //    //label(for='title') Event Name
+  //    //input#title(type='text', name='title')
+  //    //p
+  //    //  label(for='add-date') Date
+  //    //  input#event-date(type='text', name='event-date', tabindex='-1')
+  //    p
+  //      label(for='add-start-time') Start Time
+  //      input#start-time(type='text', name='start-time')
+  //    p
+  //      label(for='add-end-time') End Time
+  //      input#end-time(type='text', name='end-time')
+  //    p
+  //      //label(for='repeats') repeat
+  //      //input#repeats(type='checkbox', name='repeats', value='1')
+  //      #repeat-options
+  //        | Repeat every: week
+  //        input(type='radio', value='7', name='repeat-freq', align='bottom')
+  //        |              two weeks
+  //        input(type='radio', value='14', name='repeat-freq', align='bottom')
