@@ -1,0 +1,143 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        meta(name='csrf-token', content=_csrf)
+        title #{title} - Transcendent Pathways
+        link(href='/css/main.min.css', rel='stylesheet')
+        link(href='/media/favicon.ico', rel='shortcut icon')
+            link(rel='stylesheet', href='/js/lib/fullcalendar.min.css')
+        link(rel='stylesheet', href='/js/lib/fullcalendar.print.css',  media='print')
+        link(rel='stylesheet', href='/js/lib/jquery-ui.min.css')
+            body
+        include partials/headerFacility
+            .container
+        include partials/flash
+        block content
+            //include partials/footer
+            script(src='/js/lib/jquery.min.js')
+        script(src='/js/lib/jquery-ui.min.js')
+        script(src='/js/lib/bootstrap.min.js')
+        script(src='/js/lib/moment.min.js')
+        script(src='/js/lib/fullcalendar.min.js')
+
+        script(type='text/javascript').
+            $(document).ready(function() {
+                $('#calendar').fullCalendar({
+                header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+                },
+                eventLimit: true, // allow "more" link when too many events
+                allDayDefault: false,
+                events: {
+                url: '/gigListing',
+                type: 'GET',
+                data: {
+                custom_attribute: 'test'
+                },
+                error: function() {
+                    alert('There was an error while fetching events!');
+                }
+                },
+                dayClick: function() {
+                    //alert('a day has been clicked!');
+                    fnOpenNormalDialog();
+                },
+                eventClick: function (event, jsEvent, view) {
+                    //alert('an event has been clicked!');
+                    //fnOpenNormalDialog();
+                }
+                });
+                });
+
+                function fnOpenNormalDialog() {
+                $("#add-event").dialog({
+                autoOpen: false,
+                height: 'auto',
+                width: 'auto',
+                autoResize: true,
+                modal: true,
+                resizable: false,
+                //open: function () {
+                //  $("#title").attr("tabindex", "1");
+                //},
+                buttons: {
+                "Save Event": function () {
+                //              $.ajax({
+                //                type: "POST",
+                //                url: "includes/add-event.php",
+                //                data: $('#add-event-form').serialize(),
+                //                success: function () {
+                //                  calendar.fullCalendar('refetchEvents');
+                //                }
+                //              });
+                $(this).dialog("close");
+                },
+                "Cancel": function () {
+                $(this).dialog("close");
+                }
+                }
+                });
+                $("#add-event").dialog('open');
+                }
+
+                // function fnOpenNormalDialog() {
+                //    $("#add-event").html("Confirm Dialog Box");
+                //        // Define the Dialog and its properties.
+                //    $("#add-event").dialog({
+                //    resizable: false,
+                //    modal: true,
+                //    title: "Modal",
+                //    height: 250,
+                //    width: 400,
+                //    buttons: {
+                //    "Yes": function () {
+                //    $(this).dialog('close');
+                //        callback(true);
+                //    },
+                //    "No": function () {
+                //    $(this).dialog('close');
+                //        callback(false);
+                //    }
+                //    }
+                //    });
+                //}
+
+                function callback(value) {
+                if (value) {
+                    alert("Confirmed");
+                } else {
+                alert("Rejected");
+                }
+                }
+                function saveEventUpdate(event) {
+                var url = '/postGigDetails';
+                // Create a copy of the event object
+                var data = $.extend({}, event);
+                // Replace string date with timestamp (ms since epoch)
+                data.start = data.start.valueOf();
+                if (data.end != undefined) {
+                    data.end = event.end.valueOf();
+                }
+                data.custom_attribute = 'test';
+                var ret_id = '';
+                var jqxhr = $.post(url, data, function (responseData) {
+                    // Executed on successful update to backend
+                    // Newly added event
+                    if (event.id == undefined) {
+                        // Get event ID from insert response
+                        obj = jQuery.parseJSON(responseData);
+                        ret_id = obj.id;
+                        event.id = ret_id;
+                        // Render the event on the calendar
+                        $('#calendar').fullCalendar('renderEvent', event, true);
+                }
+                })
+                .fail(function () {
+                    alert("Error sending update AJAX");
+                })
+            }

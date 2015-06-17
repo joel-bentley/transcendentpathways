@@ -129,7 +129,9 @@ app.get('/homeFacility', passportConf.isAuthenticated, facilityController.getHom
 app.get('/homeFacility2', passportConf.isAuthenticated, facilityController.getHomeFacility2);
 app.get('/account/updateFacilityDetails', passportConf.isAuthenticated, facilityController.getUpdateFacilityDetails);
 app.post('/account/updateFacilityDetails', passportConf.isAuthenticated, facilityController.postUpdateFacilityDetails);
-app.post('/postGigDetails', passportConf.isAuthenticated, facilityController.postGigDetails);
+
+app.get('/facility/getGigListing', passportConf.isAuthenticated, facilityController.getGigListing);
+app.post('/facility/postGigDetails', passportConf.isAuthenticated, facilityController.postGigDetails);
 
 app.get('/gigListing', passportConf.isAuthenticated, musicianController.getGigListing);
 app.post('/postRequestGig', passportConf.isAuthenticated, musicianController.postRequestGig);
