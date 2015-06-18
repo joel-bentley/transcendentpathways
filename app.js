@@ -132,6 +132,7 @@ app.post('/account/updateFacilityDetails', passportConf.isAuthenticated, facilit
 
 app.get('/facility/getGigListing', passportConf.isAuthenticated, facilityController.getGigListing);
 app.post('/facility/postGigDetails', passportConf.isAuthenticated, facilityController.postGigDetails);
+app.post('/facility/removeEvent', passportConf.isAuthenticated, facilityController.removeEvent);
 
 app.get('/gigListing', passportConf.isAuthenticated, musicianController.getGigListing);
 app.post('/postRequestGig', passportConf.isAuthenticated, musicianController.postRequestGig);
