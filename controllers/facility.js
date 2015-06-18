@@ -281,10 +281,17 @@ exports.removeEvent = function(req, res, next) {
 
     console.dir(req.body.id);
 
-    Event.findById( req.body.id ).remove( function(err) {
+    Event.findById( req.body.id, function(err, event) {
         if (err) return next(err);
 
+        if (event.status.approved === false) {
+            Event.findById(req.body.id).remove(function (err) {
+                if (err) return next(err);
+                return res.end();
+            });
+        } else {
+            req.flash('error', { msg: 'Accepted events can not be deleted from this panel. Please contact system administrator.' });
+            res.redirect('/homeFacility');
+        }
     });
-
-    return res.end();
 };
