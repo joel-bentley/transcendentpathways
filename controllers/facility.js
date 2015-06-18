@@ -214,7 +214,7 @@ exports.getGigListing = function(req, res, next) {
                 }
             });
 
-            //console.dir(events);
+            //console.dir(JSON.stringify(events));
 
             res.writeHead(200, {'Content-Type': 'application/json'});
             res.end(JSON.stringify(events));
@@ -265,9 +265,26 @@ exports.postGigDetails = function(req, res, next) {
                     if (err) return next(err);
                     //req.flash('success', { msg: 'Event details posted for ' + facility.facilityName });
                     return res.redirect('/homeFacility');
+                    //return res.end();
                 });
 
             //}
         //});
     });
+};
+
+
+/**
+ * POST /facility/removeEvent
+ */
+exports.removeEvent = function(req, res, next) {
+
+    console.dir(req.body.id);
+
+    Event.findById( req.body.id ).remove( function(err) {
+        if (err) return next(err);
+
+    });
+
+    return res.end();
 };

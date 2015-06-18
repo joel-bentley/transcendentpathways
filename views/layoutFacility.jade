@@ -76,7 +76,13 @@ html
           }
         });
 
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-Token': getCSRFTokenValue()
+          }
+        });
       });
+
 
       function fnAddEventDialog(date) {
         $("#add-event").dialog({
@@ -116,7 +122,14 @@ html
           //height: 400
           buttons: {
             'Remove Event': function() {
-              $(this).dialog("close");
+
+              var data = {};
+              data.id = event._id;
+
+              $.post('/facility/removeEvent', data, function() {
+                $('#calendar').fullCalendar('refetchEvents');
+                $('#event-details').dialog("close");
+              });
             },
 
             'Cancel': function() {
@@ -124,6 +137,7 @@ html
             }
           }
         });
+
         var eventDate = event.start.format('D MMMM, YYYY');
         var startTime = 'Start Time:  ' + event.start.format('h:mm a');
         var endTime = 'End time:  ' + event.end.format('h:mm a') + '  (' + event.end.diff(event.start, 'minutes') + ' minutes)' ;
@@ -136,8 +150,17 @@ html
         $('#event-details').dialog('open');
       }
 
+      function getCSRFTokenValue() {
+        var metas = document.getElementsByTagName('meta');
+        for (var i = 0; i < metas.length; i++) {
+          if (metas[i].getAttribute("name") == 'csrf-token') {
+            return metas[i].getAttribute('content');
+          }
+        }
+        return '';
+      }
 
-      //$("add-event-form").on("submit", function (event) {
-      //  $('#add-event').dialog("close");
-      //  calendar.fullCalendar('refetchEvents');
-      //});
+//      $("add-event-form").on("submit", function (event) {
+//        $('#add-event').dialog("close");
+//        calendar.fullCalendar('refetchEvents');
+//      });
