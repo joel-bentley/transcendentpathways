@@ -7,7 +7,7 @@ var ApprovedMusician = React.createClass({
             }
     },
     updateEvent: function(){
-        debugger;
+        //debugger;
         this.props.enableSave(false);
         var updatedEvent = this.props.event;
             updatedEvent.status.approved = true;
