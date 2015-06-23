@@ -231,9 +231,9 @@ exports.postGigDetails = function(req, res, next) {
     Facility.findById( req.user.detailsId, function(err, facility) {
         if (err) return next(err);
 
-        var start = new Date(req.body.date + ' ' + req.body.startTime);
-        var end = new Date(req.body.date + ' ' + req.body.endTime);
-        var description = req.body.description;
+        var startNew = new Date(req.body.date + ' ' + req.body.startTime);
+        var endNew = new Date(req.body.date + ' ' + req.body.endTime);
+        var descriptionNew = req.body.description;
 
         //console.dir(start);
         //console.dir(typeof start);
@@ -241,24 +241,24 @@ exports.postGigDetails = function(req, res, next) {
         //console.dir(typeof end);
 
 
-        //Event.find({facilityId: facility.id, $or: [ {start: {$gte: start, $lte: end}}, {end: {$gte: start, $lte: end}} ]}).exec(function (err, overlappingEvents) {
-        //    if (err) return next(err);
-        //
-        //    //console.dir(overlappingEvents);
-        //
-        //    if (overlappingEvents) {
-        //        req.flash('error', { msg: 'Event Overlaps with existing event' });
-        //        return res.redirect('/homeFacility');
-        //
-        //    } else {
-        //        console.dir('no overlapping events');
+        Event.find({facilityId: facility.id, start: {$lt: endNew}, end: {$gt: startNew}}, function (err, overlappingEvents) {
+            if (err) return next(err);
+
+            if (overlappingEvents.length) {
+                console.dir('************ overlapping events :(');
+
+                req.flash('error', { msg: 'Event Overlaps with existing event' });
+                return res.redirect('/homeFacility');
+
+            } else {
+                console.dir('************ NO overlapping events :)');
 
                 var event = new Event({
                     facilityName: facility.facilityName,
                     facilityId: facility.id,
-                    start: start,
-                    end: end,
-                    description: description
+                    start: startNew,
+                    end: endNew,
+                    description: descriptionNew
                 });
 
                 event.save(function (err) {
@@ -268,8 +268,8 @@ exports.postGigDetails = function(req, res, next) {
                     //return res.end();
                 });
 
-            //}
-        //});
+            }
+        });
     });
 };
 
