@@ -11,10 +11,18 @@ html
 
     link(rel='stylesheet', href='/js/lib/fullcalendar.min.css')
     link(rel='stylesheet', href='/js/lib/fullcalendar.print.css',  media='print')
-    link(rel='stylesheet', href='/js/lib/jquery-ui.min.css')
+    link(rel='stylesheet', href='/js/lib/jquery-ui-1.11.4.custom/jquery-ui.min.css')
 
     link(href='/js/lib/pickadate/compressed/themes/classic.css', rel='stylesheet')
     link(href='/js/lib/pickadate/compressed/themes/classic.time.css', rel='stylesheet')
+
+    style(media='screen', type='text/css').
+      .fc-day {
+        cursor: pointer;
+      }
+      .fc-event {
+        cursor: pointer;
+      }
 
   body
     include partials/headerFacility
@@ -26,7 +34,8 @@ html
     //include partials/footer
 
     script(src='/js/lib/jquery.min.js')
-    script(src='/js/lib/jquery-ui.min.js')
+    //script(src='/js/lib/jquery-ui-1.11.4.custom/jquery-ui.min.js')
+    script(src='/js/lib/jquery-ui-1.11.4.custom/jquery-ui.min.js')
     script(src='/js/lib/bootstrap.min.js')
     script(src='/js/lib/moment.min.js')
     script(src='/js/lib/fullcalendar.min.js')
@@ -65,7 +74,8 @@ html
               alert('There was an error while fetching events!');
             }
           },
-          timezone: 'local',
+          theme: true,
+          //timezone: 'local',
           dayClick: function(date, jsEvent, view) {
             //alert('a day has been clicked!');
             fnAddEventDialog(date);
