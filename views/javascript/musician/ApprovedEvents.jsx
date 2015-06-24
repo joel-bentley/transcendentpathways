@@ -3,7 +3,7 @@ var React = require('react');
 var ApprovedEvents = React.createClass ({
 
     render: function(){
-        console.log(this.props.approvedEvents);
+        //console.log(this.props.approvedEvents);
         return(
             <div>
                 <h4>Approved Events</h4>

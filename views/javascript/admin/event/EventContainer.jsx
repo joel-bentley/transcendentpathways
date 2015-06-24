@@ -21,7 +21,6 @@ var EventContainer = React.createClass({
             events: [],
             event: [],
             showResults: false,
-            facility: [],
             enableSave: false
         }
     },
@@ -49,30 +48,7 @@ var EventContainer = React.createClass({
         });
         document.body.scrollTop = document.documentElement.scrollTop = 0;
     },
-    getCSRFTokenValue: function() {
-        var metas = document.getElementsByTagName('meta');
 
-        for (var i=0; i<metas.length; i++) {
-            if (metas[i].getAttribute("name") == 'csrf-token') {
-                return metas[i].getAttribute('content');
-            }
-        }
-        return '';
-    },
-    getFacilityInfo: function(facilityName){
-        var facility={};
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-Token': this.getCSRFTokenValue()
-            }
-        });
-        $.post(this.props.facilitySource, {name: facilityName}, function(result){
-            facility = result;
-            this.setState({
-                facility: facility
-            });
-        }.bind(this));
-    },
 
     render: function(){
         var completeEvents = [];
@@ -83,8 +59,6 @@ var EventContainer = React.createClass({
                     <EventCard
                         event = {event}
                         key = {event._id}
-                        getFacilityInfo = {this.getFacilityInfo}
-                        facility = {this.state.facility}
                         showDetails = {this.showDetails}
                         enableSave = {this.enableSave}
                         allowSave = {this.state.enableSave}
@@ -95,8 +69,6 @@ var EventContainer = React.createClass({
                     <EventCard
                         event = {event}
                         key = {event._id}
-                        getFacilityInfo = {this.getFacilityInfo}
-                        facility = {this.state.facility}
                         showDetails = {this.showDetails}
                         enableSave = {this.enableSave}
                         allowSave = {this.state.enableSave}
