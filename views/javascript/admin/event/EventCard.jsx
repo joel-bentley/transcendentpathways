@@ -1,19 +1,50 @@
 var React = require('react');
+var FacilityContact = require('./FacilityContact.jsx');
 
 var EventCard = React.createClass({
-    //getInitialState: function(){
-    //    return({
-    //        selected: false
-    //    })
-    //},
+    getInitialState: function(){
+        return({
+            facility: null,
+            complete: false
+        });
+},
 
-    componentDidMount: function(){
-        this.props.getFacilityInfo(this.props.event.facilityName)
+    getDefaultProps: function() {
+        return {
+            facilitySource: '/getFacilityInfo'
+        }
     },
+
     changeState: function(){
         var event = this.props.event;
         this.props.showDetails(event);
         this.props.enableSave(false);
+    },
+    getCSRFTokenValue: function() {
+        var metas = document.getElementsByTagName('meta');
+
+        for (var i=0; i<metas.length; i++) {
+            if (metas[i].getAttribute("name") == 'csrf-token') {
+                return metas[i].getAttribute('content');
+            }
+        }
+        return '';
+    },
+    getFacilityInfo: function(facilityName){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-Token': this.getCSRFTokenValue()
+            }
+        });
+        $.post(this.props.facilitySource, facilityName, function(result){
+            this.setState({
+                facility: result,
+                complete: true
+            });
+        }.bind(this));
+    },
+    componentDidMount: function(){
+        this.getFacilityInfo({'facilityName': this.props.event.facilityName});
     },
     render: function() {
 
@@ -24,8 +55,8 @@ var EventCard = React.createClass({
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-xs-10">
-                                    <span style={{color: 'blue'}}>
-                                        <h5>{this.props.event.facilityName}</h5>
+                                    <span>
+                                        {this.props.event.facilityName}
                                     </span>
 
                                 </div>
@@ -36,13 +67,13 @@ var EventCard = React.createClass({
                                         <button
                                             style={{padding: '2px 10px'}}
                                             type="button"
-                                            className="btn btn-default"
+                                            className="btn btn-primary"
                                             onClick={this.changeState}
                                             >
 
                                             <span
                                                 className="glyphicon glyphicon-list"
-                                                style={{color: 'blue'}}></span>
+                                            ></span>
                                         </button>
                                     }
                                 </div>
@@ -73,16 +104,7 @@ var EventCard = React.createClass({
                                 <h5>{this.props.event.description}</h5>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col-xs-10 col-xs-offset-1">
-                                <h5>Facility Contact {this.props.facility.contactName}</h5>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-xs-10 col-xs-offset-3">
-                                <h5>Phone {this.props.facility.contactPhone}</h5>
-                            </div>
-                        </div>
+                        {this.state.complete ? <FacilityContact facility={this.state.facility}/> : null}
                     </div>
                 </div>
             </div>
