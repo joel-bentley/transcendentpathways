@@ -19,6 +19,10 @@ var EventCard = React.createClass({
         var event = this.props.event;
         this.props.showDetails(event);
         this.props.enableSave(false);
+        var bodyRect = document.body.getBoundingClientRect(),
+            elemRect = this.getDOMNode().getBoundingClientRect(),
+            offset   = elemRect.top - bodyRect.top;
+        this.props.renderOffset(offset);
     },
     getCSRFTokenValue: function() {
         var metas = document.getElementsByTagName('meta');
@@ -61,7 +65,6 @@ var EventCard = React.createClass({
 
                                 </div>
                                 <div className="col-xs-2">
-
                                     {this.props.allowSave ?
                                         null :
                                         <button

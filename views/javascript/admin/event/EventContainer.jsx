@@ -4,9 +4,15 @@ var StatusCard = require('./StatusCard.jsx');
 
 
 var EventContainer = React.createClass({
+
     enableSave: function(state){
         this.setState({
             enableSave: state
+        })
+    },
+    renderOffset: function(offset){
+        this.setState({
+            offset: offset
         })
     },
     getDefaultProps: function() {
@@ -21,7 +27,8 @@ var EventContainer = React.createClass({
             events: [],
             event: [],
             showResults: false,
-            enableSave: false
+            enableSave: false,
+            offset: 0
         }
     },
     updateEvent: function(event){
@@ -33,9 +40,8 @@ var EventContainer = React.createClass({
     },
     componentDidMount: function() {                                 //csh loading the events into this.state.events
         $.get(this.props.source, function(result) {
-            var eventData = result;
             this.setState({
-                events: eventData
+                events: result
             });
         }.bind(this));
 
@@ -46,7 +52,7 @@ var EventContainer = React.createClass({
             showResults: true,
             event: eventNew
         });
-        document.body.scrollTop = document.documentElement.scrollTop = 0;
+        //document.body.scrollTop = document.documentElement.scrollTop = 0;
     },
 
 
@@ -62,6 +68,7 @@ var EventContainer = React.createClass({
                         showDetails = {this.showDetails}
                         enableSave = {this.enableSave}
                         allowSave = {this.state.enableSave}
+                        renderOffset = {this.renderOffset}
                         />
                 );
             } else {
@@ -72,6 +79,7 @@ var EventContainer = React.createClass({
                         showDetails = {this.showDetails}
                         enableSave = {this.enableSave}
                         allowSave = {this.state.enableSave}
+                        renderOffset = {this.renderOffset}
                         />
                 );
             }
@@ -90,6 +98,7 @@ var EventContainer = React.createClass({
                         <div className="col-sm-8 ">
                             {this.state.showResults ?
                                 <StatusCard
+                                    offset = {this.state.offset}
                                     ref = "status"
                                     event={this.state.event}
                                     updateEvent={this.updateEvent}
