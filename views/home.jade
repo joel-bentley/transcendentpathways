@@ -1,17 +1,21 @@
 extends layout
 
 block content
-  h1 Transcendent Pathways
-  p.lead Scheduling System
-  hr
   .row
-    .col-sm-6
-      h2 Musician?
-      p Click here to create your musician account.
-      p
-        a.btn.btn-default(href='/signupMusician', role='button') Create Account »
-    .col-sm-6
-      h2 Facility?
-      p Click here to create your facility account.
-      p
+    .col-sm-offset-1
+     h1 Transcendent Pathways
+     p.lead Scheduling System
+
+    .row
+    hr
+    .col-sm-8
+        .col-sm-offset-3
+         h2 Musician?
+         p Click here to create your musician account.
+         p
+         a.btn.btn-default(href='/signupMusician', role='button') Create Account »
+    .col-sm-4
+        h2 Facility?
+        p Click here to create your facility account.
+        p
         a.btn.btn-default(href='signupFacility', role='button') Create Account »

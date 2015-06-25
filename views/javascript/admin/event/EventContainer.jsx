@@ -1,12 +1,19 @@
 var React = require('react');
+
 var EventCard = require('./EventCard.jsx');
 var StatusCard = require('./StatusCard.jsx');
 
 
 var EventContainer = React.createClass({
+
     enableSave: function(state){
         this.setState({
             enableSave: state
+        })
+    },
+    renderOffset: function(offset){
+        this.setState({
+            offset: offset
         })
     },
     getDefaultProps: function() {
@@ -21,8 +28,8 @@ var EventContainer = React.createClass({
             events: [],
             event: [],
             showResults: false,
-            facility: [],
-            enableSave: false
+            enableSave: false,
+            offset: 0
         }
     },
     updateEvent: function(event){
@@ -34,9 +41,8 @@ var EventContainer = React.createClass({
     },
     componentDidMount: function() {                                 //csh loading the events into this.state.events
         $.get(this.props.source, function(result) {
-            var eventData = result;
             this.setState({
-                events: eventData
+                events: result
             });
         }.bind(this));
 
@@ -47,32 +53,9 @@ var EventContainer = React.createClass({
             showResults: true,
             event: eventNew
         });
-        document.body.scrollTop = document.documentElement.scrollTop = 0;
+        //document.body.scrollTop = document.documentElement.scrollTop = 0;
     },
-    getCSRFTokenValue: function() {
-        var metas = document.getElementsByTagName('meta');
 
-        for (var i=0; i<metas.length; i++) {
-            if (metas[i].getAttribute("name") == 'csrf-token') {
-                return metas[i].getAttribute('content');
-            }
-        }
-        return '';
-    },
-    getFacilityInfo: function(facilityName){
-        var facility={};
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-Token': this.getCSRFTokenValue()
-            }
-        });
-        $.post(this.props.facilitySource, {name: facilityName}, function(result){
-            facility = result;
-            this.setState({
-                facility: facility
-            });
-        }.bind(this));
-    },
 
     render: function(){
         var completeEvents = [];
@@ -83,11 +66,10 @@ var EventContainer = React.createClass({
                     <EventCard
                         event = {event}
                         key = {event._id}
-                        getFacilityInfo = {this.getFacilityInfo}
-                        facility = {this.state.facility}
                         showDetails = {this.showDetails}
                         enableSave = {this.enableSave}
                         allowSave = {this.state.enableSave}
+                        renderOffset = {this.renderOffset}
                         />
                 );
             } else {
@@ -95,11 +77,10 @@ var EventContainer = React.createClass({
                     <EventCard
                         event = {event}
                         key = {event._id}
-                        getFacilityInfo = {this.getFacilityInfo}
-                        facility = {this.state.facility}
                         showDetails = {this.showDetails}
                         enableSave = {this.enableSave}
                         allowSave = {this.state.enableSave}
+                        renderOffset = {this.renderOffset}
                         />
                 );
             }
@@ -117,13 +98,15 @@ var EventContainer = React.createClass({
                         </div>
                         <div className="col-sm-8 ">
                             {this.state.showResults ?
-                                <StatusCard
-                                    ref = "status"
-                                    event={this.state.event}
-                                    updateEvent={this.updateEvent}
-                                    allowSave = {this.state.enableSave}
-                                    enableSave = {this.enableSave}
-                                /> :  null}
+                                    <StatusCard
+                                        offset = {this.state.offset}
+                                        ref = "status"
+                                        event={this.state.event}
+                                        updateEvent={this.updateEvent}
+                                        allowSave = {this.state.enableSave}
+                                        enableSave = {this.enableSave}
+                                    />
+                                :  null}
                         </div>
                     </div>
                 </div>

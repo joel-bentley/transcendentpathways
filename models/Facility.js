@@ -36,11 +36,3 @@ module.exports = mongoose.model('Facility', facilitySchema);
 
 
 
-//gigs: [{
-//    start: Date,
-//    end: Date,
-//    details: { type: String, default: ''},
-//    musician: {
-//        type: mongoose.Schema.Types.ObjectId, ref: 'Musician'
-//    }
-//}]

@@ -31,7 +31,9 @@ Gulp.task('less', function () {
     var bundleConfigs = [{
         entries: [
             './views/stylesheets/main.less',
-            './views/stylesheets/musicianAdmin.css'
+            './views/stylesheets/musicianAdmin.css',
+            './views/stylesheets/bootstrap.css'
+
 
         ],
         dest: './public/css',
