@@ -91,7 +91,7 @@ var EventCard = React.createClass({
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-xs-6 col-xs-3-offset">
+                                <div className="col-xs-9 col-xs-3-offset">
                                     <span style={{color: 'indigo'}}>
                                         <h5>{moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}</h5>
                                     </span>
