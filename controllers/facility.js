@@ -209,9 +209,9 @@ exports.getGigListing = function(req, res, next) {
                     event.title = event.approvedMusicianName;
                 }
 
-                //convert timezone of stored dates/times from UTC
-                event.start = moment.tz(event.start, "America/Los_Angeles").format();
-                event.end = moment.tz(event.end, "America/Los_Angeles").format();
+                ////convert timezone of stored dates/times from UTC
+                //event.start = moment.tz(event.start, "America/Los_Angeles").format();
+                //event.end = moment.tz(event.end, "America/Los_Angeles").format();
 
                 //event.color = '#f00';
 
@@ -240,8 +240,12 @@ exports.postGigDetails = function(req, res, next) {
         var startString = req.body.date + ' ' + req.body.startTime;
         var endString = req.body.date + ' ' + req.body.endTime;
 
-        var start = moment.tz(startString, 'MMM D, YYYY h:m a', 'America/Los_Angeles');
-        var end = moment.tz(endString, 'MMM D, YYYY h:m a', 'America/Los_Angeles');
+        //var start = moment.tz(startString, 'MMM D, YYYY h:m a', 'America/Los_Angeles');
+        //var end = moment.tz(endString, 'MMM D, YYYY h:m a', 'America/Los_Angeles');
+
+        // PST/PDT times stored as if in UTC, therefore never need to be converted
+        var start = moment.tz(startString, 'MMM D, YYYY h:m a', 'UTC');
+        var end = moment.tz(endString, 'MMM D, YYYY h:m a', 'UTC');
 
         var startNew = start.toDate();
         var endNew = end.toDate();

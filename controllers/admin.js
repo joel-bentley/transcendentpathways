@@ -2,7 +2,9 @@ var _ = require('lodash');
 var async = require('async');
 var Musician = require('../models/Musician');
 var Facility = require('../models/Facility');
-var Event = require('../models/Event');
+var Event = require('../models/Event')
+
+var moment = require('moment-timezone');
 
 exports.getHomeAdmin = function(req, res) {
     res.render('homeAdmin', {
@@ -39,10 +41,18 @@ exports.getFacilityData = function(req, response) {
 };
 
 exports.getEventData = function(req, response) {
-    Event.find({}).sort('start').exec(function(err, event){
-        var eventData = event;
+    Event.find({}).sort('start').lean().exec(function(err, events){
+
+        events.map(function(event) {
+            //convert timezone of stored dates/times from UTC
+            event.start = moment.tz(event.start, "America/Los_Angeles").format();
+            event.end = moment.tz(event.end, "America/Los_Angeles").format();
+        });
+
+        console.log(events);
+
         response.writeHead(200, {'Content-Type': 'application/json'});
-        response.end(JSON.stringify(eventData));
+        response.end(JSON.stringify(events));
     });
 };
 

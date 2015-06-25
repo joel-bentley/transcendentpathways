@@ -1,6 +1,8 @@
 var React = require('react');
 var FacilityContact = require('./FacilityContact.jsx');
 
+var moment = require('moment');
+
 var EventCard = React.createClass({
     getInitialState: function(){
         return({
@@ -84,7 +86,7 @@ var EventCard = React.createClass({
                             <div className="row">
                                 <div className="col-xs-6 col-xs-3-offset">
                                     <span style={{color: 'indigo'}}>
-                                        <h5>{new Date(this.props.event.start).toDateString()}</h5>
+                                        <h5>{moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}</h5>
                                     </span>
                                 </div>
                             </div>
@@ -95,10 +97,10 @@ var EventCard = React.createClass({
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-xs-6">
-                                <h5>Start: {new Date(this.props.event.start).toLocaleTimeString()}</h5>
+                                <h5>Start: {moment.utc(this.props.event.start).format('h:mm a')}</h5>
                             </div>
                             <div className="col-xs-6">
-                                <h5>End: {new Date(this.props.event.end).toLocaleTimeString()}</h5>
+                                <h5>End: {moment.utc(this.props.event.end).format('h:mm a')}</h5>
                             </div>
                         </div>
                         <div className="row">
