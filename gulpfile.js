@@ -60,7 +60,8 @@ Gulp.task('nodemon', function () {
         ext: 'js jsx',
         ignore: [
             'public/**/*',
-            'node_modules/**/*'
+            'node_modules/**/*',
+            'views/javascript/lib/**/*'
         ]
     })
         .on('restart', function (files) {

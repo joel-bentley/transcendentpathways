@@ -11,10 +11,21 @@ html
 
     link(rel='stylesheet', href='/js/lib/fullcalendar.min.css')
     link(rel='stylesheet', href='/js/lib/fullcalendar.print.css',  media='print')
-    link(rel='stylesheet', href='/js/lib/jquery-ui.min.css')
+    //link(rel='stylesheet', href='/js/lib/jquery-ui.min.css')
+    link(rel='stylesheet', href='/js/lib/jquery-ui-1.11.4.custom/jquery-ui.min.css')
 
-    link(href='/js/lib/pickadate/compressed/themes/classic.css', rel='stylesheet')
-    link(href='/js/lib/pickadate/compressed/themes/classic.time.css', rel='stylesheet')
+    link(href='/js/lib/jquery-timepicker/jquery.timepicker.css', rel='stylesheet')
+
+    //link(href='/js/lib/pickadate/compressed/themes/classic.css', rel='stylesheet')
+    //link(href='/js/lib/pickadate/compressed/themes/classic.time.css', rel='stylesheet')
+
+    style(media='screen', type='text/css').
+      .fc-future {
+        cursor: pointer;
+      }
+      .fc-event {
+        cursor: pointer;
+      }
 
   body
     include partials/headerFacility
@@ -26,25 +37,46 @@ html
     //include partials/footer
 
     script(src='/js/lib/jquery.min.js')
-    script(src='/js/lib/jquery-ui.min.js')
+    //script(src='/js/lib/jquery-ui.min.js')
+    script(src='/js/lib/jquery-ui-1.11.4.custom/jquery-ui.min.js')
     script(src='/js/lib/bootstrap.min.js')
     script(src='/js/lib/moment.min.js')
     script(src='/js/lib/fullcalendar.min.js')
 
-    script(src='/js/lib/pickadate/compressed/picker.js')
-    script(src='/js/lib/pickadate/compressed/picker.time.js')
+    script(src='/js/lib/jquery-timepicker/jquery.timepicker.min.js')
+    script(src='/js/lib/Datepair/dist/datepair.min.js')
+    script(src='/js/lib/Datepair/dist/jquery.datepair.js')
     script.
-      $('#add-event .starttimepicker').pickatime({
-        interval: 15,
-        min: [7,0],
-        max: [22,0]
-       });
-      $('#add-event .endtimepicker').pickatime({
-        //editable: true,
-        interval: 15,
-        min: [7,0],
-        max: [22,0]
-      });
+      $('#datepair .time').timepicker({
+        'scrollDefault': '9:00am',
+        'showDuration': true,
+        'timeFormat': 'g:i a'
+      })
+      $('#datepair').datepair();
+      //      $('#startTime').timepicker({
+      //        'minTime': '7:00am',
+      //        'maxTime': '10:00pm'
+      //      }).on('changeTime', function() {
+      //        console.log('Working!');
+      //        $('#endTime').timepicker('option', { 'minTime': $('#startTime').val() });
+      //      });
+      //      $('#endTime').timepicker({
+      //        'maxTime': '10:00pm'
+      //      });
+    //script(src='/js/lib/pickadate/compressed/picker.js')
+    //script(src='/js/lib/pickadate/compressed/picker.time.js')
+    //script.
+    //  $('#add-event .starttimepicker').pickatime({
+    //    interval: 15,
+    //    min: [7,0],
+    //    max: [22,0]
+    //   });
+    //  $('#add-event .endtimepicker').pickatime({
+    //    //editable: true,
+    //    interval: 15,
+    //    min: [7,0],
+    //    max: [22,0]
+    //  });
 
 
     script(type='text/javascript').
@@ -65,7 +97,8 @@ html
               alert('There was an error while fetching events!');
             }
           },
-          timezone: 'local',
+          theme: true,
+          //timezone: 'local',
           dayClick: function(date, jsEvent, view) {
             //alert('a day has been clicked!');
             fnAddEventDialog(date);
@@ -102,7 +135,7 @@ html
             }
           }
         });
-        var dateFormated = date.format('D MMMM, YYYY');
+        var dateFormated = date.format('MMMM D, YYYY');
         $('#add-event #when').text(dateFormated);
         $('#add-event #date').val(dateFormated);
         $('#add-event').dialog('open');
@@ -138,7 +171,7 @@ html
           }
         });
 
-        var eventDate = event.start.format('D MMMM, YYYY');
+        var eventDate = event.start.format('MMMM D, YYYY');
         var startTime = 'Start Time:  ' + event.start.format('h:mm a');
         var endTime = 'End time:  ' + event.end.format('h:mm a') + '  (' + event.end.diff(event.start, 'minutes') + ' minutes)' ;
         var description = event.description;
