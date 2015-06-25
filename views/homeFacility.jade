@@ -20,12 +20,13 @@ block content
       input#date(type='hidden' name='date')
       p
         #when
-      p
-        label(for='startTime') Start Time
-        input.starttimepicker(type='text', name='startTime', id='startTime', placeholder='')
-      p
-        label(for='endTime') End Time
-        input.endtimepicker(type='text', name='endTime', id='endTime', placeholder='')
+      #datepair
+        p
+          label(for='startTime') Start Time
+          input(type='text', class='time start', name='startTime', id='startTime')
+        p
+          label(for='endTime') End Time
+          input(type='text', class='time end', name='endTime', id='endTime')
       p
         label(for='description') Event Description
         input(type='text', name='description', id='description', placeholder='')

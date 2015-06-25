@@ -14,6 +14,8 @@ var extra = {
 };
 var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
 
+var moment = require('moment-timezone');
+
 
 exports.getSignupFacility = function(req, res) {
     if (req.user) return res.redirect('/');
@@ -207,6 +209,10 @@ exports.getGigListing = function(req, res, next) {
                     event.title = event.approvedMusicianName;
                 }
 
+                ////convert timezone of stored dates/times from UTC
+                //event.start = moment.tz(event.start, "America/Los_Angeles").format();
+                //event.end = moment.tz(event.end, "America/Los_Angeles").format();
+
                 //event.color = '#f00';
 
                 if (event.status.approved === true) {
@@ -231,27 +237,44 @@ exports.postGigDetails = function(req, res, next) {
     Facility.findById( req.user.detailsId, function(err, facility) {
         if (err) return next(err);
 
-        var startNew = new Date(req.body.date + ' ' + req.body.startTime);
-        var endNew = new Date(req.body.date + ' ' + req.body.endTime);
+        var startString = req.body.date + ' ' + req.body.startTime;
+        var endString = req.body.date + ' ' + req.body.endTime;
+
+        //var start = moment.tz(startString, 'MMM D, YYYY h:m a', 'America/Los_Angeles');
+        //var end = moment.tz(endString, 'MMM D, YYYY h:m a', 'America/Los_Angeles');
+
+        // PST/PDT times stored as if in UTC, therefore never need to be converted
+        var start = moment.tz(startString, 'MMM D, YYYY h:m a', 'UTC');
+        var end = moment.tz(endString, 'MMM D, YYYY h:m a', 'UTC');
+
+        var startNew = start.toDate();
+        var endNew = end.toDate();
+
         var descriptionNew = req.body.description;
 
-        //console.dir(start);
-        //console.dir(typeof start);
-        //console.dir(end);
-        //console.dir(typeof end);
+        //console.log(req.body.date);
+        //console.log(req.body.startTime);
+        //console.log(req.body.endTime);
+        //console.log(startString);
+        //console.log(endString);
+        //console.log(start.format());
+        //console.log(end.format());
+        console.log(startNew);
+        console.log(endNew);
 
+        //return res.redirect('/homeFacility');
 
         Event.find({facilityId: facility.id, start: {$lt: endNew}, end: {$gt: startNew}}, function (err, overlappingEvents) {
             if (err) return next(err);
 
             if (overlappingEvents.length) {
-                console.dir('************ overlapping events :(');
+                console.log('************ overlapping events :(');
 
                 req.flash('error', { msg: 'Event Overlaps with existing event' });
                 return res.redirect('/homeFacility');
 
             } else {
-                console.dir('************ NO overlapping events :)');
+                console.log('************ NO overlapping events :)');
 
                 var event = new Event({
                     facilityName: facility.facilityName,
@@ -283,6 +306,11 @@ exports.removeEvent = function(req, res, next) {
 
     Event.findById( req.body.id, function(err, event) {
         if (err) return next(err);
+
+        if (event === null) {
+            console.log('Event ' + req.body.id + ' not found in database!');
+            return res.end();
+        }
 
         if (event.status.approved === false) {
             Event.findById(req.body.id).remove(function (err) {
