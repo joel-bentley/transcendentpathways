@@ -1,4 +1,5 @@
 var React = require('react');
+
 var EventCard = require('./EventCard.jsx');
 var StatusCard = require('./StatusCard.jsx');
 
@@ -97,14 +98,15 @@ var EventContainer = React.createClass({
                         </div>
                         <div className="col-sm-8 ">
                             {this.state.showResults ?
-                                <StatusCard
-                                    offset = {this.state.offset}
-                                    ref = "status"
-                                    event={this.state.event}
-                                    updateEvent={this.updateEvent}
-                                    allowSave = {this.state.enableSave}
-                                    enableSave = {this.enableSave}
-                                /> :  null}
+                                    <StatusCard
+                                        offset = {this.state.offset}
+                                        ref = "status"
+                                        event={this.state.event}
+                                        updateEvent={this.updateEvent}
+                                        allowSave = {this.state.enableSave}
+                                        enableSave = {this.enableSave}
+                                    />
+                                :  null}
                         </div>
                     </div>
                 </div>
