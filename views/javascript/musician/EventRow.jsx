@@ -27,8 +27,7 @@ var EventRow = React.createClass({
         return(
             <div className="panel panel-primary" key={event._id}>
                 <div className="panel-heading">
-                    <h4 className="panel-title"> {this.props.event.facilityName + ' on ' +
-                    moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')} </h4>
+                    <h4 className="panel-title">{this.props.event.facilityName + ' on ' + moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')} </h4>
                 </div>
                 <div className="panel-body">
                     <div className = "container-fluid">
