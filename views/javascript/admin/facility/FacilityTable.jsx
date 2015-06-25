@@ -27,7 +27,7 @@ var FacilityTable = React.createClass({
     saveValues: function(fields) {
         var x = this.state.facility;
         x._id = fields._id;
-        x.facilityName = fields.facilityName;
+        //x.facilityName = fields.facilityName;
         x.address1 = fields.address1;
         x.address2 = fields.address2;
         x.city = fields.city;

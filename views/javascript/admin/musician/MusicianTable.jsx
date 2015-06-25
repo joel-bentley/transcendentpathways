@@ -26,7 +26,7 @@ var MusicianTable = React.createClass({
     saveValues: function(fields) {
         var x = this.state.musician;
         x._id = fields._id;
-        x.performerName = fields.performerName;
+        //x.performerName = fields.performerName;
         x.contactName = fields.contactName;
         x.phone = fields.phone;
         x.address1 = fields.address1;
