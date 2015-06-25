@@ -69,15 +69,15 @@ exports.postFacilityDetails = function(req, res, next){
         response = response.pop();
         var lat = response.latitude;
         var lon = response.longitude;
-        console.log('a'+ lat, lon);
+        //console.log('a'+ lat, lon);
         facility.latitude = lat;
         facility.longitude = lon;
-        console.log(facility.latitude);
-        console.log(facility.longitude);
+        //console.log(facility.latitude);
+        //console.log(facility.longitude);
 
         facility.save(function(err) {
             if (err) {
-                console.log(err);
+                //console.log(err);
                 return next(err);
             }
 

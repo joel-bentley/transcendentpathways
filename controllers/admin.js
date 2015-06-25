@@ -47,12 +47,16 @@ exports.getEventData = function(req, response) {
 };
 
 exports.getFacilityInfo = function(req, response, next){
-    Facility.findOne({facilityName: req.body.name}).exec(function(err, facility){
-        if (err) return next(err);
+    //console.dir(req.body);
+    Facility.findOne(req.body, function(err, facility){
+        if (err) {
+            //console.log(err);
+            return next(err);
+        }
         var facilityData = facility;
-        //console.log(facility);
         response.writeHead(200, {'Content-Type': 'application/json'});
         response.end(JSON.stringify(facilityData));
+        //console.dir(facility);
     });
 };
 

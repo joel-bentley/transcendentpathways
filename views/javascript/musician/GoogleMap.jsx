@@ -21,7 +21,7 @@ var GoogleMap = React.createClass({
                     zoom: this.props.initialZoom
                 },
                 map = new google.maps.Map(this.getDOMNode(), mapOptions);
-            console.log(map);
+            //console.log(map);
             var markerMusician = new google.maps.Marker({
                 position: this.mapCenterLatLng2(),
                 title: this.props.musician.performerName, map: map

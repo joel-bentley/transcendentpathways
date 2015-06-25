@@ -124,7 +124,7 @@ var MusicianTable = React.createClass({
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-sm-2 list-group">
-                        <a href="#" className="list-group-item active"> <h5>Performer List</h5></a>
+                        <a href="#" className="list-group-item active">Performer List</a>
                         {rowsNotApproved} {rowsApproved}
                     </div>
                     <div className="col-sm-7">

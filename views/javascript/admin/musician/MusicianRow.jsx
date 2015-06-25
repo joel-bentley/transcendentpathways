@@ -1,4 +1,4 @@
-var React = require('react/addons');
+var React = require('react');
 
 var MusicianRow = React.createClass({
     propTypes: {
@@ -11,12 +11,12 @@ var MusicianRow = React.createClass({
     },
     render: function() {
         var name = this.props.musician.approved ?
-            this.props.musician.performerName :<span style={{color: 'blue'}}>
-                <h5>{this.props.musician.performerName}</h5>
+            this.props.musician.performerName :<span style={{"color": "blue"}}>
+                {this.props.musician.performerName}
             </span>;
         return (
             <a href="#" className="list-group-item" key={this.props.musician._id}
-               onClick={this.changeState}><h5> {name}</h5> </a>
+               onClick={this.changeState}>{name}</a>
         );
     }
 });

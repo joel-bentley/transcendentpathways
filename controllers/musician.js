@@ -65,24 +65,24 @@ exports.postMusicianDetails = function(req, res, next){
     var address = musician.address1 + ' ' + musician.address2 + ' ' + musician.city + ' ' + musician.state + ' ' +
         musician.zipcode;
     geocoder.geocode(address, function(err, response) {
-        console.log(err);
+        //console.log(err);
         response = response.pop();
         var lat = response.latitude;
         var lon = response.longitude;
-        console.log(lat, lon);
+        //console.log(lat, lon);
         musician.latitude = lat;
         musician.longitude = lon;
 
 
         musician.save(function(err) {
             if (err) {
-                console.log(err);
+                //console.log(err);
                 return next(err);
             }
 
             User.findById(req.user.id, function(err, user) {                    // Save Id from Musician in User
                 if (err) {
-                    console.log(err);
+                    //console.log(err);
                     return next(err);
                 }
 
@@ -90,7 +90,7 @@ exports.postMusicianDetails = function(req, res, next){
 
                 user.save(function(err) {
                     if (err) {
-                        console.log(err);
+                        //console.log(err);
                         return next(err);
                     }
 
