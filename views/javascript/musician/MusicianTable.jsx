@@ -6,6 +6,8 @@ var SearchEvents = require('./SearchEvents.jsx');
 var DetailEvents = require('./DetailEvents.jsx');
 var async = require('async');
 
+var moment = require('moment');
+
 var styles = {
     left: {
         position: "fixed",

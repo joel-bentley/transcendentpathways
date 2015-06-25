@@ -2,6 +2,8 @@ var React = require('react');
 var GetDistance = require('./GetDistance.jsx');
 var GoogleMap = require('./GoogleMap.jsx');
 
+var moment = require('moment');
+
 var EventRow = React.createClass({
     handleClick: function() {
         var thisEvent = this.props.event;
