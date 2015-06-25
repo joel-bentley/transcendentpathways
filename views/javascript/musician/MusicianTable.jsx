@@ -121,20 +121,20 @@ var MusicianTable = React.createClass({
                 event.requestedBy.map(function(musician){
 
                     if(musician.musicianName === this.state.musician.performerName){
-                        requestedEvents.push(<div key={event._id+musician._id}>{event.facilityName + " " + moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}</div>);
+                        requestedEvents.push(<div key={event._id+musician._id}>{event.facilityName + " " + moment.utc(event.start).format('dddd MMMM D, YYYY')}</div>);
                     }
                 }.bind(this));
             }.bind(this));
 
             this.state.events.map(function(event){
                 if((event.approvedMusicianName === this.state.musician.performerName) && (event.status.completed === false)){
-                    approvedEvents.push(<div key={event._id}>{event.facilityName + " " + moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}</div>);
+                    approvedEvents.push(<div key={event._id}>{event.facilityName + " " + moment.utc(event.start).format('dddd MMMM D, YYYY')}</div>);
                 }
             }.bind(this));
 
             this.state.events.map(function(event){
                 if((event.approvedMusicianName === this.state.musician.performerName) && (event.status.completed === true)){
-                    completedEvents.push(<div key={event._id}>{event.facilityName + " " + moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}</div>);
+                    completedEvents.push(<div key={event._id}>{event.facilityName + " " + moment.utc(event.start).format('dddd MMMM D, YYYY')}</div>);
                 }
             }.bind(this));
         }
