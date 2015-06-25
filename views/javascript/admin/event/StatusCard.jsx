@@ -6,7 +6,9 @@ var PaymentStatus = require('./PaymentStatus.jsx');
 var CancelEvent = require('./CancelEvent.jsx');
 
 var StatusCard = React.createClass({
-
+    componentDidMount: function(){
+        this.placeDiv(0,this.props.offset);
+    },
     componentDidUpdate: function(){
         this.placeDiv(0,this.props.offset);
     },
@@ -19,7 +21,7 @@ var StatusCard = React.createClass({
     render: function() {
 
         return(
-            <div className="panel panel-default">
+            <div className="panel panel-default slideTransition" >
                 <div className="panel-heading">
                     <div className="panel-title">
                         <div className="container-fluid">
