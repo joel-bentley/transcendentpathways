@@ -27,17 +27,34 @@ var ListContainer = React.createClass({
     render: function(){
 
         return (
-            <div>
-                <div>
-                    <h5 className="text-center"> Notes for {this.props.name}</h5>
-                    <AddItem
-                        add={this.handleAddItem}
-                    />
-                    <br/>
-                    <List
-                        items={this.props.getNotes()}
-                        remove={this.handleRemoveItem}
-                    />
+            <div className="panel panel-default slideTransition" >
+                <div className="panel-heading">
+                    <div className="panel-title">
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col-xs-8">
+                                    <span style={{color: 'blue'}}>
+                                        <h5>Notes</h5>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="panel-body">
+                    <div className="container-fluid">
+                        <div>
+
+                            <AddItem
+                                add={this.handleAddItem}
+                            />
+                            <br/>
+                            <List
+                                items={this.props.getNotes()}
+                                remove={this.handleRemoveItem}
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         )

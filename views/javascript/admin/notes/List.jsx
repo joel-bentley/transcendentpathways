@@ -10,7 +10,7 @@ var List = React.createClass({
             todoItemDate: {
                 cursor: "pointer",
                 float: "right",
-                fontSize: 14
+                fontSize: 10
 
             }
         };
@@ -23,7 +23,8 @@ var List = React.createClass({
                             <span
                                 style={styles.todoItemDate}
                                 onClick = {this.props.remove.bind(null, index)}
-                                className="label label-primary">Delete</span>
+                                className="glyphicon glyphicon glyphicon-trash">
+                            </span>
                         </div>
                     </div>
                     <div className="panel-body">
