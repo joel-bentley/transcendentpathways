@@ -10,13 +10,45 @@ var FacilityRow = React.createClass({
         this.props.showDetails(facility);
     },
     render: function() {
-        var name = this.props.facility.approved ?
-            this.props.facility.facilityName :<span style={{color: 'blue'}}>
-                {this.props.facility.facilityName}
-            </span>;
         return (
-            <a href="#" className="list-group-item" key={this.props.facility._id}
-               onClick={this.changeState}> {name}</a>
+            <div className="panel panel-default">
+                <div className="panel-heading">
+                    <div className="panel-title">
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col-sm-9">
+                                    <h5>{this.props.facility.facilityName}</h5>
+                                </div>
+                                <div className="col-sm-3">
+                                    <button
+                                        type="button"
+                                        className={this.props.facility.approved ? "btn-sm btn-default glyphicon glyphicon-list":
+                                            "btn-sm btn-primary glyphicon glyphicon-list"}
+                                        onClick={this.changeState}
+                                    >
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="panel-body">
+                    <div className="container-fluid">
+                        <div className="row">
+                            Facility Contact:
+                        </div>
+                        <div className="row">
+                            {this.props.facility.contactName}
+                        </div>
+                        <div className="row">
+                            {this.props.facility.contactPhone}
+                        </div>
+                        <div className="row">
+                            {this.props.facility.contactEmail}
+                        </div>
+                    </div>
+                </div>
+            </div>
         );
     }
 });

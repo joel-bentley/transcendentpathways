@@ -130,11 +130,13 @@ var FacilityTable = React.createClass({
         return (
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-sm-2 list-group">
-                        <a href="#" className="list-group-item active">Facility List</a>
-                        {rowsNotApproved} {rowsApproved}
+                    <div className="col-sm-3">
+                        <h4>New Facilities</h4>
+                        {rowsNotApproved}
+                        <h4>Approved Facilities</h4>
+                        {rowsApproved}
                     </div>
-                    <div className="col-sm-7">
+                    <div className="col-sm-6">
                         {this.state.showResults ?
                                 <DetailsBar
                                     facility={this.state.facility}
