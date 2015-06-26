@@ -130,13 +130,13 @@ var FacilityTable = React.createClass({
         return (
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-sm-3">
+                    <div className="col-xs-3">
                         <h4>New Facilities</h4>
                         {rowsNotApproved}
                         <h4>Approved Facilities</h4>
                         {rowsApproved}
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-xs-6">
                         {this.state.showResults ?
                                 <DetailsBar
                                     facility={this.state.facility}
@@ -144,7 +144,7 @@ var FacilityTable = React.createClass({
                                     saveValues={this.saveValues}
                                 />: null }
                     </div>
-                    <div className="col-sm-3">
+                    <div className="col-xs-3">
                         {this.state.showResults ?
                             <ListContainer
                                 name = {this.state.facility.facilityName}

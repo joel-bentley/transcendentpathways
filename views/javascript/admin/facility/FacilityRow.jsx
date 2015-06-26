@@ -16,10 +16,10 @@ var FacilityRow = React.createClass({
                     <div className="panel-title">
                         <div className="container-fluid">
                             <div className="row">
-                                <div className="col-sm-9">
+                                <div className="col-xs-9">
                                     <h5>{this.props.facility.facilityName}</h5>
                                 </div>
-                                <div className="col-sm-3">
+                                <div className="col-xs-3">
                                     <button
                                         type="button"
                                         className={this.props.facility.approved ? "btn-sm btn-default glyphicon glyphicon-list":
