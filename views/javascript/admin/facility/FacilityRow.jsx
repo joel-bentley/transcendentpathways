@@ -8,6 +8,10 @@ var FacilityRow = React.createClass({
     changeState: function(){
         var facility=this.props.facility;
         this.props.showDetails(facility);
+        var bodyRect = document.body.getBoundingClientRect(),
+            elemRect = this.getDOMNode().getBoundingClientRect(),
+            offset   = elemRect.top - bodyRect.top;
+        this.props.renderOffset(offset);
     },
     render: function() {
         return (

@@ -3,12 +3,12 @@ var React = require('react/addons');
 var FacilityFields = React.createClass({
     render: function() {
         return (
-            <div className="panel panel-default slideTransition" >
+            <div className="panel panel-default" >
                 <div className="panel-heading">
                     <div className="panel-title">
                         <div className="container-fluid">
                             <div className="row">
-                                <div className="col-xs-8">
+                                <div className="col-sm-12">
                                     <span style={{color: 'blue'}}>
                                         <h5>{this.props.fieldValues.facilityName}</h5>
                                     </span>
@@ -20,10 +20,9 @@ var FacilityFields = React.createClass({
                 <div className="panel-body">
                     <div className="container-fluid">
                         <form className="form-horizontal">
-
                             <div className="form-group">
                                 <label className="col-sm-4 control-label">Address Line 1</label>
-                                <div className="col-sm-7">
+                                <div className="col-sm-8">
                                     <input type="text" className="form-control" ref="address1"
                                            defaultValue={this.props.fieldValues.address1}
                                            key={this.props.fieldValues.address1} />
@@ -31,7 +30,7 @@ var FacilityFields = React.createClass({
                             </div>
                             <div className ="form-group">
                                 <label className="col-sm-4 control-label">Address Line 2</label>
-                                <div className="col-sm-7">
+                                <div className="col-sm-8">
                                     <input type="text" className="form-control" ref="address2"
                                            defaultValue={this.props.fieldValues.address2}
                                            key={this.props.fieldValues.performerName} />
@@ -39,7 +38,7 @@ var FacilityFields = React.createClass({
                             </div>
                             <div className ="form-group">
                                 <label className="col-sm-4 control-label">City</label>
-                                <div className="col-sm-7">
+                                <div className="col-sm-8">
                                     <input type="text" className="form-control" ref="city"
                                            defaultValue={this.props.fieldValues.city}
                                            key={this.props.fieldValues.city} />
@@ -47,7 +46,7 @@ var FacilityFields = React.createClass({
                             </div>
                             <div className ="form-group">
                                 <label className="col-sm-4 control-label">State</label>
-                                <div className="col-sm-7">
+                                <div className="col-sm-8">
                                     <input type="text" className="form-control" ref="state"
                                            defaultValue={this.props.fieldValues.state}
                                            key={this.props.fieldValues.state} />
@@ -55,7 +54,7 @@ var FacilityFields = React.createClass({
                             </div>
                             <div className ="form-group">
                                 <label className="col-sm-4 control-label">Zipcode</label>
-                                <div className="col-sm-7">
+                                <div className="col-sm-8">
                                     <input type="text" className="form-control" ref="zipcode"
                                            defaultValue={this.props.fieldValues.zipcode}
                                            key={this.props.fieldValues.zipcode} />
@@ -63,7 +62,7 @@ var FacilityFields = React.createClass({
                             </div>
                             <div className ="form-group">
                                 <label className="col-sm-4 control-label">Contact Name</label>
-                                <div className="col-sm-7">
+                                <div className="col-sm-8">
                                     <input type="text" className="form-control" ref="contactName"
                                            defaultValue={this.props.fieldValues.contactName}
                                            key={this.props.fieldValues.contactName} />
@@ -71,7 +70,7 @@ var FacilityFields = React.createClass({
                             </div>
                             <div className ="form-group">
                                 <label className="col-sm-4 control-label">Contact Phone</label>
-                                <div className="col-sm-7">
+                                <div className="col-sm-8">
                                     <input type="text" className="form-control" ref="contactPhone"
                                            defaultValue={this.props.fieldValues.contactPhone}
                                            key={this.props.fieldValues.contactPhone} />
@@ -79,7 +78,7 @@ var FacilityFields = React.createClass({
                             </div>
                             <div className ="form-group">
                                 <label className="col-sm-4 control-label">Contact Email</label>
-                                <div className="col-sm-7">
+                                <div className="col-sm-8">
                                     <input type="text" className="form-control" ref="contactEmail"
                                            defaultValue={this.props.fieldValues.contactEmail}
                                            key={this.props.fieldValues.contactEmail} />
@@ -87,7 +86,7 @@ var FacilityFields = React.createClass({
                             </div>
                             <div className ="form-group">
                                 <label className="col-sm-4 control-label">Building Name</label>
-                                <div className="col-sm-7">
+                                <div className="col-sm-8">
                                     <input type="text" className="form-control" ref="buildingName"
                                             defaultValue={this.props.fieldValues.buildingName}
                                             key={this.props.fieldValues.buildingName} />
@@ -95,7 +94,7 @@ var FacilityFields = React.createClass({
                             </div>
                             <div className ="form-group">
                                 <label className="col-sm-4 control-label">Location Name</label>
-                                <div className="col-sm-7">
+                                <div className="col-sm-8">
                                     <input type="text" className="form-control"ref="locationName"
                                             defaultValue={this.props.fieldValues.locationName}
                                             key={this.props.fieldValues.locationName} />
@@ -103,7 +102,7 @@ var FacilityFields = React.createClass({
                             </div>
                             <div className="form-group">
                                 <label className="col-sm-4 control-label">Room Size</label>
-                                <div className="col-sm-7">
+                                <div className="col-sm-8">
                                     <input type="text" className="form-control" ref="roomSize"
                                            defaultValue={this.props.fieldValues.roomSize}
                                            key={this.props.fieldValues.roomSize} />
@@ -111,7 +110,7 @@ var FacilityFields = React.createClass({
                             </div>
                             <div className ="form-group">
                                 <label className="col-sm-4 control-label">Security Needed</label>
-                                <div className="col-sm-7">
+                                <div className="col-sm-8">
                                     <select className="form-control" defaultValue={this.props.fieldValues.securityNeeded}
                                             ref="securityNeeded" key={this.props.fieldValues.securityNeeded}>
                                         <option value="">No</option>
@@ -121,7 +120,7 @@ var FacilityFields = React.createClass({
                             </div>
                             <div className ="form-group">
                                 <label className="col-sm-4 control-label">Waiver Needed</label>
-                                <div className="col-sm-7">
+                                <div className="col-sm-8">
                                     <select className="form-control" defaultValue={this.props.fieldValues.waiverNeeded}
                                             ref="waiverNeeded" key={this.props.fieldValues.waiverNeeded} >
                                         <option value="">No</option>
@@ -131,7 +130,7 @@ var FacilityFields = React.createClass({
                             </div>
                             <div className ="form-group">
                                 <label className="col-sm-4 control-label">Patient Number</label>
-                                <div className="col-sm-7">
+                                <div className="col-sm-8">
                                     <input type="text" className="form-control" ref="patientNumber"
                                            defaultValue={this.props.fieldValues.patientNumber}
                                            key={this.props.fieldValues.patientNumber} />
@@ -139,7 +138,7 @@ var FacilityFields = React.createClass({
                             </div>
                             <div className ="form-group">
                                 <label className="col-sm-4 control-label">Approved Date</label>
-                                <div className="col-sm-7">
+                                <div className="col-sm-8">
                                     <input type="text" className="form-control" ref="approvedDate"
                                            defaultValue={this.props.fieldValues.approvedDate}
                                            key={this.props.fieldValues.approvedDate} />
@@ -147,7 +146,7 @@ var FacilityFields = React.createClass({
                             </div>
                             <div className ="form-group">
                                 <label className="col-sm-4 control-label">Sign-Up Date</label>
-                                <div className="col-sm-7">
+                                <div className="col-sm-8">
                                     <input type="text" className="form-control" ref="signUpDate"
                                            defaultValue={this.props.fieldValues.signUpDate}
                                            key={this.props.fieldValues.signUpDate} />
@@ -155,7 +154,7 @@ var FacilityFields = React.createClass({
                             </div>
                             <div className ="form-group">
                                 <label className="col-sm-4 control-label">Approved By</label>
-                                <div className="col-sm-7">
+                                <div className="col-sm-8">
                                     <input type="text" className="form-control" ref="approvedBy"
                                            defaultValue={this.props.fieldValues.approvedBy}
                                            key={this.props.fieldValues.approvedBy} />
@@ -163,7 +162,7 @@ var FacilityFields = React.createClass({
                             </div>
                             <div className ="form-group">
                                 <label className="col-sm-4 control-label">Approved</label>
-                                <div className="col-sm-7">
+                                <div className="col-sm-8">
                                     <select className="form-control" defaultValue={this.props.fieldValues.approved}
                                             ref="approved" key={this.props.fieldValues.approved} >
                                         <option value="">No</option>
