@@ -49,7 +49,7 @@ exports.getEventData = function(req, response) {
             event.end = moment.tz(event.end, "America/Los_Angeles").format();
         });
 
-        console.log(events);
+        //console.log(events);
 
         response.writeHead(200, {'Content-Type': 'application/json'});
         response.end(JSON.stringify(events));
