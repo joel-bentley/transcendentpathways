@@ -11,6 +11,18 @@ var ListContainer = React.createClass({
             name: this.props.name
         }
     },
+    componentDidMount: function(){
+        this.placeDiv(0,this.props.offset);
+    },
+    componentDidUpdate: function(){
+        this.placeDiv(0,this.props.offset);
+    },
+    placeDiv: function(x_pos, y_pos) {
+        var d = this.getDOMNode();
+        d.style.position = "absolute";
+        d.style.left = x_pos+'px';
+        d.style.top = y_pos-121+'px';
+    },
     handleAddItem: function(newItem){
         this.setState({
             list: this.state.list.concat([newItem])
@@ -32,7 +44,7 @@ var ListContainer = React.createClass({
                     <div className="panel-title">
                         <div className="container-fluid">
                             <div className="row">
-                                <div className="col-xs-8">
+                                <div className="col-xs-12">
                                     <span style={{color: 'blue'}}>
                                         <h5>Notes</h5>
                                     </span>

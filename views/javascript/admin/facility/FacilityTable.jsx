@@ -15,7 +15,8 @@ var FacilityTable = React.createClass({
         return {
             facilities: [],
             showResults: false,
-            facility: null
+            facility: null,
+            offset: 0
         }
     },
     showDetails: function(facilityNew){
@@ -23,6 +24,11 @@ var FacilityTable = React.createClass({
             showResults: true,
             facility: facilityNew
         });
+    },
+    renderOffset: function(offset){
+        this.setState({
+            offset: offset
+        })
     },
     saveValues: function(fields) {
         var x = this.state.facility;
@@ -114,6 +120,7 @@ var FacilityTable = React.createClass({
                         facility = {facility}
                         key = {facility.facilityName}
                         showDetails={this.showDetails}
+                        renderOffset = {this.renderOffset}
                         />
                 );
             } else {
@@ -122,6 +129,7 @@ var FacilityTable = React.createClass({
                         facility = {facility}
                         key= {facility.facilityName}
                         showDetails={this.showDetails}
+                        renderOffset = {this.renderOffset}
                         />
                 );
             }
@@ -130,23 +138,25 @@ var FacilityTable = React.createClass({
         return (
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-xs-3">
+                    <div className="col-sm-3">
                         <h4>New Facilities</h4>
                         {rowsNotApproved}
                         <h4>Approved Facilities</h4>
                         {rowsApproved}
                     </div>
-                    <div className="col-xs-6">
+                    <div className="col-sm-6">
                         {this.state.showResults ?
                                 <DetailsBar
+                                    offset = {this.state.offset}
                                     facility={this.state.facility}
                                     handleChangedData={this.handleChangedData}
                                     saveValues={this.saveValues}
                                 />: null }
                     </div>
-                    <div className="col-xs-3">
+                    <div className="col-sm-3">
                         {this.state.showResults ?
                             <ListContainer
+                                offset = {this.state.offset}
                                 name = {this.state.facility.facilityName}
                                 getNotes={this.getNotes}
                                 setNotes={this.setNotes}
