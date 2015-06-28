@@ -54,6 +54,13 @@ var EventCard = React.createClass({
     },
     render: function() {
 
+        //var startMoment = moment.utc(this.props.event.start);
+        //var endMoment = moment.utc(this.props.event.end).format('h:mm a');
+
+        var startString = moment.utc(this.props.event.start).format('h:mm a');
+        var endString = moment.utc(this.props.event.end).format('h:mm a');
+        var timeDiffString = moment.utc(this.props.event.end).diff(moment.utc(this.props.event.start), 'minutes');
+
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">
@@ -84,7 +91,7 @@ var EventCard = React.createClass({
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-xs-6 col-xs-3-offset">
+                                <div className="col-xs-9 col-xs-3-offset">
                                     <span style={{color: 'indigo'}}>
                                         <h5>{moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}</h5>
                                     </span>
@@ -96,12 +103,7 @@ var EventCard = React.createClass({
                 <div className="panel-body">
                     <div className="container-fluid">
                         <div className="row">
-                            <div className="col-xs-6">
-                                <h5>Start: {moment.utc(this.props.event.start).format('h:mm a')}</h5>
-                            </div>
-                            <div className="col-xs-6">
-                                <h5>End: {moment.utc(this.props.event.end).format('h:mm a')}</h5>
-                            </div>
+                            <h5>{startString + '  -  ' + endString + ' (' + timeDiffString + ' minutes)'}</h5>
                         </div>
                         <div className="row">
                             <div className="col-xs-12 col-xs-offset-0">

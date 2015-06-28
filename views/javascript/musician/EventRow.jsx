@@ -2,6 +2,8 @@ var React = require('react');
 var GetDistance = require('./GetDistance.jsx');
 var GoogleMap = require('./GoogleMap.jsx');
 
+var moment = require('moment');
+
 var EventRow = React.createClass({
     handleClick: function() {
         var thisEvent = this.props.event;
@@ -25,18 +27,17 @@ var EventRow = React.createClass({
         return(
             <div className="panel panel-primary" key={event._id}>
                 <div className="panel-heading">
-                    <h4 className="panel-title"> {this.props.event.facilityName + ' on ' +
-                    new Date(this.props.event.start).toDateString()} </h4>
+                    <h4 className="panel-title">{this.props.event.facilityName + ' on ' + moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')} </h4>
                 </div>
                 <div className="panel-body">
                     <div className = "container-fluid">
                         <div className="row">
                             <div className="col-sm-5">
                                 <h5 className="text-center">
-                                <div >Start Date: {new Date(this.props.event.start).toDateString()}</div>
+                                <div >Start Date: {moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}</div>
                                 <div>Facility Name: {this.props.event.facilityName}</div>
-                                <div>Start Time: {new Date(this.props.event.start).toLocaleTimeString().replace(/:\d\d([ ap]|$)/, " ")}</div>
-                                <div>End Time: {new Date(this.props.event.end).toLocaleTimeString().replace(/:\d\d([ ap]|$)/, " ")}</div>
+                                <div>Start Time: {moment.utc(this.props.event.start).format('h:mm a')}</div>
+                                <div>End Time: {moment.utc(this.props.event.end).format('h:mm a')}</div>
                                 <div>{this.props.musician  && this.props.facility?
                                     <GetDistance
                                         musician={this.props.musician}
