@@ -19,7 +19,9 @@ var DetailsBar = React.createClass({
             <div className="col-sm-12 slideTransition">
                 <div>
                     <FacilityFields fieldValues = {this.props.facility}
-                                     saveValues = {this.props.saveValues}
+                                    saveValues = {this.props.saveValues}
+                                    showNotes = {this.props.showNotes}
+                                    notes = {this.props.notes}
                     />
                 </div>
             </div>

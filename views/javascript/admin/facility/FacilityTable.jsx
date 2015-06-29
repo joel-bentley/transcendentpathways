@@ -16,8 +16,14 @@ var FacilityTable = React.createClass({
             facilities: [],
             showResults: false,
             facility: null,
-            offset: 0
+            offset: 0,
+            showNotes: false
         }
+    },
+    showNotes: function(){
+        this.setState({
+            showNotes: !this.state.showNotes
+        })
     },
     showDetails: function(facilityNew){
         this.setState({
@@ -90,8 +96,9 @@ var FacilityTable = React.createClass({
             //console.log(result);
         });
     },
-    componentDidMount: function() {                                 //csh loading the facilities into this.state.facilities
+    componentDidMount: function() {
         $.get(this.props.source, function(result) {
+
             var facilityData = result;
             if (this.isMounted()) {
                 this.setState({
@@ -134,32 +141,35 @@ var FacilityTable = React.createClass({
                 );
             }
         }.bind(this));
-
         return (
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-sm-3">
+                    <div className="col-sm-4">
                         <h4>New Facilities</h4>
                         {rowsNotApproved}
                         <h4>Approved Facilities</h4>
                         {rowsApproved}
                     </div>
-                    <div className="col-sm-6">
-                        {this.state.showResults ?
+                    <div className="col-sm-8">
+                        {this.state.showResults && !this.state.showNotes ?
                                 <DetailsBar
                                     offset = {this.state.offset}
                                     facility={this.state.facility}
                                     handleChangedData={this.handleChangedData}
                                     saveValues={this.saveValues}
+                                    showNotes={this.showNotes}
+                                    notes={this.state.showNotes}
                                 />: null }
                     </div>
-                    <div className="col-sm-3">
-                        {this.state.showResults ?
+                    <div className="col-sm-8">
+                        {this.state.showNotes ?
                             <ListContainer
                                 offset = {this.state.offset}
                                 name = {this.state.facility.facilityName}
+                                approved = {this.state.facility.approved}
                                 getNotes={this.getNotes}
                                 setNotes={this.setNotes}
+                                showNotes={this.showNotes}
                             /> : null}
                     </div>
                 </div>

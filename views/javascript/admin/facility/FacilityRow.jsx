@@ -25,11 +25,11 @@ var FacilityRow = React.createClass({
                                 </div>
                                 <div className="col-xs-3">
                                     <button
+                                        className={this.props.facility.approved ?
+                                            "btn btn-default btn-sm" : "btn btn-primary btn-sm"}
                                         type="button"
-                                        className={this.props.facility.approved ? "btn-sm btn-default glyphicon glyphicon-list":
-                                            "btn-sm btn-primary glyphicon glyphicon-list"}
-                                        onClick={this.changeState}
-                                    >
+                                        onClick={this.changeState}>
+                                        <span className="glyphicon glyphicon-list"></span>
                                     </button>
                                 </div>
                             </div>
