@@ -14,14 +14,26 @@ var MusicianTable = React.createClass({
         return {
             musicians: [],
             showResults: false,
-            musician: null
+            musician: null,
+            offset: 0,
+            showNotes: false
         }
+    },
+    showNotes: function(){
+        this.setState({
+            showNotes: !this.state.showNotes
+        })
     },
     showDetails: function(musician){
         this.setState({
             showResults: true,
             musician: musician
         });
+    },
+    renderOffset: function(offset){
+        this.setState({
+            offset: offset
+        })
     },
     saveValues: function(fields) {
         var x = this.state.musician;
@@ -79,10 +91,9 @@ var MusicianTable = React.createClass({
     },
     componentDidMount: function() {                                 //csh loading the musician into this.state.musician
         $.get(this.props.source, function(result) {
-            var musicianData = result;
             if (this.isMounted()) {
                 this.setState({
-                    musicians: musicianData
+                    musicians: result
                 });
             }
         }.bind(this));
@@ -107,6 +118,7 @@ var MusicianTable = React.createClass({
                         musician = {musician}
                         key = {musician.performerName}
                         showDetails={this.showDetails}
+                        renderOffset = {this.renderOffset}
                         />
                 );
             } else {
@@ -115,6 +127,7 @@ var MusicianTable = React.createClass({
                         musician = {musician}
                         key= {musician.performerName}
                         showDetails={this.showDetails}
+                        renderOffset = {this.renderOffset}
                         />
                 );
             }
@@ -123,24 +136,33 @@ var MusicianTable = React.createClass({
         return (
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-sm-2 list-group">
-                        <a href="#" className="list-group-item active">Performer List</a>
-                        {rowsNotApproved} {rowsApproved}
+                    <div className="col-sm-4">
+                        <h4>New Musicians</h4>
+                        {rowsNotApproved}
+                        <h4>Existing Musicians</h4>
+                        {rowsApproved}
                     </div>
-                    <div className="col-sm-7">
-                        {this.state.showResults ? <DetailsBar
-                            musician={this.state.musician}
-                            handleChangedData={this.handleChangedData}
-                            saveValues={this.saveValues}
+                    <div className="col-sm-8">
+                        {this.state.showResults && !this.state.showNotes ?
+                            <DetailsBar
+                                offset = {this.state.offset}
+                                musician={this.state.musician}
+                                handleChangedData={this.handleChangedData}
+                                saveValues={this.saveValues}
+                                showNotes={this.showNotes}
+                                notes={this.state.showNotes}
                         />: null }
                     </div>
-                    <div className="col-sm-3">
-                        {this.state.showResults ?
+                    <div className="col-sm-8">
+                        {this.state.showNotes ?
                             <ListContainer
+                                offset = {this.state.offset}
                                 name = {this.state.musician.performerName}
+                                approved = {this.state.musician.approved}
                                 getNotes={this.getNotes}
                                 setNotes={this.setNotes}
-                            /> : null}
+                                showNotes={this.showNotes}
+                        /> : null}
                     </div>
                 </div>
             </div>
