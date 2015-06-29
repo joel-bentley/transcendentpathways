@@ -17,21 +17,19 @@ var FacilityRow = React.createClass({
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">
-                    <div className="panel-title">
-                        <div className="container-fluid">
-                            <div className="row">
-                                <div className="col-xs-9">
-                                    <h5>{this.props.facility.facilityName}</h5>
-                                </div>
-                                <div className="col-xs-3">
-                                    <button
-                                        className={this.props.facility.approved ?
-                                            "btn btn-default btn-sm" : "btn btn-primary btn-sm"}
-                                        type="button"
-                                        onClick={this.changeState}>
-                                        <span className="glyphicon glyphicon-list"></span>
-                                    </button>
-                                </div>
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-xs-9">
+                                <h5>{this.props.facility.facilityName}</h5>
+                            </div>
+                            <div className="col-xs-3">
+                                <button
+                                    className={this.props.facility.approved ?
+                                        "btn btn-default btn-sm" : "btn btn-primary btn-sm"}
+                                    type="button"
+                                    onClick={this.changeState}>
+                                    <span className="glyphicon glyphicon-list"></span>
+                                </button>
                             </div>
                         </div>
                     </div>

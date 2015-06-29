@@ -39,7 +39,6 @@ var FacilityTable = React.createClass({
     saveValues: function(fields) {
         var x = this.state.facility;
         x._id = fields._id;
-        //x.facilityName = fields.facilityName;
         x.address1 = fields.address1;
         x.address2 = fields.address2;
         x.city = fields.city;
@@ -98,11 +97,9 @@ var FacilityTable = React.createClass({
     },
     componentDidMount: function() {
         $.get(this.props.source, function(result) {
-
-            var facilityData = result;
             if (this.isMounted()) {
                 this.setState({
-                    facilities: facilityData
+                    facilities: result
                 });
             }
         }.bind(this));
