@@ -43,7 +43,7 @@ var ListContainer = React.createClass({
                 <div className="panel">
                     <div className={this.props.approved ? "panel-heading panel-success": "panel-heading panel-primary"}>
                         <div className="container-fluid">
-                            <div className="row"
+                            <div className="row">
                                 <div className="col-sm-10">
                                     Notes for {this.props.name}
                                 </div>
