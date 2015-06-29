@@ -3,16 +3,21 @@ var React = require('react/addons');
 var MusicianFields = React.createClass({
     render: function() {
         return (
-            <div className="panel panel-default slideTransition" >
-                <div className="panel-heading">
-                    <div className="panel-title">
-                        <div className="container-fluid">
-                            <div className="row">
-                                <div className="col-xs-8">
-                                    <span style={{color: 'blue'}}>
-                                        <h5>{this.props.fieldValues.performerName}</h5>
-                                    </span>
-                                </div>
+            <div className="panel">
+                <div className={this.props.fieldValues.approved ? "panel-heading panel-success": "panel-heading panel-primary"}>
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-sm-10">
+                                {this.props.fieldValues.performerName}
+                            </div>
+                            <div className="col-sm-2">
+                                <button
+                                    className={this.props.fieldValues.approved ?
+                                            "btn btn-primary btn-xs" : "btn btn-default btn-xs"}
+                                    type="button"
+                                    onClick={this.props.showNotes}>
+                                    <span className="glyphicon glyphicon-list-alt"> Notes </span>
+                                </button>
                             </div>
                         </div>
                     </div>
