@@ -34,29 +34,3 @@
     min-height: 1000px;
 }
 
-.panel-success > .panel-footer {
-    color: #468847;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-}
-.panel-heading > .table, .panel-heading > .table th {
-    margin: 50px;
-    border: 50px;
-}
-
-.example-enter {
-    opacity: 0.01;
-    transition: opacity .5s ease-in;
-}
-
-.example-enter.example-enter-active {
-    opacity: 1;
-}
-.example-leave {
-    opacity: 1;
-    transition: opacity .5s ease-in;
-}
-
-.example-leave.example-leave-active {
-    opacity: 0.01;
-}

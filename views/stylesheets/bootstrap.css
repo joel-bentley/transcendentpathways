@@ -27,7 +27,6 @@ figcaption,
 figure,
 footer,
 header,
-hgroup,
 main,
 menu,
 nav,
@@ -3066,9 +3065,9 @@ fieldset[disabled] a.btn {
 }
 .btn-default:focus,
 .btn-default.focus {
-  color: #ffffff;
-  background-color: #2e2f2f;
-  border-color: #080808;
+    color: #2e2f2f;
+    background-color: #ffffff;
+    border-color: #080808;
 }
 .btn-default:hover {
   color: #ffffff;
@@ -3123,7 +3122,7 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-default .badge {
   color: #474949;
-  background-color: #ffffff;
+  background-color: #000000;
 }
 .btn-primary {
   color: #ffffff;
@@ -5751,7 +5750,9 @@ button.list-group-item-danger.active:focus {
   border-bottom-color: #dddddd;
 }
 .panel-primary {
-  border-color: #d9230f;
+    color: #ffffff;
+    border-bottom: 2px solid #444444;
+    background-color: #cb210e;
 }
 .panel-primary > .panel-heading {
   color: #ffffff;
@@ -5769,13 +5770,17 @@ button.list-group-item-danger.active:focus {
   border-bottom-color: #d9230f;
 }
 .panel-success {
-  border-color: #469408;
+  color: #ffffff;
+  border-bottom: 2px solid #d9230f;
+  background-color: #444444;
 }
 .panel-success > .panel-heading {
-  color: #ffffff;
-  background-color: #469408;
+
+
+  background-color: #444444;
   border-color: #469408;
 }
+
 .panel-success > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #469408;
 }

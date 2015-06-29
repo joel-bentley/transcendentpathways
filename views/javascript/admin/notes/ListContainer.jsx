@@ -19,8 +19,8 @@ var ListContainer = React.createClass({
     },
     placeDiv: function(x_pos, y_pos) {
         var d = this.getDOMNode();
-        d.style.position = "absolute";
-        d.style.left = x_pos+'px';
+        d.style.position = "relative";
+        d.style.left = x_pos +'px';
         d.style.top = y_pos-121+'px';
     },
     handleAddItem: function(newItem){
@@ -39,32 +39,39 @@ var ListContainer = React.createClass({
     render: function(){
 
         return (
-            <div className="panel panel-default slideTransition" >
-                <div className="panel-heading">
-                    <div className="panel-title">
+            <div className="slideTransition" >
+                <div className="panel">
+                    <div className={this.props.approved ? "panel-heading panel-success": "panel-heading panel-primary"}>
                         <div className="container-fluid">
-                            <div className="row">
-                                <div className="col-xs-12">
-                                    <span style={{color: 'blue'}}>
-                                        <h5>Notes</h5>
-                                    </span>
+                            <div className="row"
+                                <div className="col-sm-10">
+                                    Notes for {this.props.name}
+                                </div>
+                                <div className="col-sm-2">
+                                    <button
+                                        className={this.props.approved ?
+                                            "btn btn-primary btn-xs" : "btn btn-default btn-xs"}
+                                        type="button"
+                                        onClick={this.props.showNotes}>
+                                        <span className="glyphicon glyphicon-arrow-left"> Back </span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="panel-body">
-                    <div className="container-fluid">
-                        <div>
+                    <div className="panel-body">
+                        <div className="container-fluid">
+                            <div>
 
-                            <AddItem
-                                add={this.handleAddItem}
-                            />
-                            <br/>
-                            <List
-                                items={this.props.getNotes()}
-                                remove={this.handleRemoveItem}
-                            />
+                                <AddItem
+                                    add={this.handleAddItem}
+                                />
+                                <br/>
+                                <List
+                                    items={this.props.getNotes()}
+                                    remove={this.handleRemoveItem}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
