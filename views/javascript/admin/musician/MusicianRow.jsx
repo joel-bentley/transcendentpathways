@@ -16,14 +16,14 @@ var MusicianRow = React.createClass({
     render: function() {
 
         return (
-            <div className="panel panel-default">
-                <div className="panel-heading">
-                    <div className="container-fluid">
+            <div className="container-fluid">
+                <div className="panel panel-default">
+                    <div className="panel-heading ">
                         <div className="row">
-                            <div className="col-xs-9">
-                                <h5>{this.props.musician.performerName}</h5>
+                            <div className="col-sm-9">
+                                {this.props.musician.performerName}
                             </div>
-                            <div className="col-xs-3">
+                            <div className="col-sm-3">
                                 <button
                                     className={this.props.musician.approved ?
                                                 "btn btn-default btn-sm" : "btn btn-primary btn-sm"}
@@ -34,17 +34,17 @@ var MusicianRow = React.createClass({
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="panel-body">
-                    <div className="container-fluid">
-                        <div className="row">
-                            Musician Contact:
-                        </div>
-                        <div className="row">
-                            {this.props.musician.contactName}
-                        </div>
-                        <div className="row">
-                            {this.props.musician.phone}
+                    <div className="panel-body">
+                        <div className="container-fluid">
+                            <div className="row">
+                                Musician Contact:
+                            </div>
+                            <div className="row">
+                                {this.props.musician.contactName}
+                            </div>
+                            <div className="row">
+                                {this.props.musician.phone}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -82,7 +82,7 @@ var PaymentStatus = React.createClass({
                         <div className="col-sm-2 col-sm-offset-9">
                             <div>
                                 {this.props.event.status.completed || this.props.event.status.canceled ? null :
-                                <button className="btn btn-primary"
+                                <button className="btn btn-sm btn-primary"
                                         onClick={this.saveAndContinue}>Submit
                                 </button>}
                             </div>

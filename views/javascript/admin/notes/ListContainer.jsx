@@ -39,8 +39,8 @@ var ListContainer = React.createClass({
     render: function(){
 
         return (
-            <div className="slideTransition" >
-                <div className="panel">
+            <div className="col-sm-12 slideTransition">
+                <div className="panel" >
                     <div className={this.props.approved ? "panel-heading panel-success": "panel-heading panel-primary"}>
                         <div className="container-fluid">
                             <div className="row">
@@ -50,7 +50,7 @@ var ListContainer = React.createClass({
                                 <div className="col-sm-2">
                                     <button
                                         className={this.props.approved ?
-                                            "btn btn-primary btn-xs" : "btn btn-default btn-xs"}
+                                            "btn btn-primary btn-sm" : "btn btn-default btn-sm"}
                                         type="button"
                                         onClick={this.props.showNotes}>
                                         <span className="glyphicon glyphicon-arrow-left"> Back </span>
@@ -60,17 +60,17 @@ var ListContainer = React.createClass({
                         </div>
                     </div>
                     <div className="panel-body">
-                        <div className="container-fluid">
+                        <div >
                             <div>
-
-                                <AddItem
-                                    add={this.handleAddItem}
-                                />
-                                <br/>
                                 <List
                                     items={this.props.getNotes()}
                                     remove={this.handleRemoveItem}
                                 />
+                                <hr></hr>
+                                <AddItem
+                                    add={this.handleAddItem}
+                                />
+                                <br/>
                             </div>
                         </div>
                     </div>

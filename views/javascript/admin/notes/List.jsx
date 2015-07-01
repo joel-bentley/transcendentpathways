@@ -1,45 +1,38 @@
 var React = require('react');
+var moment = require('moment');
 
 var List = React.createClass({
     render: function(){
-        var styles = {
-            uList: {
-                paddingLeft: 0,
-                listStyleType: "none"
-            },
-            todoItemDate: {
-                cursor: "pointer",
-                float: "right",
-                fontSize: 10
-
-            }
-        };
         var listItems = this.props.items.map(function(item, index){
             return(
-                <li className = "panel panel-default"  key={this.props.name+index+item.noteText}>
-                    <div className="panel-heading">
-                        <div>
-                            {new Date(item.noteDate).toDateString()}
-                            <span
-                                style={styles.todoItemDate}
-                                onClick = {this.props.remove.bind(null, index)}
-                                className="glyphicon glyphicon glyphicon-trash">
-                            </span>
+
+                <div className="list-group-item" key={item._id}>
+                    <div className="row">
+                        <div className="col-sm-10">
+                            <strong>{moment.utc(item.noteDate).format('dddd MMMM D, YYYY')}</strong>
+                        </div>
+                        <div className="col-sm-2">
+                            <button
+                                className={this.props.approved ?
+                                    "btn btn-default btn-sm" : "btn btn-primary btn-sm"}
+                                type="button"
+                                onClick={this.props.remove.bind(null, index)}>
+                                <span className="glyphicon glyphicon-trash"></span>
+                            </button>
                         </div>
                     </div>
-                    <div className="panel-body">
-
-                        <span>
+                    <div className="row">
+                        <div className="col-sm-8 col-sm-offset-1">
                             {item.noteText}
-                        </span>
+                        </div>
                     </div>
-                </li>
+                </div>
             )
         }.bind(this));
         return (
-            <ul style = {styles.uList}>
+            <div>
                 {listItems}
-            </ul>
+            </div>
         )
     }
 });

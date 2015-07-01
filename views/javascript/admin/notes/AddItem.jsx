@@ -25,9 +25,8 @@ var AddItem = React.createClass({
     },
     render: function(){
         return(
-            <div>
+            <div className="col-sm-12">
                 <input type="text"
-                       className = "form-control"
                        value = {this.state.newItem}
                        placeholder = "New Note"
                        onKeyDown = {this.handleSubmit}

@@ -1,15 +1,14 @@
 var React = require('react');
 
-var CompletedEvents = React.createClass ({
-
+var UpcomingEvents = React.createClass({
     render: function(){
         return (
-            <div className="panel panel-info">
+            <div className="panel panel-primary">
                 <div className="panel-heading">
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-sm-12">
-                                Completed Events
+                                Upcoming Events
                             </div>
                         </div>
                     </div>
@@ -17,7 +16,7 @@ var CompletedEvents = React.createClass ({
                 <div className="panel-body">
                     <div className="container-fluid">
                         <div className="row">
-                            {this.props.completedEvents}
+                            {this.props.upcomingEvents}
                         </div>
                     </div>
                 </div>
@@ -27,4 +26,4 @@ var CompletedEvents = React.createClass ({
     }
 });
 
-module.exports = CompletedEvents;
+module.exports = UpcomingEvents;

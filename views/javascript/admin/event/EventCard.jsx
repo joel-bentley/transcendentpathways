@@ -64,38 +64,34 @@ var EventCard = React.createClass({
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">
-                    <div className="panel-title">
-                        <div className="container-fluid">
-                            <div className="row">
-                                <div className="col-xs-10">
-                                    <span>
-                                        {this.props.event.facilityName}
-                                    </span>
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-sm-10">
+                                <span>
+                                    {this.props.event.facilityName}
+                                </span>
 
-                                </div>
-                                <div className="col-xs-2">
-                                    {this.props.allowSave ?
-                                        null :
-                                        <button
-                                            style={{padding: '2px 10px'}}
-                                            type="button"
-                                            className="btn btn-primary"
-                                            onClick={this.changeState}
-                                            >
-
-                                            <span
-                                                className="glyphicon glyphicon-list"
-                                            ></span>
-                                        </button>
-                                    }
-                                </div>
                             </div>
-                            <div className="row">
-                                <div className="col-xs-9 col-xs-3-offset">
-                                    <span style={{color: 'indigo'}}>
-                                        <h5>{moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}</h5>
-                                    </span>
-                                </div>
+                            <div className="col-sm-2">
+                                {this.props.allowSave ?
+                                    null :
+                                    <button
+                                        type="button"
+                                        className="btn btn-sm btn-primary"
+                                        onClick={this.changeState}
+                                        >
+                                        <span
+                                            className="glyphicon glyphicon-list"
+                                        ></span>
+                                    </button>
+                                }
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm-9 col-sm-3-offset">
+                                <span>
+                                    {moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -106,10 +102,8 @@ var EventCard = React.createClass({
                             <h5>{startString + '  -  ' + endString + ' (' + timeDiffString + ' minutes)'}</h5>
                         </div>
                         <div className="row">
-                            <div className="col-xs-12 col-xs-offset-0">
-                                <hr></hr>
-                                <h5>{this.props.event.description}</h5>
-                            </div>
+                            <hr></hr>
+                            <h5>{this.props.event.description}</h5>
                         </div>
                         {this.state.complete ? <FacilityContact facility={this.state.facility}/> : null}
                     </div>

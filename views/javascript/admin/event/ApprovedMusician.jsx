@@ -54,7 +54,7 @@ var ApprovedMusician = React.createClass({
                         <hr></hr>
                         <div className="col-sm-1 col-sm-11-offset">
                             <button
-                                className="btn btn-primary"
+                                className="btn btn-sm btn-primary"
                                 onClick = {this.updateEvent}
                         >Submit</button>
                         </div>
