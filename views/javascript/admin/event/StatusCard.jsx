@@ -26,22 +26,13 @@ var StatusCard = React.createClass({
         return(
             <div className="panel panel-default slideTransition" >
                 <div className="panel-heading">
-                    <div className="panel-title">
-                        <div className="container-fluid">
-                            <div className="row">
-                                <div className="col-xs-8">
-                                    <span style={{color: 'blue'}}>
-                                        <h5>{this.props.event.facilityName}</h5>
-                                    </span>
-                                </div>
-                                <div className="col-xs-4">
-                                    <span style={{color: 'blue'}}>
-                                        <h5>{moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}</h5>
-                                    </span>
-                                </div>
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-sm-8">
+                                <span>{this.props.event.facilityName}</span>
                             </div>
-                            <div className="row">
-
+                            <div className="col-sm-4">
+                                <span>{moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}</span>
                             </div>
                         </div>
                     </div>

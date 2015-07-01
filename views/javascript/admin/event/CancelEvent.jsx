@@ -41,7 +41,7 @@ var CancelEvent = React.createClass({
                         </div>
                         <div className="col-sm-1">
                             <div>
-                                <button className="btn btn-danger"
+                                <button className="btn btn-sm btn-danger"
                                     onClick={this.saveAndContinue}>CANCEL EVENT!
                                 </button>
                             </div>

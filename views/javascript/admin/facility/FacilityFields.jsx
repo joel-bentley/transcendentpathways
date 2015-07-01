@@ -4,8 +4,9 @@ var FacilityFields = React.createClass({
 
     render: function() {
         return (
-            <div className="panel">
-                <div className={this.props.fieldValues.approved ? "panel-heading panel-success": "panel-heading panel-primary"}>
+
+            <div className={this.props.fieldValues.approved ? "panel panel-default": "panel panel-primary"}>
+                <div className="panel-heading">
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-sm-10">
@@ -14,7 +15,7 @@ var FacilityFields = React.createClass({
                             <div className="col-sm-2">
                                 <button
                                     className={this.props.fieldValues.approved ?
-                                            "btn btn-primary btn-xs" : "btn btn-default btn-xs"}
+                                            "btn btn-primary btn-sm" : "btn btn-default btn-sm"}
                                     type="button"
                                     onClick={this.props.showNotes}>
                                     <span className="glyphicon glyphicon-list-alt"> Notes </span>
@@ -176,8 +177,8 @@ var FacilityFields = React.createClass({
                                     </select>
                                 </div>
                             </div>
-                            <div>
-                                <button className="btn btn-primary" onClick={this.saveAndContinue}>Submit</button>
+                            <div className="col-sm-2 col-sm-offset-10">
+                                <button className="btn btn-sm btn-primary" onClick={this.saveAndContinue}>Submit</button>
                             </div>
                         </form>
                     </div>

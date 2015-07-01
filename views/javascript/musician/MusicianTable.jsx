@@ -2,8 +2,11 @@ var React = require('react');
 var RequestedEvents = require('./RequestedEvents.jsx');
 var ApprovedEvents = require('./ApprovedEvents.jsx');
 var CompletedEvents = require('./CompletedEvents.jsx');
+var UpcomingEvents = require('./UpcomingEvents.jsx');
 var SearchEvents = require('./SearchEvents.jsx');
-var DetailEvents = require('./DetailEvents.jsx');
+var DetailEvents = require('./UpcomingEvents.jsx');
+var EventDetails = require('./EventDetails.jsx');
+
 var async = require('async');
 
 var moment = require('moment');
@@ -22,6 +25,7 @@ var MusicianTable = React.createClass({
     getInitialState: function(){
 
         return({
+            event: null,
             events: null,
             musician: null,
             facilities: null
@@ -116,6 +120,8 @@ var MusicianTable = React.createClass({
         var requestedEvents = [];
         var approvedEvents = [];
         var completedEvents = [];
+        var upcomingEvents = [];
+
         if (this.state.events && this.state.musician){
             this.state.events.map(function(event){
                 event.requestedBy.map(function(musician){
@@ -137,33 +143,38 @@ var MusicianTable = React.createClass({
                     completedEvents.push(<div key={event._id}>{event.facilityName + " " + moment.utc(event.start).format('dddd MMMM D, YYYY')}</div>);
                 }
             }.bind(this));
+            this.state.events.map(function(event){
+                if(new Date(event.start) > new Date()){
+                    upcomingEvents.push(<div key={event._id}>{event.facilityName + " " + moment.utc(event.start).format('dddd MMMM D, YYYY')}</div>);
+                }
+            }.bind(this));
         }
 
         return(
             <div className = "container-fluid">
-                     <div className = "col-sm-5">
-                        <SearchEvents />
-                        <hr></hr>
+                     <div className = "col-sm-4">
+                        <UpcomingEvents
+                            upcomingEvents={upcomingEvents}
+                        />
                         <ApprovedEvents
                             approvedEvents={approvedEvents}
                         />
-                        <hr></hr>
                         <RequestedEvents
                             requestedEvents={requestedEvents}
                         />
-                        <hr></hr>
                         <CompletedEvents
                             completedEvents={completedEvents}
                         />
-                        <hr></hr>
+
                      </div>
-                    <div className="col-sm-7" style={styles.right}>
-                        <DetailEvents
+                    <div className="col-sm-8" style={styles.right}>
+                        {this.state.event ? <EventDetails
+                            event={this.state.event}
                             events={this.state.events}
                             facilities={this.state.facilities}
                             musician={this.state.musician}
                             updateEvent={this.updateEvent}
-                        />
+                        />: null }
                     </div>
 
             </div>

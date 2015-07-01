@@ -4,11 +4,24 @@ var RequestedEvents = React.createClass ({
 
     render: function(){
 
-        return(
-            <div>
-                <h4>Requested Events</h4>
-                {this.props.requestedEvents? <h5>{this.props.requestedEvents}</h5> :
-                    <div><span style={{'color': 'red'}}><h5>No requested events yet...</h5></span></div>}
+        return (
+            <div className="panel panel-default">
+                <div className="panel-heading">
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-sm-12">
+                                Requested Events
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="panel-body">
+                    <div className="container-fluid">
+                        <div className="row">
+                            {this.props.requestedEvents}
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

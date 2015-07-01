@@ -4,7 +4,7 @@ var GoogleMap = require('./GoogleMap.jsx');
 
 var moment = require('moment');
 
-var EventRow = React.createClass({
+var EventDetails = React.createClass({
     handleClick: function() {
         var thisEvent = this.props.event;
         var alreadyRegistered = false;
@@ -18,16 +18,14 @@ var EventRow = React.createClass({
                 "musicianName": this.props.musician.performerName,
                 "musicianId": this.props.musician._id
             });
-            //this.props.event.status.requested = true;
         }
     this.props.updateEvent(this.props.event);
     },
     render: function(){
-        //console.log('logging props in row', this.props);
         return(
-            <div className="panel panel-primary" key={event._id}>
+            <div className="panel panel-default" key={event._id}>
                 <div className="panel-heading">
-                    <h4 className="panel-title">{this.props.event.facilityName + ' on ' + moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')} </h4>
+                    {this.props.event.facilityName + ' on ' + moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}
                 </div>
                 <div className="panel-body">
                     <div className = "container-fluid">
@@ -58,15 +56,15 @@ var EventRow = React.createClass({
                                     </div>
                                 </div>
                                 <div className="col-sm-6 col-sm-offset-1">
-                                    <button className="btn btn-primary" onClick={this.handleClick} type="submit">Request Event  *</button>
+                                    <button className="btn btn-default" onClick={this.handleClick} type="submit">Request Event  *</button>
                                 </div>
                             </row>
                         </div>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 });
 
-module.exports = EventRow;
+module.exports = EventDetails;
