@@ -11,13 +11,8 @@ var Newer = require('gulp-newer');
 var Concat = require('gulp-concat');
 
 var browserify = require('browserify');
-//var reactify = require('reactify');
 var babelify = require('babelify');
 var source = require('vinyl-source-stream');
-
-//var mainBowerFiles = require('main-bower-files');
-
-
 
 Gulp.task('default', ['watch', 'build', 'nodemon']);
 
@@ -31,11 +26,6 @@ Gulp.task('less', function () {
     var bundleConfigs = [{
         entries: [
             './views/stylesheets/main.less',
-            './views/stylesheets/musicianAdmin.css',
-            './views/stylesheets/bootswatch.less',
-            './views/stylesheets/variables.less'
-
-
         ],
         dest: './public/css',
         outputName: 'main.min.css'

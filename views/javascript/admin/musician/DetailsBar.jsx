@@ -12,7 +12,7 @@ var DetailsBar = React.createClass({
         var d = this.getDOMNode();
         d.style.position = "absolute";
         d.style.left = x_pos+'px';
-        d.style.top = y_pos-120+'px';
+        d.style.top = y_pos-119+'px';
     },
     render: function(){
         return (
