@@ -33,24 +33,18 @@ var CancelEvent = React.createClass({
     },
     render: function(){
         return(
-            <div>
-                <form className="form-horizontal">
-                    <div className="form-group">
-                        <div className="col-sm-5">
-                            <h5>Deleting this event will permanently remove it from the database!</h5>
-                        </div>
-                        <div className="col-sm-1">
-                            <div>
-                                <button className="btn btn-sm btn-danger"
-                                    onClick={this.saveAndContinue}>CANCEL EVENT!
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+            <div className="row">
+                <div className="col-sm-9 col-sm-offset-1">
+                    Deleting this event will permanently remove it from the database!
+                </div>
+                <div className="col-sm-2">
+                    <button className="btn btn-sm btn-info"
+                        onClick={this.saveAndContinue}>Cancel Event!
+                    </button>
+                </div>
             </div>
         )
     }
-});      //input.form-control.starttimepicker(type='text', name='startTime', id='startTime', placeholder='...')
+});
 
 module.exports = CancelEvent;

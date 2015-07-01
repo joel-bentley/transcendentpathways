@@ -32,7 +32,8 @@ Gulp.task('less', function () {
         entries: [
             './views/stylesheets/main.less',
             './views/stylesheets/musicianAdmin.css',
-            './views/stylesheets/bootstrap.css'
+            './views/stylesheets/bootswatch.less',
+            './views/stylesheets/variables.less'
 
 
         ],
@@ -83,12 +84,8 @@ Gulp.task('media', function () {
     return Merge(general, fonts, javascript);
 });
 
-//Gulp.task('bowerfiles', function() {
-//   return Gulp.src(mainBowerFiles()).pipe(Gulp.dest('./public/js/lib'))
-//});
 
 
-//Gulp.task('jsx', ['musicianjs', 'facilityjs', 'adminjs']);
 Gulp.task('jsx', ['adminjs', 'musicianjs', 'adminFacilityjs', 'adminNotes', 'adminEvents']);
 
 
@@ -99,14 +96,6 @@ Gulp.task('musicianjs', function(){
         .pipe(source('musician.min.js'))
         .pipe(Gulp.dest('public/js/'));
 });
-//
-//Gulp.task('facilityjs', function(){
-//    browserify('./views/javascript/facility/Notes.jsx')
-//        .transform(babelify)
-//        .bundle()
-//        .pipe(source('facility.min.js'))
-//        .pipe(Gulp.dest('public/js/'));
-//});
 
 Gulp.task('adminFacilityjs', function(){
     browserify('./views/javascript/admin/facility/FacilityTable.jsx')
