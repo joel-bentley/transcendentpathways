@@ -5,25 +5,26 @@ var List = React.createClass({
     render: function(){
         var listItems = this.props.items.map(function(item, index){
             return(
-
-                <div className="list-group-item" key={item._id}>
-                    <div className="row">
-                        <div className="col-sm-10">
-                            <strong>{moment.utc(item.noteDate).format('dddd MMMM D, YYYY')}</strong>
+                <div className="container-fluid" key={item.noteDate}>
+                    <div className="list-group-item" >
+                        <div className="row">
+                            <div className="col-sm-11">
+                                <strong><em>{moment.utc(item.noteDate).format('dddd MMMM D, YYYY')}</em></strong>
+                            </div>
+                            <div className="col-sm-1 buttonRow">
+                                <button
+                                    className={this.props.approved ?
+                                        "btn btn-default btn-sm" : "btn btn-primary btn-sm"}
+                                    type="button"
+                                    onClick={this.props.remove.bind(null, index)}>
+                                    <span className="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </div>
                         </div>
-                        <div className="col-sm-2">
-                            <button
-                                className={this.props.approved ?
-                                    "btn btn-default btn-sm" : "btn btn-primary btn-sm"}
-                                type="button"
-                                onClick={this.props.remove.bind(null, index)}>
-                                <span className="glyphicon glyphicon-trash"></span>
-                            </button>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-sm-8 col-sm-offset-1">
-                            {item.noteText}
+                        <div className="row">
+                            <div className="col-sm-9 col-sm-offset-1">
+                                {item.noteText}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -16,7 +16,7 @@ var MusicianRow = React.createClass({
     render: function() {
 
         return (
-            <div className="container-fluid">
+            <div>
                 <div className="panel panel-default">
                     <div className="panel-heading ">
                         <div className="row">
@@ -24,13 +24,13 @@ var MusicianRow = React.createClass({
                                 {this.props.musician.performerName}
                             </div>
                             <div className="col-sm-3">
-                                <button
+                                <div
                                     className={this.props.musician.approved ?
                                                 "btn btn-default btn-sm" : "btn btn-primary btn-sm"}
                                     type="button"
                                     onClick={this.changeState}>
                                     <span className="glyphicon glyphicon-list"></span>
-                                </button>
+                                </div>
                             </div>
                         </div>
                     </div>

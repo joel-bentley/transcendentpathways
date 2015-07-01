@@ -134,7 +134,7 @@ var MusicianTable = React.createClass({
         }.bind(this));
 
         return (
-            <div className="container-fluid">
+            <div>
                 <div className="row">
                     <div className="col-sm-4">
                         <h4>New Musicians</h4>

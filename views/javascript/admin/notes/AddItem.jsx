@@ -14,7 +14,7 @@ var AddItem = React.createClass({
     handleSubmit: function(e){
         if(e.keyCode===13){
             var newItemObj = {
-                noteDate: new Date().toLocaleString(),
+                noteDate: new Date(),
                 noteText: this.state.newItem
             };
             this.props.add(newItemObj);
