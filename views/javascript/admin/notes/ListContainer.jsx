@@ -39,38 +39,40 @@ var ListContainer = React.createClass({
     render: function(){
 
         return (
-            <div className="col-sm-12 slideTransition">
+            <div className="slideTransition">
                 <div className="panel" >
-                    <div className={this.props.approved ? "panel-heading panel-success": "panel-heading panel-primary"}>
-                        <div className="container-fluid">
-                            <div className="row">
-                                <div className="col-sm-10">
-                                    Notes for {this.props.name}
-                                </div>
-                                <div className="col-sm-2">
-                                    <button
-                                        className={this.props.approved ?
-                                            "btn btn-primary btn-sm" : "btn btn-default btn-sm"}
-                                        type="button"
-                                        onClick={this.props.showNotes}>
-                                        <span className="glyphicon glyphicon-arrow-left"> Back </span>
-                                    </button>
+                    <div className={this.props.approved ? "panel-default": "panel-primary"}>
+                        <div className="panel-heading">
+                            <div className="container-fluid">
+                                <div className="row">
+                                    <div className="col-sm-10">
+                                        Notes for {this.props.name}
+                                    </div>
+                                    <div className="col-sm-2">
+                                        <button
+                                            className={this.props.approved ?
+                                                "btn btn-primary btn-sm" : "btn btn-default btn-sm"}
+                                            type="button"
+                                            onClick={this.props.showNotes}>
+                                            <span className="glyphicon glyphicon-arrow-left"> Back </span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="panel-body">
-                        <div >
-                            <div>
-                                <List
-                                    items={this.props.getNotes()}
-                                    remove={this.handleRemoveItem}
-                                />
-                                <hr></hr>
-                                <AddItem
-                                    add={this.handleAddItem}
-                                />
-                                <br/>
+                        <div className="panel-body">
+                            <div >
+                                <div>
+                                    <List
+                                        items={this.props.getNotes()}
+                                        remove={this.handleRemoveItem}
+                                    />
+                                    <hr></hr>
+                                    <AddItem
+                                        add={this.handleAddItem}
+                                    />
+                                    <br/>
+                                </div>
                             </div>
                         </div>
                     </div>
