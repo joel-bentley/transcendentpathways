@@ -4,22 +4,11 @@ var ApprovedEvents = require('./ApprovedEvents.jsx');
 var CompletedEvents = require('./CompletedEvents.jsx');
 var UpcomingEvents = require('./UpcomingEvents.jsx');
 var SearchEvents = require('./SearchEvents.jsx');
-var DetailEvents = require('./UpcomingEvents.jsx');
 var EventDetails = require('./EventDetails.jsx');
 
 var async = require('async');
 
 var moment = require('moment');
-
-var styles = {
-    left: {
-        position: "fixed",
-        float: "left"
-    },
-    right: {
-        float: "right"
-    }
-};
 
 var MusicianTable = React.createClass({
     getInitialState: function(){
@@ -50,17 +39,21 @@ var MusicianTable = React.createClass({
                 });
             }
         }, function(err, data) {
-            if (err) {
-                return console.error(err);
-            }
+                if (err) {
+                    return console.error(err);
+                }
+                var sortedEvents = data.events.sort(function(a, b) {
+                    return a.start > b.start;
+                });
+
                 this.setState({
-                    events: data.events.sort(function(a, b) {
-                        return a.start > b.start;
-                    }),
+                    events: sortedEvents,
                     musician: data.musicianData,
                     facilities: data.facilityData
                 });
+
         }.bind(this));
+
     },
 
     gigList() {
@@ -74,6 +67,41 @@ var MusicianTable = React.createClass({
 
     componentDidMount: function(){
         this.dataFetch();
+        this.state.events && this.state.facilities ? this.facilitizeEvents(this.state.events) : null;
+    },
+
+    componentDidUpdate: function(){
+        this.state.events && this.state.facilities ? this.facilitizeEvents(this.state.events) : null;
+    },
+
+    eventFacility: function(facility){
+        var myFacility = [];
+        this.state.facilities.map(function(elem){
+            if (elem.facilityName === facility){
+                myFacility= elem;
+            }
+        });
+        return myFacility;
+    },
+
+    facilitizeEvents: function(events){
+        var modifiedEvent = null;
+        var facilitized = [];
+        events.map(function (event) {
+            modifiedEvent = event;
+            modifiedEvent.facility = this.eventFacility(event.facilityName);
+            facilitized.push(modifiedEvent);
+        }.bind(this));
+        this.setState({
+            events: facilitized,
+            facilitized: true
+        });
+    },
+
+    eventChange: function(event){
+        this.setState({
+            event: event
+        });
     },
 
     updateEvent: function(newEvent){
@@ -116,62 +144,61 @@ var MusicianTable = React.createClass({
     },
 
     render: function(){
-
         var requestedEvents = [];
         var approvedEvents = [];
         var completedEvents = [];
-        var upcomingEvents = [];
 
         if (this.state.events && this.state.musician){
             this.state.events.map(function(event){
                 event.requestedBy.map(function(musician){
 
                     if(musician.musicianName === this.state.musician.performerName){
-                        requestedEvents.push(<div key={event._id+musician._id}>{event.facilityName + " " + moment.utc(event.start).format('dddd MMMM D, YYYY')}</div>);
+                        requestedEvents.push(<div key={event._id+musician._id}>{event.facilityName + "\n" + moment.utc(event.start).format('dddd MMMM D, YYYY')}</div>);
                     }
                 }.bind(this));
             }.bind(this));
 
             this.state.events.map(function(event){
                 if((event.approvedMusicianName === this.state.musician.performerName) && (event.status.completed === false)){
-                    approvedEvents.push(<div key={event._id}>{event.facilityName + " " + moment.utc(event.start).format('dddd MMMM D, YYYY')}</div>);
+                    approvedEvents.push(<div key={event._id} type="button" onClick={this.eventChange.bind(this, event)}>
+                        {event.facilityName + "\n" + moment.utc(event.start).format('dddd MMMM D, YYYY')}</div>);
                 }
             }.bind(this));
 
             this.state.events.map(function(event){
                 if((event.approvedMusicianName === this.state.musician.performerName) && (event.status.completed === true)){
-                    completedEvents.push(<div key={event._id}>{event.facilityName + " " + moment.utc(event.start).format('dddd MMMM D, YYYY')}</div>);
+                    completedEvents.push(<div key={event._id}>{event.facilityName + "\n" + moment.utc(event.start).format('dddd MMMM D, YYYY')}</div>);
                 }
             }.bind(this));
-            this.state.events.map(function(event){
-                if(new Date(event.start) > new Date()){
-                    upcomingEvents.push(<div key={event._id}>{event.facilityName + " " + moment.utc(event.start).format('dddd MMMM D, YYYY')}</div>);
-                }
-            }.bind(this));
-        }
 
+
+        }
         return(
             <div className = "container-fluid">
                      <div className = "col-sm-4">
                         <UpcomingEvents
-                            upcomingEvents={upcomingEvents}
+                            events={this.state.events}
+                            musician={this.state.musician}
                         />
                         <ApprovedEvents
-                            approvedEvents={approvedEvents}
+                            events={this.state.events}
+                            musician={this.state.musician}
                         />
                         <RequestedEvents
-                            requestedEvents={requestedEvents}
+                            events={this.state.events}
+                            musician={this.state.musician}
                         />
                         <CompletedEvents
-                            completedEvents={completedEvents}
+                            events={this.state.events}
+                            musician={this.state.musician}
                         />
 
                      </div>
-                    <div className="col-sm-8" style={styles.right}>
+                    <div className="col-sm-8">
                         {this.state.event ? <EventDetails
                             event={this.state.event}
                             events={this.state.events}
-                            facilities={this.state.facilities}
+                            facility={this.state.event.facility}
                             musician={this.state.musician}
                             updateEvent={this.updateEvent}
                         />: null }
