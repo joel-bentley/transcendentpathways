@@ -14,24 +14,26 @@ var RequestedBy = React.createClass({
     render: function(){
         var musicianList = [];
         this.props.musicians.map(function(elem){
-            musicianList.push(
-                <li className="list-group-item" key={elem.musicianName}>
-                    <div className="row">
-                        <div className="col-sm-10   ">
-                            {elem.musicianName}
+            if(elem) {
+                musicianList.push(
+                    <li className="list-group-item" key={elem}>
+                        <div className="row">
+                            <div className="col-sm-10   ">
+                                {elem.musicianName}
+                            </div>
+                            {this.props.event.status.completed ? null :
+                                <div className="col-sm-2">
+                                    <span
+                                        className="glyphicon glyphicon-music"
+                                        style={{color:'gray'}}
+                                        onClick={this.updateMusician.bind(null, elem)}
+                                        >
+                                    </span>
+                                </div>}
                         </div>
-                        {this.props.event.status.completed? null :
-                            <div className="col-sm-2">
-                                <span
-                                    className="glyphicon glyphicon-music"
-                                    style={{color:'gray'}}
-                                    onClick={this.updateMusician.bind(null, elem.musicianName)}
-                                >
-                                </span>
-                        </div>}
-                    </div>
-                </li>
-            )
+                    </li>
+                )
+            }
         }.bind(this));
         return(
             <div>

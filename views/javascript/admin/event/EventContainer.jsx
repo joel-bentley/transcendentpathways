@@ -38,6 +38,13 @@ var EventContainer = React.createClass({
                 event: event
             });
         }
+        if (event.status.canceled) {
+            this.setState({
+                showResults: false
+            });
+
+        }
+
     },
     componentDidMount: function() {                                 //csh loading the events into this.state.events
         $.get(this.props.source, function(result) {
@@ -53,7 +60,6 @@ var EventContainer = React.createClass({
             showResults: true,
             event: eventNew
         });
-        //document.body.scrollTop = document.documentElement.scrollTop = 0;
     },
 
 

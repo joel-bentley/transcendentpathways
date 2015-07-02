@@ -19,7 +19,7 @@ var StatusCard = React.createClass({
         var d = this.getDOMNode();
         d.style.position = "absolute";
         d.style.left = x_pos+'px';
-        d.style.top = y_pos-155+'px';
+        d.style.top = y_pos-160+'px';
     },
     render: function() {
 
