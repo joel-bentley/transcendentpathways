@@ -16,12 +16,13 @@ var GetDistance = React.createClass({
     geoCode: function(){
 
     },
-    componentDidMount: function() {
+    componentDidUpdate: function() {
         var musician = this.props.musician;
         var facility = this.props.facility;
 
         var musicianAddress = musician.address1 + " " + musician.address2 + " " + musician.city + " " + musician.zipcode;
-        var facilityAddress = facility.address1 + " " + facility.address2 + " " + facility.city  + " " + facility.zipcode;
+        var facilityAddress = facility.address1 + " " + facility.address2 + " " + facility.city  + " " + facility.zipcode
+
         var service = new google.maps.DistanceMatrixService();
         service.getDistanceMatrix(
             {
@@ -58,7 +59,6 @@ var GetDistance = React.createClass({
        return(
            <div>
                {this.state.distanceResults ? 'Distance to Facility: '+this.state.distanceResults: 'Loading...'}
-
            </div>
        );
 
