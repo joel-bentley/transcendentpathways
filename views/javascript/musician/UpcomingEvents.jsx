@@ -5,10 +5,15 @@ var GoogleMap = require('./GoogleMap.jsx');
 var moment = require('moment');
 
 var UpcomingEvents = React.createClass({
+
+    getDefaultProps: function(){
+        return({
+            events: 0
+        })
+    },
     eventChange: function(event){
         this.props.eventChange(event);
     },
-
     sortEvents: function(){
         var upcomingEvents = [];
         this.props.events.map(function (event) {
@@ -38,13 +43,12 @@ var UpcomingEvents = React.createClass({
                 );
             }
         }.bind(this));
-        return (upcomingEvents);
+        return upcomingEvents;
     },
     render: function(){
-
         return (
-            <div className="panel panel-primary" key={"UPCOMING"}>
-                <div className=" panel-heading">
+            <div className=" panel panel-primary" key={"UPCOMING"}>
+                <div className="panel-heading">
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-sm-10">
@@ -67,7 +71,7 @@ var UpcomingEvents = React.createClass({
                 </div>
                 <div className="panel-body collapse" id="upcomingEvents">
                     <div className="container-fluid">
-                        {this.props.events ? this.sortEvents(): null}
+                        {this.props.events ? this.sortEvents() : null}
                     </div>
                 </div>
             </div>
