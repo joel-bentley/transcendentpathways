@@ -54,9 +54,8 @@ var GoogleMap = React.createClass({
     },
     render: function () {
         return (
-
-        <div className="map-gic"></div>
-
+            <div className="map-gic container-fluid panel panel-primary" >
+            </div>
         );
     }
 });

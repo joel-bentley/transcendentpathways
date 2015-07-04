@@ -28,7 +28,6 @@ exports.getSignupMusician = function(req, res) {
     });
 };
 
-
 exports.getMusicianDetails = function(req, res){
 
     if(!req.user) return res.redirect('/');
@@ -62,9 +61,9 @@ exports.postMusicianDetails = function(req, res, next){
         biography: req.body.biography || ''
     });
 
-    var address = musician.address1 + ' ' + musician.address2 + ' ' + musician.city + ' ' + musician.state + ' ' +
-        musician.zipcode;
-    geocoder.geocode(address, function(err, response) {
+        var address = musician.address1 + ' ' + musician.address2 + ' '
+            + musician.city + ' ' + musician.state + ' ' + musician.zipcode;
+        geocoder.geocode(address, function(err, response) {
         //console.log(err);
         response = response.pop();
         var lat = response.latitude;
@@ -107,8 +106,6 @@ exports.postMusicianDetails = function(req, res, next){
 
 };
 
-
-
 exports.getHomeMusician = function(req, res) {
 
     if (req.user.accountType==='Musician') {
@@ -123,7 +120,6 @@ exports.getHomeMusician = function(req, res) {
     }
     res.redirect('/');
 };
-
 
 exports.getUpdateMusicianDetails = function(req, res) {
 
@@ -153,7 +149,6 @@ exports.getUpdateMusicianDetails = function(req, res) {
         }
     });
 };
-
 
 exports.postUpdateMusicianDetails = function(req, res, next) {
     Musician.findOne( { userIds : { $all : [ req.user.id ] } }, function(err, musician) {
@@ -185,6 +180,7 @@ exports.getGigListing = function(req, res, next) {
     Event.find( { 'status.open': true }).exec(function(err, gigs) {
         if (err) return next(err);
         var events = gigs;
+        //console.log('events are %s', events);
         res.writeHead(200, {'Content-Type': 'application/json'});
         res.end(JSON.stringify(events));
     });
@@ -200,7 +196,7 @@ exports.getMusicianId = function(req, res, next) {
 };
 
 exports.postRequestGig = function(req, res, next) {
-    console.dir(req.body.gigId);
+    //console.dir(req.body.gigId);
 
     Musician.findOne( { userIds : { $all : [ req.user.id ] } }, function(err, musician) {
         if (err) return next(err);
