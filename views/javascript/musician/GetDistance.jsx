@@ -13,10 +13,7 @@ var GetDistance = React.createClass({
             distanceResults: null
         })
     },
-    geoCode: function(){
-
-    },
-    componentDidUpdate: function() {
+    componentDidMount: function() {
         var musician = this.props.musician;
         var facility = this.props.facility;
 
@@ -52,7 +49,7 @@ var GetDistance = React.createClass({
                 }
             }
         } else {
-            //console.log('distance matrix failuer');
+            console.log('distance matrix failuer');
         }
     },
    render: function(){

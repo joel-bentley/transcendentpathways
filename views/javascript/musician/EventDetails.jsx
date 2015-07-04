@@ -21,6 +21,7 @@ var EventDetails = React.createClass({
         }
     this.props.updateEvent(this.props.event);
     },
+
     render: function(){
         return(
             <div className="panel panel-default" key={event._id}>
@@ -31,8 +32,7 @@ var EventDetails = React.createClass({
                     <div className = "container-fluid">
                         <div className="row">
                             <div className="col-sm-5">
-                                <h5 className="text-center">
-                                <div >Start Date: {moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}</div>
+                                <div >Event Date: {moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}</div>
                                 <div>Facility Name: {this.props.event.facilityName}</div>
                                 <div>Start Time: {moment.utc(this.props.event.start).format('h:mm a')}</div>
                                 <div>End Time: {moment.utc(this.props.event.end).format('h:mm a')}</div>
@@ -42,27 +42,37 @@ var EventDetails = React.createClass({
                                         facility={this.props.facility}
                                     /> : null }
                                 </div>
-                                </h5>
-
                             </div>
-                            <div id="map-canvas">
-                                {this.props.musician && this.props.facility ? <GoogleMap musician={this.props.musician} facility={this.props.facility}/>: null}
+                        </div>
+                        <div>
+                            <hr></hr>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm-12">
+                                <div id="map-canvas">
+                                    {this.props.musician && this.props.facility ?
+                                        <GoogleMap
+                                            musician={this.props.musician}
+                                            facility={this.props.facility}
+                                        />: null
+                                    }
+                                </div>
                             </div>
-                            <row>
-                                <div className="col-sm-12">
-                                    <div className="col-sm-5">
-                                    <p className="text-center"> * Request does not imply, in any way, that you will be approved for this event!</p>
-                                    </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm-12">
+                                <div className="col-sm-8">
+                                    <p className="text-center"> * Requests are submitted for approval by administration.</p>
                                 </div>
-                                <div className="col-sm-6 col-sm-offset-1">
-                                    <button className="btn btn-default" onClick={this.handleClick} type="submit">Request Event  *</button>
+                                <div className="col-sm-4 pull-right">
+                                    <button className="btn-sm btn-default" onClick={this.handleClick} type="submit">Request Event*</button>
                                 </div>
-                            </row>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 });
 

@@ -25,6 +25,7 @@ var MusicianTable = React.createClass({
         async.parallel({
             events: function(callback) {
                 $.get('/gigListing', function(events) {
+                    //console.log(events);
                     callback(null, events);
                 });
             },
@@ -51,9 +52,7 @@ var MusicianTable = React.createClass({
                     musician: data.musicianData,
                     facilities: data.facilityData
                 });
-
         }.bind(this));
-
     },
 
     gigList() {
@@ -65,13 +64,9 @@ var MusicianTable = React.createClass({
     },
 
 
-    componentDidMount: function(){
+    componentWillMount: function(){
         this.dataFetch();
-        this.state.events && this.state.facilities ? this.facilitizeEvents(this.state.events) : null;
-    },
 
-    componentDidUpdate: function(){
-        this.state.events && this.state.facilities ? this.facilitizeEvents(this.state.events) : null;
     },
 
     eventFacility: function(facility){
@@ -99,6 +94,7 @@ var MusicianTable = React.createClass({
     },
 
     eventChange: function(event){
+        this.state.events && this.state.facilities ? this.facilitizeEvents(this.state.events) : null;
         this.setState({
             event: event
         });
@@ -151,9 +147,11 @@ var MusicianTable = React.createClass({
         if (this.state.events && this.state.musician){
             this.state.events.map(function(event){
                 event.requestedBy.map(function(musician){
-
-                    if(musician.musicianName === this.state.musician.performerName){
-                        requestedEvents.push(<div key={event._id+musician._id}>{event.facilityName + "\n" + moment.utc(event.start).format('dddd MMMM D, YYYY')}</div>);
+                    if (musician) {
+                        if (musician.musicianName === this.state.musician.performerName) {
+                            requestedEvents.push(<div
+                                key={event._id+musician._id}>{event.facilityName + "\n" + moment.utc(event.start).format('dddd MMMM D, YYYY')}</div>);
+                        }
                     }
                 }.bind(this));
             }.bind(this));
@@ -175,34 +173,35 @@ var MusicianTable = React.createClass({
         }
         return(
             <div className = "container-fluid">
-                     <div className = "col-sm-4">
-                        <UpcomingEvents
-                            events={this.state.events}
-                            musician={this.state.musician}
-                        />
-                        <ApprovedEvents
-                            events={this.state.events}
-                            musician={this.state.musician}
-                        />
-                        <RequestedEvents
-                            events={this.state.events}
-                            musician={this.state.musician}
-                        />
-                        <CompletedEvents
-                            events={this.state.events}
-                            musician={this.state.musician}
-                        />
+                <div className = "col-sm-4">
+                <UpcomingEvents
+                    events={this.state.events}
+                    musician={this.state.musician}
+                    eventChange={this.eventChange}
+                />
+                <ApprovedEvents
+                    events={this.state.events}
+                    musician={this.state.musician}
+                />
+                <RequestedEvents
+                    events={this.state.events}
+                    musician={this.state.musician}
+                />
+                <CompletedEvents
+                    events={this.state.events}
+                    musician={this.state.musician}
+                />
 
-                     </div>
-                    <div className="col-sm-8">
-                        {this.state.event ? <EventDetails
-                            event={this.state.event}
-                            events={this.state.events}
-                            facility={this.state.event.facility}
-                            musician={this.state.musician}
-                            updateEvent={this.updateEvent}
-                        />: null }
-                    </div>
+                </div>
+                <div className="col-sm-8">
+                {this.state.event ? <EventDetails
+                    event={this.state.event}
+                    events={this.state.events}
+                    facility={this.state.event.facility}
+                    musician={this.state.musician}
+                    updateEvent={this.updateEvent}
+                />: null }
+                </div>
 
             </div>
         )
