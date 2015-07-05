@@ -6,7 +6,7 @@ var RequestedBy = React.createClass({
             this.props.enableSave(true);
         }
         var x = this.props.event;
-        x.approvedMusicianName = musician;
+        x.approvedMusicianName = musician.musicianName;
         if (x) {
             this.props.updateEvent(x);
         }
@@ -25,7 +25,6 @@ var RequestedBy = React.createClass({
                                 <div className="col-sm-2">
                                     <span
                                         className="glyphicon glyphicon-music"
-                                        style={{color:'gray'}}
                                         onClick={this.updateMusician.bind(null, elem)}
                                         >
                                     </span>
