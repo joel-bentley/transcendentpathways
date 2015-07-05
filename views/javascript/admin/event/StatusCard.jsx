@@ -97,7 +97,7 @@ var StatusCard = React.createClass({
                             <hr></hr>
                         </div>
                         <div className='row'>
-                            <hr><h4>Payment Status</h4></hr>
+                            <h4>Payment Status</h4>
                         </div>
                         <div className='row'>
                             <div className="col-sm-10 col-sm-1-offset">

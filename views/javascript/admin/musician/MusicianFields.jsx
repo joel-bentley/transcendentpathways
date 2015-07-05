@@ -4,8 +4,8 @@ var MusicianFields = React.createClass({
     render: function() {
         return (
 
-            <div className={this.props.fieldValues.approved ? "panel-default": "panel-primary"}>
-                <div className = "panel-heading">
+            <div className={this.props.fieldValues.approved ? "panel panel-default": "panel panel-primary"}>
+                <div className = "panel-heading panelModified">
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-sm-10">
@@ -24,133 +24,136 @@ var MusicianFields = React.createClass({
                     </div>
                 </div>
                 <div className="panel-body">
-                    <form className="form-horizontal">
-                        <div className="form-group">
-                            <label className="col-sm-4 control-label">Contact Name</label>
-                            <div className="col-sm-7">
-                                <input type="text" className="form-control" ref="contactName"
-                                       defaultValue={this.props.fieldValues.contactName}
-                                       key={this.props.fieldValues.performerName} />
+                    <div className="container-fluid">
+
+                        <form className="form-horizontal">
+                            <div className="form-group">
+                                <label className="col-sm-4 control-label">Contact Name</label>
+                                <div className="col-sm-7">
+                                    <input type="text" className="form-control" ref="contactName"
+                                           defaultValue={this.props.fieldValues.contactName}
+                                           key={this.props.fieldValues.performerName} />
+                                </div>
                             </div>
-                        </div>
-                        <div className ="form-group">
-                            <label className="col-sm-4 control-label">Phone</label>
-                            <div className="col-sm-7">
-                                <input type="text" className="form-control" ref="phone"
-                                       defaultValue={this.props.fieldValues.phone}
-                                       key={this.props.fieldValues.performerName} />
+                            <div className ="form-group">
+                                <label className="col-sm-4 control-label">Phone</label>
+                                <div className="col-sm-7">
+                                    <input type="text" className="form-control" ref="phone"
+                                           defaultValue={this.props.fieldValues.phone}
+                                           key={this.props.fieldValues.performerName} />
+                                </div>
                             </div>
-                        </div>
-                        <div className ="form-group">
-                            <label className="col-sm-4 control-label">Address Line 1</label>
-                            <div className="col-sm-7">
-                                <input type="text" className="form-control" ref="address1"
-                                       defaultValue={this.props.fieldValues.address1}
-                                       key={this.props.fieldValues.performerName} />
+                            <div className ="form-group">
+                                <label className="col-sm-4 control-label">Address Line 1</label>
+                                <div className="col-sm-7">
+                                    <input type="text" className="form-control" ref="address1"
+                                           defaultValue={this.props.fieldValues.address1}
+                                           key={this.props.fieldValues.performerName} />
+                                </div>
                             </div>
-                        </div>
-                        <div className ="form-group">
-                            <label className="col-sm-4 control-label">Address Line 2</label>
-                            <div className="col-sm-7">
-                                <input type="text" className="form-control" ref="address2"
-                                       defaultValue={this.props.fieldValues.address2}
-                                       key={this.props.fieldValues.performerName} />
+                            <div className ="form-group">
+                                <label className="col-sm-4 control-label">Address Line 2</label>
+                                <div className="col-sm-7">
+                                    <input type="text" className="form-control" ref="address2"
+                                           defaultValue={this.props.fieldValues.address2}
+                                           key={this.props.fieldValues.performerName} />
+                                </div>
                             </div>
-                        </div>
-                        <div className ="form-group">
-                            <label className="col-sm-4 control-label">City</label>
-                            <div className="col-sm-7">
-                                <input type="text" className="form-control" ref="city"
-                                       defaultValue={this.props.fieldValues.city}
-                                       key={this.props.fieldValues.performerName} />
+                            <div className ="form-group">
+                                <label className="col-sm-4 control-label">City</label>
+                                <div className="col-sm-7">
+                                    <input type="text" className="form-control" ref="city"
+                                           defaultValue={this.props.fieldValues.city}
+                                           key={this.props.fieldValues.performerName} />
+                                </div>
                             </div>
-                        </div>
-                        <div className ="form-group">
-                            <label className="col-sm-4 control-label">State</label>
-                            <div className="col-sm-7">
-                                <input type="text" className="form-control" ref="state"
-                                       defaultValue={this.props.fieldValues.state}
-                                       key={this.props.fieldValues.performerName} />
+                            <div className ="form-group">
+                                <label className="col-sm-4 control-label">State</label>
+                                <div className="col-sm-7">
+                                    <input type="text" className="form-control" ref="state"
+                                           defaultValue={this.props.fieldValues.state}
+                                           key={this.props.fieldValues.performerName} />
+                                </div>
                             </div>
-                        </div>
-                        <div className ="form-group">
-                            <label className="col-sm-4 control-label">Zip Code</label>
-                            <div className="col-sm-7">
-                                <input type="text" className="form-control" ref="zipcode"
-                                       defaultValue={this.props.fieldValues.zipcode}
-                                       key={this.props.fieldValues.performerName} />
+                            <div className ="form-group">
+                                <label className="col-sm-4 control-label">Zip Code</label>
+                                <div className="col-sm-7">
+                                    <input type="text" className="form-control" ref="zipcode"
+                                           defaultValue={this.props.fieldValues.zipcode}
+                                           key={this.props.fieldValues.performerName} />
+                                </div>
                             </div>
-                        </div>
-                        <div className ="form-group">
-                            <label className="col-sm-4 control-label">Website URL</label>
-                            <div className="col-sm-7">
-                                <input type="text" className="form-control" ref="website"
-                                       defaultValue={this.props.fieldValues.website}
-                                       key={this.props.fieldValues.performerName} />
+                            <div className ="form-group">
+                                <label className="col-sm-4 control-label">Website URL</label>
+                                <div className="col-sm-7">
+                                    <input type="text" className="form-control" ref="website"
+                                           defaultValue={this.props.fieldValues.website}
+                                           key={this.props.fieldValues.performerName} />
+                                </div>
                             </div>
-                        </div>
-                        <div className ="form-group">
-                            <label className="col-sm-4 control-label">Biography</label>
-                            <div className="col-sm-7">
-                                <textarea className="form-control"  rows="2"
-                                          ref="biography" defaultValue={this.props.fieldValues.biography}
-                                          key={this.props.fieldValues.performerName} />
+                            <div className ="form-group">
+                                <label className="col-sm-4 control-label">Biography</label>
+                                <div className="col-sm-7">
+                                    <textarea className="form-control"  rows="2"
+                                              ref="biography" defaultValue={this.props.fieldValues.biography}
+                                              key={this.props.fieldValues.performerName} />
+                                </div>
                             </div>
-                        </div>
-                        <div className ="form-group">
-                            <label className="col-sm-4 control-label">Instruments</label>
-                            <div className="col-sm-7">
-                                <textarea className="form-control"  rows="2"
-                                          ref="instruments" defaultValue={this.props.fieldValues.instruments}
-                                          key={this.props.fieldValues.performerName} />
+                            <div className ="form-group">
+                                <label className="col-sm-4 control-label">Instruments</label>
+                                <div className="col-sm-7">
+                                    <textarea className="form-control"  rows="2"
+                                              ref="instruments" defaultValue={this.props.fieldValues.instruments}
+                                              key={this.props.fieldValues.performerName} />
+                                </div>
                             </div>
-                        </div>
-                        <div className="form-group">
-                            <label className="col-sm-4 control-label">Picture</label>
-                            <div className="col-sm-7">
-                                <input type="text" className="form-control" ref="picture"
-                                       defaultValue={this.props.fieldValues.picture}
-                                       key={this.props.fieldValues.performerName} />
+                            <div className="form-group">
+                                <label className="col-sm-4 control-label">Picture</label>
+                                <div className="col-sm-7">
+                                    <input type="text" className="form-control" ref="picture"
+                                           defaultValue={this.props.fieldValues.picture}
+                                           key={this.props.fieldValues.performerName} />
+                                </div>
                             </div>
-                        </div>
-                        <div className ="form-group">
-                            <label className="col-sm-4 control-label">Approval Date</label>
-                            <div className="col-sm-7">
-                                <input type="text" className="form-control" ref="approvedDate"
-                                       defaultValue={this.props.fieldValues.approvedDate}
-                                       key={this.props.fieldValues.performerName} />
+                            <div className ="form-group">
+                                <label className="col-sm-4 control-label">Approval Date</label>
+                                <div className="col-sm-7">
+                                    <input type="text" className="form-control" ref="approvedDate"
+                                           defaultValue={this.props.fieldValues.approvedDate}
+                                           key={this.props.fieldValues.performerName} />
+                                </div>
                             </div>
-                        </div>
-                        <div className ="form-group">
-                            <label className="col-sm-4 control-label">Approved By</label>
-                            <div className="col-sm-7">
-                                <input type="text" className="form-control" ref="approvedBy"
-                                       defaultValue={this.props.fieldValues.approvedBy}
-                                       key={this.props.fieldValues.performerName} />
+                            <div className ="form-group">
+                                <label className="col-sm-4 control-label">Approved By</label>
+                                <div className="col-sm-7">
+                                    <input type="text" className="form-control" ref="approvedBy"
+                                           defaultValue={this.props.fieldValues.approvedBy}
+                                           key={this.props.fieldValues.performerName} />
+                                </div>
                             </div>
-                        </div>
-                        <div className ="form-group">
-                            <label className="col-sm-4 control-label">Sign-Up Date</label>
-                            <div className="col-sm-7">
-                                <input type="text" className="form-control" ref="signUpDate"
-                                       defaultValue={this.props.fieldValues.signUpDate}
-                                       key={this.props.fieldValues.performerName} />
+                            <div className ="form-group">
+                                <label className="col-sm-4 control-label">Sign-Up Date</label>
+                                <div className="col-sm-7">
+                                    <input type="text" className="form-control" ref="signUpDate"
+                                           defaultValue={this.props.fieldValues.signUpDate}
+                                           key={this.props.fieldValues.performerName} />
+                                </div>
                             </div>
-                        </div>
-                        <div className ="form-group">
-                            <label className="col-sm-4 control-label">Approved To Perform</label>
-                            <div className="col-sm-7">
-                                <select className="form-control" defaultValue={this.props.fieldValues.approved}
-                                        ref="approved" key={this.props.fieldValues.performerName} >
-                                    <option value="">No</option>
-                                    <option value="true">Yes</option>
-                                </select>
+                            <div className ="form-group">
+                                <label className="col-sm-4 control-label">Approved To Perform</label>
+                                <div className="col-sm-7">
+                                    <select className="form-control" defaultValue={this.props.fieldValues.approved}
+                                            ref="approved" key={this.props.fieldValues.performerName} >
+                                        <option value="">No</option>
+                                        <option value="true">Yes</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div className="col-sm-2 col-sm-offset-10">
-                            <button className="btn btn-sm btn-primary" onClick={this.saveAndContinue}>Submit</button>
-                        </div>
-                    </form>
+                            <div className="col-sm-2 col-sm-offset-10">
+                                <button className="btn btn-sm btn-primary" onClick={this.saveAndContinue}>Submit</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         )
