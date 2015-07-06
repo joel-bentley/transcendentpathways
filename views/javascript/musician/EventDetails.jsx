@@ -5,11 +5,21 @@ var GoogleMap = require('./GoogleMap.jsx');
 var moment = require('moment');
 
 var EventDetails = React.createClass({
+    getInitialState: function(){
+        return({
+            requestEvent: false
+        })
+    },
     componentDidMount: function(){
         this.placeDiv(0,this.props.offset);
     },
     componentDidUpdate: function(){
-        this.placeDiv(0,this.props.offset);
+        this.placeDiv(0,this.props.offset)
+    },
+    componentWillReceiveProps: function(){
+        this.setState({
+            requestEvent: false
+        })
     },
     placeDiv: function(x_pos, y_pos) {
         var d = this.getDOMNode();
@@ -18,20 +28,23 @@ var EventDetails = React.createClass({
         d.style.top = y_pos-72+'px';
     },
     handleClick: function() {
-        var thisEvent = this.props.event;
-        var alreadyRegistered = false;
-        thisEvent.requestedBy.map(function (elem) {
-            if (elem.musicianName === this.props.musician.performerName) {
-                alreadyRegistered = true;
+        if (confirm("Are you sure you wish to request this event?") == true) {
+            var thisEvent = this.props.event;
+            var alreadyRegistered = false;
+            thisEvent.requestedBy.map(function (elem) {
+                if (elem.musicianName === this.props.musician.performerName) {
+                    alreadyRegistered = true;
+                }
+            }.bind(this));
+            if (alreadyRegistered === false) {
+                this.props.event.requestedBy.push({
+                    "musicianName": this.props.musician.performerName,
+                    "musicianId": this.props.musician._id
+                });
             }
-        }.bind(this));
-        if (alreadyRegistered === false) {
-            this.props.event.requestedBy.push({
-                "musicianName": this.props.musician.performerName,
-                "musicianId": this.props.musician._id
-            });
+            this.props.updateEvent(this.props.event);
+            this.props.gigList();
         }
-    this.props.updateEvent(this.props.event);
     },
 
     render: function(){
@@ -83,6 +96,8 @@ var EventDetails = React.createClass({
                                     <button className="btn-sm btn-default" onClick={this.handleClick} type="submit">Request Event*</button>
                                 </div>
                             </div>
+                        </div>
+                        <div className="row">
                         </div>
                     </div>
                 </div>
