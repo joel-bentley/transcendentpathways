@@ -96,23 +96,12 @@ var MusicianTable = React.createClass({
         });
     },
     renderOffset: function(offset){
-        console.log(offset);
         this.setState({
             offset: offset
         })
     },
     eventChange: function (event) {
         this.state.events && this.state.facilities ? this.facilitizeEvents(this.state.events) : null;
-        //if(event._id===this.state.eventID && this.state.showMap){
-        //    this.setState({
-        //        showMap: false
-        //    });
-        //} else if(event._id===this.state.eventID){
-        //    this.setState({
-        //        showMap: true
-        //    });
-        //}
-        //else {
             this.setState({
                 showMap: true,
                 eventID: event._id,
@@ -196,6 +185,7 @@ var MusicianTable = React.createClass({
                         musician={this.state.musician}
                         updateEvent={this.updateEvent}
                         offset={this.state.offset}
+                        gigList={this.gigList}
 
 
                         /> : null }

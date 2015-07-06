@@ -56,6 +56,7 @@ var UpcomingEvents = React.createClass({
                 );
             }
         }.bind(this));
+
         return upcomingEvents;
     },
     render: function(){
