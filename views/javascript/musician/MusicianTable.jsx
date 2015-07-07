@@ -101,9 +101,11 @@ var MusicianTable = React.createClass({
         })
     },
     eventChange: function (event) {
+        //if (document.getElementById('googleMap')){
+        //    React.unmountComponentAtNode(document.getElementById('googleMap'));
+        //}
         this.state.events && this.state.facilities ? this.facilitizeEvents(this.state.events) : null;
             this.setState({
-                showMap: true,
                 eventID: event._id,
                 event: event
             });
@@ -178,7 +180,7 @@ var MusicianTable = React.createClass({
                         />
                 </div>
                 <div className="col-sm-8">
-                    {this.state.event && this.state.showMap ? <EventDetails
+                    {this.state.event ? <EventDetails
                         event={this.state.event}
                         events={this.state.events}
                         facility={this.state.event.facility}

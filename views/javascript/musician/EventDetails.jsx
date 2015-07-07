@@ -61,10 +61,10 @@ var EventDetails = React.createClass({
                                 <div>Facility Name: {this.props.event.facilityName}</div>
                                 <div>Start Time: {moment.utc(this.props.event.start).format('h:mm a')}</div>
                                 <div>End Time: {moment.utc(this.props.event.end).format('h:mm a')}</div>
-                                <div>{this.props.musician && this.props.facility ?
+                                <div>{this.props.musician && this.props.event.facility ?
                                     <GetDistance
                                         musician={this.props.musician}
-                                        facility={this.props.facility}
+                                        facility={this.props.event.facility}
                                     /> : null }
                                 </div>
                                 <hr></hr>
@@ -79,11 +79,11 @@ var EventDetails = React.createClass({
                         <div className="row">
                             <div className="col-sm-12">
                                 <div id="map-canvas">
-                                    {this.props.musician && this.props.facility ?<GoogleMap
+                                    <GoogleMap
+                                            id = "googleMap"
                                             musician={this.props.musician}
                                             facility={this.props.facility}
-                                        />: null
-                                    }
+                                        />
                                 </div>
                             </div>
                         </div>
