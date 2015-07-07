@@ -99,10 +99,6 @@ exports.postMusicianDetails = function(req, res, next){
         });
     });
 
-    //$.get( "https://maps.googleapis.com/maps/api/geocode/json?address=4381 Rocking Chair Rd. , Florence, SC, 29505&key=AIzaSyDumEXAOtWsGFb7FX9yoXZ6zNkZKTkvn5U", function( response ) {
-    //    console.log(response.results[0].geometry.location.lat);
-    //    console.log(response.results[0].geometry.location.lng);
-    //} );
 
 };
 
