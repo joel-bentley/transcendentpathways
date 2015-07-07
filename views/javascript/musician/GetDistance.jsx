@@ -49,7 +49,7 @@ var GetDistance = React.createClass({
                 }
             }
         } else {
-            console.log('distance matrix failuer');
+            console.log('distance matrix failure');
         }
     },
    render: function(){
