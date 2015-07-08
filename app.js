@@ -135,7 +135,7 @@ app.post('/facility/postGigDetails', passportConf.isAuthenticated, facilityContr
 app.post('/facility/removeEvent', passportConf.isAuthenticated, facilityController.removeEvent);
 
 app.get('/gigListing', passportConf.isAuthenticated, musicianController.getGigListing);
-app.post('/postRequestGig', passportConf.isAuthenticated, musicianController.postRequestGig);
+//app.post('/postRequestGig', passportConf.isAuthenticated, musicianController.postRequestGig);
 app.get('/getMusicianId', passportConf.isAuthenticated, musicianController.getMusicianId);
 
 app.get('/homeAdmin', passportConf.isAuthenticated, adminController.getHomeAdmin);

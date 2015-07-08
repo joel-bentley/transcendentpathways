@@ -108,6 +108,23 @@ exports.postSignup = function(req, res, next) {
     accountType: req.body.accountType
   });
 
+  var transporter = nodemailer.createTransport({
+    service: 'Mandrill',
+    auth: {
+        user: secrets.mandrill.user,
+        pass: secrets.mandrill.password
+    }
+  });
+  var mailOptions = {
+    to: user.email,
+    from: 'admin@transcendentpathways.org',
+    subject: 'Your Transcendent Pathways Account has been created',
+    text: 'Hello,\n\n' +
+    'This is a confirmation that your ' + req.body.accountType + ' account has been created and submitted for approval.' +
+    '\nYou can access your account with your email address as you provided: ' + user.email
+  };
+
+
   User.findOne({ email: req.body.email }, function(err, existingUser) {
     if (existingUser) {
       req.flash('errors', { msg: 'Account with that email address already exists.' });
@@ -121,6 +138,11 @@ exports.postSignup = function(req, res, next) {
     }
     user.save(function(err) {
       if (err) return next(err);
+        transporter.sendMail(mailOptions, function(err) {
+            req.flash('success', { msg: 'Success! Your account has been created. Thank you!' });
+            console.log(err);
+            //done(err);
+        });
       req.logIn(user, function(err) {
         if (err) return next(err);
         if(req.body.accountType==='Musician' && !existingUser) {
@@ -163,10 +185,6 @@ exports.postUpdateProfile = function(req, res, next) {
     });
   });
 };
-
-
-
-
 
 /**
  * POST /account/password
