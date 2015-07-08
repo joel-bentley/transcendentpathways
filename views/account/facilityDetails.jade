@@ -15,7 +15,7 @@ block content
             .form-group.required
                 label.col-sm-3.control-label(for='address1') Address Line 1
                 .col-sm-7
-                    input.form-control(type='text', required='required', name='address1', id='address1', placeholder='Address')
+                    input.form-control(type='text', pattern='[a-zA-Z0-9\\s\\-\\,\\#\\.\\+]+', title='Please enter valid street address.', required='required', name='address1', id='address1', placeholder='Address')
             .form-group
                 label.col-sm-3.control-label(for='address2') Address Line 2
                 .col-sm-7
@@ -27,11 +27,11 @@ block content
             .form-group.required
                 label.col-sm-3.control-label(for='state') State
                 .col-sm-7
-                    input.form-control(type='text', required='required', name='State', id='State', placeholder='State')
+                    input.form-control(type='text', required='required', name='state', id='state', placeholder='State')
             .form-group.required
                 label.col-sm-3.control-label(for='zipcode') Zip Code
                 .col-sm-7
-                    input.form-control(type='number', required='required', name='zipcode', id='zipcode', placeholder='Zip Code')
+                    input.form-control(pattern='[0-9]{5,6}(?:[-\\s][0-9]{4})?', title='Please enter valid zip code.', required='required', name='zipcode', id='zipcode', placeholder='Zip Code')
             .form-group.required
                 label.col-sm-3.control-label(for='contactName') Point of Contact Name
                 .col-sm-7
@@ -39,7 +39,7 @@ block content
             .form-group.required
                 label.col-sm-3.control-label(for='contactPhone') Point of Contact Phone Number
                 .col-sm-7
-                    input.form-control(type='tel', required='required', name='contactPhone', id='contactPhone', placeholder='Contact Phone Number')
+                    input.form-control(type='tel', pattern='\\(?[0-9]{2,4}\\)?[0-9\\s-]{3,}', title='Please enter valid phone number.', required='required', name='contactPhone', id='contactPhone', placeholder='Contact Phone Number')
             .form-group.required
                 label.col-sm-3.control-label(for='contactEmail') Point of Contact Email Address
                 .col-sm-7
