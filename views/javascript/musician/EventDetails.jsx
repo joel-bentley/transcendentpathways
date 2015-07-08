@@ -7,7 +7,8 @@ var moment = require('moment');
 var EventDetails = React.createClass({
     getInitialState: function(){
         return({
-            requestEvent: false
+            requestEvent: false,
+            requested: false
         })
     },
     componentDidMount: function(){
@@ -28,26 +29,28 @@ var EventDetails = React.createClass({
         d.style.top = y_pos-72+'px';
     },
     handleClick: function() {
-        if (confirm("Are you sure you wish to request this event?") == true) {
-            var thisEvent = this.props.event;
-            var alreadyRegistered = false;
-            thisEvent.requestedBy.map(function (elem) {
-                if (elem.musicianName === this.props.musician.performerName) {
-                    alreadyRegistered = true;
-                }
-            }.bind(this));
-            if (alreadyRegistered === false) {
-                this.props.event.requestedBy.push({
-                    "musicianName": this.props.musician.performerName,
-                    "musicianId": this.props.musician._id
-                });
+        var thisEvent = this.props.event;
+        var alreadyRegistered = false;
+        thisEvent.requestedBy.map(function (elem) {
+            if (elem.musicianName === this.props.musician.performerName) {
+                alreadyRegistered = true;
             }
-            this.props.updateEvent(this.props.event);
-            this.props.gigList();
+        }.bind(this));
+        if (alreadyRegistered === false) {
+            this.props.event.requestedBy.push({
+                "musicianName": this.props.musician.performerName,
+                "musicianId": this.props.musician._id
+            });
         }
+        this.props.updateEvent(this.props.event);
+        this.props.gigList();
+        this.setState({
+            requested: true
+        })
     },
 
     render: function(){
+
         return(
             <div className="panel panel-default slideTransition" key={event._id}>
                 <div className="panel-heading">
@@ -67,14 +70,14 @@ var EventDetails = React.createClass({
                                         facility={this.props.event.facility}
                                     /> : null }
                                 </div>
-                                <hr></hr>
-                                <div className="panel panel-info panel-heading">
+                                <div className="panel panel-heading panel-info ">
                                     {this.props.event.description}
                                 </div>
+
                             </div>
                         </div>
-                        <div>
-                            <hr></hr>
+                        <div >
+
                         </div>
                         <div className="row">
                             <div className="col-sm-12">
@@ -97,7 +100,23 @@ var EventDetails = React.createClass({
                                 </div>
                             </div>
                         </div>
-                        <div className="row">
+                        <div className="container-fluid">
+                            <div className="row">
+                                {this.state.requested ?
+                                    <div className="alert alert-success" style={{
+                                         "color": "#FFFFFF",
+                                         "backgroundColor": "#6C9FE2",
+                                         "padding-bottom": "40px"
+                                         }}>
+                                        <div className="col-sm-8 col-sm-offset-2">You have successfully requested this event!</div>
+                                        <div className="col-sm-2">
+                                            <button
+                                                type='button'
+                                                className="btn btn-xs"
+                                                data-dismiss='alert'>
+                                                <span className="glyphicon glyphicon-remove"> </span>
+                                            </button></div></div>: null}
+                            </div>
                         </div>
                     </div>
                 </div>
