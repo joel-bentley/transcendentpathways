@@ -1,6 +1,8 @@
 var _ = require('lodash');
 var async = require('async');
 var nodemailer = require('nodemailer');
+var secrets = require('../config/secrets');
+
 
 
 
@@ -193,24 +195,26 @@ exports.getMusicianId = function(req, res, next) {
     });
 };
 
-exports.postRequestGig = function(req, res, next) {
-    //console.dir(req.body.gigId);
-
-    Musician.findOne( { userIds : { $all : [ req.user.id ] } }, function(err, musician) {
-        if (err) return next(err);
-
-        Event.findById(req.body.gigId, function(err, event) {
-            if (err) return next(err);
-
-            event.status.requested = true;
-            event.requestedBy.push({musicianName: musician.performerName, musicianId: musician.id});
-
-            event.save(function(err) {
-                if (err) return next(err);
-            });
-        });
-    });
-};
+//exports.postRequestGig = function(req, res, next) {
+//    //console.dir(req.body.gigId);
+//
+//    Musician.findOne( { userIds : { $all : [ req.user.id ] } }, function(err, musician) {
+//        if (err) return next(err);
+//
+//        Event.findById(req.body.gigId, function(err, event) {
+//            if (err) return next(err);
+//
+//            event.status.requested = true;
+//            event.requestedBy.push({musicianName: musician.performerName, musicianId: musician.id});
+//
+//            event.save(function(err) {
+//                if (err) return next(err);
+//
+//
+//            });
+//        });
+//    });
+//};
 
 exports.postUpdateEventDetails = function(req, res, next) {
     Event.findOne({_id: req.body._id}).exec(function(err, event) {

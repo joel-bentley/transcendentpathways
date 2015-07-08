@@ -1,8 +1,11 @@
 var _ = require('lodash');
 var async = require('async');
+var nodemailer = require('nodemailer');
+var secrets = require('../config/secrets');
 var Musician = require('../models/Musician');
 var Facility = require('../models/Facility');
-var Event = require('../models/Event')
+var Event = require('../models/Event');
+var User = require('../models/User');
 
 var moment = require('moment-timezone');
 
@@ -73,6 +76,8 @@ exports.getFacilityInfo = function(req, response, next){
 exports.postUpdateMusicianDetails = function(req, res, next) {
     Musician.findOne({_id: req.body._id}).exec(function(err, musician) {
         if (err) return next(err);
+        var wasApproved = musician.approved;
+        var thisMusician = null;
         musician.performerName = req.body.performerName || '';
         musician.contactName = req.body.contactName || '';
         musician.address1 = req.body.address1 || '';
@@ -96,6 +101,34 @@ exports.postUpdateMusicianDetails = function(req, res, next) {
             //req.flash('success', { msg: 'Musician Details Updated for ' + musician.performerName });
             //res.redirect('/account');
         });
+        //console.log('req.body.userIds: %s', req.body._id);
+        User.findOne({detailsId: req.body._id}).exec(function(err, user) {
+            if (err) return next(err);
+            //console.log(user);
+            thisMusician = user.email;
+        });
+
+        if(req.body.approved && !wasApproved){
+            var transporter = nodemailer.createTransport({
+                service: 'Mandrill',
+                auth: {
+                    user: secrets.mandrill.user,
+                    pass: secrets.mandrill.password
+                }
+            });
+            var mailOptions = {
+                to: thisMusician,
+                from: 'admin@transcendentpathways.org',
+                subject: 'Account Approval Confirmation from Transcendent Pathways',
+                text: 'Hello,\n\n' +
+                'This is a confirmation that your account has been successfully approved. ' +
+                    ' You can request performances at www.transcendentpathways.org.'
+            };
+            transporter.sendMail(mailOptions, function(err) {
+                req.flash('success', { msg: 'Approval email sent to user.' });
+                //done(err);
+            });
+        }
     });
 };
 exports.postUpdateFacilityDetails = function(req, res, next) {
@@ -129,6 +162,8 @@ exports.postUpdateFacilityDetails = function(req, res, next) {
 
 exports.postUpdateEventDetails = function(req, res, next) {
     Event.findOne({_id: req.body._id}).exec(function(err, event) {
+
+        var approvedMusician = event.approvedMusicianName;
         if (err) return next(err);
         event.facilityName = req.body.facilityName || '';
         event.start = req.body.start || '';
@@ -140,9 +175,48 @@ exports.postUpdateEventDetails = function(req, res, next) {
         event.payment = req.body.payment || '';
         event.performance = req.body.performance || '';
 
-        event.save(function(err) {
+        Musician.findOne({performerName: req.body.approvedMusicianName}).exec(function(err, musician){
             if (err) return next(err);
+            //console.log('musician: %s', musician);
+            User.findOne({detailsId: musician._id}).exec(function(err, user){
+                //console.log('userids: %s', user);
+                if (err) return next(err);
+                event.save(function(err) {
+                    if (err) return next(err);
+                    //console.log('req.body.approvedMusicianName: %s',req.body.approvedMusicianName);
+                    //console.log('approvedMusician: %s', approvedMusician);
+                    if(req.body.approvedMusicianName!==approvedMusician) {
+                        var transporter = nodemailer.createTransport({
+                            service: 'Mandrill',
+                            auth: {
+                                user: secrets.mandrill.user,
+                                pass: secrets.mandrill.password
+                            }
+                        });
+                        //console.log('user.email: %s', user.email);
+                        var mailOptions = {
+                            to: user.email,
+                            from: 'admin@transcendentpathways.org',
+                            subject: 'You have been approved for an event you requested!',
+                            text: 'Hello,\n\n' +
+                            'This is a confirmation that you have been approved to perform at the following event: \n' +
+                            '\nFacility Name: ' + event.facilityName +
+                            '\nDate: ' + event.start +
+                            '\nEnd: ' + event.end +
+                            '\nDescription: ' + event.description
+                        };
+                        transporter.sendMail(mailOptions, function (err) {
+                            req.flash('success', {msg: 'Success! You have successfully requested this event!'});
+                            console.log('email sent!');
+                            console.log('error: %s', err);
+                            //done(err);
+                        });
+                    }
+                })
+            })
         });
+
+;
         res.writeHead(200, {'Content-Type': 'application/json'});
         res.end(JSON.stringify(event));
     });

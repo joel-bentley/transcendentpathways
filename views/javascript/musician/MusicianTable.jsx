@@ -135,7 +135,7 @@ var MusicianTable = React.createClass({
             }
         });
         $.post('/postUpdateEventDetails', saveEvent, function (result) {
-            this.gigList();
+            //this.gigList();
         }.bind(this));
     },
 
