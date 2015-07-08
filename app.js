@@ -26,7 +26,7 @@ var expressValidator = require('express-validator');
 var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
-var contactController = require('./controllers/contact');
+//var contactController = require('./controllers/contact');
 var musicianController = require('./controllers/musician');
 var facilityController = require('./controllers/facility');
 var adminController = require('./controllers/admin');
@@ -102,8 +102,8 @@ app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
 
-app.get('/contact', contactController.getContact);
-app.post('/contact', contactController.postContact);
+//app.get('/contact', contactController.getContact);
+//app.post('/contact', contactController.postContact);
 
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
@@ -296,18 +296,18 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedi
 /**
  * OAuth authorization routes. (API examples)
  */
-app.get('/auth/foursquare', passport.authorize('foursquare'));
-app.get('/auth/foursquare/callback', passport.authorize('foursquare', { failureRedirect: '/api' }), function(req, res) {
-  res.redirect('/api/foursquare');
-});
-app.get('/auth/tumblr', passport.authorize('tumblr'));
-app.get('/auth/tumblr/callback', passport.authorize('tumblr', { failureRedirect: '/api' }), function(req, res) {
-  res.redirect('/api/tumblr');
-});
-app.get('/auth/venmo', passport.authorize('venmo', { scope: 'make_payments access_profile access_balance access_email access_phone' }));
-app.get('/auth/venmo/callback', passport.authorize('venmo', { failureRedirect: '/api' }), function(req, res) {
-  res.redirect('/api/venmo');
-});
+//app.get('/auth/foursquare', passport.authorize('foursquare'));
+//app.get('/auth/foursquare/callback', passport.authorize('foursquare', { failureRedirect: '/api' }), function(req, res) {
+//  res.redirect('/api/foursquare');
+//});
+//app.get('/auth/tumblr', passport.authorize('tumblr'));
+//app.get('/auth/tumblr/callback', passport.authorize('tumblr', { failureRedirect: '/api' }), function(req, res) {
+//  res.redirect('/api/tumblr');
+//});
+//app.get('/auth/venmo', passport.authorize('venmo', { scope: 'make_payments access_profile access_balance access_email access_phone' }));
+//app.get('/auth/venmo/callback', passport.authorize('venmo', { failureRedirect: '/api' }), function(req, res) {
+//  res.redirect('/api/venmo');
+//});
 
 /**
  * Error Handler.
