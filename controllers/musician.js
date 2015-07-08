@@ -41,7 +41,8 @@ exports.getMusicianDetails = function(req, res){
     if(req.user.accountType==='Musician') {
 
         return res.render('account/musicianDetails', {
-            title: 'Musician - Performer Details'
+            title: 'Musician - Performer Details',
+            locals: {flash: req.flash()}
         });
     }
     res.redirect('/');
