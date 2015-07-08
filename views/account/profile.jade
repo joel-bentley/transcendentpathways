@@ -27,17 +27,30 @@ block content
   br
   hr
 
-  h3 Edit #{user.accountType} Details
-    .form-group
-      .col-sm-offset-2.col-sm-4
-        if user.accountType == 'Musician'
-          a.btn.btn.btn-primary(href='/account/updateMusicianDetails')
-            span.ion-edit
-            | Edit #{user.accountType} Details
-        if user.accountType == 'Facility'
-          a.btn.btn.btn-primary(href='/account/updateFacilityDetails')
-            span.ion-edit
-            | Edit #{user.accountType} Details
+  h3 Edit My Account Details
+    p
+      .form-group
+        .col-sm-offset-2.col-sm-4
+          if user.accountType == 'Musician'
+            a.btn.btn.btn-primary(href='/account/updateMusicianDetails')
+              span.ion-edit
+              | Edit Details
+          if user.accountType == 'Facility'
+            a.btn.btn.btn-primary(href='/account/updateFacilityDetails')
+              span.ion-edit
+              | Edit Details
+
+  //h3 Edit #{user.accountType} Details
+  //  .form-group
+  //    .col-sm-offset-2.col-sm-4
+  //      if user.accountType == 'Musician'
+  //        a.btn.btn.btn-primary(href='/account/updateMusicianDetails')
+  //          span.ion-edit
+  //          | Edit #{user.accountType} Details
+  //      if user.accountType == 'Facility'
+  //        a.btn.btn.btn-primary(href='/account/updateFacilityDetails')
+  //          span.ion-edit
+  //          | Edit #{user.accountType} Details
 
   br
   hr
