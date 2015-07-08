@@ -223,7 +223,6 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRe
         res.redirect('/');
       }
     }
-
   } else {
     res.redirect('/');
   }
