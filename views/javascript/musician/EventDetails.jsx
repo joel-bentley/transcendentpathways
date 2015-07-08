@@ -22,6 +22,11 @@ var EventDetails = React.createClass({
             requestEvent: false
         })
     },
+    dismissAlert: function(){
+        this.setState({
+            requested: false
+        })
+    },
     placeDiv: function(x_pos, y_pos) {
         var d = this.getDOMNode();
         d.style.position = "absolute";
@@ -113,7 +118,7 @@ var EventDetails = React.createClass({
                                             <button
                                                 type='button'
                                                 className="btn btn-xs"
-                                                data-dismiss='alert'>
+                                                onClick={this.dismissAlert}>
                                                 <span className="glyphicon glyphicon-remove"> </span>
                                             </button></div></div>: null}
                             </div>
