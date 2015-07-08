@@ -156,7 +156,7 @@ exports.postUpdateMusicianDetails = function(req, res, next) {
 
         if (err) return next(err);
 
-        musician.performerName = req.body.performerName || '';
+        //musician.performerName = req.body.performerName || '';
         musician.contactName = req.body.contactName || '';
         musician.address1 = req.body.address1 || '';
         musician.address2 = req.body.address2 || '';
