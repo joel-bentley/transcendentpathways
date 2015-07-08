@@ -4,10 +4,10 @@ block content
         h3 Musician - Performer Details
     form.form-horizontal(action='/account/UpdateMusicianDetails', method='POST')
         input(type='hidden', name='_csrf', value=_csrf)
-        .form-group.required
+        .form-group
             label.col-sm-3.control-label(for='performerName') Musician or Group Name
             .col-sm-7
-                input.form-control(type='text', required='required', name='performerName', id='performerName', value='#{performerName}')
+                input.form-control(disabled='disabled', name='performerName', id='performerName', value='#{performerName}')
         .form-group.required
             label.col-sm-3.control-label(for='contactName') Contact Name
             .col-sm-7
@@ -15,7 +15,7 @@ block content
         .form-group.required
             label.col-sm-3.control-label(for='address1') Address Line 1
             .col-sm-7
-                input.form-control(type='text', required='required', name='address1', id='address1',value='#{address1}')
+                input.form-control(type='text', pattern='[a-zA-Z0-9\\s\\-\\,\\#\\.\\+]+', title='Please enter valid street address.', required='required', name='address1', id='address1',value='#{address1}')
         .form-group
             label.col-sm-3.control-label(for='address2') Address Line 2
             .col-sm-7
@@ -31,11 +31,11 @@ block content
         .form-group.required
             label.col-sm-3.control-label(for='zipcode') Zip Code
             .col-sm-7
-                input.form-control(type='number', required='required', name='zipcode', id='zipcode',value='#{zipcode}')
+                input.form-control(pattern='[0-9]{5,6}(?:[-\\s][0-9]{4})?', title='Please enter valid zip code.', required='required', name='zipcode', id='zipcode',value='#{zipcode}')
         .form-group.required
             label.col-sm-3.control-label(for='phone') Contact Phone Number
             .col-sm-7
-                input.form-control(type='tel', required='required', name='phone', id='phone',value='#{phone}')
+                input.form-control(type='tel', pattern='\\(?[0-9]{2,4}\\)?[0-9\\s-]{3,}', title='Please enter valid phone number.', required='required', name='phone', id='phone',value='#{phone}')
         .form-group.required
             label.col-sm-3.control-label(for='instruments') Instrument(s)
             .col-sm-7
@@ -44,11 +44,11 @@ block content
         .form-group.required
             label.col-sm-3.control-label(for='website') Website or Online Reference
             .col-sm-7
-                input.form-control(type='text', required='required', name='website', id='website', value='#{website}')
-        .form-group
-            label.col-sm-3.control-label(for='picture') Upload Headshot / Picture
-            .col-sm-7
-                input.form-control(type='text', name='picture', id='picture', value='#{picture}')
+                input.form-control(type='text', pattern='(?:http\\:\\/\\/)?[a-zA-Z0-9\\-\\.]+\\.[a-zA-Z]{2,}', title='Please enter valid web address.', required='required', name='website', id='website', value='#{website}')
+        //.form-group
+        //    label.col-sm-3.control-label(for='picture') Upload Headshot / Picture
+        //    .col-sm-7
+        //        input.form-control(type='text', name='picture', id='picture', value='#{picture}')
         .form-group.required
             label.col-sm-3.control-label(for='biography') Short Biography Text
             .col-sm-7

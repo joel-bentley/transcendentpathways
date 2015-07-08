@@ -163,7 +163,7 @@ exports.postUpdateFacilityDetails = function(req, res, next) {
 
         if (err) return next(err);
 
-        facility.facilityName = req.body.facilityName || '';
+        //facility.facilityName = req.body.facilityName || '';
         facility.address1 = req.body.address1 || '';
         facility.address2 = req.body.address2 || '';
         facility.city = req.body.city || '';
@@ -259,8 +259,8 @@ exports.postGigDetails = function(req, res, next) {
         //console.log(endString);
         //console.log(start.format());
         //console.log(end.format());
-        console.log(startNew);
-        console.log(endNew);
+        //console.log(startNew);
+        //console.log(endNew);
 
         //return res.redirect('/homeFacility');
 
