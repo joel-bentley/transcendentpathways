@@ -66,6 +66,7 @@ var EventDetails = React.createClass({
                     <div className="panel-body">
                         <div className="row">
                             <div className="col-sm-12">
+                                <div><h4>Itinerary</h4></div>
                                 <div >Event Date: {moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}</div>
                                 <div>Facility Name: {this.props.event.facilityName}</div>
                                 <div>Start Time: {moment.utc(this.props.event.start).format('h:mm a')}</div>
@@ -76,8 +77,31 @@ var EventDetails = React.createClass({
                                         facility={this.props.event.facility}
                                     /> : null }
                                 </div>
+                                <hr></hr>
+                                <div><h4>Address</h4></div>
+                                <div>{this.props.event.facility.address1}</div>
+                                <div>{this.props.event.facility.address2}</div>
+                                <div>{this.props.event.facility.city+ ", " +
+                                    this.props.event.facility.state + " " +
+                                    this.props.event.facility.zipcode}
+                                </div>
+                                <div>Building: {this.props.event.facility.buildingName}</div>
+                                <div>Location: {this.props.event.facility.locationName}</div>
+                                <div>Room Size: {this.props.event.facility.roomSize}</div>
+                                <div>Waiver Required: {this.props.event.facility.waiverNeeded ? 'Yes' : 'No'}</div>
+                                <div>Security Provided: {this.props.event.facility.securityNeeded ? 'Yes' : 'No'}</div>
+                                <div>Expected Attendees: {this.props.event.facility.patientNumber}</div>
+                                <hr></hr>
+                                <div><h4>Event Contact</h4></div>
+                                <div>{this.props.event.facility.contactName}</div>
+                                <div>{this.props.event.facility.contactPhone}</div>
+                                <div>{this.props.event.facility.contactEmail}</div>
+                                <hr></hr>
                                 <div>
-                                    Description: {this.props.event.description}
+                                    <h4>Event Details</h4>
+                                </div>
+                                <div>
+                                    {this.props.event.description}
                                 </div>
                             </div>
                         </div>
