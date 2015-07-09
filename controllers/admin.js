@@ -178,7 +178,7 @@ exports.postUpdateEventDetails = function(req, res, next) {
         if(event.approvedMusicianName) {
             Musician.findOne({performerName: req.body.approvedMusicianName}).exec(function (err, musician) {
                 if (err) return next(err);
-                console.log('musician: %s', musician);
+                //console.log('musician: %s', musician);
                 User.findOne({detailsId: musician._id}).exec(function (err, user) {
                     //console.log('userids: %s', user);
                     if (err) return next(err);

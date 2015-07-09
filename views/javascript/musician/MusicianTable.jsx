@@ -129,7 +129,7 @@ var MusicianTable = React.createClass({
                 saveEvent.performance = newEvent.performance;
             }
         }.bind(this));
-        console.log(this.state.musician);
+        //console.log(this.state.musician);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-Token': this.getCSRFTokenValue()
