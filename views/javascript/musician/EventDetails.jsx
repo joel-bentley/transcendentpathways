@@ -1,6 +1,7 @@
 var React = require('react');
 var GetDistance = require('./GetDistance.jsx');
 var GoogleMap = require('./GoogleMap.jsx');
+var Alert = require('./Alert.jsx');
 
 var moment = require('moment');
 
@@ -57,12 +58,12 @@ var EventDetails = React.createClass({
     render: function(){
 
         return(
-            <div className="panel panel-default slideTransition" key={event._id}>
-                <div className="panel-heading">
-                    {this.props.event.facilityName + ' on ' + moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}
-                </div>
-                <div className="panel-body">
-                    <div className = "container-fluid">
+            <div className="col-sm-12 slideTransition" key={event._id}>
+                <div className="panel panel-default">
+                    <div className="panel-heading">
+                        {this.props.event.facilityName + ' on ' + moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}
+                    </div>
+                    <div className="panel-body">
                         <div className="row">
                             <div className="col-sm-12">
                                 <div >Event Date: {moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}</div>
@@ -75,15 +76,12 @@ var EventDetails = React.createClass({
                                         facility={this.props.event.facility}
                                     /> : null }
                                 </div>
-                                <div className="panel panel-heading panel-info ">
-                                    {this.props.event.description}
+                                <div>
+                                    Description: {this.props.event.description}
                                 </div>
-
                             </div>
                         </div>
-                        <div >
-
-                        </div>
+                        <hr></hr>
                         <div className="row">
                             <div className="col-sm-12">
                                 <div id="map-canvas">
@@ -97,30 +95,26 @@ var EventDetails = React.createClass({
                         </div>
                         <div className="row">
                             <div className="col-sm-12">
-                                <div className="col-sm-8">
-                                    <p className="text-center"> * Requests are submitted for approval by administration.</p>
+                                <div className="col-sm-10">
+                                    Requests are approved by administration.
                                 </div>
-                                <div className="col-sm-4 pull-right">
-                                    <button className="btn-sm btn-default" onClick={this.handleClick} type="submit">Request Event*</button>
+                                <div className="col-sm-2">
+                                    <button className="btn-sm btn-default"
+                                            disabled={this.state.requested}
+                                            onClick={this.handleClick}
+                                            type="submit">
+                                            Request
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div className="container-fluid">
-                            <div className="row">
-                                {this.state.requested ?
-                                    <div className="alert alert-success" style={{
-                                         "color": "#FFFFFF",
-                                         "backgroundColor": "#6C9FE2",
-                                         "padding-bottom": "40px"
-                                         }}>
-                                        <div className="col-sm-8 col-sm-offset-2">You have successfully requested this event!</div>
-                                        <div className="col-sm-2">
-                                            <button
-                                                type='button'
-                                                className="btn btn-xs"
-                                                onClick={this.dismissAlert}>
-                                                <span className="glyphicon glyphicon-remove"> </span>
-                                            </button></div></div>: null}
+                        <hr></hr>
+                        <div className="row">
+                            <div className="col-sm-12">
+                                {this.state.requested ? <Alert
+                                    message="Event requested!"
+                                    dismiss={this.dismissAlert}
+                                />: null}
                             </div>
                         </div>
                     </div>
