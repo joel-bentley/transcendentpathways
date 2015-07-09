@@ -14,7 +14,8 @@ var MusicianRow = React.createClass({
         this.props.renderOffset(offset);
     },
     render: function() {
-
+        var phone = this.props.musician.phone;
+        var formattedPhone = '('+phone.substr(0, 3) + ')' + ' ' + phone.substr(3, 3) + '-' + phone.substr(6,4);
         return (
             <div>
                 <div className="panel panel-default">
@@ -43,7 +44,7 @@ var MusicianRow = React.createClass({
                                 {this.props.musician.contactName}
                             </div>
                             <div className="row">
-                                {this.props.musician.phone}
+                                {formattedPhone}
                             </div>
                         </div>
                     </div>
