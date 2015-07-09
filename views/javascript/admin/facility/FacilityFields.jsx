@@ -6,7 +6,7 @@ var FacilityFields = React.createClass({
         return (
 
             <div className={this.props.fieldValues.approved ? "panel panel-default": "panel panel-primary"}>
-                <div className="panel-heading panelModified">
+                <div className="panel-heading">
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-sm-10">
