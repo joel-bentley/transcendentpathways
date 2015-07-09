@@ -85,7 +85,7 @@ var MusicianTable = React.createClass({
             }
         });
         $.post(this.props.postRoute, musician, function(result){
-            //console.log(result);
+            console.log("notes saved to db: %s", result);
         });
 
     },
@@ -107,6 +107,7 @@ var MusicianTable = React.createClass({
         this.setState({
             musician: x
         });
+        this.handleChangedData(this.state.musician)
     },
     render: function() {
         var rowsApproved = [];

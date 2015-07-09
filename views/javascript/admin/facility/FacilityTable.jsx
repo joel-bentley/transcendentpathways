@@ -113,6 +113,7 @@ var FacilityTable = React.createClass({
         this.setState({
             facility: x
         });
+        this.handleChangedData(this.state.musician)
     },
     render: function() {
         var rowsApproved = [];
