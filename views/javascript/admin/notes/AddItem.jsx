@@ -25,12 +25,25 @@ var AddItem = React.createClass({
     },
     render: function(){
         return(
-            <div className="col-sm-12">
-                <input type="text"
-                       value = {this.state.newItem}
-                       placeholder = "New Note"
-                       onKeyDown = {this.handleSubmit}
-                       onChange = {this.handleChange} />
+            <div className="panel panel-default notePanel">
+                <div className="form-group">
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <h4>Create a New Note</h4>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-sm-10 col-sm-offset-1">
+                            <textarea
+                               className="form-control" rows="3"
+                               value = {this.state.newItem}
+                               placeholder = "Record your comments here."
+                               onKeyDown = {this.handleSubmit}
+                               onChange = {this.handleChange}>
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
