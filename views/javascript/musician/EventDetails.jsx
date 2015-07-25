@@ -1,7 +1,8 @@
 var React = require('react');
+var Alert = require('react-bootstrap').Alert;
 var GetDistance = require('./GetDistance.jsx');
 var GoogleMap = require('./GoogleMap.jsx');
-var Alert = require('./Alert.jsx');
+
 
 var moment = require('moment');
 
@@ -16,7 +17,7 @@ var EventDetails = React.createClass({
         this.placeDiv(0,this.props.offset);
     },
     componentDidUpdate: function(){
-        this.placeDiv(0,this.props.offset)
+        this.placeDiv(0,this.props.offset);
     },
     componentWillReceiveProps: function(){
         this.setState({
@@ -54,11 +55,17 @@ var EventDetails = React.createClass({
             requested: true
         })
     },
+    handleAlertDismiss: function(){
+        this.setState({
+            requested: false
+        })
+        console.log('handleAlertDismiss called');
+    },
 
     render: function(){
 
         return(
-            <div className="col-sm-12 slideTransition" key={event._id}>
+            <div className="col-sm-12 slideTransition" >
                 <div className="panel panel-default">
                     <div className="panel-heading">
                         {this.props.event.facilityName + ' on ' + moment.utc(this.props.event.start).format('dddd MMMM D, YYYY')}
@@ -135,10 +142,15 @@ var EventDetails = React.createClass({
                         <hr></hr>
                         <div className="row">
                             <div className="col-sm-12">
-                                {this.state.requested ? <Alert
-                                    message="Event requested!"
-                                    dismiss={this.dismissAlert}
-                                />: null}
+                                {this.state.requested ? <Alert bsStyle='info'
+                                                               bSize='small'
+                                                               id='requested'
+                                                               onDismiss={this.handleAlertDismiss}
+                                                               dismissAfter={2000}>
+                                    <strong>Event Request Submitted</strong>
+                                    <p>A request has been sent to the site administrator for approval.</p>
+                                    </Alert> : null
+                                }
                             </div>
                         </div>
                     </div>
