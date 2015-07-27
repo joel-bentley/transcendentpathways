@@ -28,7 +28,6 @@ var MusicianTable = React.createClass({
         async.parallel({
             events: function (callback) {
                 $.get('/gigListing', function (events) {
-                    //console.log(events);
                     callback(null, events);
                 });
             },
@@ -47,7 +46,7 @@ var MusicianTable = React.createClass({
                 return console.error(err);
             }
             var sortedEvents = data.events.sort(function (a, b) {
-                return a.start > b.start;
+                return new Date(a.start) - new Date(b.start);
             });
 
             this.setState({
@@ -58,13 +57,13 @@ var MusicianTable = React.createClass({
         }.bind(this));
     },
 
-    gigList() {
-        $.get('/gigListing', function (gigs) {
-            this.setState({
-                events: gigs
-            });
-        }.bind(this));
-    },
+    //gigList() {
+    //    $.get('/gigListing', function (gigs) {
+    //        this.setState({
+    //            events: gigs
+    //        });
+    //    }.bind(this));
+    //},
 
 
     componentWillMount: function () {
