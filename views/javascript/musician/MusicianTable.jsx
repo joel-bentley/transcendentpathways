@@ -141,7 +141,7 @@ var MusicianTable = React.createClass({
         if (this.state.musician === null){
             return (
                 <div className="row">
-                    <div className="col-sm-8">
+                    <div className="col-sm-8 col-sm-offset-2">
                         <Alert bsStyle='info'
                                bSize='small'
                             >
@@ -154,7 +154,7 @@ var MusicianTable = React.createClass({
         } else if (!this.state.musician.approved){
             return (
                 <div className="row">
-                    <div className="col-sm-8">
+                    <div className="col-sm-8 col-sm-offset-2">
                         <Alert bsStyle='info'
                                bSize='small'
                                >
