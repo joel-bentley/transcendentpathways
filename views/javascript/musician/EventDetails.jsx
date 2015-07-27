@@ -50,16 +50,17 @@ var EventDetails = React.createClass({
             });
         }
         this.props.updateEvent(this.props.event);
-        this.props.gigList();
+        //this.props.gigList(); not needed as the props will be updated and flow down
         this.setState({
             requested: true
         })
     },
     handleAlertDismiss: function(){
         this.setState({
+            requestEvent: true,
             requested: false
-        })
-        console.log('handleAlertDismiss called');
+        });
+        //console.log('handleAlertDismiss called');
     },
 
     render: function(){
@@ -126,31 +127,28 @@ var EventDetails = React.createClass({
                         </div>
                         <div className="row">
                             <div className="col-sm-12">
+                                {this.state.requested ? <Alert bsStyle='info'
+                                                               bSize='small'
+                                                               onDismiss={this.handleAlertDismiss}
+                                                               dismissAfter={3000}>
+                                    <h4>Event Request Submitted</h4>
+                                    <p>A request has been submitted to the site administrator for approval.</p>
+                                </Alert> : null
+                                }
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm-12">
                                 <div className="col-sm-10">
                                     Requests are approved by administration.
                                 </div>
                                 <div className="col-sm-2">
-                                    <button className="btn-sm btn-default"
-                                            disabled={this.state.requested}
+                                    {this.state.requestEvent ? 'Requested' : <button className="btn-sm btn-default"
                                             onClick={this.handleClick}
                                             type="submit">
                                             Request
-                                    </button>
+                                    </button>}
                                 </div>
-                            </div>
-                        </div>
-                        <hr></hr>
-                        <div className="row">
-                            <div className="col-sm-12">
-                                {this.state.requested ? <Alert bsStyle='info'
-                                                               bSize='small'
-                                                               id='requested'
-                                                               onDismiss={this.handleAlertDismiss}
-                                                               dismissAfter={2000}>
-                                    <strong>Event Request Submitted</strong>
-                                    <p>A request has been sent to the site administrator for approval.</p>
-                                    </Alert> : null
-                                }
                             </div>
                         </div>
                     </div>
