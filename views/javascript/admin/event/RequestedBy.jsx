@@ -16,7 +16,7 @@ var RequestedBy = React.createClass({
         this.props.musicians.map(function(elem){
             if(elem) {
                 musicianList.push(
-                    <li className="list-group-item" key={elem}>
+                    <li className="list-group-item" key={elem.musicianName + elem.musicianId}>
                         <div className="row">
                             <div className="col-sm-10   ">
                                 {elem.musicianName}
@@ -34,6 +34,8 @@ var RequestedBy = React.createClass({
                 )
             }
         }.bind(this));
+        debugger;
+        //console.log(musicianList);
         return(
             <div>
                 <div className="list-group-item-heading">
