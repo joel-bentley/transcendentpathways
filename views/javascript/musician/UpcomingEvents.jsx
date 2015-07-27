@@ -24,7 +24,7 @@ var UpcomingEvents = React.createClass({
         var upcomingEvents = [];
         this.props.events.map(function (event) {
             var boundClick = this.eventChange.bind(null, event);
-            if (new Date(event.start) > new Date()) {
+            if (new Date(event.start) > new Date() && this.props.musician.approved) {
                 upcomingEvents.push(
                     <div className="panel panel-primary " key={event._id}>
                         <div className="panel-heading">

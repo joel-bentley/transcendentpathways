@@ -1,4 +1,5 @@
 var React = require('react');
+var Alert = require('react-bootstrap').Alert;
 var RequestedEvents = require('./RequestedEvents.jsx');
 var ApprovedEvents = require('./ApprovedEvents.jsx');
 var CompletedEvents = require('./CompletedEvents.jsx');
@@ -26,14 +27,14 @@ var MusicianTable = React.createClass({
 
     dataFetch() {
         async.parallel({
-            events: function (callback) {
-                $.get('/gigListing', function (events) {
-                    callback(null, events);
-                });
-            },
             musicianData: function (callback) {
                 $.get('/getMusicianId', function (musician) {
                     callback(null, musician);
+                });
+            },
+            events: function (callback) {
+                $.get('/gigListing', function (events) {
+                    callback(null, events);
                 });
             },
             facilityData: function (callback) {
@@ -56,21 +57,10 @@ var MusicianTable = React.createClass({
             });
         }.bind(this));
     },
-
-    //gigList() {
-    //    $.get('/gigListing', function (gigs) {
-    //        this.setState({
-    //            events: gigs
-    //        });
-    //    }.bind(this));
-    //},
-
-
-    componentWillMount: function () {
+    componentDidMount: function () {
         this.dataFetch();
 
     },
-
     eventFacility: function (facility) {
         var myFacility = [];
         this.state.facilities.map(function (elem) {
@@ -100,9 +90,6 @@ var MusicianTable = React.createClass({
         })
     },
     eventChange: function (event) {
-        //if (document.getElementById('googleMap')){
-        //    React.unmountComponentAtNode(document.getElementById('googleMap'));
-        //}
         this.state.events && this.state.facilities ? this.facilitizeEvents(this.state.events) : null;
             this.setState({
                 eventID: event._id,
@@ -151,6 +138,34 @@ var MusicianTable = React.createClass({
     },
 
     render: function () {
+        if (this.state.musician === null){
+            return (
+                <div className="row">
+                    <div className="col-sm-8">
+                        <Alert bsStyle='info'
+                               bSize='small'
+                            >
+                            <h4>Loading Events</h4>
+                            <p>Retrieving event records.</p>
+                        </Alert>
+                    </div>
+                </div>
+            )
+        } else if (!this.state.musician.approved){
+            return (
+                <div className="row">
+                    <div className="col-sm-8">
+                        <Alert bsStyle='info'
+                               bSize='small'
+                               >
+                            <h4>Account Awaiting Admin Approval</h4>
+                            <p>A request has been submitted to the site administrator for approval. Once your account
+                            is approved, you will receive confirmation via email.</p>
+                        </Alert>
+                    </div>
+                </div>
+            )
+        } else {
         return (
             <div className="container-fluid">
                 <div className="col-sm-4">
@@ -193,7 +208,7 @@ var MusicianTable = React.createClass({
                         /> : null }
                 </div>
             </div>
-        )
+        )}
     }
 });
 

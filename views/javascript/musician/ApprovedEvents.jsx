@@ -24,7 +24,8 @@ var ApprovedEvents = React.createClass({
             var boundClick = this.eventChange.bind(this, event);
             var musicianName = this.props.musician.performerName;
 
-            if((event.approvedMusicianName === musicianName) && (event.status.completed === false)){
+            if((event.approvedMusicianName === musicianName) && (event.status.completed === false) &&
+            this.props.musician.approved){
                 approvedEvents.push(
                 <div className="panel panel-default" key={event._id}>
                     <div className="panel-heading">
