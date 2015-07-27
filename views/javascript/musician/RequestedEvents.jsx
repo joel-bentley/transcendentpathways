@@ -25,10 +25,11 @@ var RequestedEvents = React.createClass({
         this.props.events.map(function(event) {
             var boundClick = this.eventChange.bind(this, event);
             var musicianName = this.props.musician.performerName;
+            var approved = this.props.musician.approved;
 
             event.requestedBy.map(function (musician) {
                 if (musician) {
-                    if (musician.musicianName === musicianName) {
+                    if (musician.musicianName === musicianName && approved) {
                         requestedEvents.push(
                             <div className="panel panel-default " key={event._id}>
                                 <div className="panel-heading">
