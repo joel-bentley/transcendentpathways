@@ -23,7 +23,6 @@ var ShowEvents = React.createClass({
                     request=true;
                 }
             });
-
             // sort--completed / cancelled events first
             // event.approvedMusicianName === this.props.musician.performerName) &&
             // (event.status.completed === true) &&
