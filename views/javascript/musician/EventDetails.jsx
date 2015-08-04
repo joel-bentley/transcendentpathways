@@ -53,7 +53,7 @@ var EventDetails = React.createClass({
         //this.props.gigList(); not needed as the props will be updated and flow down
         this.setState({
             requested: true
-        });
+        })
         this.props.eventPrep();
     },
     handleAlertDismiss: function(){
