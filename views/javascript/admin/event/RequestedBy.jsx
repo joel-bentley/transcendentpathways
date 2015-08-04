@@ -34,7 +34,7 @@ var RequestedBy = React.createClass({
                 )
             }
         }.bind(this));
-        debugger;
+        //debugger;
         //console.log(musicianList);
         return(
             <div>
