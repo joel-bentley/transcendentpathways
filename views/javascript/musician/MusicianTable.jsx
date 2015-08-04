@@ -1,11 +1,6 @@
 var React = require('react');
 var Alert = require('react-bootstrap').Alert;
-var RequestedEvents = require('./RequestedEvents.jsx');
-var ApprovedEvents = require('./ApprovedEvents.jsx');
-var CompletedEvents = require('./CompletedEvents.jsx');
-var UpcomingEvents = require('./UpcomingEvents.jsx');
-var SearchEvents = require('./SearchEvents.jsx');
-var EventDetails = require('./EventDetails.jsx');
+var ShowEvents = require('./ShowEvents.jsx');
 
 var async = require('async');
 
@@ -13,7 +8,6 @@ var moment = require('moment');
 
 var MusicianTable = React.createClass({
     getInitialState: function () {
-
         return ({
             event: null,
             events: null,
@@ -21,24 +15,33 @@ var MusicianTable = React.createClass({
             facilities: null,
             showMap: false,
             eventID: null,
-            offset: 0
+            offset: 0,
+            upcoming: [],
+            approved: [],
+            requested: [],
+            complete: [],
+            request: false
         })
     },
 
-    dataFetch() {
-        async.parallel({
+    dataFetch: function() {
+        var sortedEvents = [];
+        async.series({
             musicianData: function (callback) {
                 $.get('/getMusicianId', function (musician) {
+                    //console.log( musician);
                     callback(null, musician);
                 });
-            },
+            },  
             events: function (callback) {
                 $.get('/gigListing', function (events) {
+                    //console.log('got events %s', events);
                     callback(null, events);
                 });
             },
             facilityData: function (callback) {
                 $.get('/homeAdminFacilityData', function (facilities) {
+                    //console.log('got facilities %s', facilities);
                     callback(null, facilities);
                 });
             }
@@ -46,56 +49,30 @@ var MusicianTable = React.createClass({
             if (err) {
                 return console.error(err);
             }
-            var sortedEvents = data.events.sort(function (a, b) {
+            sortedEvents = data.events.sort(function (a, b) {
                 return new Date(a.start) - new Date(b.start);
             });
+            //console.log( data.musicianData);
+            //console.log('got events %s', sortedEvents);
+            //console.log(data.facilityData);
 
             this.setState({
                 events: sortedEvents,
                 musician: data.musicianData,
                 facilities: data.facilityData
             });
+
         }.bind(this));
+
     },
-    componentDidMount: function () {
+    
+    componentWillMount: function () {
         this.dataFetch();
-
-    },
-    eventFacility: function (facility) {
-        var myFacility = [];
-        this.state.facilities.map(function (elem) {
-            if (elem.facilityName === facility) {
-                myFacility = elem;
-            }
-        });
-        return myFacility;
     },
 
-    facilitizeEvents: function (events) {
-        var modifiedEvent = null;
-        var facilitized = [];
-        events.map(function (event) {
-            modifiedEvent = event;
-            modifiedEvent.facility = this.eventFacility(event.facilityName);
-            facilitized.push(modifiedEvent);
-        }.bind(this));
-        this.setState({
-            events: facilitized,
-            facilitized: true
-        });
-    },
-    renderOffset: function(offset){
-        this.setState({
-            offset: offset
-        })
-    },
-    eventChange: function (event) {
-        this.state.events && this.state.facilities ? this.facilitizeEvents(this.state.events) : null;
-            this.setState({
-                eventID: event._id,
-                event: event
-            });
-    },
+
+
+
 
     updateEvent: function (newEvent) {
         var saveEvent = newEvent;
@@ -115,7 +92,6 @@ var MusicianTable = React.createClass({
                 saveEvent.performance = newEvent.performance;
             }
         }.bind(this));
-        //console.log(this.state.musician);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-Token': this.getCSRFTokenValue()
@@ -136,7 +112,6 @@ var MusicianTable = React.createClass({
         }
         return '';
     },
-
     render: function () {
         if (this.state.musician === null){
             return (
@@ -151,7 +126,7 @@ var MusicianTable = React.createClass({
                     </div>
                 </div>
             )
-        } else if (!this.state.musician.approved){
+        } else if (this.state.musician.approved===false){
             return (
                 <div className="row">
                     <div className="col-sm-8 col-sm-offset-2">
@@ -165,50 +140,17 @@ var MusicianTable = React.createClass({
                     </div>
                 </div>
             )
-        } else {
-        return (
-            <div className="container-fluid">
-                <div className="col-sm-4">
-                    <UpcomingEvents
-                        events={this.state.events}
-                        musician={this.state.musician}
-                        eventChange={this.eventChange}
-                        renderOffset={this.renderOffset}
-                        />
-                    <ApprovedEvents
-                        events={this.state.events}
-                        musician={this.state.musician}
-                        eventChange={this.eventChange}
-                        renderOffset={this.renderOffset}
-                        />
-                    <RequestedEvents
-                        events={this.state.events}
-                        musician={this.state.musician}
-                        eventChange={this.eventChange}
-                        renderOffset={this.renderOffset}
-                        />
-                    <CompletedEvents
-                        events={this.state.events}
-                        musician={this.state.musician}
-                        eventChange={this.eventChange}
-                        renderOffset={this.renderOffset}
-                        />
-                </div>
-                <div className="col-sm-8">
-                    {this.state.event ? <EventDetails
-                        event={this.state.event}
-                        events={this.state.events}
-                        facility={this.state.event.facility}
-                        musician={this.state.musician}
-                        updateEvent={this.updateEvent}
-                        offset={this.state.offset}
-                        gigList={this.gigList}
-
-
-                        /> : null }
-                </div>
+        } else return (
+            <div>
+                <ShowEvents
+                    events={this.state.events}
+                    musician={this.state.musician}
+                    facilities={this.state.facilities}
+                    eventChange={this.eventChange}
+                    updateEvent={this.updateEvent}
+                />
             </div>
-        )}
+        )
     }
 });
 

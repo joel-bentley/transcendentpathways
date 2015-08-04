@@ -31,7 +31,7 @@ var EventDetails = React.createClass({
     },
     placeDiv: function(x_pos, y_pos) {
         var d = this.getDOMNode();
-        d.style.position = "absolute";
+        d.style.position = "relative";
         d.style.left = x_pos+'px';
         d.style.top = y_pos-72+'px';
     },
@@ -53,7 +53,8 @@ var EventDetails = React.createClass({
         //this.props.gigList(); not needed as the props will be updated and flow down
         this.setState({
             requested: true
-        })
+        });
+        this.props.eventPrep();
     },
     handleAlertDismiss: function(){
         this.setState({
@@ -82,7 +83,7 @@ var EventDetails = React.createClass({
                                 <div>{this.props.musician && this.props.event.facility ?
                                     <GetDistance
                                         musician={this.props.musician}
-                                        facility={this.props.event.facility}
+                                        facility={this.props.facility}
                                     /> : null }
                                 </div>
                                 <hr></hr>
@@ -143,11 +144,11 @@ var EventDetails = React.createClass({
                                     Requests are approved by administration.
                                 </div>
                                 <div className="col-sm-2">
-                                    {this.state.requestEvent ? 'Requested' : <button className="btn-sm btn-default"
+                                    {this.props.type==='upcomingEvents' ?  <button className="btn-sm btn-default"
                                             onClick={this.handleClick}
                                             type="submit">
                                             Request
-                                    </button>}
+                                    </button> : null}
                                 </div>
                             </div>
                         </div>
